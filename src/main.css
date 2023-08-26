@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Agdasima&family=Amatic+SC&family=Montserrat:wght@300;400;500&family=Poppins:wght@400;500;600&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Poppins;
+  text-decoration: none;
+}
+
+:root {
+  --PrimaryColor: #232429;
+  --PrimaryColor2: #333;
+  --SecondaryColor: #c3c2c5;
+  --SecondaryColor2: #f5f4f4;
+  --SecondaryColor3: red;
+  --SecondaryColor4: #fff;
+  --colorOne: hsl(15, 74%, 70%);
+  --colorTwo: hsl(28, 100%, 82%);
+  --HoverColor: hsl(225, 56%, 59%);
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(0, 0%, 12%);
+  --textColor: hsl(240, 1%, 48%);
+  --borderColor: hsl(0, 0%, 83%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyBg: hsl(0, 0%, 96%);
+  --greyText: rgb(145, 145, 145);
+  --inputColor: hsl(330, 12%, 97%);
+  --boxShadow: box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  --transition: .4s ease-in-out;
+}
+
+body {
+  background-color: var(--PrimaryColor);
+  color: var(--SecondaryColor4);
+}
+
+.wrapper {
+  position: relative;
+}
+
+.navbar-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  color: var(--SecondaryColor);
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  z-index: 3;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.navbar {
+  padding-right: 20px;
+}
+.navbar .sideNav {
+  position: fixed;
+  top: 0;
+  left: -80%;
+  width: 80%;
+  height: 100%;
+  background: var(--PrimaryColor2);
+  color: var(--SecondaryColor);
+  transition: left 0.3s ease-in-out;
+  z-index: 3;
+}
+.navbar .sideNav.open {
+  left: 0;
+}
+.navbar .sideNav .logo-login {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding-top: 10px;
+  color: var(--SecondaryColor);
+}
+.navbar .sideNav .logo-login .logo {
+  font-size: 2rem;
+  display: grid;
+  place-content: center;
+  padding: 0px 10px;
+}
+.navbar .sideNav .logo-login .login {
+  font-size: 0.8rem;
+}
+.navbar .sideNav .logo-login:hover {
+  color: var(--SecondaryColor3);
+}
+.navbar .sideNav ul {
+  padding-top: 2rem;
+  padding-left: 2rem;
+}
+.navbar .sideNav ul li {
+  list-style: none;
+  padding: 0.5rem;
+}
+.navbar .sideNav ul li a {
+  font-size: 0.8rem;
+  color: var(--SecondaryColor);
+}
+.navbar .sideNav ul li a:hover {
+  color: var(--SecondaryColor3);
+}
+.navbar .sideNav ul li .premium {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--SecondaryColor4);
+}
+
+.navbar-top {
+  position: fixed;
+  width: 90%;
+  background-color: var(--PrimaryColor);
+  z-index: 2;
+  padding-left: 30px;
+}
+.navbar-top .main-logo img {
+  padding: 10px;
+  width: 100px;
+}
+.navbar-top .search-section .search-bar {
+  border-radius: 3rem;
+  border: 2px solid var(--SecondaryColor);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+.navbar-top .search-section .search-bar .search-icon {
+  font-size: 1.2rem;
+  color: var(--SecondaryColor);
+}
+.navbar-top .search-section .search-bar .input-search-option {
+  background-color: transparent;
+  color: var(--SecondaryColor);
+  border: none;
+  font-size: 0.8rem;
+  width: 100%;
+  outline: none;
+  padding-left: 10px;
+}
+.navbar-top .music-width {
+  overflow-x: scroll;
+}
+.navbar-top .music-width .music-category {
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  padding: 10px 0px;
+  width: 580px;
+  align-items: center;
+  gap: 10px;
+}
+.navbar-top .music-width .music-category p {
+  font-size: 0.7rem;
+  color: var(--SecondaryColor);
+  cursor: pointer;
+}
+.navbar-top .music-width .music-category p:hover {
+  color: red;
+}
+.navbar-top .music-width::-webkit-scrollbar {
+  height: 0.2rem;
+}
+.navbar-top .music-width::-webkit-scrollbar-thumb {
+  background: var(--SecondaryColor);
+}
+
+.toggler {
+  /* Rounded sliders */
+}
+.toggler .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 40px;
+}
+.toggler .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggler .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #555; /* Dark gray background */
+  transition: 0.4s;
+}
+.toggler .switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff; /* Light color for the circle */
+  transition: 0.4s;
+}
+.toggler input:checked + .slider {
+  background-color: #ccc;
+}
+.toggler input:focus + .slider {
+  box-shadow: 0 0 1px #ccc;
+}
+.toggler input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.toggler .slider.round {
+  border-radius: 34px;
+}
+.toggler .slider.round:before {
+  border-radius: 50%;
+}
+
+.home-carousel {
+  padding-top: 150px;
+  width: 90%;
+  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home-carousel .sliding-img {
+  width: 250px;
+}
+
+@media screen and (min-width: 360px) {
+  .home-carousel {
+    padding-left: 30px;
+  }
+  .home-carousel .sliding-img {
+    width: 320px;
+  }
+}
+@media screen and (min-width: 480px) {
+  .home-carousel {
+    padding-left: 35px;
+  }
+  .home-carousel .sliding-img {
+    width: 220px;
+  }
+}
+@media screen and (min-width: 580px) {
+  .home-carousel {
+    padding-left: 15px;
+    margin: auto;
+  }
+  .home-carousel .sliding-img {
+    width: 260px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .home-carousel {
+    padding-left: 15px;
+    margin: auto;
+  }
+  .home-carousel .sliding-img {
+    width: 300px;
+  }
+}
+@media screen and (min-width: 960px) {
+  .home-carousel {
+    padding-left: 15px;
+    margin: auto;
+  }
+  .home-carousel .sliding-img {
+    width: 300px;
+  }
+}
+@media screen and (min-width: 1106px) {
+  .home-carousel {
+    padding-left: 15px;
+    margin: auto;
+  }
+  .home-carousel .sliding-img {
+    width: 600px;
+  }
+}/*# sourceMappingURL=main.css.map */
