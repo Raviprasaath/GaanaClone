@@ -1,6 +1,5 @@
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineDown } from "react-icons/ai";
 import MainLogo from "../../assets/main-logo.png";
-
 
 function NavbarTop() {
   return (
@@ -23,19 +22,7 @@ function NavbarTop() {
           </span>
         </span>
 
-        <div className="music-width">
-          <div className="music-category">
-            <p>All</p>
-            <p>Trending Songs</p>
-            <p>New Songs</p>
-            <p>Old Songs</p>
-            <p>Moods & Genres</p>
-            <p>Albums</p>
-            <p>Radio</p>
-            <p>Podcast</p>
-            <p>My Music</p>
-          </div>
-        </div>
+        
       </div>
     </>
   );

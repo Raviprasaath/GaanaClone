@@ -9,9 +9,7 @@
 
 :root {
   --PrimaryColor: #232429;
-  --PrimaryColor2: #333;
   --SecondaryColor: #c3c2c5;
-  --SecondaryColor2: #f5f4f4;
   --SecondaryColor3: red;
   --SecondaryColor4: #fff;
   --colorOne: hsl(15, 74%, 70%);
@@ -32,6 +30,15 @@
 body {
   background-color: var(--PrimaryColor);
   color: var(--SecondaryColor4);
+}
+
+*::-webkit-scrollbar {
+  height: 0.2rem;
+  width: 0.2rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--SecondaryColor);
 }
 
 .wrapper {
@@ -63,6 +70,10 @@ body {
   display: block;
 }
 
+.react-multiple-carousel__arrow {
+  z-index: 1;
+}
+
 .navbar {
   padding-right: 20px;
 }
@@ -72,7 +83,7 @@ body {
   left: -80%;
   width: 80%;
   height: 100%;
-  background: var(--PrimaryColor2);
+  background: var(--PrimaryColor);
   color: var(--SecondaryColor);
   transition: left 0.3s ease-in-out;
   z-index: 3;
@@ -122,7 +133,7 @@ body {
 
 .navbar-top {
   position: fixed;
-  width: 90%;
+  width: 100%;
   background-color: var(--PrimaryColor);
   z-index: 2;
   padding-left: 30px;
@@ -139,6 +150,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 5px 20px;
+  width: 95%;
 }
 .navbar-top .search-section .search-bar .search-icon {
   font-size: 1.2rem;
@@ -153,30 +165,199 @@ body {
   outline: none;
   padding-left: 10px;
 }
-.navbar-top .music-width {
-  overflow-x: scroll;
-}
-.navbar-top .music-width .music-category {
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  padding: 10px 0px;
-  width: 580px;
-  align-items: center;
-  gap: 10px;
-}
-.navbar-top .music-width .music-category p {
-  font-size: 0.7rem;
+
+.songsCollection {
+  padding-top: 120px;
+  max-width: 1200px;
+  overflow: auto;
   color: var(--SecondaryColor);
+  background-color: var(--PrimaryColor);
   cursor: pointer;
 }
-.navbar-top .music-width .music-category p:hover {
+.songsCollection .MuiBox-root .css-1563k86-MuiTypography-root {
+  min-width: 100px;
+  font-size: 0.8rem;
+}
+.songsCollection .MuiButtonBase-root {
+  background-color: var(--PrimaryColor);
+  color: var(--SecondaryColor);
+  margin-left: 0;
+}
+.songsCollection .MuiButtonBase-root .MuiTypography-root {
+  text-transform: none;
+  font-weight: unset;
+  font-size: 0.8rem;
+}
+
+.css-ahj2mt-MuiTypography-root {
+  font-size: 0.8rem !important;
+}
+
+.MuiModal-root .MuiPaper-root {
+  background-color: var(--PrimaryColor);
+  color: var(--SecondaryColor);
+}
+.MuiModal-root .MuiPaper-root::before {
+  content: none;
+}
+
+.largerCarousel {
+  padding-left: 20px;
+  padding-top: 10px;
+}
+.largerCarousel .large-slider-img {
+  width: 240px;
+}
+
+.Testing.card {
+  margin-top: 120px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 320px;
+  margin: auto 1rem;
+  text-align: center;
+  font-family: arial;
+}
+.Testing.card .product--image {
+  width: 100%;
+  height: 16em;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.music-control-comp {
+  background-color: var(--PrimaryColor);
+  padding: 5px 20px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  bottom: 0;
+}
+.music-control-comp .mob-screen-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.music-control-comp .mob-screen-controls .song-name {
+  display: flex;
+  align-items: center;
+}
+.music-control-comp .mob-screen-controls .song-name .current-playing-song {
+  width: 30px;
+}
+.music-control-comp .mob-screen-controls .song-name .song-name-lines {
+  padding: 0px 20px;
+}
+.music-control-comp .mob-screen-controls .song-name .song-name-lines .song-name-1 {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.music-control-comp .mob-screen-controls .song-name .song-name-lines .song-name-2 {
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+.music-control-comp .mob-screen-controls .song-controls-play {
+  display: flex;
+  width: 80px;
+  justify-content: space-around;
+}
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control .playing-icon {
+  color: red;
+  font-size: 1.5rem;
+}
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control .next-songs-icon {
+  font-size: 1.5rem;
+}
+.music-control-comp .large-screen-controls {
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .current-playing-song {
+  width: 30px;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .song-name {
+  padding: 0px 10px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .song-details {
+  padding: 0px 10px;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .heart-empty {
+  font-size: 1.3rem;
+  margin-left: 15px;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .heart-filled {
+  margin-left: 15px;
+  font-size: 1.3rem;
   color: red;
 }
-.navbar-top .music-width::-webkit-scrollbar {
-  height: 0.2rem;
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .options {
+  margin-left: 15px;
+  font-size: 1rem;
 }
-.navbar-top .music-width::-webkit-scrollbar-thumb {
-  background: var(--SecondaryColor);
+.music-control-comp .large-screen-controls .song-playing-area2 {
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-duration-track {
+  border: 1px solid var(--SecondaryColor);
+  padding: 5px 15px;
+  color: var(--SecondaryColor);
+  border-radius: 25px;
+  font-size: 0.8rem;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns {
+  display: flex;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon1 {
+  font-size: 1.5rem;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon3 {
+  font-size: 1.5rem;
+  color: red;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon4, .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon2 {
+  font-size: 2.2rem;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon5 {
+  font-size: 1rem;
+}
+.music-control-comp .large-screen-controls .song-playing-area3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 180px;
+}
+.music-control-comp .large-screen-controls .song-playing-area3 .volume-button {
+  display: flex;
+}
+.music-control-comp .large-screen-controls .song-playing-area3 .volume-button .volume-btn {
+  font-size: 2rem;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 5px;
+}
+.music-control-comp .large-screen-controls .song-playing-area3 .audio-type {
+  border: 1px solid red;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+.music-control-comp .large-screen-controls .song-playing-area3 .song-details {
+  font-size: 1.2rem;
 }
 
 .toggler {
@@ -230,67 +411,148 @@ body {
   border-radius: 50%;
 }
 
-.home-carousel {
-  padding-top: 150px;
-  width: 90%;
-  padding-left: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.home-carousel .sliding-img {
-  width: 250px;
-}
-
 @media screen and (min-width: 360px) {
-  .home-carousel {
-    padding-left: 30px;
+  .largerCarousel {
+    padding-left: 20px;
+    padding-top: 10px;
   }
-  .home-carousel .sliding-img {
-    width: 320px;
+  .largerCarousel .large-slider-img {
+    width: 350px;
   }
 }
 @media screen and (min-width: 480px) {
-  .home-carousel {
-    padding-left: 35px;
+  .largerCarousel {
+    padding-left: 20px;
+    padding-top: 10px;
   }
-  .home-carousel .sliding-img {
-    width: 220px;
+  .largerCarousel .large-slider-img {
+    width: 240px;
   }
 }
-@media screen and (min-width: 580px) {
-  .home-carousel {
-    padding-left: 15px;
-    margin: auto;
+@media screen and (min-width: 600px) {
+  .navbar {
+    padding-right: 20px;
   }
-  .home-carousel .sliding-img {
-    width: 260px;
+  .navbar .sideNav {
+    top: 0;
+    left: -80%;
+    width: 80%;
+  }
+  .navbar .sideNav.open {
+    left: 0;
+  }
+  .navbar .sideNav .logo-login {
+    padding-top: 10px;
+  }
+  .navbar .sideNav .logo-login .logo {
+    font-size: 2rem;
+  }
+  .navbar .sideNav .logo-login .login {
+    font-size: 0.9rem;
+  }
+  .navbar .sideNav ul {
+    padding-top: 2rem;
+    padding-left: 2rem;
+  }
+  .navbar .sideNav ul li {
+    padding: 0.5rem;
+  }
+  .navbar .sideNav ul li a {
+    font-size: 0.9rem;
+  }
+  .navbar .sideNav ul li .premium {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .navbar-top .search-section .search-bar .input-search-option {
+    font-size: 1rem;
+  }
+  .largerCarousel {
+    padding-left: 20px;
+    padding-top: 10px;
+  }
+  .largerCarousel .large-slider-img {
+    width: 320px;
+  }
+  .songsCollection .MuiBox-root .css-1563k86-MuiTypography-root {
+    min-width: 130px;
+    font-size: 0.9rem;
+  }
+  .songsCollection .MuiButtonBase-root .MuiTypography-root {
+    font-size: 0.9rem;
+  }
+  .css-ahj2mt-MuiTypography-root {
+    font-size: 0.9rem !important;
+  }
+  .MuiModal-root .MuiPaper-root {
+    background-color: var(--PrimaryColor);
+    color: var(--SecondaryColor);
+  }
+  .MuiModal-root .MuiPaper-root::before {
+    content: none;
   }
 }
 @media screen and (min-width: 768px) {
-  .home-carousel {
-    padding-left: 15px;
-    margin: auto;
+  .navbar {
+    padding-right: 20px;
   }
-  .home-carousel .sliding-img {
-    width: 300px;
+  .navbar .sideNav {
+    top: 0;
+    left: -80%;
+    width: 80%;
+  }
+  .navbar .sideNav.open {
+    left: 0;
+  }
+  .navbar .sideNav .logo-login {
+    padding-top: 10px;
+  }
+  .navbar .sideNav .logo-login .logo {
+    font-size: 2rem;
+  }
+  .navbar .sideNav .logo-login .login {
+    font-size: 0.9rem;
+  }
+  .navbar .sideNav ul {
+    padding-top: 2rem;
+    padding-left: 2rem;
+  }
+  .navbar .sideNav ul li {
+    padding: 0.5rem;
+  }
+  .navbar .sideNav ul li a {
+    font-size: 0.9rem;
+  }
+  .navbar .sideNav ul li .premium {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .navbar-top .search-section .search-bar .input-search-option {
+    font-size: 0.92rem;
+  }
+  .largerCarousel {
+    padding-left: 20px;
+    padding-top: 10px;
+  }
+  .largerCarousel .large-slider-img {
+    width: 380px;
   }
 }
 @media screen and (min-width: 960px) {
-  .home-carousel {
-    padding-left: 15px;
-    margin: auto;
+  .largerCarousel {
+    padding-left: 20px;
+    padding-top: 10px;
   }
-  .home-carousel .sliding-img {
-    width: 300px;
+  .largerCarousel .large-slider-img {
+    width: 420px;
   }
 }
-@media screen and (min-width: 1106px) {
-  .home-carousel {
-    padding-left: 15px;
-    margin: auto;
+@media screen and (min-width: 1024px) {
+  .largerCarousel {
+    padding-left: 10px;
+    padding-top: 10px;
   }
-  .home-carousel .sliding-img {
-    width: 600px;
+  .largerCarousel .large-slider-img {
+    width: 490px;
   }
 }/*# sourceMappingURL=main.css.map */

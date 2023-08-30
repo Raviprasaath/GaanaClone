@@ -11,7 +11,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
-export default function AccountMenu() {
+const SongsCollection = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -25,7 +25,7 @@ export default function AccountMenu() {
 
   return (
     <>
-      <div className="testing">
+      <div className="songsCollection">
         <Box
           sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
         >
@@ -55,11 +55,10 @@ export default function AccountMenu() {
               </Typography>
             </IconButton>
           </Tooltip>
-          <Typography sx={{ minWidth: 150 }}>Guasdasdads</Typography>
-          <Typography sx={{ minWidth: 150 }}>Profile</Typography>
-          <Typography sx={{ minWidth: 150 }}>Profile</Typography>
-          <Typography sx={{ minWidth: 150 }}>Profile</Typography>
-          <Typography sx={{ minWidth: 150 }}>Profile</Typography>
+          <Typography sx={{ minWidth: 150 }}>Album</Typography>
+          <Typography sx={{ minWidth: 150 }}>Radio</Typography>
+          <Typography sx={{ minWidth: 150 }}>Podcast</Typography>
+          <Typography sx={{ minWidth: 150 }}>My Music</Typography>
         </Box>
         <Menu
           anchorEl={anchorEl}
@@ -166,4 +165,6 @@ export default function AccountMenu() {
       </div>
     </>
   );
-}
+};
+
+export default SongsCollection;

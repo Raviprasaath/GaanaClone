@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
-import Navbar from "./Components/NavbarSide/Navbar.jsx";
-import HomeCarousel from "./Components/HomeCarousel/HomeCarousel.jsx";
-
-
-
-import Test from "./Components/Test.jsx";
 import { FaBars } from "react-icons/fa";
+
+import Navbar from "./Components/NavbarSide/Navbar.jsx";
 import NavbarTop from "./Components/NavbarSide/NavbarTop.jsx";
-import Trending from "./Components/HomeCarousels-types/Trending.jsx";
+import NavbarSongTypeChoose from "./Components/NavbarSide/NavbarSongTypeChoose.jsx";
+import LargerCarousel from "./Components/HomeCarousel/LargerCarousel.jsx";
+import MusicControlComp from "./Components/MusicControlComp/MusicControlComp.jsx";
+import SongsCollection from "./Components/HomeCarousel/SongsCollection.jsx"
+
+
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+import Testing from "./Components/HomeCarousel/Testing.jsx";
+import { productData, responsive } from "./Components/HomeCarousel/Data.jsx";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
 
+  // sidebar open close
   const toggleSidePanel = () => {
     setIsOpen(!isOpen);
   };
@@ -35,19 +42,56 @@ function App() {
     };
   }, []);
 
+
+  // data testing carosal
+  const product = productData.map((item) => (
+    <Testing 
+      key= {item.id}
+      name={item.name}
+      url={item.imageurl}
+      price={item.price}
+    />
+  ));
+
+  function toggling() {
+    console.log("ravi");
+  }
+   
+
+
   return (
     <>
       <div className={`wrapper ${isOpen ? "open" : ""}`} ref={wrapperRef}>
         <button className="navbar-btn" onClick={toggleSidePanel}>
           <FaBars />
         </button>
-        <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
+        <Navbar toggleCallback={toggling} isOpen={isOpen} closeSidePanel={closeSidePanel} />
         {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
       </div>
-      <NavbarTop />
-      <HomeCarousel/>
-      <Trending/>
 
+      <NavbarTop />
+      {/* <NavbarSongTypeChoose /> */}
+      
+      <SongsCollection />
+      <LargerCarousel />
+
+      <h2>Upcoming</h2>
+      <Carousel showDots={false} responsive={responsive}>
+        {product}
+      </Carousel>
+      
+      <h2>Top Trending</h2>
+      <Carousel showDots={false} responsive={responsive}>
+        {product}
+      </Carousel>
+
+      <MusicControlComp />
+
+
+
+      
+
+      
     </>
   );
 }
