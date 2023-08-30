@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaBars } from "react-icons/fa";
-
+import {useSelector} from 'react-redux';
 import Navbar from "./Components/NavbarSide/Navbar.jsx";
 import NavbarTop from "./Components/NavbarSide/NavbarTop.jsx";
 import NavbarSongTypeChoose from "./Components/NavbarSide/NavbarSongTypeChoose.jsx";
@@ -18,7 +18,8 @@ import { productData, responsive } from "./Components/HomeCarousel/Data.jsx";
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
-
+  const darkMode = useSelector(state => state.usersData.darkMode);
+  console.log('print dark mode val', darkMode);
   // sidebar open close
   const toggleSidePanel = () => {
     setIsOpen(!isOpen);
@@ -62,6 +63,7 @@ function App() {
   return (
     <>
       <div className={`wrapper ${isOpen ? "open" : ""}`} ref={wrapperRef}>
+        DARKMODEVAL::{darkMode}
         <button className="navbar-btn" onClick={toggleSidePanel}>
           <FaBars />
         </button>

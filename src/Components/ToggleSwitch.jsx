@@ -1,11 +1,13 @@
 import { useState } from "react";
-
+import {useDispatch} from 'react-redux';
+import actions from '../action';
 function ToggleSwitch() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const dispatch = useDispatch();
     // dark theme toggler
     const handleDarkModeToggle = () => {
       setIsDarkMode(!isDarkMode);
+      dispatch(actions.toggledarkmode(!isDarkMode));
     };
     const bodyStyle = {
       backgroundColor: isDarkMode ? "#222" : "#fff",
