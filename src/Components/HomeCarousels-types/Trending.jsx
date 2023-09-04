@@ -1,11 +1,11 @@
 
-function Trending() {
-    return (
-        <>
-            Hi this is Trending
-        </>
-    )
+// function Trending() {
+//     return (
+//         <>
+//             Hi this is Trending
+//         </>
+//     )
 
-}
+// }
 
-export default Trending; 
+// export default Trending; 

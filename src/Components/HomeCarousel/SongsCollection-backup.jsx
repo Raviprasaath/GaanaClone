@@ -13,18 +13,11 @@ import Logout from "@mui/icons-material/Logout";
 
 const SongsCollection = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [activeItem, setActiveItem] = React.useState("");
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    setActiveItem(event)
-    
   };
-  
-  const handleSongSelection = (selectedItem) => {
-    setActiveItem(selectedItem)
-  }
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -36,13 +29,13 @@ const SongsCollection = () => {
         <Box
           sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
         >
-          <Typography onClick={() => handleSongSelection("All")} className={activeItem === "All" ? "active" : ""} sx={{ minWidth: 150 }}>All</Typography>
-          <Typography onClick={() => handleSongSelection("Trending Songs")} className={activeItem === "Trending Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Trending Songs</Typography>
-          <Typography onClick={() => handleSongSelection("New Songs")} className={activeItem === "New Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>New Songs</Typography>
-          <Typography onClick={() => handleSongSelection("Old Songs")} className={activeItem === "Old Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Old Songs</Typography>
-          <Tooltip title="Hover for Access to the Drop-Down Menu">
+          <Typography sx={{ minWidth: 150 }}>All</Typography>
+          <Typography sx={{ minWidth: 150 }}>Trending Songs</Typography>
+          <Typography sx={{ minWidth: 150 }}>New Songs</Typography>
+          <Typography sx={{ minWidth: 150 }}>Old Songs</Typography>
+          <Tooltip title="">
             <IconButton
-              
+              onClick={handleClick}
               size="small"
               sx={{ ml: 2 }}
               aria-controls={open ? "account-menu" : undefined}
@@ -50,9 +43,6 @@ const SongsCollection = () => {
               aria-expanded={open ? "true" : undefined}
             >
               <Typography
-              onClick={handleClick}
-              className={activeItem === "Moods & Genres" ? "active" : ""}
-
                 variant="body1"
                 component="span"
                 sx={{
@@ -65,10 +55,10 @@ const SongsCollection = () => {
               </Typography>
             </IconButton>
           </Tooltip>
-          <Typography onClick={() => handleSongSelection("Album")} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
-          <Typography onClick={() => handleSongSelection("Radio")} className={activeItem === "Radio" ? "active" : ""} sx={{ minWidth: 150 }}>Radio</Typography>
-          <Typography onClick={() => handleSongSelection("Podcast")} className={activeItem === "Podcast" ? "active" : ""} sx={{ minWidth: 150 }}>Podcast</Typography>
-          <Typography onClick={() => handleSongSelection("My Music")} className={activeItem === "My Music" ? "active" : ""} sx={{ minWidth: 150 }}>My Music</Typography>
+          <Typography sx={{ minWidth: 150 }}>Album</Typography>
+          <Typography sx={{ minWidth: 150 }}>Radio</Typography>
+          <Typography sx={{ minWidth: 150 }}>Podcast</Typography>
+          <Typography sx={{ minWidth: 150 }}>My Music</Typography>
         </Box>
         <Menu
           anchorEl={anchorEl}
