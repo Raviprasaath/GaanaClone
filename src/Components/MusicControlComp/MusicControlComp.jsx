@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import image1 from "../../assets/trending-movies3.jpg";
+import image from "../../assets/trending-movies3.jpg";
 
 import { BsFillPlayCircleFill, BsFillVolumeUpFill } from "react-icons/bs";
 import { IoIosArrowUp, IoMdRepeat, IoMdShuffle } from "react-icons/io";
@@ -10,6 +10,8 @@ import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
 function MusicControlComp() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +34,7 @@ function MusicControlComp() {
           <section className="mob-screen-controls">
             <div className="song-name">
               <div>
-                <img className="current-playing-song" src={image1} alt="" />
+                <img className="current-playing-song" src={image} alt="" />
               </div>
               <p className="song-name-lines">
                 <p className="song-name-1">Song playing</p>
@@ -53,7 +55,7 @@ function MusicControlComp() {
             <div className="song-playing-area1">
               <div className="song-cover">
                 <div>
-                  <img className="current-playing-song" src={image1} alt="" />
+                  <img className="current-playing-song" src={image} alt="" />
                 </div>
                 <div>
                   <p className="song-name">Song Name</p>

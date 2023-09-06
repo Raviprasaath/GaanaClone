@@ -13,7 +13,7 @@ function TrackListHeader() {
       setScreenSize(window.innerWidth < 960);
     };
     const handleScrolling = () => {
-      if (window.scrollY >= 300) {
+      if (window.scrollY >= 440) {
         setScrolling(true);
       } else {
         setScrolling(false);

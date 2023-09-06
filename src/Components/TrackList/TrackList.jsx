@@ -809,6 +809,351 @@ function TrackList() {
                   </button>
                 </td>
               </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
+              <tr className="table-tr-mob">
+                <td className="table-td-1">1</td>
+                <td className="table-td-2">
+                  <div className="table-td-2-img">
+                    <img src={image} alt="img" className="table-mob-view-poster" />
+                    <div className="table-button-artist">
+                      <button className="premium-button">Premium</button>
+                      <p className="table-mob-artist">Karthik</p>
+                    </div>
+                    <p className="table-song-name">
+                      Yethi Yethi Yethi En Nenjil
+                    </p>
+                  </div>
+                </td>
+                <td className="table-td-3">
+                  <button className="btn-play">
+                    <BsFillPlayFill className="play-button"/>
+                  </button>
+                  <button className="btn-option"> 
+                    <BsThreeDotsVertical className="play-option"/>
+                  </button>
+                </td>
+              </tr>
              
               
             </table>

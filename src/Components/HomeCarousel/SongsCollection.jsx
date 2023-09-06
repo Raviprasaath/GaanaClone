@@ -11,6 +11,11 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
+import { AiOutlineDown } from 'react-icons/ai'
+
+import { Link } from 'react-router-dom';
+
+
 const SongsCollection = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [activeItem, setActiveItem] = React.useState("");
@@ -18,8 +23,7 @@ const SongsCollection = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    setActiveItem(event)
-    
+    setActiveItem(event.target.innerText);
   };
   
   const handleSongSelection = (selectedItem) => {
@@ -33,41 +37,60 @@ const SongsCollection = () => {
   return (
     <>
       <div className="songsCollection">
-        <Box
-          sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
-        >
-          <Typography onClick={() => handleSongSelection("All")} className={activeItem === "All" ? "active" : ""} sx={{ minWidth: 150 }}>All</Typography>
-          <Typography onClick={() => handleSongSelection("Trending Songs")} className={activeItem === "Trending Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Trending Songs</Typography>
-          <Typography onClick={() => handleSongSelection("New Songs")} className={activeItem === "New Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>New Songs</Typography>
-          <Typography onClick={() => handleSongSelection("Old Songs")} className={activeItem === "Old Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Old Songs</Typography>
+        <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+          
+          <Link className="list-selector" to="/">         
+            <Typography onClick={() => handleSongSelection("All")} className={activeItem === "All" ? "active" : ""} sx={{ minWidth: 150 }}>
+              All
+            </Typography>
+          </Link>   
+
+          <Link className="list-selector" to="/trending">         
+            <Typography onClick={() => handleSongSelection("Trending Songs")} className={activeItem === "Trending Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>              
+                Trending Songs
+            </Typography>    
+          </Link>              
+          
+          <Link className="list-selector" to="/newsongs">         
+            <Typography onClick={() => handleSongSelection("New Songs")} className={activeItem === "New Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>            
+              New Songs
+            </Typography>
+          </Link>
+          <Link className="list-selector" to="/oldsongs">                   
+            <Typography onClick={() => handleSongSelection("Old Songs")} className={activeItem === "Old Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Old Songs</Typography>
+          </Link>
+
           <Tooltip title="Hover for Access to the Drop-Down Menu">
-            <IconButton
-              
+            <IconButton              
               size="small"
               sx={{ ml: 2 }}
               aria-controls={open ? "account-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
+              aria-expanded={open ? "true" : undefined}>
               <Typography
               onClick={handleClick}
               className={activeItem === "Moods & Genres" ? "active" : ""}
-
-                variant="body1"
-                component="span"
-                sx={{
-                  fontSize: "1rem",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                }}
-              >
-                Moods & Genres
+              variant="body1"
+              component="span"
+              sx={{
+                fontSize: "1rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+              }} >
+                Moods & Genres <AiOutlineDown />
               </Typography>
             </IconButton>
           </Tooltip>
-          <Typography onClick={() => handleSongSelection("Album")} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
-          <Typography onClick={() => handleSongSelection("Radio")} className={activeItem === "Radio" ? "active" : ""} sx={{ minWidth: 150 }}>Radio</Typography>
-          <Typography onClick={() => handleSongSelection("Podcast")} className={activeItem === "Podcast" ? "active" : ""} sx={{ minWidth: 150 }}>Podcast</Typography>
+          <Link className="list-selector" to="/album">                 
+            <Typography onClick={() => handleSongSelection("Album")} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
+          </Link>
+          <Link className="list-selector" to="/comingsoon">          
+            <Typography onClick={() => handleSongSelection("Radio")} className={activeItem === "Radio" ? "active" : ""} sx={{ minWidth: 150 }}>Radio</Typography>
+          </Link>
+          <Link className="list-selector" to="/comingsoon">          
+            <Typography onClick={() => handleSongSelection("Podcast")} className={activeItem === "Podcast" ? "active" : ""} sx={{ minWidth: 150 }}>Podcast</Typography>
+          </Link>
+
           <Typography onClick={() => handleSongSelection("My Music")} className={activeItem === "My Music" ? "active" : ""} sx={{ minWidth: 150 }}>My Music</Typography>
         </Box>
         <Menu
@@ -100,11 +123,13 @@ const SongsCollection = () => {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Party
-              </Typography>
-            </MenuItem>
+              <Link className="list-selector" to="/party">                 
+                <MenuItem  onClick={handleClose}>
+                    <Typography  variant="body1" component="span">
+                      Party 
+                    </Typography>
+                </MenuItem>
+              </Link>
             <MenuItem onClick={handleClose}>
               <Typography variant="body1" component="span">
                 Romance
