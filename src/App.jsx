@@ -7,7 +7,7 @@ import "react-multi-carousel/lib/styles.css";
 import HomePage from "./Components/PagesRoute/HomePage/HomePage.jsx";
 import TrendingSongs from "./Components/PagesRoute/TrendingSongs/TrendingSongs.jsx";
 import MusicControlComp from "./Components/MusicControlComp/MusicControlComp.jsx";
-import MusicPlayer from "./Components/MusicPlayer/MusicPlayer.jsx";
+
 import Footer from "./Components/Footer/Footer.jsx";
 
 import image from "./assets/trending-movies6.jpg";
@@ -26,6 +26,13 @@ import Album from "./Components/PagesRoute/Album/Album.jsx";
 import OldSongs from "./Components/PagesRoute/OldSongs/OldSongs.jsx";
 import ComingSoonPage from "./Components/PagesRoute/ComingSoonPage/ComingSoonPage.jsx";
 import PartySongs from "./Components/PagesRoute/PartySongs/PartySongs.jsx";
+import Romance from "./Components/PagesRoute/Romance/Romance.jsx";
+import SongsFrom90s2000s from "./Components/PagesRoute/SongsFrom90s2000s/SongsFrom90s2000s.jsx";
+import LoginPage from "./Components/LoginPage/LoginPage.jsx";
+import SubscriptionPage from "./Components/SubscriptionPage/SubscriptionPage.jsx";
+
+
+
 
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
@@ -43,6 +50,10 @@ function App() {
   const closeSidePanel = () => {
     setIsOpen(false);
   };
+
+
+
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,6 +88,7 @@ function App() {
   // DARKMODEVAL::{darkMode}
   return (
     <>
+
       <button className="navbar-btn" onClick={toggleSidePanel}>
         <FaBars />
       </button>
@@ -93,6 +105,8 @@ function App() {
         <Route path="/newsongs" element={<NewSongs />} />
         <Route path="/oldsongs" element={<OldSongs />} />
         <Route path="/party" element={<PartySongs />} />
+        <Route path="/romance" element={<Romance />} />
+        <Route path="/songsfrom90s2000s" element={<SongsFrom90s2000s />} />
 
         <Route path="/album" element={<Album />} />
         <Route path="/comingsoon" element={<ComingSoonPage />} />
@@ -626,7 +640,14 @@ function App() {
         </div>
       )}
       <Footer />
-      <MusicControlComp />
+      <MusicControlComp  />
+
+      {/* <SubscriptionPage /> */}
+
+      
+
+
+
     </>
   );
 }

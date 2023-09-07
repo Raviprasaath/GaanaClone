@@ -10,7 +10,8 @@
 :root {
   --PrimaryColor: #232429;
   --PrimaryColor2: #283024;
-  --SecondaryColor: #c3c2c5;
+  --PrimaryColor3: #333;
+  --SecondaryColor: #d4d3d6;
   --SecondaryColor3: red;
   --SecondaryColor4: #fff;
   --SecondaryColor5: #0b91e9;
@@ -58,6 +59,11 @@ body {
   border: none;
   font-size: 1.2rem;
   z-index: 3;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.navbar-btn:hover {
+  opacity: 0.5;
 }
 
 .overlay {
@@ -174,6 +180,10 @@ body {
 .navbar-top .navbar-view-changer .search-section .search-bar .search-icon {
   font-size: 1.2rem;
   color: var(--SecondaryColor);
+  cursor: pointer;
+}
+.navbar-top .navbar-view-changer .search-section .search-bar .search-icon:hover {
+  opacity: 0.5;
 }
 .navbar-top .navbar-view-changer .search-section .search-bar .input-search-option {
   background-color: transparent;
@@ -307,6 +317,7 @@ body {
   align-items: center;
   width: 100%;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 .musicCollections .traction-splitter .button-details-splitter .song-button .song-play-btn {
   border: none;
@@ -317,11 +328,19 @@ body {
   background-color: var(--SecondaryColor3);
   color: var(--SecondaryColor4);
   font-weight: 600;
+  cursor: pointer;
+}
+.musicCollections .traction-splitter .button-details-splitter .song-button .song-play-btn:hover {
+  opacity: 0.5;
 }
 .musicCollections .traction-splitter .button-details-splitter .song-button .fav-song-adding {
   font-size: 2.2rem;
   padding: 0px 10px;
   width: 20%;
+  cursor: pointer;
+}
+.musicCollections .traction-splitter .button-details-splitter .song-button .fav-song-adding:hover {
+  opacity: 0.5;
 }
 .musicCollections .traction-splitter .button-details-splitter .songs-side-details {
   display: flex;
@@ -456,9 +475,14 @@ body {
 .music-control-comp .mob-screen-controls .song-controls-play .icons-control .playing-icon {
   color: red;
   font-size: 1.5rem;
+  cursor: pointer;
+}
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control .playing-icon:hover {
+  opacity: 0.5;
 }
 .music-control-comp .mob-screen-controls .song-controls-play .icons-control .next-songs-icon {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .music-control-comp .mob-screen-controls .song-controls-play .icons-control .next-songs-icon:hover {
   opacity: 0.5;
@@ -491,15 +515,27 @@ body {
 .music-control-comp .large-screen-controls .song-playing-area1 .song-cover .heart-empty {
   font-size: 1.3rem;
   margin-left: 15px;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .heart-empty:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area1 .song-cover .heart-filled {
   margin-left: 15px;
   font-size: 1.3rem;
   color: red;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .heart-filled:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area1 .song-cover .options {
   margin-left: 15px;
   font-size: 1rem;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area1 .song-cover .options:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area2 {
   width: 350px;
@@ -520,16 +556,32 @@ body {
 }
 .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon1 {
   font-size: 1.5rem;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon1:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon3 {
   font-size: 2rem;
   color: red;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon3:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon4, .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon2 {
   font-size: 2.2rem;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon4:hover, .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon2:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon5 {
   font-size: 1rem;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon5:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area3 {
   display: flex;
@@ -545,6 +597,10 @@ body {
   border: 1px solid white;
   border-radius: 50%;
   padding: 5px;
+  cursor: pointer;
+}
+.music-control-comp .large-screen-controls .song-playing-area3 .volume-button .volume-btn:hover {
+  opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area3 .audio-type {
   border: 1px solid red;
@@ -554,6 +610,7 @@ body {
 }
 .music-control-comp .large-screen-controls .song-playing-area3 .song-details {
   font-size: 1.2rem;
+  cursor: pointer;
 }
 .music-control-comp .large-screen-controls .song-playing-area3 .song-details:hover {
   opacity: 0.5;
@@ -602,6 +659,10 @@ body {
   color: var(--SecondaryColor4);
   font-size: 1.1rem;
   margin-left: 30px;
+  cursor: pointer;
+}
+.track-list-header .track-list-playing-option:hover {
+  opacity: 0.5;
 }
 .track-list-header .playlist-heart {
   font-size: 3rem;
@@ -609,6 +670,10 @@ body {
   border-radius: 50%;
   padding: 5px;
   margin-left: 30px;
+  cursor: pointer;
+}
+.track-list-header .playlist-heart:hover {
+  opacity: 0.5;
 }
 
 .trackList .trackList-container .table-container {
@@ -636,6 +701,10 @@ body {
 }
 .trackList .trackList-container .table-container .table-body-container tr {
   border-bottom: 1px solid var(--SecondaryColor6);
+  cursor: pointer;
+}
+.trackList .trackList-container .table-container .table-body-container tr:hover {
+  opacity: 0.5;
 }
 .trackList .trackList-container .table-container .table-body-container tr .table-col-1 {
   text-align: center;
@@ -688,6 +757,12 @@ body {
 }
 .trackList .trackList-container .table-container .table-body-container tr .table-col-5 .track-duration {
   text-align: center;
+}
+.trackList .table-mobile-container .table-tr-mob {
+  cursor: pointer;
+}
+.trackList .table-mobile-container .table-tr-mob:hover {
+  opacity: 0.5;
 }
 .trackList .table-mobile-container .table-tr-mob .table-td-1 {
   width: 1rem;
@@ -754,6 +829,10 @@ body {
   font-size: 1.5rem;
   margin-left: 20px;
   margin-top: 10px;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .drop-arrow:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player .view-splitter .poster-container {
   display: flex;
@@ -784,6 +863,13 @@ body {
   width: 100%;
   font-size: 1.1rem;
 }
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-name .heart-in {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-name .heart-in:hover {
+  opacity: 0.5;
+}
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-duration {
   display: flex;
   width: 95%;
@@ -803,16 +889,32 @@ body {
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon1 {
   font-size: 1.5rem;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon1:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon3 {
   font-size: 2rem;
   color: red;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon3:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon4, .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon2 {
   font-size: 2.2rem;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon4:hover, .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon2:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon5 {
   font-size: 1rem;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon5:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img {
   width: 100%;
@@ -855,6 +957,12 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .songs-collection .fav-remover {
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .songs-collection .fav-remover:hover {
+  opacity: 0.5;
+}
 .music-player-container .music-player-lap-view .music-player-section {
   display: flex;
   justify-content: space-around;
@@ -877,6 +985,12 @@ body {
   width: 100%;
   font-size: 1.1rem;
 }
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-name .heart-in {
+  cursor: pointer;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-name .heart-in:hover {
+  opacity: 0.5;
+}
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-duration {
   display: flex;
   width: 95%;
@@ -896,19 +1010,36 @@ body {
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon1 {
   font-size: 1.5rem;
+  cursor: pointer;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon1:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon3 {
   font-size: 2rem;
   color: red;
+  cursor: pointer;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon3:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon4, .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon2 {
   font-size: 2.2rem;
+  cursor: pointer;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon4:hover, .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon2:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon5 {
   font-size: 1rem;
+  cursor: pointer;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon5:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .drop-arrow {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .drop-arrow:hover {
   opacity: 0.5;
@@ -955,6 +1086,12 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection .fav-remover {
+  cursor: pointer;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection .fav-remover:hover {
+  opacity: 0.5;
 }
 
 .new-songs-section {
@@ -1248,6 +1385,166 @@ body {
   padding: 10px 20px;
 }
 
+.carousel.card {
+  position: relative;
+  transition: 0.5s ease-in-out;
+}
+.carousel.card .play-icon {
+  display: none;
+}
+.carousel.card:hover {
+  transition: 0.5s ease-in-out;
+  opacity: 0.7;
+}
+.carousel.card:hover .play-icon {
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  font-size: 2.5rem;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.ReactModalPortal {
+  position: relative;
+}
+.ReactModalPortal .ReactModal__Content {
+  background: transparent !important;
+  padding: 0 !important;
+  width: 100%;
+}
+.ReactModalPortal .close-btn-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.2rem;
+  color: var(--SecondaryColor);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.ReactModalPortal .close-btn-icon:hover {
+  transform: scale(1.3);
+  transition: 0.5s ease-in-out;
+}
+.ReactModalPortal .login-container {
+  height: 500px;
+  width: 100%;
+  background-color: var(--PrimaryColor3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ReactModalPortal .login-container .login-section1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 20px;
+  width: 100%;
+}
+.ReactModalPortal .login-container .login-section1 img {
+  width: 60px;
+}
+.ReactModalPortal .login-container .login-section1 .login-title {
+  padding-top: 20px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+.ReactModalPortal .login-container .login-section1 .login-info {
+  padding-top: 10px;
+  font-size: 0.5rem;
+  opacity: 0.7;
+  width: 100%;
+  text-align: center;
+  font-weight: 200;
+}
+.ReactModalPortal .login-container .login-section1 .user-id {
+  padding-top: 20px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: var(--SecondaryColor);
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--SecondaryColor);
+}
+.ReactModalPortal .login-container .login-section1 .login-btn {
+  margin-top: 30px;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 50px;
+  width: 100%;
+  font-weight: 800;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.ReactModalPortal .login-container .login-section1 .line-break {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+  width: 40%;
+  height: 0;
+  border: 1px solid var(--SecondaryColor);
+}
+.ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+  white-space: nowrap;
+  width: 50%;
+  text-align: center;
+  font-size: 0.7rem;
+  opacity: 0.8;
+  padding: 0 8px;
+}
+.ReactModalPortal .login-container .login-section1 .google-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem !important;
+  font-weight: 500;
+}
+.ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+  font-size: 1.1rem;
+}
+.ReactModalPortal .login-container .login-section2 img {
+  height: 500px;
+}
+
+.subscription-page {
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.464) 20%, #333 40%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+.subscription-page .subscribe-card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  font-weight: 600;
+  text-align: center;
+}
+.subscription-page .subscribe-card .text-highlight {
+  color: red;
+}
+.subscription-page .subscribe-card .svg-container {
+  display: flex;
+  overflow: auto;
+  gap: 15px;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 30px;
+}
+.subscription-page .subscribe-card .svg-container img {
+  width: 50px;
+}
+
 @media screen and (min-width: 360px) {
   .largerCarousel {
     padding-left: 20px;
@@ -1348,6 +1645,69 @@ body {
     padding: 0 10px;
     font-size: 0.75rem;
   }
+  .ReactModalPortal {
+    position: relative;
+  }
+  .ReactModalPortal .ReactModal__Content {
+    width: 100%;
+  }
+  .ReactModalPortal .close-btn-icon {
+    font-size: 1.2rem;
+  }
+  .ReactModalPortal .login-container {
+    height: 500px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 {
+    padding: 0px 20px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 img {
+    width: 60px;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-title {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-info {
+    font-size: 0.5rem;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .user-id {
+    padding-top: 20px;
+    width: 100%;
+    font-size: 0.8rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-btn {
+    padding: 10px 50px;
+    width: 100%;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break {
+    padding-top: 30px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+    width: 40%;
+    height: 0;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+    white-space: nowrap;
+    width: 30%;
+    font-size: 0.7rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn {
+    gap: 5px;
+    font-size: 0.75rem !important;
+    font-weight: 500;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+    font-size: 1.1rem;
+  }
+  .ReactModalPortal .login-container .login-section2 img {
+    height: 500px;
+  }
 }
 @media screen and (min-width: 480px) {
   .largerCarousel {
@@ -1445,6 +1805,69 @@ body {
   .new-songs-section .new-songs-container .song-container-level-1 .music-card .song-details {
     padding: 0 10px;
     font-size: 0.75rem;
+  }
+  .ReactModalPortal {
+    position: relative;
+  }
+  .ReactModalPortal .ReactModal__Content {
+    width: 100%;
+  }
+  .ReactModalPortal .close-btn-icon {
+    font-size: 1.2rem;
+  }
+  .ReactModalPortal .login-container {
+    height: 500px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 {
+    padding: 0px 20px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 img {
+    width: 80px;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-info {
+    font-size: 0.6rem;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .user-id {
+    padding-top: 20px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-btn {
+    padding: 10px 50px;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break {
+    padding-top: 30px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+    width: 40%;
+    height: 0;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+    white-space: nowrap;
+    width: 30%;
+    font-size: 0.8rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn {
+    gap: 5px;
+    font-size: 0.8rem !important;
+    font-weight: 500;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+    font-size: 1.1rem;
+  }
+  .ReactModalPortal .login-container .login-section2 img {
+    height: 500px;
   }
 }
 @media screen and (min-width: 600px) {
@@ -1574,6 +1997,69 @@ body {
   }
   .trackList .table-mobile-container .table-tr-mob .table-td-3 .btn-option .play-option {
     font-size: 1.5rem;
+  }
+  .ReactModalPortal {
+    position: relative;
+  }
+  .ReactModalPortal .ReactModal__Content {
+    width: 60%;
+  }
+  .ReactModalPortal .close-btn-icon {
+    font-size: 1.2rem;
+  }
+  .ReactModalPortal .login-container {
+    height: 500px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 {
+    padding: 0px 20px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 img {
+    width: 80px;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-info {
+    font-size: 0.6rem;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .user-id {
+    padding-top: 20px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-btn {
+    padding: 10px 50px;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break {
+    padding-top: 30px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+    width: 40%;
+    height: 0;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+    white-space: nowrap;
+    width: 30%;
+    font-size: 0.8rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn {
+    gap: 5px;
+    font-size: 0.8rem !important;
+    font-weight: 500;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+    font-size: 1.1rem;
+  }
+  .ReactModalPortal .login-container .login-section2 img {
+    height: 500px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -1768,6 +2254,10 @@ body {
     color: var(--PrimaryColor);
     background-color: var(--SecondaryColor4);
     border: none;
+    cursor: pointer;
+  }
+  .navbar-top .navbar-view-changer .buttons-area .get-gaana-plus:hover {
+    opacity: 0.5;
   }
   .navbar-top .navbar-view-changer .buttons-area .dark-light-toggler {
     background-color: transparent;
@@ -1775,6 +2265,10 @@ body {
     border: none;
     padding: 0px 20px;
     font-size: 1.2rem;
+    cursor: pointer;
+  }
+  .navbar-top .navbar-view-changer .buttons-area .dark-light-toggler:hover {
+    opacity: 0.5;
   }
   .navbar-top .navbar-view-changer .buttons-area .user-login {
     border: none;
@@ -1782,6 +2276,10 @@ body {
     margin-right: 20px;
     background-color: transparent;
     color: var(--SecondaryColor);
+    cursor: pointer;
+  }
+  .navbar-top .navbar-view-changer .buttons-area .user-login:hover {
+    opacity: 0.5;
   }
   .largerCarousel {
     padding-left: 20px;
@@ -1943,6 +2441,69 @@ body {
     padding: 0 10px;
     font-size: 0.85rem;
   }
+  .ReactModalPortal {
+    position: relative;
+  }
+  .ReactModalPortal .ReactModal__Content {
+    width: 60%;
+  }
+  .ReactModalPortal .close-btn-icon {
+    font-size: 1.2rem;
+  }
+  .ReactModalPortal .login-container {
+    height: 500px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 {
+    padding: 0px 20px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 img {
+    width: 80px;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-title {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-info {
+    font-size: 0.6rem;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .user-id {
+    padding-top: 20px;
+    width: 100%;
+    font-size: 0.8rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-btn {
+    padding: 10px 50px;
+    width: 100%;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break {
+    padding-top: 30px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+    width: 30%;
+    height: 0;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+    white-space: nowrap;
+    width: 70%;
+    font-size: 0.7rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn {
+    gap: 5px;
+    font-size: 0.8rem !important;
+    font-weight: 500;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+    font-size: 1.1rem;
+  }
+  .ReactModalPortal .login-container .login-section2 img {
+    height: 500px;
+  }
 }
 @media screen and (min-width: 1024px) {
   .largerCarousel {
@@ -1977,28 +2538,150 @@ body {
     padding: 5px 15px;
     color: var(--SecondaryColor);
     border-radius: 25px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns {
     display: flex;
   }
   .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon3 {
-    font-size: 2.3rem;
+    font-size: 1.9rem;
     color: red;
   }
   .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon4, .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
   .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon5 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+  }
+  .ReactModalPortal {
+    position: relative;
+  }
+  .ReactModalPortal .ReactModal__Content {
+    width: 60%;
+  }
+  .ReactModalPortal .close-btn-icon {
+    font-size: 1.2rem;
+  }
+  .ReactModalPortal .login-container {
+    height: 500px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 {
+    padding: 0px 20px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 img {
+    width: 80px;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-info {
+    font-size: 0.65rem;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .user-id {
+    padding-top: 20px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-btn {
+    padding: 10px 50px;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break {
+    padding-top: 30px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+    width: 40%;
+    height: 0;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+    white-space: nowrap;
+    width: 60%;
+    font-size: 0.8rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn {
+    gap: 5px;
+    font-size: 0.8rem !important;
+    font-weight: 500;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+    font-size: 1.1rem;
   }
 }
 @media screen and (min-width: 1106px) {
   .music-control-comp .large-screen-controls .song-playing-area2 {
     width: 700px;
     gap: 2rem;
+  }
+}
+@media screen and (min-width: 1332px) {
+  .ReactModalPortal {
+    position: relative;
+  }
+  .ReactModalPortal .ReactModal__Content {
+    width: 45%;
+  }
+  .ReactModalPortal .close-btn-icon {
+    font-size: 1.2rem;
+  }
+  .ReactModalPortal .login-container {
+    height: 500px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 {
+    padding: 0px 20px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 img {
+    width: 80px;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-info {
+    font-size: 0.65rem;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .user-id {
+    padding-top: 20px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .login-btn {
+    padding: 10px 50px;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break {
+    padding-top: 30px;
+    width: 100%;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line {
+    width: 40%;
+    height: 0;
+  }
+  .ReactModalPortal .login-container .login-section1 .line-break .empty-line-content {
+    white-space: nowrap;
+    width: 60%;
+    font-size: 0.8rem;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn {
+    gap: 5px;
+    font-size: 0.8rem !important;
+    font-weight: 500;
+  }
+  .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
+    font-size: 1.1rem;
   }
 }/*# sourceMappingURL=main.css.map */

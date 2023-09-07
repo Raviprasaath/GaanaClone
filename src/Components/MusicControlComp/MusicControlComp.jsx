@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import image from "../../assets/trending-movies3.jpg";
+import MusicPlayer from "../MusicPlayer/MusicPlayer.jsx";
 
 import { BsFillPlayCircleFill, BsFillVolumeUpFill } from "react-icons/bs";
 import { IoIosArrowUp, IoMdRepeat, IoMdShuffle } from "react-icons/io";
@@ -10,8 +11,13 @@ import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
 function MusicControlComp() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  const [lifting, setLifting] = useState(true);
   
+  const isMobile = windowWidth < 1000;
+  
+  const handlerExpander = () => {
+    setLifting(false)
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,11 +31,28 @@ function MusicControlComp() {
     };
   }, []);
 
-  const isMobile = windowWidth < 1000;
+
+  const handleMinimizer = (data) => {
+    setLifting(data)
+  }
+
+
+  if (!lifting) {
+    return (
+      <>
+      <div className="expanded-view-music-section">
+        <MusicPlayer expanderMessage={handleMinimizer} />      
+      </div>
+      </>
+
+    )
+  }
+  
 
   return (
     <>
       <div className="music-control-comp">
+        
         {isMobile ? (
           <section className="mob-screen-controls">
             <div className="song-name">
@@ -46,7 +69,7 @@ function MusicControlComp() {
                 <BsFillPlayCircleFill className="playing-icon" />
               </div>
               <div className="icons-control">
-                <IoIosArrowUp className="next-songs-icon" />
+                <IoIosArrowUp onClick={handlerExpander} className="next-songs-icon" />
               </div>
             </div>
           </section>
@@ -95,11 +118,13 @@ function MusicControlComp() {
               </div>
               <div className="audio-type">Audio High</div>
               <div>
-                <IoIosArrowUp className="song-details" />
+                <IoIosArrowUp onClick={handlerExpander} className="song-details" />
               </div>
             </div>
           </div>
         )}
+
+       
       </div>
     </>
   );

@@ -10,9 +10,16 @@ import { FaBars } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 
-function MusicPlayer() {
+function MusicPlayer(props) {
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
+  const [minimize, setMinimizer] = useState(true);
+
+  const handlerMinimize = () => {
+    setMinimizer(false)
+    props.expanderMessage(minimize);
+  }
+
 
   // sidebar open close
   const toggleSidePanel = () => {
@@ -51,7 +58,7 @@ function MusicPlayer() {
 
   return (
     <>
-      {screenSize && (
+      {/* {screenSize && (
         <div>
           <button className="navbar-btn" onClick={toggleSidePanel}>
             <FaBars />
@@ -61,12 +68,12 @@ function MusicPlayer() {
           {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
           <NavbarTop />
         </div>
-      )}
+      )} */}
       <div className="music-player-container">
         {!screenSize && (
           <div className="music-player">
             <div className="view-splitter">
-              <IoIosArrowDown className="drop-arrow"/>
+              <IoIosArrowDown onClick={handlerMinimize} className="drop-arrow"/>
               <div className="poster-container">
                 <img
                   className="mobile-view-song-preview"
@@ -78,8 +85,7 @@ function MusicPlayer() {
                     <div className="song-name">
                       <p>Nenjukkul</p>
                       <p>
-                        {" "}
-                        <AiOutlineHeart />{" "}
+                        <AiOutlineHeart className="heart-in"/>
                       </p>
                     </div>
                     <div className="song-seeking-line"></div>
@@ -126,7 +132,7 @@ function MusicPlayer() {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose />
+                        <AiOutlineClose className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -146,9 +152,110 @@ function MusicPlayer() {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose />
+                        <AiOutlineClose className="fav-remover"/>
                       </p>
                     </div>
+                    <div className="songs-collection">
+                      <img
+                        src={image}
+                        alt="img"
+                        className="table-mob-view-poster"
+                      />
+
+                      <div className="flex">
+                        <div className="table-button-artist">
+                          <button className="premium-button">Premium</button>
+                          <p className="table-mob-artist">Karthik</p>
+                        </div>
+                        <p className="table-song-name">
+                          Yethi Yethi Yethi En Nenjil
+                        </p>
+                      </div>
+                      <p>
+                        <AiOutlineClose className="fav-remover"/>
+                      </p>
+                    </div>
+                    <div className="songs-collection">
+                      <img
+                        src={image}
+                        alt="img"
+                        className="table-mob-view-poster"
+                      />
+
+                      <div className="flex">
+                        <div className="table-button-artist">
+                          <button className="premium-button">Premium</button>
+                          <p className="table-mob-artist">Karthik</p>
+                        </div>
+                        <p className="table-song-name">
+                          Yethi Yethi Yethi En Nenjil
+                        </p>
+                      </div>
+                      <p>
+                        <AiOutlineClose className="fav-remover"/>
+                      </p>
+                    </div>
+                    <div className="songs-collection">
+                      <img
+                        src={image}
+                        alt="img"
+                        className="table-mob-view-poster"
+                      />
+
+                      <div className="flex">
+                        <div className="table-button-artist">
+                          <button className="premium-button">Premium</button>
+                          <p className="table-mob-artist">Karthik</p>
+                        </div>
+                        <p className="table-song-name">
+                          Yethi Yethi Yethi En Nenjil
+                        </p>
+                      </div>
+                      <p>
+                        <AiOutlineClose className="fav-remover"/>
+                      </p>
+                    </div>
+                    <div className="songs-collection">
+                      <img
+                        src={image}
+                        alt="img"
+                        className="table-mob-view-poster"
+                      />
+
+                      <div className="flex">
+                        <div className="table-button-artist">
+                          <button className="premium-button">Premium</button>
+                          <p className="table-mob-artist">Karthik</p>
+                        </div>
+                        <p className="table-song-name">
+                          Yethi Yethi Yethi En Nenjil
+                        </p>
+                      </div>
+                      <p>
+                        <AiOutlineClose className="fav-remover"/>
+                      </p>
+                    </div>
+                    <div className="songs-collection">
+                      <img
+                        src={image}
+                        alt="img"
+                        className="table-mob-view-poster"
+                      />
+
+                      <div className="flex">
+                        <div className="table-button-artist">
+                          <button className="premium-button">Premium</button>
+                          <p className="table-mob-artist">Karthik</p>
+                        </div>
+                        <p className="table-song-name">
+                          Yethi Yethi Yethi En Nenjil
+                        </p>
+                      </div>
+                      <p>
+                        <AiOutlineClose className="fav-remover"/>
+                      </p>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -169,8 +276,7 @@ function MusicPlayer() {
                   <div className="song-name">
                     <p>Nenjukkul</p>
                     <p>
-                      {" "}
-                      <AiOutlineHeart />{" "}
+                      <AiOutlineHeart className="heart-in" />
                     </p>
                   </div>
                   <div className="song-seeking-line"></div>
@@ -198,7 +304,7 @@ function MusicPlayer() {
                 </div>
               </div>
               <div className="music-player-section-2">
-                <IoIosArrowDown className="drop-arrow"/>
+                <IoIosArrowDown onClick={handlerMinimize} className="drop-arrow"/>
                 <div className="table-td-2-img">
                   <div className="songs-collection">
                     <img
@@ -217,7 +323,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -237,7 +343,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -257,7 +363,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -277,7 +383,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -297,7 +403,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -317,7 +423,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -337,7 +443,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -357,7 +463,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -377,7 +483,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -397,7 +503,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -417,7 +523,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -437,7 +543,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -457,7 +563,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -477,7 +583,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -497,7 +603,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -517,7 +623,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -537,7 +643,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -557,7 +663,7 @@ function MusicPlayer() {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose />
+                      <AiOutlineClose className="fav-remover"/>
                     </p>
                   </div>
                 </div>

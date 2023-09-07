@@ -13,9 +13,11 @@
     --PrimaryColor: #232429;
     // --PrimaryColor: #c3c2c5;
     --PrimaryColor2 : #283024;
+    --PrimaryColor3 : #333;
+
     
     // --SecondaryColor: #232429;
-    --SecondaryColor: #c3c2c5;
+    --SecondaryColor: #d4d3d6;
 
     --SecondaryColor3: red;
     --SecondaryColor4: #fff;
@@ -69,8 +71,13 @@ body {
   border: none;
   font-size: 1.2rem;
   z-index: 3;
-}
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
 
+  &:hover {
+    opacity: 0.5;
+  }
+}
 
 
 .overlay {
@@ -198,6 +205,11 @@ body {
         .search-icon {
           font-size: 1.2rem;
           color: var(--SecondaryColor);
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+
+          }
         }
         
         .input-search-option {
@@ -361,6 +373,8 @@ body {
         align-items: center;
         width: 100%;
         font-size: 0.9rem;
+        cursor: pointer;
+          
 
         .song-play-btn {
           border: none;
@@ -371,11 +385,19 @@ body {
           background-color: var(--SecondaryColor3);
           color: var(--SecondaryColor4);
           font-weight: 600;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
         .fav-song-adding {
           font-size: 2.2rem;
           padding: 0px 10px;
           width: 20%;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
       }
       .songs-side-details {
@@ -539,9 +561,14 @@ body {
           .playing-icon {
             color: red;
             font-size: 1.5rem;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
           }
           .next-songs-icon {
             font-size: 1.5rem;
+            cursor: pointer;
             &:hover {
               opacity: 0.5;
             }
@@ -585,15 +612,27 @@ body {
         .heart-empty {
           font-size: 1.3rem;
           margin-left: 15px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
         .heart-filled {
           margin-left: 15px;
           font-size: 1.3rem;
           color: red;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
         .options {
           margin-left: 15px;
           font-size: 1rem;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
 
 
@@ -620,16 +659,32 @@ body {
         
         .controls-icon1 {
           font-size: 1.5rem;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
         .controls-icon3 {
           font-size: 2rem;
           color: red;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
         .controls-icon4, .controls-icon2 {
           font-size: 2.2rem;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
         .controls-icon5 {
           font-size: 1rem;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
       }
 
@@ -648,6 +703,10 @@ body {
           border: 1px solid white;
           border-radius: 50%;
           padding: 5px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
         }
       }
 
@@ -659,6 +718,7 @@ body {
       }
       .song-details {
         font-size: 1.2rem;
+        cursor: pointer;
         &:hover {
           opacity: 0.5;
         }
@@ -717,6 +777,10 @@ body {
     color: var(--SecondaryColor4);
     font-size: 1.1rem;
     margin-left: 30px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
   }
   .playlist-heart {
     font-size: 3rem;
@@ -724,6 +788,11 @@ body {
     border-radius: 50%;
     padding: 5px;
     margin-left: 30px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+
   }
 
 }
@@ -759,7 +828,10 @@ body {
       .table-body-container {
         tr {
           border-bottom: 1px solid var(--SecondaryColor6);
-
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
           .table-col-1 {
             text-align: center;
           }
@@ -833,6 +905,10 @@ body {
   .table-mobile-container {
 
     .table-tr-mob {
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
       .table-td-1 {
 
         width: 1rem;
@@ -912,6 +988,10 @@ body {
         font-size: 1.5rem;
         margin-left: 20px;
         margin-top: 10px;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.5;
+        }
       }
       .poster-container {
         display: flex;
@@ -941,6 +1021,14 @@ body {
               padding: 0px 10px;
               width: 100%;
               font-size: 1.1rem;
+
+              .heart-in {
+                font-size: 1.4rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
+              }
             }
             .song-duration {
               display: flex;
@@ -963,16 +1051,32 @@ body {
               
               .controls-icon1 {
                 font-size: 1.5rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
               .controls-icon3 {
                 font-size: 2rem;
                 color: red;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
               .controls-icon4, .controls-icon2 {
                 font-size: 2.2rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
               .controls-icon5 {
                 font-size: 1rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
             }
       
@@ -1022,7 +1126,12 @@ body {
                     text-overflow: ellipsis;
                   }
               }
-    
+              .fav-remover {
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
+              }
             }
     
           }
@@ -1054,6 +1163,13 @@ body {
             padding: 0px 10px;
             width: 100%;
             font-size: 1.1rem;
+
+            .heart-in {
+              cursor: pointer;
+              &:hover {
+                opacity: 0.5;
+              }            
+            }
           }
           .song-duration {
             display: flex;
@@ -1075,16 +1191,32 @@ body {
               
               .controls-icon1 {
                 font-size: 1.5rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
               .controls-icon3 {
                 font-size: 2rem;
                 color: red;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
               .controls-icon4, .controls-icon2 {
                 font-size: 2.2rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
               .controls-icon5 {
                 font-size: 1rem;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.5;
+                }
               }
             }
       
@@ -1096,6 +1228,7 @@ body {
       .music-player-section-2 {
         .drop-arrow {
           font-size: 1.5rem;
+          cursor: pointer;
           &:hover {
             opacity: 0.5;
           }
@@ -1145,7 +1278,12 @@ body {
                   text-overflow: ellipsis;
                 }
             }
-  
+            .fav-remover {
+              cursor: pointer;
+              &:hover {
+                opacity: 0.5;
+              }
+            }
           }
   
         }
@@ -1502,6 +1640,189 @@ body {
   }
 }
 
+.carousel.card {
+  position: relative;
+  .play-icon {
+    display: none;
+  }
+  transition: 0.5s ease-in-out;
+  
+  &:hover {
+    .play-icon {
+      display: block;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      font-size: 2.5rem;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+    }
+    transition: 0.5s ease-in-out;
+    opacity: 0.7;
+  }
+}
+
+// Login page
+
+.ReactModalPortal {
+  position: relative;
+  .ReactModal__Content  {
+    background: transparent !important;
+    padding: 0 !important;
+    width: 100%;
+  }
+    .close-btn-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: var(--SecondaryColor);
+      transition: 0.5s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.3);
+        transition: 0.5s ease-in-out;
+      }
+    
+
+  }
+  .login-container {
+    height: 500px;
+    width: 100%;
+    background-color: var(--PrimaryColor3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .login-section1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 20px;
+      width: 100%;   //needs to change for lap view 
+      img {
+        width: 60px;
+      }
+      .login-title {
+        padding-top: 20px;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .login-info {
+        padding-top: 10px;
+        font-size: 0.5rem;
+        opacity: 0.7;
+        width: 100%;
+        
+        text-align: center;
+        font-weight: 200;
+      }
+      .user-id {
+        padding-top: 20px;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        width: 100%;
+        color: var(--SecondaryColor);
+        font-size: 0.8rem;
+        border-bottom: 1px solid var(--SecondaryColor);
+      }
+      .login-btn {
+        margin-top: 30px;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 50px;
+        width: 100%;
+        font-weight: 800;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+      .line-break {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .empty-line {
+          width: 40%;
+          height: 0;
+          border: 1px solid var(--SecondaryColor);
+        }
+        .empty-line-content {
+          white-space: nowrap;
+          width: 50%;
+          text-align: center;
+          font-size: 0.7rem;
+          opacity: 0.8;
+          padding: 0 8px;
+        }
+      }
+      .google-btn {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.75rem !important;
+        font-weight: 500;
+        .google-icon {
+          font-size: 1.1rem;
+        }
+      }
+    }
+    .login-section2 {
+      img {
+        height: 500px;
+      }
+    }
+  }
+
+}
+
+
+// subscribe page
+.subscription-page {
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.464) 20%, #333 40%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  
+  .subscribe-card {
+    display: flex;  
+    flex-direction: column;  
+    width: 300px;
+    font-weight: 600;
+    text-align: center;
+    .text-highlight {
+      color:  red;
+    }
+    .svg-container {
+      display: flex;
+      overflow: auto;
+      gap: 15px;
+      -webkit-overflow-scrolling: touch;
+      padding-top: 30px;      
+
+      img {
+        width: 50px;
+      }
+    }
+
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1650,6 +1971,73 @@ body {
         }
       }
     }
+  }
+  .ReactModalPortal {
+    position: relative;
+    .ReactModal__Content  {
+      width: 100%; // need to off
+    }
+    .close-btn-icon {        
+      font-size: 1.2rem;  
+    }
+    .login-container {
+      height: 500px;
+      width: 100%;
+      
+      .login-section1 {
+        padding: 0px 20px;
+        width: 100%;   //needs to change for lap view 
+        img {
+          width: 60px;
+        }
+        .login-title {
+          font-size: 1rem;
+          font-weight: 800;
+        }
+        .login-info {
+          font-size: 0.5rem;
+          width: 100%;
+        }
+        .user-id {
+          padding-top: 20px;
+          width: 100%;
+          font-size: 0.8rem;
+        }
+        .login-btn {
+          padding: 10px 50px;
+          width: 100%;
+          font-size: 0.8rem;
+          cursor: pointer;
+        }
+        .line-break {
+          padding-top: 30px;
+          width: 100%;
+          .empty-line {
+            width: 40%;
+            height: 0;
+          }
+          .empty-line-content {
+            white-space: nowrap;
+            width: 30%;   // needs to change
+            font-size: 0.7rem;
+          }
+        }
+        .google-btn {
+          gap: 5px;
+          font-size: 0.75rem !important;
+          font-weight: 500;
+          .google-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      .login-section2 {
+        img {
+          height: 500px;
+        }
+      }
+    }
+  
   }
   
   
@@ -1801,6 +2189,74 @@ body {
         }
       }
     }
+  }
+
+  .ReactModalPortal {
+    position: relative;
+    .ReactModal__Content  {
+      width: 100%; // need to off
+    }
+    .close-btn-icon {        
+      font-size: 1.2rem;  
+    }
+    .login-container {
+      height: 500px;
+      width: 100%;
+      
+      .login-section1 {
+        padding: 0px 20px;
+        width: 100%;   //needs to change for lap view 
+        img {
+          width: 80px;
+        }
+        .login-title {
+          font-size: 1.2rem;
+          font-weight: 800;
+        }
+        .login-info {
+          font-size: 0.6rem;
+          width: 100%;
+        }
+        .user-id {
+          padding-top: 20px;
+          width: 100%;
+          font-size: 0.9rem;
+        }
+        .login-btn {
+          padding: 10px 50px;
+          width: 100%;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+        .line-break {
+          padding-top: 30px;
+          width: 100%;
+          .empty-line {
+            width: 40%;
+            height: 0;
+          }
+          .empty-line-content {
+            white-space: nowrap;
+            width: 30%;   // needs to change
+            font-size: 0.8rem;
+          }
+        }
+        .google-btn {
+          gap: 5px;
+          font-size: 0.8rem !important;
+          font-weight: 500;
+          .google-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      .login-section2 {
+        img {
+          height: 500px;
+        }
+      }
+    }
+  
   }
 
 }
@@ -2017,6 +2473,73 @@ body {
         }
       }
   
+    }
+  
+  }
+  .ReactModalPortal {
+    position: relative;
+    .ReactModal__Content  {
+      width: 60%; // need to off
+    }
+    .close-btn-icon {        
+      font-size: 1.2rem;  
+    }
+    .login-container {
+      height: 500px;
+      width: 100%;
+      
+      .login-section1 {
+        padding: 0px 20px;
+        width: 100%;   //needs to change for lap view 
+        img {
+          width: 80px;
+        }
+        .login-title {
+          font-size: 1.2rem;
+          font-weight: 800;
+        }
+        .login-info {
+          font-size: 0.6rem;
+          width: 100%;
+        }
+        .user-id {
+          padding-top: 20px;
+          width: 100%;
+          font-size: 0.9rem;
+        }
+        .login-btn {
+          padding: 10px 50px;
+          width: 100%;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+        .line-break {
+          padding-top: 30px;
+          width: 100%;
+          .empty-line {
+            width: 40%;
+            height: 0;
+          }
+          .empty-line-content {
+            white-space: nowrap;
+            width: 30%;   // needs to change
+            font-size: 0.8rem;
+          }
+        }
+        .google-btn {
+          gap: 5px;
+          font-size: 0.8rem !important;
+          font-weight: 500;
+          .google-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      .login-section2 {
+        img {
+          height: 500px;
+        }
+      }
     }
   
   }
@@ -2268,6 +2791,10 @@ body {
             color: var(--PrimaryColor);
             background-color: var(--SecondaryColor4);
             border: none;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
           }
           .dark-light-toggler {
             background-color: transparent;
@@ -2275,6 +2802,10 @@ body {
             border: none;
             padding: 0px 20px;
             font-size: 1.2rem;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
           }
           .user-login {
             border: none;
@@ -2282,6 +2813,10 @@ body {
             margin-right: 20px;
             background-color: transparent;
             color: var(--SecondaryColor);
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
           }
       }
 
@@ -2477,6 +3012,74 @@ body {
       }
     }
   }
+
+  .ReactModalPortal {
+    position: relative;
+    .ReactModal__Content  {
+      width: 60%; // need to off
+    }
+    .close-btn-icon {        
+      font-size: 1.2rem;  
+    }
+    .login-container {
+      height: 500px;
+      width: 100%;
+      
+      .login-section1 {
+        padding: 0px 20px;
+        width: 100%;   //needs to change for lap view 
+        img {
+          width: 80px;
+        }
+        .login-title {
+          font-size: 1rem;
+          font-weight: 800;
+        }
+        .login-info {
+          font-size: 0.6rem;
+          width: 100%;
+        }
+        .user-id {
+          padding-top: 20px;
+          width: 100%;
+          font-size: 0.8rem;
+        }
+        .login-btn {
+          padding: 10px 50px;
+          width: 100%;
+          font-size: 0.8rem;
+          cursor: pointer;
+        }
+        .line-break {
+          padding-top: 30px;
+          width: 100%;
+          .empty-line {
+            width: 30%;
+            height: 0;
+          }
+          .empty-line-content {
+            white-space: nowrap;
+            width: 70%;   // needs to change
+            font-size: 0.7rem;
+          }
+        }
+        .google-btn {
+          gap: 5px;
+          font-size: 0.8rem !important;
+          font-weight: 500;
+          .google-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }
+      .login-section2 {
+        img {
+          height: 500px;
+        }
+      }
+    }
+  
+  }
   
 
 }
@@ -2526,29 +3129,91 @@ body {
           padding: 5px 15px;
           color: var(--SecondaryColor);
           border-radius: 25px;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
         }
         .song-changing-btns {
           display: flex;
           
           .controls-icon1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
           }
           .controls-icon3 {
-            font-size: 2.3rem;
+            font-size: 1.9rem;
             color: red;
           }
           .controls-icon4, .controls-icon2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
           }
           .controls-icon5 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
           }
         }
   
   
       }
     }
+  }
+  .ReactModalPortal {
+    position: relative;
+    .ReactModal__Content  {
+      width: 60%; // need to off
+    }
+    .close-btn-icon {        
+      font-size: 1.2rem;  
+    }
+    .login-container {
+      height: 500px;
+      width: 100%;
+      
+      .login-section1 {
+        padding: 0px 20px;
+        width: 100%;   //needs to change for lap view 
+        img {
+          width: 80px;
+        }
+        .login-title {
+          font-size: 1.2rem;
+          font-weight: 800;
+        }
+        .login-info {
+          font-size: 0.65rem;
+          width: 100%;
+        }
+        .user-id {
+          padding-top: 20px;
+          width: 100%;
+          font-size: 0.9rem;
+        }
+        .login-btn {
+          padding: 10px 50px;
+          width: 100%;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+        .line-break {
+          padding-top: 30px;
+          width: 100%;
+          .empty-line {
+            width: 40%;
+            height: 0;
+          }
+          .empty-line-content {
+            white-space: nowrap;
+            width: 60%;   // needs to change
+            font-size: 0.8rem;
+          }
+        }
+        .google-btn {
+          gap: 5px;
+          font-size: 0.8rem !important;
+          font-weight: 500;
+          .google-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }      
+    }
+  
   }
 }
 
@@ -2561,8 +3226,70 @@ body {
       }
     }
   }
+
 }
 
 @media screen and (min-width: 1332px) {
-
+  .ReactModalPortal {
+    position: relative;
+    .ReactModal__Content  {
+      width: 45%; // need to off
+    }
+    .close-btn-icon {        
+      font-size: 1.2rem;  
+    }
+    .login-container {
+      height: 500px;
+      width: 100%;
+      
+      .login-section1 {
+        padding: 0px 20px;
+        width: 100%;   //needs to change for lap view 
+        img {
+          width: 80px;
+        }
+        .login-title {
+          font-size: 1.2rem;
+          font-weight: 800;
+        }
+        .login-info {
+          font-size: 0.65rem;
+          width: 100%;
+        }
+        .user-id {
+          padding-top: 20px;
+          width: 100%;
+          font-size: 0.9rem;
+        }
+        .login-btn {
+          padding: 10px 50px;
+          width: 100%;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+        .line-break {
+          padding-top: 30px;
+          width: 100%;
+          .empty-line {
+            width: 40%;
+            height: 0;
+          }
+          .empty-line-content {
+            white-space: nowrap;
+            width: 60%;   // needs to change
+            font-size: 0.8rem;
+          }
+        }
+        .google-btn {
+          gap: 5px;
+          font-size: 0.8rem !important;
+          font-weight: 500;
+          .google-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }      
+    }
+  
+  }
 }

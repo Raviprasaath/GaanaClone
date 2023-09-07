@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import action from '../../action.js'
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -18,16 +20,21 @@ import { Link } from 'react-router-dom';
 
 const SongsCollection = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [activeItem, setActiveItem] = React.useState("");
+  // const [activeItem, setActiveItem] = React.useState("");
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
+  const activeItem = useSelector((state) => state.usersData.activeItem);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     setActiveItem(event.target.innerText);
   };
   
+
+
   const handleSongSelection = (selectedItem) => {
-    setActiveItem(selectedItem)
+    // setActiveItem(selectedItem)
+    dispatch(action.setActiveItem(selectedItem));
   }
 
   const handleClose = () => {
@@ -130,71 +137,98 @@ const SongsCollection = () => {
                     </Typography>
                 </MenuItem>
               </Link>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Romance
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                90s and 2000s
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Bhakti
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Indie
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                EDM
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Ghazals
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Workout
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Stars
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Retro
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Wedding
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Kids
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Dance
-              </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Typography variant="body1" component="span">
-                Friendship
-              </Typography>
-            </MenuItem>
+              <Link className="list-selector" to="/romance">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Romance
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/songsfrom90s2000s">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    90s and 2000s
+                  </Typography>
+                </MenuItem>
+              </Link>
+              
+              <Link className="list-selector" to="/comingsoon">
+              <MenuItem onClick={handleClose}>
+                <Typography variant="body1" component="span">
+                  Bhakti
+                </Typography>
+              </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Indie
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    EDM
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Ghazals
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Workout
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Stars
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Retro
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Wedding
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Kids
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Dance
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link className="list-selector" to="/comingsoon">
+                <MenuItem onClick={handleClose}>
+                  <Typography variant="body1" component="span">
+                    Friendship
+                  </Typography>
+                </MenuItem>
+              </Link>
           </Box>
         </Menu>
       </div>
