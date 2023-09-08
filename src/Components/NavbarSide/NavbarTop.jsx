@@ -62,7 +62,9 @@ function NavbarTop() {
               </span>
             </span>
             <div className="buttons-area">
-              <button className="get-gaana-plus">Get Gaana Plus</button>
+              <Link to="/subscription">
+                <button className="get-gaana-plus">Get Gaana Plus</button>
+              </Link>
               <button className="dark-light-toggler"><BsFillBrightnessHighFill /></button>
               <button className="user-login" onClick={openLoginForm} >Log In / Sign Up</button>
             </div>

@@ -29,14 +29,14 @@ import PartySongs from "./Components/PagesRoute/PartySongs/PartySongs.jsx";
 import Romance from "./Components/PagesRoute/Romance/Romance.jsx";
 import SongsFrom90s2000s from "./Components/PagesRoute/SongsFrom90s2000s/SongsFrom90s2000s.jsx";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
-import SubscriptionPage from "./Components/SubscriptionPage/SubscriptionPage.jsx";
+import SubscriptionPage from "./Components/PagesRoute/SubscriptionPage/SubscriptionPage.jsx";
 
 
 
 
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
-  console.log("print dark mode val", darkMode);
+  // console.log("print dark mode val", darkMode);
 
   // music player maximize and minimize
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
@@ -96,7 +96,10 @@ function App() {
       <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
       {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
       <NavbarTop />
-      <SongsCollection />
+
+      <div style={{position : "sticky", top:"-15px", zIndex:"2", width:"100%", backgroundColor:"#232429"}}>
+        <SongsCollection  />
+      </div>
 
 
       <Routes>
@@ -110,7 +113,7 @@ function App() {
 
         <Route path="/album" element={<Album />} />
         <Route path="/comingsoon" element={<ComingSoonPage />} />
-
+        <Route path="/subscription" element={ <SubscriptionPage /> } />
 
       </Routes>
 
@@ -644,7 +647,7 @@ function App() {
 
       {/* <SubscriptionPage /> */}
 
-      
+      <LoginPage />
 
 
 

@@ -58,7 +58,7 @@ body {
   background-color: transparent;
   border: none;
   font-size: 1.2rem;
-  z-index: 3;
+  z-index: 4;
   transition: 0.5s ease-in-out;
   cursor: pointer;
 }
@@ -96,7 +96,7 @@ body {
   background: var(--PrimaryColor2);
   color: var(--SecondaryColor);
   transition: left 0.3s ease-in-out;
-  z-index: 3;
+  z-index: 4;
 }
 .navbar .sideNav.open {
   left: 0;
@@ -155,7 +155,7 @@ body {
   position: fixed;
   width: 100%;
   background-color: var(--PrimaryColor);
-  z-index: 2;
+  z-index: 3;
   padding-left: 30px;
   padding-top: 10px;
 }
@@ -1409,10 +1409,15 @@ body {
 
 .ReactModalPortal {
   position: relative;
+  z-index: 6;
+}
+.ReactModalPortal .ReactModal__Overlay {
+  background-color: rgba(51, 51, 51, 0.6039215686) !important;
 }
 .ReactModalPortal .ReactModal__Content {
   background: transparent !important;
   padding: 0 !important;
+  border: unset !important;
   width: 100%;
 }
 .ReactModalPortal .close-btn-icon {
@@ -1435,6 +1440,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .ReactModalPortal .login-container .login-section1 {
   display: flex;
@@ -1517,9 +1523,9 @@ body {
 }
 
 .subscription-page {
-  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.464) 20%, #333 40%);
-  width: 100vw;
-  height: 100vh;
+  background: linear-gradient(to bottom, rgba(255, 0, 0, 0.464) 20%, #282828 40%);
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   padding-top: 30px;
@@ -1527,8 +1533,13 @@ body {
 .subscription-page .subscribe-card {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 90%;
   font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+.subscription-page .subscribe-card .subscribe-intro {
   text-align: center;
 }
 .subscription-page .subscribe-card .text-highlight {
@@ -1540,9 +1551,103 @@ body {
   gap: 15px;
   -webkit-overflow-scrolling: touch;
   padding-top: 30px;
+  width: 90%;
 }
 .subscription-page .subscribe-card .svg-container img {
-  width: 50px;
+  width: 70px;
+}
+.subscription-page .subscribe-card .package-container .checkbox {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 10px;
+}
+.subscription-page .subscribe-card .package-container .checkbox .list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--PrimaryColor2);
+  align-items: center;
+  padding: 20px 30px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 10px;
+  width: 250px;
+  cursor: pointer;
+}
+.subscription-page .subscribe-card .package-container .checkbox .list .activated {
+  display: none;
+}
+.subscription-page .subscribe-card .package-container .checkbox .list .section-1 {
+  font-size: 0.8rem;
+}
+.subscription-page .subscribe-card .package-container .checkbox .list .section-1 .extras {
+  font-size: 0.55rem;
+  opacity: 0.5;
+}
+.subscription-page .subscribe-card .package-container .checkbox .list .section-2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.subscription-page .subscribe-card .package-container .checkbox .list .section-2 .empty-mark {
+  font-size: 1.2rem;
+}
+.subscription-page .subscribe-card .package-container .checkbox .activePay {
+  background-color: red !important;
+}
+.subscription-page .subscribe-card .package-container .checkbox .activePay .empty-mark {
+  display: none;
+}
+.subscription-page .subscribe-card .package-container .checkbox .activePay .activated {
+  font-size: 1.2rem;
+  display: block;
+}
+.subscription-page .subscribe-card .subscribe-btn {
+  margin-top: 20px;
+  border: none;
+  padding: 10px 30px;
+  background-color: red;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.subscription-page .subscribe-card .subscribe-btn .payment-option {
+  display: none;
+}
+.subscription-page .subscribe-card .subscribe-btn .subs-btn .arrow-option {
+  padding-bottom: -4px;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+.subscription-page .subscribe-card .faq-query {
+  margin-top: 20px;
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+
+.accordion-section h2 {
+  padding: 25px 0 0 15px;
+}
+.accordion-section .accordion-header {
+  background-color: var(--PrimaryColor);
+  color: white;
+}
+.accordion-section .accordion-header .accordion-header-level-1 {
+  color: white;
+}
+.accordion-section .MuiSvgIcon-root {
+  color: white;
+}
+.accordion-section .accordion-content {
+  background-color: var(--PrimaryColor);
+}
+.accordion-section .accordion-content .accordion-section-content {
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 200;
+  opacity: 0.6;
 }
 
 @media screen and (min-width: 360px) {
@@ -1708,6 +1813,56 @@ body {
   .ReactModalPortal .login-container .login-section2 img {
     height: 500px;
   }
+  .subscription-page .subscribe-card {
+    width: 90%;
+    padding-top: 30px;
+  }
+  .subscription-page .subscribe-card .svg-container {
+    width: 90%;
+  }
+  .subscription-page .subscribe-card .svg-container img {
+    width: 70px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list {
+    padding: 20px 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 340px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 {
+    font-size: 0.8rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 .extras {
+    font-size: 0.55rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-2 .empty-mark {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .activePay .activated {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .subscribe-btn {
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .subscription-page .subscribe-card .subscribe-btn .subs-btn .arrow-option {
+    padding-bottom: -4px;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+  .subscription-page .subscribe-card .faq-query {
+    margin-top: 20px;
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+  .accordion-section .accordion-content .accordion-section-content {
+    font-size: 0.7rem;
+    font-weight: 200;
+    opacity: 0.6;
+  }
 }
 @media screen and (min-width: 480px) {
   .largerCarousel {
@@ -1869,6 +2024,56 @@ body {
   .ReactModalPortal .login-container .login-section2 img {
     height: 500px;
   }
+  .subscription-page .subscribe-card {
+    width: 90%;
+    padding-top: 30px;
+  }
+  .subscription-page .subscribe-card .svg-container {
+    width: 90%;
+  }
+  .subscription-page .subscribe-card .svg-container img {
+    width: 70px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list {
+    padding: 20px 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 460px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 {
+    font-size: 0.8rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 .extras {
+    font-size: 0.55rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-2 .empty-mark {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .activePay .activated {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .subscribe-btn {
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .subscription-page .subscribe-card .subscribe-btn .subs-btn .arrow-option {
+    padding-bottom: -4px;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+  .subscription-page .subscribe-card .faq-query {
+    margin-top: 20px;
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+  .accordion-section .accordion-content .accordion-section-content {
+    font-size: 0.7rem;
+    font-weight: 200;
+    opacity: 0.6;
+  }
 }
 @media screen and (min-width: 600px) {
   .navbar {
@@ -1973,6 +2178,57 @@ body {
   .new-songs-section .new-songs-container .song-container-level-1 .music-card .song-details {
     padding: 0 10px;
     font-size: 0.85rem;
+  }
+  .subscription-page .subscribe-card {
+    width: 90%;
+    padding-top: 30px;
+  }
+  .subscription-page .subscribe-card .svg-container {
+    width: 90%;
+    justify-content: center;
+  }
+  .subscription-page .subscribe-card .svg-container img {
+    width: 70px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list {
+    padding: 20px 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 560px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 {
+    font-size: 0.8rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 .extras {
+    font-size: 0.55rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-2 .empty-mark {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .activePay .activated {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .subscribe-btn {
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .subscription-page .subscribe-card .subscribe-btn .subs-btn .arrow-option {
+    padding-bottom: -4px;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+  .subscription-page .subscribe-card .faq-query {
+    margin-top: 20px;
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+  .accordion-section .accordion-content .accordion-section-content {
+    font-size: 0.7rem;
+    font-weight: 200;
+    opacity: 0.6;
   }
 }
 @media screen and (min-width: 680px) {
@@ -2281,6 +2537,16 @@ body {
   .navbar-top .navbar-view-changer .buttons-area .user-login:hover {
     opacity: 0.5;
   }
+  .songsCollection {
+    padding-top: 100px;
+  }
+  .songsCollection .MuiBox-root .css-1563k86-MuiTypography-root {
+    min-width: 130px;
+    font-size: 1rem;
+  }
+  .songsCollection .MuiButtonBase-root .MuiTypography-root {
+    font-size: 1rem;
+  }
   .largerCarousel {
     padding-left: 20px;
     padding-top: 10px;
@@ -2503,6 +2769,56 @@ body {
   }
   .ReactModalPortal .login-container .login-section2 img {
     height: 500px;
+  }
+  .subscription-page .subscribe-card {
+    width: 90%;
+    padding-top: 30px;
+  }
+  .subscription-page .subscribe-card .svg-container {
+    width: 90%;
+  }
+  .subscription-page .subscribe-card .svg-container img {
+    width: 70px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list {
+    padding: 20px 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 750px;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 {
+    font-size: 0.9rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-1 .extras {
+    font-size: 0.65rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .list .section-2 .empty-mark {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .package-container .checkbox .activePay .activated {
+    font-size: 1.2rem;
+  }
+  .subscription-page .subscribe-card .subscribe-btn {
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .subscription-page .subscribe-card .subscribe-btn .subs-btn .arrow-option {
+    padding-bottom: -4px;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+  .subscription-page .subscribe-card .faq-query {
+    margin-top: 20px;
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+  .accordion-section .accordion-content .accordion-section-content {
+    font-size: 0.7rem;
+    font-weight: 200;
+    opacity: 0.6;
   }
 }
 @media screen and (min-width: 1024px) {

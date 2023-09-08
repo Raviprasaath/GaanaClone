@@ -27,7 +27,7 @@ const MusicCollections = () => {
                     </span>{" "}
                 </span>
                 <p className="song-line2">
-                    Hosanna <p>From "Vinnaithaandi Varuvaayaa"</p>{" "}
+                    Hosanna <span>From "Vinnaithaandi Varuvaayaa"</span>{" "}
                 </p>
 
                 <span className="track-details-warp">

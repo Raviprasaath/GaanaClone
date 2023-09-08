@@ -8,7 +8,7 @@ import "react-multi-carousel/lib/styles.css";
 function TrendingSongs() {
 
   const darkMode = useSelector((state) => state.usersData.darkMode);
-  console.log("print dark mode val", darkMode);
+  // console.log("print dark mode val", darkMode);
   
 
   return (

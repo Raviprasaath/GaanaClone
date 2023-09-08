@@ -5,8 +5,7 @@ import login_bg from "../../assets/login_bg.jpg";
 
 import { AiOutlineClose } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { DockSharp } from "@mui/icons-material";
-
+Modal.setAppElement('#root');
 const customStyles = {
   content: {
     top: "50%",
@@ -22,7 +21,7 @@ function LoginPage(props) {
   const { loginState } = props;
   const ref = useRef();
   
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
 
   useEffect(() => {
@@ -52,12 +51,14 @@ function LoginPage(props) {
 
   useEffect (()=> {
     loginState && setIsOpen(true);
-  }, [loginState])
+  }, [loginState, screenSize])
 
 
   const handlerInputTyping = (event) => {
     if (event.target.value.length === 5) {
       ref.current.disabled = true;
+    } else {
+      ref.current.disabled = false;
     }
   }
 
@@ -67,7 +68,7 @@ function LoginPage(props) {
         {/* <button onClick={openModal}>Open Modal</button> */}
         <Modal
           isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
+          // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Example Modal"

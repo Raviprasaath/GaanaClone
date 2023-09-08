@@ -73,9 +73,10 @@ const SongsCollection = () => {
               sx={{ ml: 2 }}
               aria-controls={open ? "account-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}>
-              <Typography
+              aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
+              >
+              <Typography
               className={activeItem === "Moods & Genres" ? "active" : ""}
               variant="body1"
               component="span"
