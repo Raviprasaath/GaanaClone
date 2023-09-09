@@ -472,12 +472,23 @@ body {
   width: 80px;
   justify-content: space-around;
 }
-.music-control-comp .mob-screen-controls .song-controls-play .icons-control .playing-icon {
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control {
+  display: flex;
+  align-items: center;
+}
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control .bg-play {
+  background-color: white;
+  width: 15px;
+  height: 15px;
+  display: grid;
+  place-content: center;
+}
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control .bg-play .playing-icon {
   color: red;
   font-size: 1.5rem;
   cursor: pointer;
 }
-.music-control-comp .mob-screen-controls .song-controls-play .icons-control .playing-icon:hover {
+.music-control-comp .mob-screen-controls .song-controls-play .icons-control .bg-play:hover {
   opacity: 0.5;
 }
 .music-control-comp .mob-screen-controls .song-controls-play .icons-control .next-songs-icon {
@@ -561,12 +572,19 @@ body {
 .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon1:hover {
   opacity: 0.5;
 }
-.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon3 {
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .bg-play {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-content: center;
+}
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .bg-play .controls-icon3 {
   font-size: 2rem;
   color: red;
   cursor: pointer;
 }
-.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon3:hover {
+.music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .bg-play:hover {
   opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon4, .music-control-comp .large-screen-controls .song-playing-area2 .song-changing-btns .controls-icon2 {

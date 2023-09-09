@@ -562,14 +562,25 @@ body {
         justify-content: space-around;
 
         .icons-control {
-          .playing-icon {
-            color: red;
-            font-size: 1.5rem;
-            cursor: pointer;
+          display: flex;
+          align-items: center;
+          .bg-play {
+            background-color: white;
+            width: 15px;
+            height: 15px;
+            display: grid;
+            place-content: center;
+            
+            .playing-icon {
+              color: red;
+              font-size: 1.5rem;
+              cursor: pointer;
+            }
             &:hover {
               opacity: 0.5;
             }
           }
+          
           .next-songs-icon {
             font-size: 1.5rem;
             cursor: pointer;
@@ -668,10 +679,18 @@ body {
             opacity: 0.5;
           }
         }
-        .controls-icon3 {
-          font-size: 2rem;
-          color: red;
-          cursor: pointer;
+        .bg-play {
+          background-color: white;
+          width: 20px;
+          height: 20px;
+          display: grid;
+          place-content: center;
+
+          .controls-icon3 {
+            font-size: 2rem;
+            color: red;
+            cursor: pointer;
+          }
           &:hover {
             opacity: 0.5;
           }

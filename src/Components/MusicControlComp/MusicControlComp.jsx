@@ -9,32 +9,48 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
-function MusicControlComp() {
+function MusicControlComp( {tracks} ) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
-  
+
+
+
+// #region ------------ screen size control ---------
+
   const isMobile = windowWidth < 1000;
   
   const handlerExpander = () => {
     setLifting(false)
+  }
+  const handleMinimizer = (data) => {
+    setLifting(data)
   }
 
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
+  
     window.addEventListener("resize", handleResize);
-
+  
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  // #endregion ------------ screen size control ---------
+  
 
-  const handleMinimizer = (data) => {
-    setLifting(data)
-  }
+
+
+// #region ------------ song control ---------
+
+
+// #endregion ------------ song control ---------
+
+
+
+
 
 
   if (!lifting) {
@@ -66,7 +82,9 @@ function MusicControlComp() {
             </div>
             <div className="song-controls-play">
               <div className="icons-control">
-                <BsFillPlayCircleFill className="playing-icon" />
+                <div className="bg-play">
+                  <BsFillPlayCircleFill className="playing-icon" />
+                </div>
               </div>
               <div className="icons-control">
                 <IoIosArrowUp onClick={handlerExpander} className="next-songs-icon" />
@@ -102,7 +120,9 @@ function MusicControlComp() {
                 <BiSkipPrevious className="controls-icon2" />
               </div>
               <div className="song-changing-btns">
-                <BsFillPlayCircleFill className="controls-icon3" />
+                <div className="bg-play">
+                  <BsFillPlayCircleFill className="controls-icon3" />
+                </div>
               </div>
               <div className="song-changing-btns">
                 <BiSkipNext className="controls-icon4" />
