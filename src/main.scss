@@ -226,6 +226,10 @@ body {
   }
 }
 
+.list-selector {
+  color: var(--SecondaryColor);
+}
+
 
 // songs collection below search bar
 .songsCollection {
@@ -289,6 +293,10 @@ body {
   &:hover {
     opacity: 0.5;
   }
+}
+// Moods and Genres drop down settings
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  padding-top: 0px !important;
 }
 
 
@@ -520,6 +528,7 @@ body {
 
 // bottom song playing control
 .music-control-comp {
+  
   border-top: 1px solid var(--SecondaryColor);
   background-color: var(--PrimaryColor);
   padding: 5px 20px;
@@ -754,6 +763,19 @@ body {
   
 
 }
+
+.expanded-view-music-section {
+  position: absolute;
+  background-color: var(--PrimaryColor);
+  z-index: 8;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform: translate(-50% -50%);
+  
+}
+
 
 
 // second page track list header

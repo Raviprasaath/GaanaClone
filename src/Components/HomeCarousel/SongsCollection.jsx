@@ -25,6 +25,8 @@ const SongsCollection = () => {
   const dispatch = useDispatch();
   const activeItem = useSelector((state) => state.usersData.activeItem);
 
+  function setActiveItem(){}
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     setActiveItem(event.target.innerText);
@@ -74,7 +76,7 @@ const SongsCollection = () => {
               aria-controls={open ? "account-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
+              onMouseOver={handleClick}
               >
               <Typography
               className={activeItem === "Moods & Genres" ? "active" : ""}

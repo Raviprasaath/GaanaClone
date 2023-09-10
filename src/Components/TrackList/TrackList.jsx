@@ -717,6 +717,9 @@ function TrackList() {
           !screenSize && 
           <div className="table-mobile-container">  
             <table>
+              <tbody>
+
+              
               <tr className="table-tr-mob">
                 <td className="table-td-1">1</td>
                 <td className="table-td-2">
@@ -1155,7 +1158,7 @@ function TrackList() {
                 </td>
               </tr>
              
-              
+              </tbody>
             </table>
           </div>
         }

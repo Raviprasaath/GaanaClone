@@ -9,7 +9,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
-function MusicControlComp( {tracks} ) {
+function MusicControlComp( props, {tracks} ) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
 
@@ -25,6 +25,10 @@ function MusicControlComp( {tracks} ) {
   const handleMinimizer = (data) => {
     setLifting(data)
   }
+
+  useEffect (()=> {
+    props.expander(lifting)
+  }, [lifting])
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,9 +60,9 @@ function MusicControlComp( {tracks} ) {
   if (!lifting) {
     return (
       <>
-      <div className="expanded-view-music-section">
-        <MusicPlayer expanderMessage={handleMinimizer} />      
-      </div>
+        <div className="expanded-view-music-section">
+            <MusicPlayer expanderMessage={handleMinimizer} />
+        </div>
       </>
 
     )
@@ -75,10 +79,10 @@ function MusicControlComp( {tracks} ) {
               <div>
                 <img className="current-playing-song" src={image} alt="" />
               </div>
-              <p className="song-name-lines">
+              <div className="song-name-lines">
                 <p className="song-name-1">Song playing</p>
                 <p className="song-name-2">Song playing (From Movie)</p>
-              </p>
+              </div>
             </div>
             <div className="song-controls-play">
               <div className="icons-control">

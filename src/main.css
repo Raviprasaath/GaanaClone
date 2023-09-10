@@ -195,6 +195,10 @@ body {
   padding-left: 10px;
 }
 
+.list-selector {
+  color: var(--SecondaryColor);
+}
+
 .songsCollection {
   padding-top: 120px;
   max-width: 1200px;
@@ -245,6 +249,10 @@ body {
 }
 .css-ahj2mt-MuiTypography-root:hover {
   opacity: 0.5;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  padding-top: 0px !important;
 }
 
 .MuiModal-root .MuiPaper-root {
@@ -632,6 +640,17 @@ body {
 }
 .music-control-comp .large-screen-controls .song-playing-area3 .song-details:hover {
   opacity: 0.5;
+}
+
+.expanded-view-music-section {
+  position: absolute;
+  background-color: var(--PrimaryColor);
+  z-index: 8;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform: translate(-50% -50%);
 }
 
 .track-list-header {

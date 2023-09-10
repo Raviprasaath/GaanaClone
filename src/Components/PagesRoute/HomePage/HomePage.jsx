@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import axios from 'axios';
 
 
 import LargerCarousel from "../../HomeCarousel/LargerCarousel.jsx";
@@ -38,6 +39,32 @@ function HomePage () {
         price={item.price}
       />
     ));
+
+
+    // useEffect (()=> {
+    //   const headers = {
+    //     'Content-Type': 'application/json',        
+    //     'projectId': '8jf3b15onzua'        
+    //   }
+
+    //   axios
+    //   .get ("https://academics.newtonschool.co/api/v1/music/song", {headers: headers} )
+    //   .then(data => console.log(data.data))
+    //   .catch(error => console.log(error));
+    // }, [])
+
+
+    // useEffect (()=> {
+    //   const headers = {
+    //     'Content-Type': 'application/json',        
+    //     'projectId': 'f104bi07c490'        
+    //   }
+
+    //   axios
+    //   .get ("https://academics.newtonschool.co/api/v1/music/album", {headers: headers} )
+    //   .then(data => console.log(data.data))
+    //   .catch(error => console.log(error));
+    // }, [])
   
     //
   
@@ -70,7 +97,7 @@ function HomePage () {
         </Carousel>
 
   
-        <MusicControlComp />
+        {/* <MusicControlComp /> */}
       </>
     );
   }

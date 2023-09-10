@@ -30,9 +30,7 @@ import Romance from "./Components/PagesRoute/Romance/Romance.jsx";
 import SongsFrom90s2000s from "./Components/PagesRoute/SongsFrom90s2000s/SongsFrom90s2000s.jsx";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
 import SubscriptionPage from "./Components/PagesRoute/SubscriptionPage/SubscriptionPage.jsx";
-
-
-
+import DataFetch from "./Components/DataFetch/DataFetch.jsx";
 
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
@@ -50,10 +48,6 @@ function App() {
   const closeSidePanel = () => {
     setIsOpen(false);
   };
-
-
-
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -86,571 +80,60 @@ function App() {
   // toggleCallback={toggling}
 
   // DARKMODEVAL::{darkMode}
+
+  const onHandlerExpander = (value) => {
+    setMusicExpander(value);
+  };
+
   return (
     <>
-
-      <button className="navbar-btn" onClick={toggleSidePanel}>
-        <FaBars />
-      </button>
-      {isOpen && <div className="opacity-style-middle"></div>}
-      <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
-      {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
-      <NavbarTop />
-
-      <div style={{position : "sticky", top:"-15px", zIndex:"2", width:"100%", backgroundColor:"#232429"}}>
-        <SongsCollection  />
-      </div>
-
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/trending" element={<TrendingSongs />} />
-        <Route path="/newsongs" element={<NewSongs />} />
-        <Route path="/oldsongs" element={<OldSongs />} />
-        <Route path="/party" element={<PartySongs />} />
-        <Route path="/romance" element={<Romance />} />
-        <Route path="/songsfrom90s2000s" element={<SongsFrom90s2000s />} />
-
-        <Route path="/album" element={<Album />} />
-        <Route path="/comingsoon" element={<ComingSoonPage />} />
-        <Route path="/subscription" element={ <SubscriptionPage /> } />
-
-      </Routes>
-
       {musicExpander && (
         <div>
-          {screenSize && (
-            <div>
-              <button className="navbar-btn" onClick={toggleSidePanel}>
-                <FaBars />
-              </button>
-              {isOpen && <div className="opacity-style-middle"></div>}
-              <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
-              {isOpen && (
-                <div className="overlay" onClick={closeSidePanel}></div>
-              )}
-              <NavbarTop />
-            </div>
-          )}
-          <div className="music-player-container">
-            {!screenSize && (
-              <div className="music-player">
-                <div className="view-splitter">
-                  <IoIosArrowDown className="drop-arrow" />
-                  <div className="poster-container">
-                    <img
-                      className="mobile-view-song-preview"
-                      src={image}
-                      alt="img"
-                    />
-                    <div className="song-details-splitter">
-                      <div className="poster-song-splitter">
-                        <div className="song-name">
-                          <p>Nenjukkul</p>
-                          <p>
-                            {" "}
-                            <AiOutlineHeart />{" "}
-                          </p>
-                        </div>
-                        <div className="song-seeking-line"></div>
-                        <div className="song-duration">
-                          <p className="song-starting">0:00</p>
-                          <p className="song-balance">0:00</p>
-                        </div>
-                      </div>
-                      <div className="song-playing-area2">
-                        <div className="song-changing-btns">
-                          <IoMdRepeat className="controls-icon1" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <BiSkipPrevious className="controls-icon2" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <BsFillPlayCircleFill className="controls-icon3" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <BiSkipNext className="controls-icon4" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <IoMdShuffle className="controls-icon5" />
-                        </div>
-                      </div>
+          <button className="navbar-btn" onClick={toggleSidePanel}>
+            <FaBars />
+          </button>
+          {isOpen && <div className="opacity-style-middle"></div>}
+          <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
+          {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
+          <NavbarTop />
 
-                      <div style={{ padding: "5px 0px" }}></div>
-
-                      <div className="table-td-2-img">
-                        <div className="songs-collection">
-                          <img
-                            src={image}
-                            alt="img"
-                            className="table-mob-view-poster"
-                          />
-
-                          <div className="flex">
-                            <div className="table-button-artist">
-                              <button className="premium-button">
-                                Premium
-                              </button>
-                              <p className="table-mob-artist">Karthik</p>
-                            </div>
-                            <p className="table-song-name">
-                              Yethi Yethi Yethi En Nenjil
-                            </p>
-                          </div>
-                          <p>
-                            <AiOutlineClose />
-                          </p>
-                        </div>
-                        <div className="songs-collection">
-                          <img
-                            src={image}
-                            alt="img"
-                            className="table-mob-view-poster"
-                          />
-
-                          <div className="flex">
-                            <div className="table-button-artist">
-                              <button className="premium-button">
-                                Premium
-                              </button>
-                              <p className="table-mob-artist">Karthik</p>
-                            </div>
-                            <p className="table-song-name">
-                              Yethi Yethi Yethi En Nenjil
-                            </p>
-                          </div>
-                          <p>
-                            <AiOutlineClose />
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-            )}
-            {screenSize && (
-              <div className="music-player-lap-view">
-                <div className="music-player-section">
-                  <div className="music-player-section-1">
-                    <img
-                      className="mobile-view-song-preview"
-                      src={image}
-                      alt="img"
-                    />
-                    <div className="poster-song-splitter">
-                      <div className="song-name">
-                        <p>Nenjukkul</p>
-                        <p>
-                          {" "}
-                          <AiOutlineHeart />{" "}
-                        </p>
-                      </div>
-                      <div className="song-seeking-line"></div>
-                      <div className="song-duration">
-                        <p className="song-starting">0:00</p>
-                        <p className="song-balance">0:00</p>
-                      </div>
-                      <div className="song-playing-area2">
-                        <div className="song-changing-btns">
-                          <IoMdRepeat className="controls-icon1" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <BiSkipPrevious className="controls-icon2" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <BsFillPlayCircleFill className="controls-icon3" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <BiSkipNext className="controls-icon4" />
-                        </div>
-                        <div className="song-changing-btns">
-                          <IoMdShuffle className="controls-icon5" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="music-player-section-2">
-                    <IoIosArrowDown className="drop-arrow" />
-                    <div className="table-td-2-img">
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                      <div className="songs-collection">
-                        <img
-                          src={image}
-                          alt="img"
-                          className="table-mob-view-poster"
-                        />
-
-                        <div className="flex">
-                          <div className="table-button-artist">
-                            <button className="premium-button">Premium</button>
-                            <p className="table-mob-artist">Karthik</p>
-                          </div>
-                          <p className="table-song-name">
-                            Yethi Yethi Yethi En Nenjil
-                          </p>
-                        </div>
-                        <p>
-                          <AiOutlineClose />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+          <div
+            style={{
+              position: "sticky",
+              top: "-15px",
+              zIndex: "2",
+              width: "100%",
+              backgroundColor: "#232429",
+            }}
+          >
+            <SongsCollection />
           </div>
+
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/trending" element={<TrendingSongs />} />
+            <Route path="/newsongs" element={<NewSongs />} />
+            <Route path="/oldsongs" element={<OldSongs />} />
+            <Route path="/party" element={<PartySongs />} />
+            <Route path="/romance" element={<Romance />} />
+            <Route path="/songsfrom90s2000s" element={<SongsFrom90s2000s />} />
+
+            <Route path="/album" element={<Album />} />
+            <Route path="/comingsoon" element={<ComingSoonPage />} />
+            <Route path="/subscription" element={<SubscriptionPage />} />
+          </Routes>
         </div>
       )}
-      <Footer />
-      <MusicControlComp  />
 
-      {/* <SubscriptionPage /> */}
+
+      {musicExpander && <Footer />}
+
+      <DataFetch />
+      <MusicControlComp expander={onHandlerExpander} />
+
+      
 
       <LoginPage />
-
-
-
     </>
   );
 }
