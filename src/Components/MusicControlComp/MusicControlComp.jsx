@@ -1,18 +1,54 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import image from "../../assets/trending-movies3.jpg";
 import MusicPlayer from "../MusicPlayer/MusicPlayer.jsx";
 
-import { BsFillPlayCircleFill, BsFillVolumeUpFill } from "react-icons/bs";
+import { BsFillPlayCircleFill, BsFillVolumeUpFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { IoIosArrowUp, IoMdRepeat, IoMdShuffle } from "react-icons/io";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
-function MusicControlComp( props, {tracks} ) {
+
+function MusicControlComp( props ) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
+  const [sampleSongs, setSampleSongs] = useState([]);
 
+  console.clear();
+  
+
+
+  // #region ------local Storage value getting -------
+  const [ songStore, setSongStore ] = useState([]);
+  
+  console.clear();
+  const detailedData = songStore.data;
+
+  const handleSongs = () => {
+    const tempLocalSongs = JSON.parse(localStorage.getItem("localSongs"));
+    setSongStore(tempLocalSongs);
+  }
+
+  const arrayStore = [];
+
+  if (Array.isArray(detailedData)) {
+    detailedData.map((item) => {
+      const artistDescription = item.artist && item.artist[0] && item.artist[0].songs[0];      
+      arrayStore.push(`https://newton-project-resume-backend.s3.amazonaws.com/audio/${artistDescription}.mp3`);
+    })
+  }
+
+  // console.log(sampleSongs);
+  
+  useEffect (() => {
+    setSampleSongs(arrayStore);
+    handleSongs();
+  }, [])
+
+  const  temp = ['https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e147ae38c3e33a721d.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf916447ae38c3e33a2b25.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e147ae38c3e33a721d.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf91cd47ae38c3e33a33a4.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf920b47ae38c3e33a3889.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf911747ae38c3e33a24f9.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e147ae38c3e33a721d.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e147ae38c3e33a721d.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf938f47ae38c3e33a56f7.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf907d47ae38c3e33a189a.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e147ae38c3e33a721d.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf90c647ae38c3e33a1e6b.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf90bf47ae38c3e33a1ddc.mp3', 'https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf94e147ae38c3e33a721d.mp3']
+
+  // #endregion -------
 
 
 // #region ------------ screen size control ---------
@@ -68,12 +104,14 @@ function MusicControlComp( props, {tracks} ) {
     )
   }
   
-
   return (
     <>
       <div className="music-control-comp">
         
+
+
         {isMobile ? (
+          
           <section className="mob-screen-controls">
             <div className="song-name">
               <div>
@@ -86,9 +124,15 @@ function MusicControlComp( props, {tracks} ) {
             </div>
             <div className="song-controls-play">
               <div className="icons-control">
-                <div className="bg-play">
-                  <BsFillPlayCircleFill className="playing-icon" />
-                </div>
+
+              <div className="bg-play"> <BsFillPlayCircleFill className="playing-icon" /> </div>
+
+                {/* <div className="bg-play" onClick={playing ? handlePause : handlePlay}>
+                    {playing ? 
+                    <BsFillPlayCircleFill className="playing-icon" /> :
+                    <BsFillPauseCircleFill className="playing-icon" /> }
+                </div> */}
+
               </div>
               <div className="icons-control">
                 <IoIosArrowUp onClick={handlerExpander} className="next-songs-icon" />

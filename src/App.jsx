@@ -32,6 +32,18 @@ import LoginPage from "./Components/LoginPage/LoginPage.jsx";
 import SubscriptionPage from "./Components/PagesRoute/SubscriptionPage/SubscriptionPage.jsx";
 import DataFetch from "./Components/DataFetch/DataFetch.jsx";
 
+
+// #region
+import song1 from './assets/audio/song-1.mp3'
+import song2 from './assets/audio/song-2.mp3'
+import song3 from './assets/audio/song-3.mp3'
+import song4 from './assets/audio/song-4.mp3'
+import song5 from './assets/audio/song-5.mp3'
+import song6 from './assets/audio/song-6.mp3'
+// #endregion
+
+
+
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
   // console.log("print dark mode val", darkMode);
@@ -75,7 +87,20 @@ function App() {
     };
   }, []);
 
-  //
+  // #region --- songs area
+  const tracks = [
+    { src:{song1}, name: "Track 1"},
+    { src:{song2}, name: "Track 2"},
+    { src:{song3}, name: "Track 3"},
+    { src:{song4}, name: "Track 4"},
+    { src:{song5}, name: "Track 5"},
+    { src:{song6}, name: "Track 6"},
+  ]
+  
+
+  // #endregion
+
+
 
   // toggleCallback={toggling}
 
@@ -87,53 +112,55 @@ function App() {
 
   return (
     <>
-      {musicExpander && (
-        <div>
-          <button className="navbar-btn" onClick={toggleSidePanel}>
-            <FaBars />
-          </button>
-          {isOpen && <div className="opacity-style-middle"></div>}
-          <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
-          {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
-          <NavbarTop />
+      <div className={`app-component ${ darkMode ? `dark-mode` : 'lite-mode'}`}   >
 
-          <div
-            style={{
-              position: "sticky",
-              top: "-15px",
-              zIndex: "2",
-              width: "100%",
-              backgroundColor: "#232429",
-            }}
-          >
-            <SongsCollection />
+        {musicExpander && (
+          <div>
+            <button className="navbar-btn" onClick={toggleSidePanel}>
+              <FaBars />
+            </button>
+            {isOpen && <div className="opacity-style-middle"></div>}
+            <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
+            {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
+            <NavbarTop />
+
+            <div
+              style={{
+                position: "sticky",
+                top: "-15px",
+                zIndex: "2",
+                width: "100%",
+                backgroundColor: "#232429",
+              }}
+            >
+              <SongsCollection />
+            </div>
+
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/trending" element={<TrendingSongs />} />
+              <Route path="/newsongs" element={<NewSongs />} />
+              <Route path="/oldsongs" element={<OldSongs />} />
+              <Route path="/party" element={<PartySongs />} />
+              <Route path="/romance" element={<Romance />} />
+              <Route path="/songsfrom90s2000s" element={<SongsFrom90s2000s />} />
+
+              <Route path="/album" element={<Album />} />
+              <Route path="/comingsoon" element={<ComingSoonPage />} />
+              <Route path="/subscription" element={<SubscriptionPage />} />
+            </Routes>
           </div>
+        )}
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/trending" element={<TrendingSongs />} />
-            <Route path="/newsongs" element={<NewSongs />} />
-            <Route path="/oldsongs" element={<OldSongs />} />
-            <Route path="/party" element={<PartySongs />} />
-            <Route path="/romance" element={<Romance />} />
-            <Route path="/songsfrom90s2000s" element={<SongsFrom90s2000s />} />
+        {musicExpander && <Footer />}
 
-            <Route path="/album" element={<Album />} />
-            <Route path="/comingsoon" element={<ComingSoonPage />} />
-            <Route path="/subscription" element={<SubscriptionPage />} />
-          </Routes>
-        </div>
-      )}
+        <DataFetch />
+        <MusicControlComp tracks={tracks} expander={onHandlerExpander} />
 
+        
 
-      {musicExpander && <Footer />}
-
-      <DataFetch />
-      <MusicControlComp expander={onHandlerExpander} />
-
-      
-
-      <LoginPage />
+        <LoginPage />
+      </div>
     </>
   );
 }

@@ -5,9 +5,10 @@ function DataFetch () {
     const [ songStore, setSongStore ] = useState([]);
     const [ albumStore, setAlbumStore ] = useState([]);
 
-    console.clear();
+    // console.clear();
+
     // console.log(albumStore.data)
-    console.log(albumStore);
+    // console.log(albumStore);
 
     const detailedData = songStore.data;
     
@@ -20,36 +21,20 @@ function DataFetch () {
     // })
     // console.log(result)
     
-    // if (Array.isArray(detailedData)) {
-    //     detailedData.map((item) => {
-    //         const artistDescription = item.artist && item.artist[0] && item.artist[0].description;
-    //         console.log(artistDescription || "");
-    //     })
-    // }
+    if (Array.isArray(detailedData)) {
+        detailedData.map((item) => {
+            const artistDescription = item.artist && item.artist[0] && item.artist[0].songs;
+            // console.log(artistDescription || "");
+        })
+    }
+    const sampleUrl = "https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf942e47ae38c3e33a63d2.mp3"
+    
     if (Array.isArray(detailedData)) {
         detailedData.map((item) => {
             const artistDescription = item.artist && item.artist[0] && item.artist[0];
-            console.log(artistDescription || "");
+            // console.log(artistDescription || "");
         })
     }
-
-
-    
-    // ------ totally 4 types mood
-    // happy
-    // romantic
-    // sad
-    // excited
-
-    // ------ featured types
-    // Trending songs
-    // Soul soother
-    // Evergreen melodies
-    // Top 20 of this week
-
-
-
-
 
 
     const handleSongs = () => {
@@ -109,3 +94,17 @@ function DataFetch () {
 }
 
 export default DataFetch;
+
+    // ------ totally 4 types mood
+    // happy
+    // romantic
+    // sad
+    // excited
+
+    // ------ featured types
+    // Trending songs
+    // Soul soother
+    // Evergreen melodies
+    // Top 20 of this week
+
+    // Sorting by Year

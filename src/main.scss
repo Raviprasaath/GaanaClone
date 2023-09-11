@@ -15,7 +15,6 @@
     --PrimaryColor2 : #283024;
     --PrimaryColor3 : #333;
 
-    
     // --SecondaryColor: #232429;
     --SecondaryColor: #d4d3d6;
 
@@ -42,10 +41,19 @@
 
 }
 
-body {
-  background-color: var(--PrimaryColor);
+.app-component {
   color: var(--SecondaryColor4);
   scroll-behavior: smooth;
+}
+
+.dark-mode {
+  background-color: var(--PrimaryColor);
+  color: var(--SecondaryColor);
+}
+
+.lite-mode {
+  background-color: var(--SecondaryColor);
+  color: var(--PrimaryColor);
 }
 
 

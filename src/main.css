@@ -31,10 +31,19 @@
   --transition: .4s ease-in-out;
 }
 
-body {
-  background-color: var(--PrimaryColor);
+.app-component {
   color: var(--SecondaryColor4);
   scroll-behavior: smooth;
+}
+
+.dark-mode {
+  background-color: var(--PrimaryColor);
+  color: var(--SecondaryColor);
+}
+
+.lite-mode {
+  background-color: var(--SecondaryColor);
+  color: var(--PrimaryColor);
 }
 
 *::-webkit-scrollbar {
