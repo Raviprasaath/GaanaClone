@@ -7,18 +7,21 @@ import axios from 'axios';
 
 import LargerCarousel from "../../HomeCarousel/LargerCarousel.jsx";
 import MusicControlComp from '../../MusicControlComp/MusicControlComp.jsx'
-import CarouselType2 from "../../CarouselType2/CarouselType2.jsx";
+import CarouselType2 from "../../CarouselTypes/CarouselType2.jsx";
 import MultiCarouselCard from "../../HomeCarousel/MultiCarouselCard.jsx";
-import { productData, responsive } from "../../../Components/HomeCarousel/Data.jsx";
+import { productData } from "../../../Components/HomeCarousel/Data.jsx";
+import TrendingSongsCarousel from "../../CarouselTypes/TrendingSongsCarousel.jsx";
 
+import { responsive } from '../../CarouselTypes/CarouselResponsive.jsx'
 
+import trendingData from "../../CarouselTypes/TrendingData.jsx";
 
 
 
 function HomePage () {
-    const darkMode = useSelector((state) => state.usersData.darkMode);
+    // const darkMode = useSelector((state) => state.usersData.darkMode);
     // console.log("print dark mode val", darkMode);
-  
+    
 
     // data MultiCarouselCard carousel
     const product = productData.map((item) => (
@@ -26,13 +29,20 @@ function HomePage () {
         key={item.id}
         name={item.name}
         url={item.imageurl}
-        price={item.price}
       />
     ));
+
+    // const productTrending = trendingData.map((item) => (
+    //   <TrendingSongsCarousel
+    //     key={item.id}
+    //     name={item.name}
+    //     url={item.imageurl}
+    //   />
+    // ));
   
     // round carousel
     const productArtist = productData.map((item) => (
-      <CarouselType2
+      <CarouselType2        
         key={item.id}
         name={item.name}
         url={item.imageurl}
@@ -76,22 +86,30 @@ function HomePage () {
       <>
   
         <LargerCarousel />
-  
-        <h2>Upcoming</h2>
+
+        <h2 className="homepage-heading">Top Trending</h2>
+        {/* <Carousel showDots={false} responsive={responsive}>
+          {productTrending}
+          
+        </Carousel> */}
+        
+        <h2 className="homepage-heading">Pop Songs</h2>
         <Carousel showDots={false} responsive={responsive}>
           {product}
         </Carousel>
 
-        <h2>Top Trending</h2>
+        <h2 className="homepage-heading">Hip Hop Songs</h2>
         <Carousel showDots={false} responsive={responsive}>
           {product}
         </Carousel>
 
+        <h2 className="homepage-heading">Rock Songs</h2>
+        
         <Carousel showDots={false} responsive={responsive}>
           {product}
         </Carousel>
   
-        <h2>Top Trending</h2>
+        <h2 className="homepage-heading">Top Trending</h2>
         {/* round */}
         <Carousel showDots={false} responsive={responsive}>
           {productArtist}

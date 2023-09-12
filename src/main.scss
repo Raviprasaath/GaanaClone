@@ -8,14 +8,14 @@
   font-family: Poppins;
   text-decoration: none;
 }
+// --PrimaryColor: #c3c2c5;
+// --SecondaryColor: #232429;
 
 :root {
     --PrimaryColor: #232429;
-    // --PrimaryColor: #c3c2c5;
     --PrimaryColor2 : #283024;
     --PrimaryColor3 : #333;
 
-    // --SecondaryColor: #232429;
     --SecondaryColor: #d4d3d6;
 
     --SecondaryColor3: red;
@@ -54,6 +54,7 @@
 .lite-mode {
   background-color: var(--SecondaryColor);
   color: var(--PrimaryColor);
+
 }
 
 
@@ -1997,7 +1998,11 @@
 }
 
 
-
+.homepage-heading {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
 
 
 

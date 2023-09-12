@@ -5,7 +5,7 @@ const CarouselType2 = (props) => {
     <>
       <div className="productArtist card">
         <img  className="product-image" src={props.url} alt="product image" />
-        <h4>Song</h4>
+        <h4> {props.name} </h4>
       </div>
     </>
   );

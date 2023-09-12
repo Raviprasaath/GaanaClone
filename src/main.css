@@ -1696,6 +1696,12 @@
   opacity: 0.6;
 }
 
+.homepage-heading {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
 @media screen and (min-width: 360px) {
   .largerCarousel {
     padding-left: 20px;

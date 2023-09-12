@@ -5,8 +5,10 @@ function DataFetch () {
     const [ songStore, setSongStore ] = useState([]);
     const [ albumStore, setAlbumStore ] = useState([]);
 
-    // console.clear();
+    console.clear();
 
+
+    console.log(songStore)
     // console.log(albumStore.data)
     // console.log(albumStore);
 
@@ -17,24 +19,41 @@ function DataFetch () {
     // })
 
     // const result = detailedData.filter((item) => {
-    //     return (item.featured === "Top 20 of this week");
+    //     return (item.featured === "Trending songs");
     // })
     // console.log(result)
     
-    if (Array.isArray(detailedData)) {
-        detailedData.map((item) => {
-            const artistDescription = item.artist && item.artist[0] && item.artist[0].songs;
-            // console.log(artistDescription || "");
-        })
-    }
+    // if (Array.isArray(detailedData)) {
+    //     detailedData.map((item) => {
+    //         const artistDescription = item ;
+    //         console.log(artistDescription || "");
+    //     })
+    // }
     const sampleUrl = "https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf942e47ae38c3e33a63d2.mp3"
     
-    if (Array.isArray(detailedData)) {
-        detailedData.map((item) => {
-            const artistDescription = item.artist && item.artist[0] && item.artist[0];
-            // console.log(artistDescription || "");
-        })
-    }
+    // if (Array.isArray(detailedData)) {
+    //     detailedData.map((item) => {
+    //         const artistDescription = item.artist && item.artist[0] && item.artist[0];
+    //         console.log(artistDescription || "");
+    //     })
+    // }
+
+
+    // -----------1 Trending Split
+    // try {
+    //     const trending = detailedData.filter((item) => {
+    //       return (item.featured === "Top 20 of this week");
+    //     });
+    //     console.log(trending);
+    //     trending.map((item) => {
+    //       console.log(item);
+    //     });
+    //   } catch (error) {
+    //     console.error("Error in DataFetch component:", error);
+    //   }
+
+
+
 
 
     const handleSongs = () => {
@@ -96,15 +115,15 @@ function DataFetch () {
 export default DataFetch;
 
     // ------ totally 4 types mood
-    // happy
-    // romantic
-    // sad
-    // excited
+    // happy - 28
+    // romantic - 22
+    // sad - 21
+    // excited - 29
 
     // ------ featured types
-    // Trending songs
-    // Soul soother
-    // Evergreen melodies
-    // Top 20 of this week
+    // Trending songs - 2 
+    // Soul soother - 2
+    // Evergreen melodies - 2
+    // Top 20 of this week - 1
 
     // Sorting by Year

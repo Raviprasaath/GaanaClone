@@ -10,6 +10,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
 
+
 function MusicControlComp( props ) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
@@ -107,11 +108,7 @@ function MusicControlComp( props ) {
   return (
     <>
       <div className="music-control-comp">
-        
-
-
         {isMobile ? (
-          
           <section className="mob-screen-controls">
             <div className="song-name">
               <div>
