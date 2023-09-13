@@ -41,7 +41,7 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
               </a>
             </li>
             <li>
-              <a href="#">
+              <a className="toggler-control" href="#">
                 Night Mode
                 <ToggleSwitch />
               </a>

@@ -1,5 +1,5 @@
 import image from "../../assets/trending-movies6.jpg";
-import { AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { IoMdRepeat, IoMdShuffle, IoIosArrowDown } from "react-icons/io";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 import { BsFillPlayCircleFill } from "react-icons/bs";
@@ -132,7 +132,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -152,7 +152,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -172,7 +172,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -192,7 +192,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -212,7 +212,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -232,7 +232,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     <div className="songs-collection">
@@ -252,7 +252,7 @@ function MusicPlayer(props) {
                         </p>
                       </div>
                       <p>
-                        <AiOutlineClose className="fav-remover"/>
+                        <AiOutlineHeart className="fav-remover"/>
                       </p>
                     </div>
                     
@@ -323,7 +323,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -343,7 +343,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -363,7 +363,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -383,7 +383,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -403,7 +403,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -423,7 +423,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -443,7 +443,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -463,7 +463,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -483,7 +483,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -503,7 +503,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -523,7 +523,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -543,7 +543,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -563,7 +563,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -583,7 +583,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -603,7 +603,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -623,7 +623,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -643,7 +643,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                   <div className="songs-collection">
@@ -663,7 +663,7 @@ function MusicPlayer(props) {
                       </p>
                     </div>
                     <p>
-                      <AiOutlineClose className="fav-remover"/>
+                      <AiOutlineHeart className="fav-remover"/>
                     </p>
                   </div>
                 </div>

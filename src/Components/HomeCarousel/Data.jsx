@@ -147,3 +147,10 @@ export const responsive = {
       description: "Some text about the product..",
     },
   ];
+
+
+  // const localStorageData = localStorage.getItem('localSongs');
+  // const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];  
+  // console.log("checking data " , parsedLocalStorageData.data)
+  // export const productData2 = Array.isArray(parsedLocalStorageData) ? [...parsedLocalStorageData] : [];
+  

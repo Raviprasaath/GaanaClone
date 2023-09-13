@@ -31,6 +31,7 @@ import SongsFrom90s2000s from "./Components/PagesRoute/SongsFrom90s2000s/SongsFr
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
 import SubscriptionPage from "./Components/PagesRoute/SubscriptionPage/SubscriptionPage.jsx";
 import DataFetch from "./Components/DataFetch/DataFetch.jsx";
+import MySongs from "./Components/PagesRoute/MySongs/MySongs.jsx";
 
 
 
@@ -99,14 +100,8 @@ function App() {
             {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
             <NavbarTop />
 
-            <div
-              style={{
-                position: "sticky",
-                top: "-15px",
-                zIndex: "2",
-                width: "100%",
-                backgroundColor: "#232429",
-              }}
+            <div className="bg-fill-patch-work"
+              
             >
               <SongsCollection />
             </div>
@@ -123,6 +118,7 @@ function App() {
               <Route path="/album" element={<Album />} />
               <Route path="/comingsoon" element={<ComingSoonPage />} />
               <Route path="/subscription" element={<SubscriptionPage />} />
+              <Route path="/mysongs" element={<MySongs />} />
             </Routes>
           </div>
         )}

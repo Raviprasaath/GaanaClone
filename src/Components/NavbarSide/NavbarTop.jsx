@@ -1,8 +1,9 @@
 import { AiOutlineSearch, AiOutlineDown } from "react-icons/ai";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
+import { MdBrightness2 } from "react-icons/md";
 import MainLogo from "../../assets/main-logo.png";
 import { useEffect, useState } from "react";
-
+import actions from "../../action.js";
 import { useDispatch } from "react-redux";
 import action from '../../action.js'
 
@@ -13,6 +14,7 @@ import LoginPage from '../../Components/LoginPage/LoginPage.jsx'
 function NavbarTop() {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
   const [loginState, setLoginState] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -20,6 +22,10 @@ function NavbarTop() {
     dispatch(action.setActiveItem())
   }
 
+  const handleDarkModeToggle = () => {
+    setIsDarkMode(!isDarkMode);
+    dispatch(actions.toggledarkmode(!isDarkMode));
+  };
 
   useEffect(() => {
     const handleResize = () => {      
@@ -65,7 +71,14 @@ function NavbarTop() {
               <Link to="/subscription">
                 <button className="get-gaana-plus">Get Gaana Plus</button>
               </Link>
-              <button className="dark-light-toggler"><BsFillBrightnessHighFill /></button>
+              <button className="dark-light-toggler" onClick={handleDarkModeToggle}>
+                {isDarkMode ? (
+                  <BsFillBrightnessHighFill  />                
+                ) : (
+                  <MdBrightness2  />                
+                )
+              }
+              </button>
               <button className="user-login" onClick={openLoginForm} >Log In / Sign Up</button>
             </div>
           </div>

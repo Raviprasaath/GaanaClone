@@ -5,7 +5,6 @@ function DataFetch () {
     const [ songStore, setSongStore ] = useState([]);
     const [ albumStore, setAlbumStore ] = useState([]);
 
-    console.clear();
 
 
     console.log(songStore)
@@ -107,7 +106,7 @@ function DataFetch () {
 
     return (
         <>
-            Hi this is data
+            
         </>
     )
 }

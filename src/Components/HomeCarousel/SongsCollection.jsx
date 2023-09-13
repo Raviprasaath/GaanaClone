@@ -100,8 +100,9 @@ const SongsCollection = () => {
           <Link className="list-selector" to="/comingsoon">          
             <Typography onClick={() => handleSongSelection("Podcast")} className={activeItem === "Podcast" ? "active" : ""} sx={{ minWidth: 150 }}>Podcast</Typography>
           </Link>
-
-          <Typography onClick={() => handleSongSelection("My Music")} className={activeItem === "My Music" ? "active" : ""} sx={{ minWidth: 150 }}>My Music</Typography>
+          <Link className="list-selector" to="/mysongs">          
+            <Typography onClick={() => handleSongSelection("My Music")} className={activeItem === "My Music" ? "active" : ""} sx={{ minWidth: 150 }}>My Music</Typography>
+          </Link>
         </Box>
         <Menu
           anchorEl={anchorEl}
