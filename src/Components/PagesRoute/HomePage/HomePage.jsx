@@ -11,33 +11,10 @@ import TrendingSongsCarousel from "../../CarouselTypes/TrendingSongsCarousel.jsx
 
 import { responsive } from "../../CarouselTypes/CarouselResponsive.jsx";
 
-const localStorageData = localStorage.getItem("localSongs");
-const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
-const trendingData = parsedLocalStorageData.data;
-const trendingSongs = trendingData.filter((item) => {
-  return item.featured === "Trending songs";
-});
 
 
-const happySongs = parsedLocalStorageData.data;
-const happySongsData = happySongs.filter((item) => {
-  return item.mood === "happy";
-});
 
-const romanticSongs = parsedLocalStorageData.data;
-const romanticSongsData = romanticSongs.filter((item) => {
-  return item.mood === "romantic";
-});
 
-const sadSongs = parsedLocalStorageData.data;
-const sadSongsData = sadSongs.filter((item) => {
-  return item.mood === "sad";
-});
-
-const excitedSongs = parsedLocalStorageData.data;
-const excitedSongsData = excitedSongs.filter((item) => {
-  return item.mood === "excited";
-});
 
 
 
@@ -48,9 +25,62 @@ const excitedSongsData = excitedSongs.filter((item) => {
 function HomePage() {
   // const darkMode = useSelector((state) => state.usersData.darkMode);
   // console.log("print dark mode val", darkMode);
+  const [trendingSongs, setTrendingSongs] = useState();
+  const [happySongsData, setHappySongsData] = useState();
+  const [romanticSongsData, setRomanticSongsData] = useState();
+  const [sadSongsData, setSadSongsData] = useState();
+  const [excitedSongsData, setExcitedSongsData] = useState();
+
+  
+  
+  function fetching() {
+
+
+    const localStorageData = localStorage.getItem("localSongs");
+    const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
+    
+    const trendingData = parsedLocalStorageData.data;
+    const ts = trendingData?.filter((item) => {
+      return item.featured === "Trending songs";
+    });
+    setTrendingSongs(ts);
+    
+    
+    const happySongs = parsedLocalStorageData.data;
+    const hsd = happySongs?.filter((item) => {
+      return item.mood === "happy";
+    });
+    setHappySongsData(hsd);
+    
+    
+    const romanticSongs = parsedLocalStorageData.data;
+    const rsd = romanticSongs?.filter((item) => {
+      return item.mood === "romantic";
+    });
+    setRomanticSongsData(rsd);
+    
+    
+    
+    const sadSongs = parsedLocalStorageData.data;
+    const ssd = sadSongs?.filter((item) => {
+      return item.mood === "sad";
+    });
+    setSadSongsData(ssd);
+    
+    const excitedSongs = parsedLocalStorageData.data;
+    const esd = excitedSongs?.filter((item) => {
+      return item.mood === "excited";
+    });
+    setExcitedSongsData(esd);
+}
+
+
+  useEffect (() => {
+    fetching();
+  }, [trendingSongs,happySongsData,romanticSongsData,sadSongsData,excitedSongsData])
 
   // Trending Carousel
-  const productTrending = trendingSongs.map((item) => (
+  const productTrending = trendingSongs?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
       name={item.title}
@@ -58,7 +88,7 @@ function HomePage() {
       audio={item.audio_url}
     />
   ));
-  const productHappy = happySongsData.map((item) => (
+  const productHappy = happySongsData?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
       name={item.title}
@@ -66,7 +96,7 @@ function HomePage() {
       audio={item.audio_url}
     />
   ));
-  const productRomantic = romanticSongsData.map((item) => (
+  const productRomantic = romanticSongsData?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
       name={item.title}
@@ -74,7 +104,7 @@ function HomePage() {
       audio={item.audio_url}
     />
   ));
-  const productSad = sadSongsData.map((item) => (
+  const productSad = sadSongsData?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
       name={item.title}
@@ -82,7 +112,7 @@ function HomePage() {
       audio={item.audio_url}
     />
   ));
-  const productExcited = excitedSongsData.map((item) => (
+  const productExcited = excitedSongsData?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
       name={item.title}
@@ -92,12 +122,12 @@ function HomePage() {
   ));
 
   // data MultiCarouselCard carousel
-  // const product = productData.map((item) => (
+  // const product = productData?.map((item) => (
   //   <MultiCarouselCard key={item.id} name={item.name} url={item.imageurl} />
   // ));
 
   // round carousel
-  const productArtist = productData.map((item) => (
+  const productArtist = productData?.map((item) => (
     <CarouselType2
       key={item.id}
       name={item.name}
@@ -115,30 +145,30 @@ function HomePage() {
       <LargerCarousel />
 
       <h2 className="homepage-heading">Top Trending</h2>
-      <Carousel showDots={false} responsive={responsive}>
+      { productTrending?.length > 0 && <Carousel showDots={false} responsive={responsive}>
         {productTrending}
-      </Carousel>
+      </Carousel> } 
 
       <h2 className="homepage-heading">Happy Mood</h2>
-      <Carousel showDots={false} responsive={responsive}>
+      {productHappy?.length > 0 && <Carousel showDots={false} responsive={responsive}>
         {productHappy}
-      </Carousel>
+      </Carousel>}
 
       <h2 className="homepage-heading">Romantic Mood</h2>
-      <Carousel showDots={false} responsive={responsive}>
+      { productRomantic?.length > 0 && <Carousel showDots={false} responsive={responsive}>
         {productRomantic}
-      </Carousel>
+      </Carousel> }
 
       <h2 className="homepage-heading">Sad Songs</h2>
-      <Carousel showDots={false} responsive={responsive}>
+      {productSad?.length > 0 && <Carousel showDots={false} responsive={responsive}>
         {productSad}
-      </Carousel>
+      </Carousel>}
 
       <h2 className="homepage-heading">Excited Mood</h2>
 
-      <Carousel showDots={false} responsive={responsive}>
+      {productExcited?.length > 0 && <Carousel showDots={false} responsive={responsive}>
         {productExcited}
-      </Carousel>
+      </Carousel>}
 
       <h2 className="homepage-heading">Artist</h2>
       {/* round */}

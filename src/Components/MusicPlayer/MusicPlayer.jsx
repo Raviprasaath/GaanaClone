@@ -58,17 +58,6 @@ function MusicPlayer(props) {
 
   return (
     <>
-      {/* {screenSize && (
-        <div>
-          <button className="navbar-btn" onClick={toggleSidePanel}>
-            <FaBars />
-          </button>
-          {isOpen && <div className="opacity-style-middle"></div>}
-          <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
-          {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
-          <NavbarTop />
-        </div>
-      )} */}
       <div className="music-player-container">
         {!screenSize && (
           <div className="music-player">
@@ -100,7 +89,7 @@ function MusicPlayer(props) {
                     </div>
                     <div className="song-changing-btns">
                       <BiSkipPrevious className="controls-icon2" />
-                    </div>
+                    </div>                    
                     <div className="song-changing-btns">
                       <BsFillPlayCircleFill className="controls-icon3" />
                     </div>

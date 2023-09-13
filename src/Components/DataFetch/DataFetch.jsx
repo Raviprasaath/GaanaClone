@@ -28,7 +28,6 @@ function DataFetch () {
     //         console.log(artistDescription || "");
     //     })
     // }
-    const sampleUrl = "https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf942e47ae38c3e33a63d2.mp3"
     
     // if (Array.isArray(detailedData)) {
     //     detailedData.map((item) => {
@@ -60,7 +59,7 @@ function DataFetch () {
         if (!tempLocalSongs || tempLocalSongs.length === 0) {
             const headers = {
                 'Content-Type': 'application/json',        
-                'projectId': 'f104bi07c490'        
+                'projectId': '8jf3b15onzua'        
               }
         
               axios

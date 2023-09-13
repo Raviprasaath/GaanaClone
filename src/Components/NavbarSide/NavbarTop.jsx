@@ -3,6 +3,7 @@ import { BsFillBrightnessHighFill } from "react-icons/bs";
 import { MdBrightness2 } from "react-icons/md";
 import MainLogo from "../../assets/main-logo.png";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import actions from "../../action.js";
 import { useDispatch } from "react-redux";
 import action from '../../action.js'
@@ -15,8 +16,11 @@ function NavbarTop() {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
   const [loginState, setLoginState] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const darkMode = useSelector((state) => state.usersData.darkMode);
 
   const dispatch = useDispatch();
+
+  console.log(darkMode)
 
   const handleLogo = () => {
     dispatch(action.setActiveItem())
@@ -72,8 +76,8 @@ function NavbarTop() {
                 <button className="get-gaana-plus">Get Gaana Plus</button>
               </Link>
               <button className="dark-light-toggler" onClick={handleDarkModeToggle}>
-                {isDarkMode ? (
-                  <BsFillBrightnessHighFill  />                
+                {darkMode ? (
+                  <BsFillBrightnessHighFill  />
                 ) : (
                   <MdBrightness2  />                
                 )

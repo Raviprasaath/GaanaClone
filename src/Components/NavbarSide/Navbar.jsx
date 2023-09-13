@@ -10,18 +10,19 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
     <>
       <div className="navbar">
         <nav className={`sideNav ${isOpen ? "open" : ""}`}>
-          <Link className="list-selector" to="/">  
+           
           <div className="logo-login">
             <div className="logo">
               <BiUserCircle />
             </div>
             <div className="login">Login / Sign Up</div>
           </div>
-            </Link>
           <ul>
+            <Link className="list-selector" to="/">
             <li>
               <a href="#home">Home</a>
             </li>
+            </Link>
             <li>
               <a href="#radio">Radio</a>
             </li>

@@ -676,7 +676,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-
+      position: relative;
 
       .song-name {
         display: flex;
@@ -737,6 +737,35 @@
 
       }
 
+      .song-time-tracker {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 1px;
+        background: #ddd;
+        border-radius: 2px;
+        position: absolute;
+        top: -6px;
+        left: 0;
+      
+        &::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 1px;
+        }
+      
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: var(--SecondaryColor3);
+          cursor: pointer;
+          position: relative;
+          transform: translateY(-40%); /* Center the thumb horizontally */
+        }
+      }
+
   }
   
   .large-screen-controls {
@@ -744,7 +773,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;  
+    justify-content: space-between;
+    position: relative;  
 
     .song-playing-area1 {
       .song-cover {
@@ -863,6 +893,9 @@
       width: 180px;
       position: relative;
 
+
+
+      // original
       .volume-btn-container {
         .volume-button {
           cursor: pointer;
@@ -880,10 +913,13 @@
           transform: rotate(270deg);
           padding: 5px 10px;
           background-color: var(--PrimaryColor);
+          -webkit-appearance: none;
+          appearance: none;          
         }
         &:hover {
           .volume-increase-btn-cont {
             display: block;
+            
             position: absolute;
             left: -82.5px;
             top: -82px;
@@ -895,23 +931,7 @@
         }
 
       }
-
-      //-----trailing
       
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -932,6 +952,36 @@
         }
       }
     }
+
+    .song-time-tracker {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      border-radius: 2px;
+      position: absolute;
+      top: -6px;
+      left: 0;
+    
+      &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 1px;
+      }
+    
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--SecondaryColor3);
+        cursor: pointer;
+        position: relative;
+        transform: translateY(-40%); /* Center the thumb horizontally */
+      }
+    }
+    
     
     
 
@@ -1264,6 +1314,32 @@
               font-size: 0.8rem;
               opacity: 0.8;
             }
+            .song-time-tracker {
+        
+              -webkit-appearance: none;
+              appearance: none;
+              width: 250px;
+              height: 1px;
+              background: #ddd;
+              border-radius: 2px;
+            
+              &::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 1px;
+              }
+            
+              &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: var(--SecondaryColor3);
+                cursor: pointer;
+                position: relative;
+                transform: translateY(-40%); /* Center the thumb horizontally */
+              }
+            }
           }
           .song-playing-area2 {
           
@@ -1282,14 +1358,8 @@
                   opacity: 0.5;
                 }
               }
-              .controls-icon3 {
-                font-size: 2rem;
-                color: red;
-                cursor: pointer;
-                &:hover {
-                  opacity: 0.5;
-                }
-              }
+              
+              
               .controls-icon4, .controls-icon2 {
                 font-size: 2.2rem;
                 cursor: pointer;
@@ -1302,6 +1372,29 @@
                 cursor: pointer;
                 &:hover {
                   opacity: 0.5;
+                }
+              }
+            }
+            .song-changing-btns-bg {
+              position: relative;
+              .bg-white {
+                background-color: white;
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                z-index: -1;
+                top: 5px;
+                left: 5px;
+              }
+              .song-changing-btns {
+
+                .controls-icon3 {
+                  font-size: 2rem;
+                  color: red;
+                  cursor: pointer;
+                  &:hover {
+                    opacity: 0.5;
+                  }
                 }
               }
             }
@@ -1375,6 +1468,35 @@
       padding-top: 80px;
       background-color: var(--PrimaryColor);
 
+      .song-time-tracker {
+        
+        -webkit-appearance: none;
+        appearance: none;
+        width: 350px;
+        height: 1px;
+        background: #ddd;
+        border-radius: 2px;
+      
+        &::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 1px;
+        }
+      
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: var(--SecondaryColor3);
+          cursor: pointer;
+          position: relative;
+          transform: translateY(-40%); /* Center the thumb horizontally */
+        }
+      }
+
+
+
       .music-player-section-1 {
         .mobile-view-song-preview {
           width: 400px;
@@ -1407,8 +1529,7 @@
             font-size: 0.8rem;
             opacity: 0.8;
           }
-          .song-playing-area2 {
-          
+          .song-playing-area2 {          
             width: 360px;
             display: flex;
             align-items: center;
@@ -1416,6 +1537,8 @@
       
             .song-changing-btns {
               display: flex;
+              position: relative;
+              
               
               .controls-icon1 {
                 font-size: 1.5rem;
@@ -1424,14 +1547,26 @@
                   opacity: 0.5;
                 }
               }
+
+              .bg-white-play {
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                background-color: white;
+                z-index: 0;
+                top: 8px;
+                left: 8px;
+              }
               .controls-icon3 {
                 font-size: 2rem;
                 color: red;
                 cursor: pointer;
-                &:hover {
-                  opacity: 0.5;
-                }
+                position: relative;
               }
+              &:hover {
+                opacity: 0.5;
+              }
+
               .controls-icon4, .controls-icon2 {
                 font-size: 2.2rem;
                 cursor: pointer;
@@ -1775,7 +1910,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #555; /* Dark gray background */
+      background-color: #555;
       -webkit-transition: 0.4s;
       transition: 0.4s;
       
@@ -2324,6 +2459,9 @@
                 width: 95%;
                 font-size: 0.8rem;
               }
+              .song-time-tracker {
+                width: 300px;
+              }
             }
             .song-playing-area2 {        
               width: 340px;    
@@ -2369,6 +2507,7 @@
               }
             }
           }
+          
           
         }
       }
@@ -2616,6 +2755,9 @@
               .song-duration {
                 width: 95%;
                 font-size: 0.9rem;
+              }
+              .song-time-tracker {
+                width: 400px;
               }
             }
             .song-playing-area2 {        
@@ -3339,6 +3481,9 @@
               .song-duration {
                 width: 95%;
                 font-size: 0.9rem;
+              }
+              .song-time-tracker {
+                width: 500px;
               }
             }
             .song-playing-area2 {        

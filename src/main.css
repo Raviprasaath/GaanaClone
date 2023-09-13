@@ -585,6 +585,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 .music-control-comp .mob-screen-controls .song-name {
   display: flex;
@@ -635,12 +636,40 @@
 .music-control-comp .mob-screen-controls .song-controls-play .icons-control .next-songs-icon:hover {
   opacity: 0.5;
 }
+.music-control-comp .mob-screen-controls .song-time-tracker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  border-radius: 2px;
+  position: absolute;
+  top: -6px;
+  left: 0;
+}
+.music-control-comp .mob-screen-controls .song-time-tracker::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+}
+.music-control-comp .mob-screen-controls .song-time-tracker::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--SecondaryColor3);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(-40%); /* Center the thumb horizontally */
+}
 .music-control-comp .large-screen-controls {
   padding: 5px 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 .music-control-comp .large-screen-controls .song-playing-area1 .song-cover {
   display: flex;
@@ -761,6 +790,9 @@
   transform: rotate(270deg);
   padding: 5px 10px;
   background-color: var(--PrimaryColor);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
 }
 .music-control-comp .large-screen-controls .song-playing-area3 .volume-btn-container:hover .volume-increase-btn-cont {
   display: block;
@@ -784,6 +816,33 @@
 }
 .music-control-comp .large-screen-controls .song-playing-area3 .song-details:hover {
   opacity: 0.5;
+}
+.music-control-comp .large-screen-controls .song-time-tracker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  border-radius: 2px;
+  position: absolute;
+  top: -6px;
+  left: 0;
+}
+.music-control-comp .large-screen-controls .song-time-tracker::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+}
+.music-control-comp .large-screen-controls .song-time-tracker::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--SecondaryColor3);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(-40%); /* Center the thumb horizontally */
 }
 
 .expanded-view-music-section {
@@ -1059,6 +1118,30 @@
   font-size: 0.8rem;
   opacity: 0.8;
 }
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-time-tracker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 250px;
+  height: 1px;
+  background: #ddd;
+  border-radius: 2px;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-time-tracker::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-time-tracker::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--SecondaryColor3);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(-40%); /* Center the thumb horizontally */
+}
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 {
   width: 280px;
   display: flex;
@@ -1075,14 +1158,6 @@
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon1:hover {
   opacity: 0.5;
 }
-.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon3 {
-  font-size: 2rem;
-  color: red;
-  cursor: pointer;
-}
-.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon3:hover {
-  opacity: 0.5;
-}
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon4, .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon2 {
   font-size: 2.2rem;
   cursor: pointer;
@@ -1095,6 +1170,26 @@
   cursor: pointer;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns .controls-icon5:hover {
+  opacity: 0.5;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns-bg {
+  position: relative;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns-bg .bg-white {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: -1;
+  top: 5px;
+  left: 5px;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns-bg .song-changing-btns .controls-icon3 {
+  font-size: 2rem;
+  color: red;
+  cursor: pointer;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 .song-changing-btns-bg .song-changing-btns .controls-icon3:hover {
   opacity: 0.5;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img {
@@ -1152,6 +1247,30 @@
   padding-top: 80px;
   background-color: var(--PrimaryColor);
 }
+.music-player-container .music-player-lap-view .music-player-section .song-time-tracker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 350px;
+  height: 1px;
+  background: #ddd;
+  border-radius: 2px;
+}
+.music-player-container .music-player-lap-view .music-player-section .song-time-tracker::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+}
+.music-player-container .music-player-lap-view .music-player-section .song-time-tracker::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--SecondaryColor3);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(-40%); /* Center the thumb horizontally */
+}
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .mobile-view-song-preview {
   width: 400px;
 }
@@ -1190,6 +1309,7 @@
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns {
   display: flex;
+  position: relative;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon1 {
   font-size: 1.5rem;
@@ -1198,12 +1318,22 @@
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon1:hover {
   opacity: 0.5;
 }
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .bg-white-play {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  z-index: 0;
+  top: 8px;
+  left: 8px;
+}
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon3 {
   font-size: 2rem;
   color: red;
   cursor: pointer;
+  position: relative;
 }
-.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon3:hover {
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns:hover {
   opacity: 0.5;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon4, .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-playing-area2 .song-changing-btns .controls-icon2 {
@@ -1497,7 +1627,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #555; /* Dark gray background */
+  background-color: #555;
   transition: 0.4s;
 }
 .toggler .switch .slider:before {
@@ -1944,6 +2074,9 @@
     width: 95%;
     font-size: 0.8rem;
   }
+  .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-time-tracker {
+    width: 300px;
+  }
   .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 {
     width: 340px;
   }
@@ -2157,6 +2290,9 @@
   .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-duration {
     width: 95%;
     font-size: 0.9rem;
+  }
+  .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-time-tracker {
+    width: 400px;
   }
   .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 {
     width: 450px;
@@ -2666,6 +2802,9 @@
   .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-duration {
     width: 95%;
     font-size: 0.9rem;
+  }
+  .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .poster-song-splitter .song-time-tracker {
+    width: 500px;
   }
   .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .song-playing-area2 {
     width: 650px;

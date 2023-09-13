@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import actions from "../action";
+import { useSelector } from "react-redux";
+
 function ToggleSwitch() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const dispatch = useDispatch();
+  const checkbox = useRef();
+
+  const darkMode = useSelector((state) => state.usersData.darkMode);
+
   // dark theme toggler
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
     dispatch(actions.toggledarkmode(!isDarkMode));
+    
   };
+
 
   return (
     <>
@@ -16,8 +24,9 @@ function ToggleSwitch() {
         <label className="switch">
           <input
             type="checkbox"
-            checked={isDarkMode}
+            checked={darkMode}
             onChange={handleDarkModeToggle}
+            ref={checkbox}
           />
           <span className="slider round"></span>
         </label>

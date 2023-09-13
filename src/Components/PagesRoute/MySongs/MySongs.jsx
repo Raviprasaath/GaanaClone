@@ -5,7 +5,7 @@ function MySongs() {
   return (
     <>
       <div className="mySongs">
-        <h2>Favorites Songs</h2>
+        <h2>Favorite Songs</h2>
         <div className="music-player-section-2">
           <div className="table-td-2-img">
             <div className="songs-collection">

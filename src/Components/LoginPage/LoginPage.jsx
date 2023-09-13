@@ -19,6 +19,7 @@ const customStyles = {
 
 function LoginPage(props) {
   const { loginState } = props;
+  
   const ref = useRef();
   
   const [modalIsOpen, setIsOpen] = useState(false);

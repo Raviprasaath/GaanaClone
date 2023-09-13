@@ -50,13 +50,13 @@ const SongsCollection = () => {
           
           <Link className="list-selector" to="/">         
             <Typography onClick={() => handleSongSelection("All")} className={activeItem === "All" ? "active" : ""} sx={{ minWidth: 150 }}>
-              All
+              Home
             </Typography>
           </Link>   
 
           <Link className="list-selector" to="/trending">         
             <Typography onClick={() => handleSongSelection("Trending Songs")} className={activeItem === "Trending Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>              
-                Trending Songs
+                All Songs
             </Typography>    
           </Link>              
           
