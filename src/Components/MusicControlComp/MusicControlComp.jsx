@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 import image from "../../assets/trending-movies3.jpg";
-import MusicPlayer from "../MusicPlayer/MusicPlayer.jsx";
 
 import song1 from "../../assets/audio/song-1.mp3";
 import song2 from "../../assets/audio/song-2.mp3";
@@ -13,7 +12,7 @@ import { BsFillPlayCircleFill, BsFillVolumeUpFill, BsFillPauseCircleFill, } from
 import { IoIosArrowDown,IoIosArrowUp, IoMdRepeat, IoMdShuffle } from "react-icons/io";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
+import { BiSolidVolumeMute, BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
 const tracks = [
   // "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/97/ac/de/97acdecc-a25b-ab43-8866-f6feae8782c9/mzaf_1042132389403017210.plus.aac.ep.m4a",
@@ -62,6 +61,7 @@ function MusicControlComp(props) {
   const [isLoopOn, setIsLoopOn] = useState(false);
   const [isShuffleOn, setIsShuffleOn] = useState(false);
   const [shuffledTracks, setShuffledTracks] = useState([]);
+  const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
 
 
@@ -106,7 +106,20 @@ function MusicControlComp(props) {
     const newVolume = e.target.value;
     setVolume(newVolume);
     audioRef.current.volume = newVolume;
+    setIsMuted(false);
   };
+
+  const handleMuteBtn = () => {
+    if(isMuted) {
+      audioRef.current.volume = volume;
+      setIsMuted(false);
+    } else {
+      audioRef.current.volume = 0;
+      setIsMuted(true);
+    }
+  }
+
+  
 
   const handleSeek = (e) => {
     const newTime = e.target.value;
@@ -136,6 +149,7 @@ function MusicControlComp(props) {
   const handleToggleLoop = () => {
     setIsLoopOn(!isLoopOn);
     audioRef.current.loop = !isLoopOn;
+    
   };
 
   const handleToggleShuffle = () => {
@@ -237,7 +251,7 @@ function MusicControlComp(props) {
                       </div>
                       <div className="song-playing-area2">
                         <div className="song-changing-btns">
-                          <IoMdRepeat onClick={handleToggleLoop} className="controls-icon1" />
+                          <IoMdRepeat onClick={handleToggleLoop} className = {!isLoopOn ? "controls-icon1" : "controls-icon1 selectActivator"} />
                         </div>
                         <div className="song-changing-btns">
                           <BiSkipPrevious onClick={handlePrevTrack} className="controls-icon2" />
@@ -258,7 +272,7 @@ function MusicControlComp(props) {
                           <BiSkipNext onClick={handleNextTrack} className="controls-icon4" />
                         </div>
                         <div className="song-changing-btns">
-                          <IoMdShuffle onClick={handleToggleShuffle} className="controls-icon5" />
+                          <IoMdShuffle onClick={handleToggleShuffle} className = {!isShuffleOn ? "controls-icon5" : "controls-icon5 selectActivator"} />
                         </div>
                       </div>
 
@@ -450,14 +464,13 @@ function MusicControlComp(props) {
                       </div>
                       <div className="song-playing-area2">
                         <div className="song-changing-btns">
-                          <IoMdRepeat onClick={handleToggleLoop} className="controls-icon1" />
+                          <IoMdRepeat onClick={handleToggleLoop} className = {!isLoopOn ? "controls-icon1" : "controls-icon1 selectActivator"} />
                         </div>
                         <div className="song-changing-btns">
                           <BiSkipPrevious onClick={handlePrevTrack} className="controls-icon2" />
                         </div>
                         <div className="song-changing-btns">
                           <div className="bg-white-play">
-
                           </div>
                           <div className="bg-play" onClick={playing ? handlePause : handlePlay} >
                               {playing ? (
@@ -471,7 +484,7 @@ function MusicControlComp(props) {
                           <BiSkipNext onClick={handleNextTrack} className="controls-icon4" />
                         </div>
                         <div className="song-changing-btns">
-                          <IoMdShuffle onClick={handleToggleShuffle} className="controls-icon5" />
+                          <IoMdShuffle onClick={handleToggleShuffle}  className = {!isShuffleOn ? "controls-icon5" : "controls-icon5 selectActivator"} />
                         </div>
                       </div>
                     </div>
@@ -894,12 +907,6 @@ function MusicControlComp(props) {
                     <BsFillPlayCircleFill className="playing-icon" />
                   )}
                 </div>
-
-                {/* <div className="bg-play" onClick={playing ? handlePause : handlePlay}>
-                    {playing ? 
-                    <BsFillPlayCircleFill className="playing-icon" /> :
-                    <BsFillPauseCircleFill className="playing-icon" /> }
-                </div> */}
               </div>
               <div className="icons-control">
                 <IoIosArrowUp
@@ -938,8 +945,7 @@ function MusicControlComp(props) {
                 </div>
               </div>
             </div>
-            <div className="song-playing-area2">
-              {/* <div className="song-duration-track"> {formatTime(currentTime)} / {formatTime(duration)} </div> */}
+            <div className="song-playing-area2">              
               <div className="song-duration-track">
                 {isNaN(duration) || isNaN(currentTime) ? "0:00 / 0:00" : `${formatTime(currentTime)} / ${formatTime(duration)}`}
               </div>
@@ -947,7 +953,7 @@ function MusicControlComp(props) {
               <div className="song-changing-btns">
                 <IoMdRepeat
                   onClick={handleToggleLoop}
-                  className="controls-icon1"
+                  className = {!isLoopOn ? "controls-icon1" : "controls-icon1 selectActivator"}
                 />
               </div>
               <div className="song-changing-btns">
@@ -957,19 +963,13 @@ function MusicControlComp(props) {
                 />
               </div>
               <div className="song-changing-btns">
-                <div
-                  className="bg-play"
-                  onClick={playing ? handlePause : handlePlay}
-                >
+                <div className="bg-play" onClick={playing ? handlePause : handlePlay} >
                   {playing ? (
                     <BsFillPauseCircleFill className="controls-icon3" />
                   ) : (
                     <BsFillPlayCircleFill className="controls-icon3" />
                   )}
                 </div>
-                {/* <div className="bg-play">
-                  <BsFillPlayCircleFill className="controls-icon3" />
-                </div> */}
               </div>
               <div className="song-changing-btns">
                 <BiSkipNext
@@ -979,16 +979,18 @@ function MusicControlComp(props) {
               </div>
               <div className="song-changing-btns">
                 <IoMdShuffle
-                  onClick={handleToggleShuffle}
-                  className="controls-icon5"
+                  onClick={handleToggleShuffle} className = {!isShuffleOn ? "controls-icon5" : "controls-icon5 selectActivator"}
                 />
               </div>
             </div>
             <div></div>
             <div className="song-playing-area3">
               <div className="volume-btn-container">
-                <div className="volume-button">
-                  <BsFillVolumeUpFill className="volume-btn" />
+                <div className="volume-button"
+                // onMouseEnter={() => audioRef.current.volume = isMuted ? 0 : volume}
+                // onMouseLeave={() => audioRef.current.volume = isMuted ? 0 : volume}
+                onClick={handleMuteBtn} >
+                  {isMuted ? <BiSolidVolumeMute className="volume-btn"/> : <BsFillVolumeUpFill className="volume-btn" />}                  
                 </div>
                 <div className="volume-increase-btn-cont">
                   <input 
@@ -998,18 +1000,13 @@ function MusicControlComp(props) {
                   min={0}
                   max={1}
                   step={0.01}
-                  value={volume}
-                  onChange={handleVolumeChange} 
-                
-                />
+                  value={isMuted ? 0 : volume}
+                  onChange={handleVolumeChange} />
                 </div>
               </div>
               <div className="audio-type">Audio High</div>
               <div>
-                <IoIosArrowUp
-                  onClick={handlerExpander}
-                  className="song-details"
-                />
+                <IoIosArrowUp onClick={handlerExpander} className="song-details" />
               </div>
             </div>
           </div>

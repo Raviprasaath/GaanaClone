@@ -844,6 +844,9 @@
   position: relative;
   transform: translateY(-40%); /* Center the thumb horizontally */
 }
+.music-control-comp .selectActivator {
+  color: red;
+}
 
 .expanded-view-music-section {
   position: absolute;
@@ -1079,6 +1082,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: var(--PrimaryColor);
 }
 .music-player-container .music-player .view-splitter .poster-container .mobile-view-song-preview {
   max-width: 280px;
@@ -1405,6 +1409,9 @@
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection .fav-remover:hover {
   opacity: 0.5;
+}
+.music-player-container .selectActivator {
+  color: red;
 }
 
 .new-songs-section {

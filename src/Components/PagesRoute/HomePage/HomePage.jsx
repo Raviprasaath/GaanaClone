@@ -34,8 +34,6 @@ function HomePage() {
   
   
   function fetching() {
-
-
     const localStorageData = localStorage.getItem("localSongs");
     const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
     
@@ -52,6 +50,7 @@ function HomePage() {
     });
     setHappySongsData(hsd);
     
+    localStorage.setItem("happy", JSON.stringify(hsd))
     
     const romanticSongs = parsedLocalStorageData.data;
     const rsd = romanticSongs?.filter((item) => {
@@ -59,6 +58,7 @@ function HomePage() {
     });
     setRomanticSongsData(rsd);
     
+    localStorage.setItem("romantic", JSON.stringify(rsd))
     
     
     const sadSongs = parsedLocalStorageData.data;
@@ -66,18 +66,27 @@ function HomePage() {
       return item.mood === "sad";
     });
     setSadSongsData(ssd);
-    
+
+    localStorage.setItem("sad", JSON.stringify(ssd))
+
     const excitedSongs = parsedLocalStorageData.data;
     const esd = excitedSongs?.filter((item) => {
       return item.mood === "excited";
     });
     setExcitedSongsData(esd);
+
+    localStorage.setItem("excited", JSON.stringify(esd))
+
 }
 
 
   useEffect (() => {
-    fetching();
-  }, [trendingSongs,happySongsData,romanticSongsData,sadSongsData,excitedSongsData])
+    
+    setTimeout (()=> {
+      fetching();
+    }, 200)
+
+  }, [])
 
   // Trending Carousel
   const productTrending = trendingSongs?.map((item) => (

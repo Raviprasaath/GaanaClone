@@ -20,7 +20,7 @@ function NavbarTop() {
 
   const dispatch = useDispatch();
 
-  console.log(darkMode)
+ 
 
   const handleLogo = () => {
     dispatch(action.setActiveItem())
