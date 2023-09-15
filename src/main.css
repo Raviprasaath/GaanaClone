@@ -481,13 +481,20 @@
   display: flex;
   width: 100%;
   padding: 0 10px;
+  flex-direction: column;
+}
+.musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line1 .song-name1 {
+  font-size: 1rem;
+}
+.musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line1 .song-movie-name {
   font-size: 0.8rem;
 }
 .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line2 {
   display: flex;
-  width: 100%;
+  width: 250px;
   padding: 0 10px;
-  font-size: 1rem;
+  font-size: 0.7rem;
+  color: #0b91e9;
 }
 .musicCollections .traction-splitter .button-details-splitter .songs-side-details .track-details-warp {
   display: flex;
@@ -867,6 +874,7 @@
   top: 60px;
   z-index: 2;
   background-color: var(--PrimaryColor);
+  padding-left: 10px;
 }
 .track-list-header .track-list-header-img {
   height: 80px;
@@ -874,11 +882,13 @@
 .track-list-header .song-genere {
   width: 500px;
   display: flex;
+  padding-left: 10px;
   overflow: auto;
 }
 .track-list-header .song-genere .song-name {
   font-size: 2rem;
-  width: 250px;
+  padding-left: 10px;
+  width: 500px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2037,6 +2047,10 @@
   opacity: 0.5;
 }
 
+.audio-hide {
+  visibility: hidden;
+}
+
 @media screen and (min-width: 360px) {
   .largerCarousel {
     padding-left: 20px;
@@ -2475,6 +2489,25 @@
   }
   .comming-soon-page .coming-soon-image .content {
     font-size: 1.5rem;
+  }
+  .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line1 {
+    display: flex;
+    width: 100%;
+    padding: 0 10px;
+    flex-direction: column;
+  }
+  .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line1 .song-name1 {
+    font-size: 1rem;
+  }
+  .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line1 .song-movie-name {
+    font-size: 0.8rem;
+  }
+  .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line2 {
+    display: flex;
+    width: 450px;
+    padding: 0 10px;
+    font-size: 0.7rem;
+    color: #0b91e9;
   }
 }
 @media screen and (min-width: 600px) {
@@ -3037,15 +3070,17 @@
     display: flex;
     width: 100%;
     padding: 20px 10px;
-    font-size: 1.2rem;
     flex-direction: column;
+  }
+  .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line1 .song-name1 {
+    font-size: 1.8rem;
   }
   .musicCollections .traction-splitter .button-details-splitter .songs-side-details .song-line2 {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 500px;
     padding: 10px 10px;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   .musicCollections .traction-splitter .button-details-splitter .songs-side-details .track-details-warp {
     display: flex;

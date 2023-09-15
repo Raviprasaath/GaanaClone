@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import MusicCollections from "../../MusicCollections/MusicCollections.jsx";
 import TrackListHeader from "../../TrackList/TrackListHeader.jsx";
@@ -16,7 +16,44 @@ function TrendingSongs() {
   // console.log("print dark mode val", darkMode);
   const [screenSize, setScreenSize] = useState(window.innerWidth < 960);
   const [scrolling, setScrolling] = useState(false);
-  const [currentSong, setCurrentSong] = useState({})
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState(0);
+
+  const audioRef = useRef(null);
+
+
+
+  // const [currentSong, setCurrentSong] = useState({
+  //   imageUrl:"https://newton-project-resume-backend.s3.amazonaws.com/thumbnail/64cf945447ae38c3e33a66ef.jpg",
+  //   title:"O Meri Mehbooba Mehbooba Mehbooba",
+  //   audioUrl:"https://newton-project-resume-backend.s3.amazonaws.com/audio/64cf945447ae38c3e33a66ef.mp3",
+  //   description:"An emotive journey, blending heartbreak and hope in soul-stirring symphonies. A genre-defying artist of substance.",
+  // })
+  const [currentSong, setCurrentSong] = useState([]);
+
+  console.log(currentSong)
+
+
+
+  const handleTimeUpdate = () => {
+    setCurrentTime(audioRef.current.currentTime);
+    setDuration(audioRef.current.duration);
+  };
+
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+      2,
+      "0"
+    )}`;
+  };
+  const formatTime2 = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${minutes} min ${seconds} sec`;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,27 +76,54 @@ function TrendingSongs() {
   }, [scrolling]);
 
   function localStorageDataGetting() {
-    const fromLocalStorage = JSON.parse(localStorage.getItem('localSongs'));
-    const dataFromLocalStorage = (fromLocalStorage.data);
-    dataFromLocalStorage.map((item)=> {
-      console.log(item.title, item.thumbnail, item.audio_url, item.artist[0].description)
-    })
+    try {
+      const fromLocalStorage = JSON.parse(localStorage.getItem('localSongs'));
+      if (fromLocalStorage && fromLocalStorage.data) {
+        console.log("Data from local storage:", fromLocalStorage.data);
+        const updatedSongs = fromLocalStorage.data.map((item) => ({
+          imageUrl: item.thumbnail || "",
+          title: item.title || "",
+          audioUrl: item.audio_url || "",
+          description: (item.artist && item.artist[0] && item.artist[0].description) || "",
+          artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+          id: item._id || "",
+        }));
+        console.log("Updated songs:", updatedSongs);
+        setCurrentSong(updatedSongs); // Set the songs as an array
+      } else {
+        console.error("Data not found in local storage.");
+      }
+    } catch (error) {
+      console.error("Error parsing data from local storage:", error);
+    }
   }
+  
+
 
   useEffect(()=> {
-    localStorageDataGetting();
+      localStorageDataGetting();
   }, [])
 
+  const currentSongArray = Object.keys(currentSong).map((key)=>currentSong[key])
 
 
   return (
     <>
+        <audio
+          ref={audioRef}
+          src={currentSong.audioUrl}
+          onTimeUpdate={handleTimeUpdate}
+          controls
+          autoPlay
+          muted
+          className="audio-hide"
+        />
       <div>
         <div className="musicCollections">
           <div className="traction-splitter">
               <div className="track-section">
                   <AiOutlinePlayCircle className="prime-poster-play poster-play-option" />
-                  <img className="posterPrime" src={image1} alt="" />
+                  <img className="posterPrime" src={currentSong[0].imageUrl} alt="img" />
               </div>
               <div className="button-details-splitter">
               <div className="song-button">
@@ -70,36 +134,33 @@ function TrendingSongs() {
               </div>
               <div className="songs-side-details">
                   <div className="song-line1">
-                      <span className="song-name1">Hosanna</span>
-                      <span className="song-movie-name">
-                      (From "Vinnaithaandi Varuvaayaa") Song |
-                      <span>Vijay Prakash</span>
-                      </span>
+                      <div className="song-name1">{currentSong[0].title}</div>
+                      <div className="song-movie-name">
+                        (From "{currentSong[0].title}") Song | <span>{currentSong[0].artist}</span>
+                      </div>
                   </div>
                   <p className="song-line2">
-                      Hosanna <span>From "Vinnaithaandi Varuvaayaa"</span>{" "}
+                      {currentSong[0].description}
                   </p>
-
                   <div className="track-details-warp">
-                    <a className="song-line3" href="#">Hosanna</a>
+                    {/* <a className="song-line3" href="#">Hosanna</a>
                     <span className="dot">•</span>
                     <span className="released-year">2010</span>
-                    <span className="dot">•</span>
-                    <button className="track-duration">4 min 48sec</button>
+                    <span className="dot">•</span> */}
+                    <button className="track-duration">{formatTime2(duration)}</button>
                   </div>
               </div>
-
           </div>
           </div>
         </div>
       </div>    
       {!screenSize && scrolling ? (
         <div className="track-list-header">
-          <img className="track-list-header-img" src={image1} alt="img" />
+          <img className="track-list-header-img" src={currentSong[0].imageUrl} alt="img" />
           <div className="song-genere">
-            <p className="song-name">Jillunu Oru Kadhal </p>
-            <p className="song-divider">-</p>
-            <p className="songs-types">Romantic Hits Tamil</p>
+            <p className="song-name">{currentSong[0].title} </p>
+            {/* <p className="song-divider">-</p>
+            <p className="songs-types">Romantic Hits Tamil</p> */}
           </div>
           <button className="track-list-playing-option">Play All</button>
           <AiOutlineHeart className="playlist-heart" />
@@ -108,8 +169,8 @@ function TrendingSongs() {
         <div></div>
       )}
 
-<div className="trackList">
-        {screenSize &&         
+      <div className="trackList">
+        {!screenSize &&         
           <div className="trackList-container">
             <table className="table-container">
               <thead className="table-header">
@@ -122,7 +183,7 @@ function TrendingSongs() {
                   </tr>
               </thead> 
               <tbody className="table-body-container">              
-                <tr >
+                {/* <tr >
                   <td className="table-col-1">1</td>
                   <td className="table-col-2">
                     <div className="track-img-play">
@@ -144,16 +205,56 @@ function TrendingSongs() {
                   </td>
                   <td className="table-col-5"> 
                       <p className="track-duration">
-                          04:20
+                        04:20
                       </p>
                   </td>
-                </tr>                
+                </tr> */}
+
+                {/* {currentSong.map((item)=> (
+                  <div key={item.id}>
+                    Hi
+                  </div>
+
+                ))} */}
+
+                {currentSongArray.map((tracks, index)=> (
+                  <tr key={index}>
+                    <td className="table-col-1">{index+1}</td>
+                    <td className="table-col-2">
+                      <div className="track-img-play">
+                        <BsPlayCircle className="play-track-icon" />
+                        <img src={image1} alt="tracker-img" className="tracker-image" />
+                      </div>
+                      <div className="track-name-premium">
+                        <button className="premium-btn">Premium</button>
+                        <p className="song-name">Nenjukul</p>
+                      </div>
+                    </td>
+                    <td className="table-col-3">
+                      <p className="singer-name"> Karthik </p>
+                    </td>
+                    <td className="table-col-4"> 
+                        <p className="track-movie-name">
+                            Varanam Aayiram 
+                        </p>
+                    </td>
+                    <td className="table-col-5"> 
+                        <p className="track-duration">
+                          04:20
+                        </p>
+                    </td>
+                  </tr>
+                ))}
+                
+                
+
+
               </tbody>
             </table>
           </div>
         }
         {
-          !screenSize && 
+          screenSize && 
           <div className="table-mobile-container">  
             <table>
               <tbody>
