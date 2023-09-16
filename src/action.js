@@ -14,8 +14,22 @@ const setActiveItem = (item) => {
     }
 }
 
+const setActiveSong = (item) => {
+    return {
+        type: "SET_ACTIVE_SONG",
+        payload: item
+    }
+}
+
+const setHappyData = (item) => {
+    return {
+        type: "SET_HAPPY_SONG",
+        payload: item
+    }
+}
+
 
 
 export default {
-    toggledarkmode, setActiveItem
+    toggledarkmode, setActiveItem, setActiveSong, setHappyData
 }

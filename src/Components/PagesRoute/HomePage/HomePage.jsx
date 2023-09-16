@@ -11,7 +11,9 @@ import TrendingSongsCarousel from "../../CarouselTypes/TrendingSongsCarousel.jsx
 
 import { responsive } from "../../CarouselTypes/CarouselResponsive.jsx";
 
+import { useDispatch } from "react-redux";
 
+import action from '../../../action.js'
 
 
 
@@ -31,8 +33,14 @@ function HomePage() {
   const [sadSongsData, setSadSongsData] = useState();
   const [excitedSongsData, setExcitedSongsData] = useState();
 
+  const dispatch = useDispatch();
   
   
+  
+  
+
+
+
   function fetching() {
     const localStorageData = localStorage.getItem("localSongs");
     const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
@@ -50,7 +58,8 @@ function HomePage() {
     });
     setHappySongsData(hsd);
     
-    localStorage.setItem("happy", JSON.stringify(hsd))
+    dispatch(action.setHappyData(hsd));
+//    localStorage.setItem("happy", JSON.stringify(hsd))
     
     const romanticSongs = parsedLocalStorageData.data;
     const rsd = romanticSongs?.filter((item) => {
@@ -84,7 +93,7 @@ function HomePage() {
     
     setTimeout (()=> {
       fetching();
-    }, 200)
+    }, 300)
 
   }, [])
 
@@ -92,41 +101,51 @@ function HomePage() {
   const productTrending = trendingSongs?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
+      songId={item._id}
       name={item.title}
       url={item.thumbnail}
       audio={item.audio_url}
+      mood={item.mood}
     />
   ));
   const productHappy = happySongsData?.map((item) => (
     <TrendingSongsCarousel
-      key={item._id}
-      name={item.title}
-      url={item.thumbnail}
-      audio={item.audio_url}
+    key={item._id}
+    songId={item._id}
+    name={item.title}
+    url={item.thumbnail}
+    audio={item.audio_url}
+    mood={item.mood}
     />
   ));
   const productRomantic = romanticSongsData?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
+      songId={item._id}
       name={item.title}
       url={item.thumbnail}
       audio={item.audio_url}
+      mood={item.mood}
     />
   ));
   const productSad = sadSongsData?.map((item) => (
     <TrendingSongsCarousel
-      key={item._id}
-      name={item.title}
-      url={item.thumbnail}
-      audio={item.audio_url}
+    key={item._id}
+    songId={item._id}
+    name={item.title}
+    url={item.thumbnail}
+    audio={item.audio_url}
+    mood={item.mood}
     />
   ));
   const productExcited = excitedSongsData?.map((item) => (
     <TrendingSongsCarousel
-      key={item._id}
-      name={item.title}
-      url={item.thumbnail}
-      audio={item.audio_url}
+    key={item._id}
+    songId={item._id}
+    name={item.title}
+    url={item.thumbnail}
+    audio={item.audio_url}
+    mood={item.mood}
     />
   ));
 
@@ -154,28 +173,33 @@ function HomePage() {
       <LargerCarousel />
 
       <h2 className="homepage-heading">Top Trending</h2>
-      { productTrending?.length > 0 && <Carousel showDots={false} responsive={responsive}>
+      { productTrending?.length > 0 && 
+      <Carousel showDots={false} responsive={responsive}>
         {productTrending}
       </Carousel> } 
 
       <h2 className="homepage-heading">Happy Mood</h2>
-      {productHappy?.length > 0 && <Carousel showDots={false} responsive={responsive}>
+      {productHappy?.length > 0 && 
+      <Carousel showDots={false} responsive={responsive}>
         {productHappy}
       </Carousel>}
 
       <h2 className="homepage-heading">Romantic Mood</h2>
-      { productRomantic?.length > 0 && <Carousel showDots={false} responsive={responsive}>
+      { productRomantic?.length > 0 && 
+      <Carousel showDots={false} responsive={responsive}>
         {productRomantic}
       </Carousel> }
 
       <h2 className="homepage-heading">Sad Songs</h2>
-      {productSad?.length > 0 && <Carousel showDots={false} responsive={responsive}>
+      {productSad?.length > 0 && 
+      <Carousel showDots={false} responsive={responsive}>
         {productSad}
       </Carousel>}
 
       <h2 className="homepage-heading">Excited Mood</h2>
 
-      {productExcited?.length > 0 && <Carousel showDots={false} responsive={responsive}>
+      {productExcited?.length > 0 && 
+      <Carousel showDots={false} responsive={responsive}>
         {productExcited}
       </Carousel>}
 

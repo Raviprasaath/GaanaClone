@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom/client";
 
 import image from "../../assets/trending-movies3.jpg";
 
@@ -14,14 +15,26 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSolidVolumeMute, BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 
-const tracks = [
+import { useSelector } from "react-redux";
+
+let tracks = [
   // "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/97/ac/de/97acdecc-a25b-ab43-8866-f6feae8782c9/mzaf_1042132389403017210.plus.aac.ep.m4a",
   song1, song2, song3, song4, song5, ];
 
 function MusicControlComp(props) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
-  const [sampleSongs, setSampleSongs] = useState([]);
+  const [songArray, setSongArray] = useState([]);
+  let songList = [];
+
+  const activeSong = useSelector((state) => state.usersData.activeSong);
+  const happySongList = useSelector((state) => state.usersData.happySong);
+  
+  if (activeSong.mood === "happy") {
+    songList = happySongList;
+  }
+
+  console.log("songList -> ",songList)
 
   // #region ------------ screen size control ---------
 
@@ -198,6 +211,39 @@ function MusicControlComp(props) {
 
   // #endregion
   
+
+  // #region ------------Filter process -------------
+  function handleFilter() {
+    const localStorageFiltered = JSON.parse(localStorage.getItem('localSongs'));    
+    const storedData = localStorageFiltered.data;
+    if (activeSong.mood === 'happy') {
+      const result = storedData.filter((item)=> item.mood==='happy')
+      .map((item) => ({  
+        imageUrl: item.thumbnail || "",
+        title: item.title || "",
+        audioUrl: item.audio_url || "",
+        description: (item.artist && item.artist[0] && item.artist[0].description) || "",
+        artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+        mood: (item.mood) || "",
+        id: item._id || "",
+      }))
+      console.log("happy result ", result)
+      setSongArray(result);
+    } 
+  }
+
+  console.log(songArray)
+
+  
+  useEffect(()=> {    
+    setTimeout (()=> {
+      handleFilter();    
+    }, 1000)  
+  }, [activeSong])
+
+  // #endregion
+
+
   if (!lifting) {
     return (
       <>        
@@ -205,8 +251,6 @@ function MusicControlComp(props) {
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}
         src={tracks[0]?.src} controls />
-
-
 
 
         <div className="expanded-view-music-section">          

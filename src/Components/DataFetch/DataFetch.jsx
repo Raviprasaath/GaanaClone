@@ -7,7 +7,7 @@ function DataFetch () {
 
 
 
-    console.log(songStore)
+    // console.log(songStore)
     // console.log(albumStore.data)
     // console.log(albumStore);
 
@@ -56,7 +56,7 @@ function DataFetch () {
 
     const handleSongs = () => {
         const tempLocalSongs = JSON.parse(localStorage.getItem("localSongs")) || [];
-        if (!tempLocalSongs || tempLocalSongs.length <= 20) {
+        if (!tempLocalSongs || tempLocalSongs.length === 0) {
             const headers = {
                 'Content-Type': 'application/json',        
                 'projectId': '8jf3b15onzua'        

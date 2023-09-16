@@ -1,18 +1,27 @@
 import { AiOutlinePlayCircle } from "react-icons/ai";
-import Carousel from "react-multi-carousel";
+import { useDispatch } from "react-redux";
+import actions from "../../action";
+
 
 const TrendingSongsCarousel = (props) => {
-    const handleSongClicker = (e) => {
-      console.log(props.audio)
-    }
+  const dispatch = useDispatch();
+  
+  const handleSongClicker = (data) => {
+    console.log(data)
+    dispatch(actions.setActiveSong(data));
+  }
+
 
   return (
     <>
-      <div className="carousel card">
-        <AiOutlinePlayCircle onClick={handleSongClicker} className="play-icon" />
-        <img className="product-image" src={props.url} alt="product image" />
-        <h4> {props.name} </h4>
-      </div>
+        <div className="carousel card">
+          <AiOutlinePlayCircle
+            onClick={()=>handleSongClicker(props)}
+            className="play-icon"
+          />
+          <img className="product-image" src={props.url} alt="product image" />
+          <h4> {props.name} </h4>
+        </div>
     </>
   );
 };

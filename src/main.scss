@@ -12,8 +12,8 @@
 // --SecondaryColor: #232429;
 
 :root {
-    --PrimaryColor: #232429;
-    --PrimaryColor2 : #283024;
+    --PrimaryColor: #1b1b1c;
+    --PrimaryColor2 : #232522;
     --PrimaryColor3 : #333;
 
     --SecondaryColor: #d4d3d6;
@@ -51,8 +51,6 @@
 .dark-mode {
   background-color: var(--PrimaryColor);
   color: var(--SecondaryColor);
-
-  
 }
 
 .lite-mode {
@@ -128,8 +126,9 @@
   .navbar .sideNav {
     background-color: rgb(201, 199, 199);    
   }
-  .navbar .sideNav ul li a,
+  .navbar .sideNav ul li,
   .list-selector,
+  .navbar .sideNav ul li .premium,
   .navbar .sideNav .logo-login {
     color: var(--PrimaryColor);
   }
@@ -196,7 +195,7 @@
   top: -15px;
   z-index: 2;
   width: 100%;
-  background-color :#232429;
+  background-color :var(--PrimaryColor);
 }
 
 .overlay {
@@ -264,14 +263,20 @@
       li {
         list-style: none;
         padding: 0.5rem;
-        
-        a {
-          font-size: 0.8rem;
-          color: var(--SecondaryColor);
-          &:hover {
-            color: var(--SecondaryColor3);
-          }
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: var(--SecondaryColor);
+
+        &:hover {
+          color: var(--SecondaryColor3);
         }
+        // a {
+        //   font-size: 0.8rem;
+        //   color: var(--SecondaryColor);
+        //   &:hover {
+        //     color: var(--SecondaryColor3);
+        //   }
+        // }
         .toggler-control {
           display: flex;
           justify-content: space-between;
@@ -1148,7 +1153,7 @@
             }
             .track-name-premium {
               display: flex;
-              width: 100px;
+              
               
               .premium-btn {
                 border: none;
@@ -1159,10 +1164,14 @@
                 background-color: var(--SecondaryColor3);
                 color: var(--SecondaryColor4);
               }
-              .song-name {
-                margin-left: 10px;
+              .song-name {                
+                margin-left: 5px;
                 margin-right: 10px;
-  
+                font-size: 0.6rem;
+                width: 50px;
+                white-space: nowrap;
+                overflow-x: hidden;       
+                text-overflow: ellipsis;
               }
             }
           }
@@ -1203,8 +1212,9 @@
         text-align: center;
       }
       .table-td-2 {
-        width: auto;
+        width: 70%;
         padding-left: 0.5rem;
+
         .table-td-2-img {      
              
           display: flex;
@@ -1688,6 +1698,7 @@
     h2 {
       padding-left: 30px;
       font-size: 1.1rem;
+      padding-bottom: 10px;
     }
     .language-selector-container {
       display: flex;
@@ -1719,13 +1730,15 @@
       flex-wrap: wrap;
       gap: 15px;
       justify-content: center;
-
+      
       .music-card {
+        color: var(--SecondaryColor);
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 250px;
 
         .play-icon {
           font-size: 2.5rem;
@@ -2013,16 +2026,6 @@
 }
 
 
-.party-songs {
-  h1 {
-    font-size: 2rem;
-    padding: 10px 20px;
-  }
-  h2 {
-    font-size: 1.5rem;
-    padding: 10px 20px;
-  }
-}
 
 
 .carousel.card {

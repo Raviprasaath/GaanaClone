@@ -20,41 +20,48 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
           <ul>
             <Link className="list-selector" to="/">
             <li>
-              <a href="#home">Home</a>
+              Home
+              {/* <a href="#home">Home</a> */}
             </li>
             </Link>
             <li>
-              <a href="#radio">Radio</a>
+              Radio
+              {/* <a href="#radio">Radio</a> */}
             </li>
             <li>
-              <a href="#">Podcast</a>
+              Podcast
+              {/* <a href="#">Podcast</a> */}
             </li>
             <li>
-              <a href="#">My Music</a>
+              My Music
+              {/* <a href="#">My Music</a> */}
             </li>
             <li>
-              <a href="#">India's Music</a>
+              India's Music
+              {/* <a href="#">India's Music</a> */}
             </li>
             <li>
-              <a href="#">
                 Language
                 <p>(Set Music language)</p>
-              </a>
+              {/* <a href="#">
+              </a> */}
             </li>
             <li>
-              <a className="toggler-control" href="#">
+              <div className="toggler-control" href="#">
                 Night Mode
                 <ToggleSwitch />
-              </a>
+              </div>
             </li>
             <br />
             <li>
-              <a className="premium" href="#">
+              
+              <div className="premium" href="#">
                 Go Premium{" "}
-              </a>
+              </div>
             </li>
             <li>
-              <a href="#">Get Gaana Plus </a>
+              Get Gaana Plus
+              {/* <a href="#">Get Gaana Plus </a> */}
             </li>
           </ul>
         </nav>

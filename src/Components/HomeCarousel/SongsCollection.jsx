@@ -52,21 +52,23 @@ const SongsCollection = () => {
             <Typography onClick={() => handleSongSelection("All")} className={activeItem === "All" ? "active" : ""} sx={{ minWidth: 150 }}>
               Home
             </Typography>
-          </Link>   
-
-          <Link className="list-selector" to="/trending">         
+          </Link>
+          <Link className="list-selector" to="/album">                 
+            <Typography onClick={() => handleSongSelection("Album")} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
+          </Link>
+          <Link className="list-selector" to="/allsongs">         
             <Typography onClick={() => handleSongSelection("Trending Songs")} className={activeItem === "Trending Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>              
                 All Songs
             </Typography>    
           </Link>              
           
-          <Link className="list-selector" to="/newsongs">         
+          <Link className="list-selector" to="/happy">         
             <Typography onClick={() => handleSongSelection("New Songs")} className={activeItem === "New Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>            
-              New Songs
+              Happy Mood
             </Typography>
           </Link>
-          <Link className="list-selector" to="/oldsongs">                   
-            <Typography onClick={() => handleSongSelection("Old Songs")} className={activeItem === "Old Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Old Songs</Typography>
+          <Link className="list-selector" to="/exited">                   
+            <Typography onClick={() => handleSongSelection("Old Songs")} className={activeItem === "Old Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Exciting Harmony</Typography>
           </Link>
 
           <Tooltip title="Hover for Access to the Drop-Down Menu">
@@ -91,9 +93,7 @@ const SongsCollection = () => {
               </Typography>
             </IconButton>
           </Tooltip>
-          <Link className="list-selector" to="/album">                 
-            <Typography onClick={() => handleSongSelection("Album")} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
-          </Link>
+          
           <Link className="list-selector" to="/comingsoon">          
             <Typography onClick={() => handleSongSelection("Radio")} className={activeItem === "Radio" ? "active" : ""} sx={{ minWidth: 150 }}>Radio</Typography>
           </Link>
@@ -134,10 +134,10 @@ const SongsCollection = () => {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
-              <Link className="list-selector" to="/party">                 
+              <Link className="list-selector" to="/sad">                 
                 <MenuItem  onClick={handleClose}>
                     <Typography  variant="body1" component="span">
-                      Party 
+                      Sad Songs 
                     </Typography>
                 </MenuItem>
               </Link>
