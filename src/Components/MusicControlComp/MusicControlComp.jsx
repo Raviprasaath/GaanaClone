@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import ReactDOM from "react-dom/client";
 
 import image from "../../assets/trending-movies3.jpg";
@@ -84,9 +84,10 @@ function MusicControlComp(props) {
   const audioRef = useRef(null);
 
 
-  const handlePlay = () => {
+  const handlePlay = (e) => {
+    e.preventDefault();
     audioRef.current.play();
-    setPlaying(true);
+    // setPlaying(true);
   };
 
   const handlePause = () => {
@@ -172,7 +173,14 @@ function MusicControlComp(props) {
   };
 
   const handleToggleShuffle = () => {
-    setIsShuffleOn(!isShuffleOn);
+    // setIsShuffleOn(!isShuffleOn);
+    setIsShuffleOn((prev)=> {
+      if(!prev) {
+        const shuffled = shuffleArray(tracks);
+        setShuffledTracks(shuffled);
+      }
+      return !isShuffleOn;
+    })
   };
 
   const formatTime = (timeInSeconds) => {
@@ -223,7 +231,7 @@ function MusicControlComp(props) {
     return (
       <>        
         <audio ref={audioRef}
-        onTimeUpdate={handleTimeUpdate}
+        // onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}
         src={tracks[0]} controls />
 
@@ -256,7 +264,7 @@ function MusicControlComp(props) {
                             max={duration}
                             step={0.01}
                             value={currentTime}
-                            onChange={handleSeek}
+                            // onChange={handleSeek}
                           />
                         </div>
                         <div className="song-duration">
@@ -279,7 +287,7 @@ function MusicControlComp(props) {
                           <div className="bg-white">
 
                           </div>
-                          <div onClick={playing ? handlePause : handlePlay} className="song-changing-btns">
+                          <div id="place1" onClick={playing ? handlePause : handlePlay} className="song-changing-btns">
                             {playing ? (
                               <BsFillPauseCircleFill className="controls-icon3" />
                             ) : (
@@ -470,7 +478,7 @@ function MusicControlComp(props) {
                           max={duration}
                           step={0.01}
                           value={currentTime}
-                          onChange={handleSeek}
+                          // onChange={handleSeek}
                         />
                       </div>
                       <div className="song-duration">
@@ -491,7 +499,7 @@ function MusicControlComp(props) {
                         <div className="song-changing-btns">
                           <div className="bg-white-play">
                           </div>
-                          <div className="bg-play" onClick={playing ? handlePause : handlePlay} >
+                          <div id="place2" className="bg-play" onClick={playing ? handlePause : handlePlay} >
                               {playing ? (
                                 <BsFillPauseCircleFill className="controls-icon3" />
                               ) : (
@@ -886,7 +894,7 @@ function MusicControlComp(props) {
   return (
     <>
       <audio ref={audioRef}
-       onTimeUpdate={handleTimeUpdate}
+       // onTimeUpdate={handleTimeUpdate}
        onEnded={handleNextTrack}
         src={tracks[0]} controls />
 
@@ -900,7 +908,7 @@ function MusicControlComp(props) {
               max={duration}
               step={0.01}
               value={currentTime}
-              onChange={handleSeek}
+              // onChange={handleSeek}
             />
             <div className="song-name">
               <div>
@@ -944,7 +952,7 @@ function MusicControlComp(props) {
               max={duration}
               step={0.01}
               value={currentTime}
-              onChange={handleSeek}
+              // onChange={handleSeek}
             />
             <div className="song-playing-area1">
               <div className="song-cover">
@@ -982,7 +990,7 @@ function MusicControlComp(props) {
                 />
               </div>
               <div className="song-changing-btns">
-                <div className="bg-play" onClick={playing ? handlePause : handlePlay} >
+                <div id="place3" className="bg-play" onClick={playing ? ()=>audioRef.current.pause() : ()=>audioRef.current.play()} >
                   {playing ? (
                     <BsFillPauseCircleFill className="controls-icon3" />
                   ) : (
@@ -1035,4 +1043,4 @@ function MusicControlComp(props) {
   );
 }
 
-export default MusicControlComp;
+export default memo(MusicControlComp);
