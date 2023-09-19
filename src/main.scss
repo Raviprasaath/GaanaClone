@@ -722,7 +722,7 @@
           display: flex;
           align-items: center;
           .bg-play {
-            background-color: white;
+            background-color: var(--SecondaryColor);
             width: 15px;
             height: 15px;
             display: grid;
@@ -836,12 +836,12 @@
             opacity: 0.5;
           }
         }
-
-
       }
     }
     .song-playing-area2 {
-      
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0%);
       width: 350px;
       display: flex;
       align-items: center;
@@ -1720,9 +1720,9 @@
         cursor: pointer;
         &:hover {
           opacity: 0.6;
-        } 
-
+        }
       }
+
     }
     .song-container-level-1 {
       display: flex;

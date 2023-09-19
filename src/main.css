@@ -622,7 +622,7 @@
   align-items: center;
 }
 .music-control-comp .mob-screen-controls .song-controls-play .icons-control .bg-play {
-  background-color: white;
+  background-color: var(--SecondaryColor);
   width: 15px;
   height: 15px;
   display: grid;
@@ -722,6 +722,9 @@
   opacity: 0.5;
 }
 .music-control-comp .large-screen-controls .song-playing-area2 {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
   width: 350px;
   display: flex;
   align-items: center;

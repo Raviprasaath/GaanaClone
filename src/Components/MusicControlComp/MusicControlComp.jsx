@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef, memo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ReactDOM from "react-dom/client";
 
 import image from "../../assets/trending-movies3.jpg";
+
+import image1 from '../../assets/1.jpg'
+
 
 import song1 from "../../assets/audio/song-1.mp3";
 import song2 from "../../assets/audio/song-2.mp3";
@@ -14,33 +18,66 @@ import { IoIosArrowDown,IoIosArrowUp, IoMdRepeat, IoMdShuffle } from "react-icon
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSolidVolumeMute, BiSkipPrevious, BiSkipNext } from "react-icons/bi";
-import { useSelector } from "react-redux";
 
 
 function MusicControlComp(props) {
 
+  const dispatch = useDispatch();
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
-  const [songArray, setSongArray] = useState([]);
+
   let songList = [];
 
   const activeSong = useSelector((state) => state.usersData.activeSong);
+  const topTrendingSongList = useSelector((state) => state.usersData.trendingSong);
   const happySongList = useSelector((state) => state.usersData.happySong);
+  const romanticSongList = useSelector((state) => state.usersData.romanticSong);
+  const sadSongList = useSelector((state) => state.usersData.sadSong);
+  const excitedSongList = useSelector((state) => state.usersData.excitedSong);
+  const allSongsList = useSelector((state) => state.usersData.allSongs);
+
+  console.log("current song ", activeSong )
+
+  if (activeSong.featured === "Trending songs") {
+    songList = topTrendingSongList;
+  }
   
   if (activeSong.mood === "happy") {
     songList = happySongList;
   }
+  
+  if (activeSong.mood === "romantic") {
+    songList = romanticSongList;
+  }
+
+  if (activeSong.mood === "sad") {
+    songList = sadSongList;
+  }
+
+  if (activeSong.mood === "excited") {
+    songList = excitedSongList;
+  }
+
+  // if ((activeSong.featured !== "Trending songs") && 
+  // (activeSong.mood !== "happy") && (activeSong.mood !== "romantic") &&
+  // (activeSong.mood !== "sad") && (activeSong.mood !== "excited")
+  // ) {
+  // }
+  songList = allSongsList;
+  console.log(allSongsList)
+
+  let songListIndex = [];
+
   const songTrackList = [];
-  songList.map((item)=> {
+  songList?.map((item)=> {
     songTrackList.push(item.audio_url);
+    songListIndex.push(item._id);
   })
   console.log("songList -> ",songList)
 
-
-  // let tracks = [ song1, song2, song3, song4, song5, ];
-  let tracks = songTrackList;
-
-
+  // let tracks = [ song1, song2, song3, song4, song5,  ];
+  let tracks = songTrackList.length !==0 ? songTrackList : {song1};
 
   // #region ------------ screen size control ---------
 
@@ -83,11 +120,17 @@ function MusicControlComp(props) {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
 
+  useEffect(() => {
+    if (songTrackList.length !== 0) {      
+      if (!playing) {
+        handlePlay();
+      }
+    }
+  }, [activeSong]);
 
-  const handlePlay = (e) => {
-    e.preventDefault();
+  const handlePlay = () => {
     audioRef.current.play();
-    // setPlaying(true);
+    setPlaying(true);
   };
 
   const handlePause = () => {
@@ -95,10 +138,75 @@ function MusicControlComp(props) {
     setPlaying(false);
   };
 
-  // useEffect(() => {
-  //   const shuffled = shuffleArray(tracks);
-  //   setShuffledTracks(shuffled);
-  // }, [tracks]);
+    
+  useEffect(()=> {
+    const currentId = activeSong.songId;
+    if (songListIndex.length > 0 && currentId !== "") {
+      const index = songList.findIndex((d) => d._id === currentId);
+      setCurrentTrack(index);
+    }
+  }, [activeSong])
+
+
+ 
+
+  const handleNextTrack = () => {
+        if (isShuffleOn) {
+      const nextShuffledIndex = Math.floor(
+        Math.random() * shuffledTracks.length
+      );
+      setCurrentTrack(nextShuffledIndex);
+      
+    } else 
+    if (currentTrack < tracks.length-1) {
+      setCurrentTrack((prevTrack) => prevTrack + 1);      
+    }
+    else if (isLoopOn) {
+      setCurrentTrack(0);
+    }
+    setPlaying(true);
+    
+  };
+
+  const handlePrevTrack = () => {
+    if (currentTrack > 0) {
+      setCurrentTrack((prevTrack) => prevTrack - 1);
+    }
+    setPlaying(true);    
+  };
+
+  useEffect(() => {
+    audioRef.current.src = tracks[currentTrack];
+    if (playing) {
+      handlePlay();
+    }
+  }, [currentTrack]);
+
+  useEffect(() => {
+    audioRef.current.addEventListener("ended", handleNextTrack);
+  
+    return () => {
+      audioRef.current.removeEventListener("ended", handleNextTrack);
+    };
+  }, [currentTrack]);
+
+  //---------------------- extra
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value;
+    setVolume(newVolume);
+    audioRef.current.volume = newVolume;
+    setIsMuted(false);
+  };
+
+  const handleMuteBtn = () => {
+    if (isMuted) {
+      audioRef.current.volume = volume;
+      setIsMuted(false);
+    } else {
+      audioRef.current.volume = 0;
+      setIsMuted(true);
+    }
+  };
 
   function shuffleArray(array) {
     const shuffled = [...array];
@@ -109,37 +217,10 @@ function MusicControlComp(props) {
     return shuffled;
   }
 
-  useEffect(() => {
-    audioRef.current.addEventListener("ended", handleNextTrack);
-
-    return () => {
-      audioRef.current.removeEventListener("ended", handleNextTrack);
-    };
-  }, [currentTrack]);
-  
   const handleTimeUpdate = () => {
     setCurrentTime(audioRef.current.currentTime);
     setDuration(audioRef.current.duration);
   };
-
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
-    setVolume(newVolume);
-    audioRef.current.volume = newVolume;
-    setIsMuted(false);
-  };
-
-  const handleMuteBtn = () => {
-    if(isMuted) {
-      audioRef.current.volume = volume;
-      setIsMuted(false);
-    } else {
-      audioRef.current.volume = 0;
-      setIsMuted(true);
-    }
-  }
-
-  
 
   const handleSeek = (e) => {
     const newTime = e.target.value;
@@ -147,60 +228,39 @@ function MusicControlComp(props) {
     audioRef.current.currentTime = newTime;
   };
 
-  const handleNextTrack = () => {
-    if (isShuffleOn) {
-      const nextShuffledIndex = Math.floor(
-        Math.random() * shuffledTracks.length
-      );
-      setCurrentTrack(nextShuffledIndex);
-    } else if (currentTrack < tracks.length - 1) {
-      setCurrentTrack((prevTrack) => prevTrack + 1);
-    } else if (isLoopOn) {
-      setCurrentTrack(0);
+  
+const handleToggleLoop = () => {
+  setIsLoopOn(!isLoopOn);
+  audioRef.current.loop = !isLoopOn;
+};
+
+const handleToggleShuffle = () => {
+  // setIsShuffleOn(!isShuffleOn);
+  setIsShuffleOn((prev) => {
+    if (!prev) {
+      const shuffled = shuffleArray(tracks);
+      setShuffledTracks(shuffled);
     }
-  };
+    return !isShuffleOn;
+  });
+};
 
-  const handlePrevTrack = () => {
-    if (currentTrack > 0) {
-      setCurrentTrack((prevTrack) => prevTrack - 1);
-    }
-  };
+const formatTime = (timeInSeconds) => {
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+    2,
+    "0"
+  )}`;
+};
 
-  const handleToggleLoop = () => {
-    setIsLoopOn(!isLoopOn);
-    audioRef.current.loop = !isLoopOn;
-    
-  };
 
-  const handleToggleShuffle = () => {
-    // setIsShuffleOn(!isShuffleOn);
-    setIsShuffleOn((prev)=> {
-      if(!prev) {
-        const shuffled = shuffleArray(tracks);
-        setShuffledTracks(shuffled);
-      }
-      return !isShuffleOn;
-    })
-  };
 
-  const formatTime = (timeInSeconds) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-      2,
-      "0"
-    )}`;
-  };
-
-  useEffect(() => {
-    audioRef.current.src = tracks[currentTrack];
-    if (playing) {
-      handlePlay();
-    }
-  }, [currentTrack]);
 
   // #endregion ------------ song control ---------
 
+
+  
   // #region -----------music expander -------------
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
@@ -229,11 +289,11 @@ function MusicControlComp(props) {
 
   if (!lifting) {
     return (
-      <>        
+      <>   
         <audio ref={audioRef}
         // onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}
-        src={tracks[0]} controls />
+        src={tracks[currentTrack]} controls autoPlay />
 
 
         <div className="expanded-view-music-section">          
@@ -245,13 +305,13 @@ function MusicControlComp(props) {
                   <div className="poster-container">
                     <img
                       className="mobile-view-song-preview"
-                      src={image}
+                      src={songList && songList[currentTrack] && songList[currentTrack].thumbnail ? songList[currentTrack].thumbnail : image1}
                       alt="img"
                     />
                     <div className="song-details-splitter">
                       <div className="poster-song-splitter">
                         <div className="song-name">
-                          <p>Nenjukkul</p>
+                          <p>{songList && songList[currentTrack] && songList[currentTrack].title ? songList[currentTrack].title : ""}</p>
                           <p>
                             <AiOutlineHeart className="heart-in"/>
                           </p>
@@ -287,13 +347,13 @@ function MusicControlComp(props) {
                           <div className="bg-white">
 
                           </div>
-                          <div id="place1" onClick={playing ? handlePause : handlePlay} className="song-changing-btns">
-                            {playing ? (
-                              <BsFillPauseCircleFill className="controls-icon3" />
-                            ) : (
-                              <BsFillPlayCircleFill className="controls-icon3" />
-                            )}
-                          </div>
+                            <div id="place1" onClick={playing ? handlePause : handlePlay} className="song-changing-btns">
+                              {playing ? (
+                                <BsFillPauseCircleFill className="controls-icon3" />
+                              ) : (
+                                <BsFillPlayCircleFill className="controls-icon3" />
+                              )}
+                            </div>
                         </div>
                         <div className="song-changing-btns">
                           <BiSkipNext onClick={handleNextTrack} className="controls-icon4" />
@@ -460,12 +520,12 @@ function MusicControlComp(props) {
                   <div className="music-player-section-1">
                     <img
                       className="mobile-view-song-preview"
-                      src={image}
+                      src={songList && songList[currentTrack] && songList[currentTrack].thumbnail ? songList[currentTrack].thumbnail : image1}
                       alt="img"
                     />
                     <div className="poster-song-splitter">
                       <div className="song-name">
-                        <p>Nenjukkul</p>
+                        <p>{songList && songList[currentTrack] && songList[currentTrack].title ? songList[currentTrack].title : ""}</p>
                         <p>
                           <AiOutlineHeart className="heart-in" />
                         </p>
@@ -521,7 +581,7 @@ function MusicControlComp(props) {
                     <div className="table-td-2-img">
                       <div className="songs-collection">
                         <img
-                          src={image}
+                          src={songList && songList[currentTrack] && songList[currentTrack].thumbnail ? songList[currentTrack].thumbnail : image1}
                           alt="img"
                           className="table-mob-view-poster"
                         />
@@ -894,9 +954,11 @@ function MusicControlComp(props) {
   return (
     <>
       <audio ref={audioRef}
-       // onTimeUpdate={handleTimeUpdate}
-       onEnded={handleNextTrack}
-        src={tracks[0]} controls />
+      //  onTimeUpdate={handleTimeUpdate}
+        onEnded={handleNextTrack}
+        src={tracks[currentTrack]} controls autoPlay 
+        key={tracks[currentTrack]}
+        />
 
       <div className="music-control-comp">
         {isMobile ? (
@@ -912,11 +974,11 @@ function MusicControlComp(props) {
             />
             <div className="song-name">
               <div>
-                <img className="current-playing-song" src={image} alt="" />
+                <img className="current-playing-song" src={songList && songList[currentTrack] && songList[currentTrack].thumbnail ? songList[currentTrack].thumbnail : image1} alt="" />
               </div>
               <div className="song-name-lines">
-                <p className="song-name-1">Song playing</p>
-                <p className="song-name-2">Song playing (From Movie)</p>
+                <p className="song-name-1">{activeSong.name ? activeSong.name : "Once upon a Time" }</p>
+                <p className="song-name-2">{activeSong.name ? activeSong.name : "Once upon a Time" } (From Movie)</p>
               </div>
             </div>
             <div className="song-controls-play">
@@ -957,11 +1019,12 @@ function MusicControlComp(props) {
             <div className="song-playing-area1">
               <div className="song-cover">
                 <div>
-                  <img className="current-playing-song" src={image} alt="" />
+                  <img className="current-playing-song" src=
+                  {songList && songList[currentTrack] && songList[currentTrack].thumbnail ? songList[currentTrack].thumbnail : image1} alt="" />
                 </div>
                 <div>
-                  <p className="song-name">Song Name</p>
-                  <p className="song-details">Song Name with movie name</p>
+                  <p className="song-name">{songList && songList[currentTrack] && songList[currentTrack].title ? songList[currentTrack].title : ""}</p>
+                  <p className="song-details">{songList && songList[currentTrack] && songList[currentTrack].title ? songList[currentTrack].title : ""}</p>
                 </div>
                 <div>
                   <AiOutlineHeart className="heart-empty" />
@@ -990,7 +1053,9 @@ function MusicControlComp(props) {
                 />
               </div>
               <div className="song-changing-btns">
-                <div id="place3" className="bg-play" onClick={playing ? ()=>audioRef.current.pause() : ()=>audioRef.current.play()} >
+
+                <div id="place1" className="bg-play" onClick={playing ? handlePause : handlePlay} >
+                {/* <div id="place3" className="bg-play" onClick={playing ? ()=>audioRef.current.pause() : ()=>audioRef.current.play()} > */}
                   {playing ? (
                     <BsFillPauseCircleFill className="controls-icon3" />
                   ) : (

@@ -15,41 +15,31 @@ import { useDispatch } from "react-redux";
 
 import action from '../../../action.js'
 
-
-
-
-
-
-
-
-
-
 function HomePage() {
-  // const darkMode = useSelector((state) => state.usersData.darkMode);
-  // console.log("print dark mode val", darkMode);
   const [trendingSongs, setTrendingSongs] = useState();
   const [happySongsData, setHappySongsData] = useState();
   const [romanticSongsData, setRomanticSongsData] = useState();
   const [sadSongsData, setSadSongsData] = useState();
   const [excitedSongsData, setExcitedSongsData] = useState();
+  const [allsongs, setAllSongs] = useState();
 
   const dispatch = useDispatch();
   
-  
-  
-  
-
-
-
   function fetching() {
     const localStorageData = localStorage.getItem("localSongs");
     const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
     
     const trendingData = parsedLocalStorageData.data;
+    dispatch(action.setAllSongsData(trendingData));
+    setAllSongs(trendingData);
+    console.log("checking all songs -> ", allsongs)
+
     const ts = trendingData?.filter((item) => {
       return item.featured === "Trending songs";
     });
     setTrendingSongs(ts);
+
+    dispatch(action.setTrendingData(ts));
     
     
     const happySongs = parsedLocalStorageData.data;
@@ -59,32 +49,32 @@ function HomePage() {
     setHappySongsData(hsd);
     
     dispatch(action.setHappyData(hsd));
-//    localStorage.setItem("happy", JSON.stringify(hsd))
-    
+
     const romanticSongs = parsedLocalStorageData.data;
     const rsd = romanticSongs?.filter((item) => {
       return item.mood === "romantic";
     });
     setRomanticSongsData(rsd);
     
-    localStorage.setItem("romantic", JSON.stringify(rsd))
-    
-    
+    dispatch(action.setRomanticData(rsd));
+
     const sadSongs = parsedLocalStorageData.data;
     const ssd = sadSongs?.filter((item) => {
       return item.mood === "sad";
     });
+    
+    dispatch(action.setSadSongData(ssd));
     setSadSongsData(ssd);
 
-    localStorage.setItem("sad", JSON.stringify(ssd))
+
 
     const excitedSongs = parsedLocalStorageData.data;
     const esd = excitedSongs?.filter((item) => {
       return item.mood === "excited";
     });
+    dispatch(action.setExcitedData(esd));
     setExcitedSongsData(esd);
 
-    localStorage.setItem("excited", JSON.stringify(esd))
 
 }
 
@@ -93,12 +83,12 @@ function HomePage() {
     
     setTimeout (()=> {
       fetching();
-    }, 300)
+    }, 500)
 
   }, [])
 
   // Trending Carousel
-  const productTrending = trendingSongs?.map((item) => (
+  const productTrending = trendingSongs?.map((item) => (    
     <TrendingSongsCarousel
       key={item._id}
       songId={item._id}
@@ -106,6 +96,7 @@ function HomePage() {
       url={item.thumbnail}
       audio={item.audio_url}
       mood={item.mood}
+      featured={item.featured}
     />
   ));
   const productHappy = happySongsData?.map((item) => (

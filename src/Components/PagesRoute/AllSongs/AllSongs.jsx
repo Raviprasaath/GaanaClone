@@ -5,7 +5,8 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsPlayCircle, BsFillPlayFill,BsThreeDotsVertical } from "react-icons/bs";
-
+import { useDispatch } from "react-redux";
+import actions from "../../../action";
 
 function AllSongs() {
   // const darkMode = useSelector((state) => state.usersData.darkMode);
@@ -18,6 +19,9 @@ function AllSongs() {
   const [currentTrack, setCurrentTrack] = useState(0);
   const [currentSong, setCurrentSong] = useState([]);
 
+  const dispatch = useDispatch();
+
+
   const audioRef = useRef(null);
 
   const handleTimeUpdate = () => {
@@ -28,10 +32,7 @@ function AllSongs() {
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-      2,
-      "0"
-    )}`;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart( 2, "0" )}`;
   };
 
   const formatTime2 = (timeInSeconds) => {
@@ -82,15 +83,18 @@ function AllSongs() {
   }
 
 
+  const handleSongClicker = (data) => {
+    console.log(data)
+    dispatch(actions.setActiveSong(data));
+  }
+
+
 
   useEffect(()=> {
     localStorageDataGetting();
   }, [])
 
   const currentSongArray = Object.keys(currentSong).map((key)=>currentSong[key])
-
-
-
 
   useEffect(()=> {
     setTimeout(()=> {
@@ -109,19 +113,19 @@ function AllSongs() {
               onTimeUpdate={handleTimeUpdate}
               controls
               autoPlay
-              muted
+              // muted
               className="audio-hide"
             />
           <div>
           <div className="musicCollections">
               <div className="traction-splitter">
                   <div className="track-section">
-                      <AiOutlinePlayCircle className="prime-poster-play poster-play-option" />
+                      <AiOutlinePlayCircle onClick={()=>handleSongClicker(currentSong)} className="prime-poster-play poster-play-option" />
                       <img className="posterPrime" src={currentSong[0].imageUrl} alt="img" />
                   </div>
                   <div className="button-details-splitter">
                   <div className="song-button">
-                      <button className="song-play-btn">Play Song</button>
+                      <button onClick={()=>handleSongClicker(currentSong)} className="song-play-btn">Play Song</button>
                       
                       <BiHeart className="fav-song-adding"/>
 
@@ -137,10 +141,6 @@ function AllSongs() {
                           {currentSong[0].description}
                       </p>
                       <div className="track-details-warp">
-                        {/* <a className="song-line3" href="#">Hosanna</a>
-                        <span className="dot">•</span>
-                        <span className="released-year">2010</span>
-                        <span className="dot">•</span> */}
                         <button className="track-duration">{formatTime2(duration)}</button>
                       </div>
                   </div>
@@ -152,8 +152,6 @@ function AllSongs() {
               <img className="track-list-header-img" src={currentSong[0].imageUrl} alt="img" />
               <div className="song-genere">
                 <p className="song-name">{currentSong[0].title} </p>
-                {/* <p className="song-divider">-</p>
-                <p className="songs-types">Romantic Hits Tamil</p> */}
               </div>
               <button className="track-list-playing-option">Play All</button>
               <AiOutlineHeart className="playlist-heart" />
@@ -177,7 +175,7 @@ function AllSongs() {
                   <tbody className="table-body-container">              
 
                     {currentSongArray.map((tracks, index)=> (
-                      <tr key={index}>
+                      <tr key={index} onClick={()=>handleSongClicker(currentSong)}>
                         <td className="table-col-1">{index+1}</td>
                         <td className="table-col-2">
                           <div className="track-img-play">
@@ -232,7 +230,7 @@ function AllSongs() {
                     </td>
                     <td className="table-td-3">
                       <button className="btn-play">
-                        <BsFillPlayFill className="play-button"/>
+                        <BsFillPlayFill onClick={()=>handleSongClicker(currentSong)} className="play-button"/>
                       </button>
                       <button className="btn-option"> 
                         <BsThreeDotsVertical className="play-option"/>

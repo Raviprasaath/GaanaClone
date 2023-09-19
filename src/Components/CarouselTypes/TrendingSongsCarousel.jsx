@@ -4,6 +4,7 @@ import actions from "../../action";
 
 
 const TrendingSongsCarousel = (props) => {
+
   const dispatch = useDispatch();
   
   const handleSongClicker = (data) => {

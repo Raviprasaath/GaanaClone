@@ -13,12 +13,18 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
+
+
 import { AiOutlineDown } from 'react-icons/ai'
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 const SongsCollection = () => {
+
+  const location = useLocation();
+  console.log("locartion ->",location)
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   // const [activeItem, setActiveItem] = React.useState("");
   const open = Boolean(anchorEl);
@@ -32,7 +38,9 @@ const SongsCollection = () => {
     setActiveItem(event.target.innerText);
   };
   
-
+  React.useEffect(()=> {
+    
+  }, [])
 
   const handleSongSelection = (selectedItem) => {
     // setActiveItem(selectedItem)
