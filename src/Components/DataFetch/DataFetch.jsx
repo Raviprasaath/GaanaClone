@@ -56,14 +56,14 @@ function DataFetch () {
 
     const handleSongs = () => {
         const tempLocalSongs = JSON.parse(localStorage.getItem("localSongs")) || [];
-        if (!tempLocalSongs || tempLocalSongs.length === 0) {
+        if (!tempLocalSongs || tempLocalSongs.length < 21) {
             const headers = {
                 'Content-Type': 'application/json',        
                 'projectId': '8jf3b15onzua'        
               }
         
               axios
-              .get ("https://academics.newtonschool.co/api/v1/music/song", {headers: headers} )
+              .get ("https://academics.newtonschool.co/api/v1/music/song?limit=100", {headers: headers} )
               .then(data =>{
                 const result = (data.data);
                 setSongStore(result);
@@ -78,14 +78,14 @@ function DataFetch () {
     const handleAlbums = () => {
         const tempLocalAlbum = JSON.parse(localStorage.getItem("localAlbum")) || [];
         
-        if (!tempLocalAlbum || tempLocalAlbum.length === 0) {
+        if (!tempLocalAlbum || tempLocalAlbum.length < 21) {
             const headers = {
                 'Content-Type': 'application/json',        
                 'projectId': 'f104bi07c490'        
               }
         
               axios
-              .get ("https://academics.newtonschool.co/api/v1/music/album", {headers: headers} )
+              .get ("https://academics.newtonschool.co/api/v1/music/album?limit=100", {headers: headers} )
               .then(data => {
                 const response = data.data;                    
                 setAlbumStore(response);

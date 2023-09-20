@@ -678,6 +678,10 @@
   justify-content: space-between;
   position: relative;
 }
+.music-control-comp .large-screen-controls .song-playing-area1 {
+  width: 30%;
+  overflow: hidden;
+}
 .music-control-comp .large-screen-controls .song-playing-area1 .song-cover {
   display: flex;
   flex-direction: row;
@@ -1218,8 +1222,12 @@
   width: 100%;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .songs-collection {
+  position: relative;
   display: flex;
   padding: 10px 10px;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .songs-collection:hover {
+  opacity: 0.8;
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .songs-collection .table-mob-view-poster {
   width: 45px;
@@ -1260,6 +1268,13 @@
 }
 .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .songs-collection .fav-remover:hover {
   opacity: 0.5;
+}
+.music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img .play-track-icon {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  font-size: 1.2rem;
+  z-index: 2;
 }
 .music-player-container .music-player-lap-view .music-player-section {
   display: flex;
@@ -1384,8 +1399,12 @@
   overflow: scroll;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection {
+  position: relative;
   display: flex;
   padding: 10px 10px;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection:hover {
+  opacity: 0.5;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection .table-mob-view-poster {
   width: 45px;
@@ -1426,6 +1445,13 @@
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .songs-collection .fav-remover:hover {
   opacity: 0.5;
+}
+.music-player-container .music-player-lap-view .music-player-section .music-player-section-2 .table-td-2-img .play-track-icon {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  font-size: 1.2rem;
+  z-index: 2;
 }
 .music-player-container .selectActivator {
   color: red;

@@ -1,6 +1,6 @@
 const initialState = {
     darkMode: true,
-    activeItem: "",
+    activeItem: "Home",
     activeSong: {},
     happySong: [],
 };

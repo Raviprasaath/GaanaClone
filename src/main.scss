@@ -791,6 +791,8 @@
     position: relative;  
 
     .song-playing-area1 {
+      width: 30%;
+      overflow: hidden;
       .song-cover {
         
         .current-playing-song {        
@@ -1310,7 +1312,7 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
-  
+          
           .poster-song-splitter {
             width: 95%;
             display: flex;
@@ -1430,9 +1432,12 @@
             background-color: var(--PrimaryColor);       
             width: 100%;
             .songs-collection {
+              position: relative;
               display: flex;
               padding: 10px 10px;
-              
+              &:hover {
+                opacity: 0.8;
+              }
               .table-mob-view-poster {
                 width: 45px;
               }
@@ -1478,7 +1483,13 @@
                 }
               }
             }
-    
+            .play-track-icon {
+              position: absolute;
+              left: 25px;
+              top: 25px;              
+              font-size: 1.2rem;
+              z-index: 2;
+            }
           }
         }
   
@@ -1520,9 +1531,6 @@
           transform: translateY(-40%); /* Center the thumb horizontally */
         }
       }
-
-
-
       .music-player-section-1 {
         .mobile-view-song-preview {
           width: 400px;
@@ -1627,9 +1635,12 @@
           width: 100%;
           overflow: scroll;
           .songs-collection {
+            position: relative;
             display: flex;
             padding: 10px 10px;
-            
+            &:hover {
+              opacity: 0.5;
+            }
             .table-mob-view-poster {
               width: 45px;
             }
@@ -1674,7 +1685,13 @@
               }
             }
           }
-  
+          .play-track-icon {
+            position: absolute;
+            left: 25px;
+            top: 25px;              
+            font-size: 1.2rem;
+            z-index: 2;
+          }
         }
       }
     }

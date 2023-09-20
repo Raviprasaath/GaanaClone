@@ -194,11 +194,10 @@ function HomePage() {
         {productExcited}
       </Carousel>}
 
-      <h2 className="homepage-heading">Artist</h2>
-      {/* round */}
+      {/* <h2 className="homepage-heading">Artist</h2>
       <Carousel showDots={false} responsive={responsive}>
         {productArtist}
-      </Carousel>
+      </Carousel> */}
     </>
   );
 }

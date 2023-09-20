@@ -26,9 +26,6 @@ function HappySongs() {
         mood: (item.mood) || "",
         songId: item._id || "",
       }))
-      
-
-
     setDataFromStore(result);    
   }
 
@@ -39,8 +36,8 @@ function HappySongs() {
     }, 0);
   }, [])
   
-  const handleSongClicker = (data) => {
-    console.log("happy songs ", data)
+  const handleSongClicker = (data) => {  
+    console.log("happy data -> ", data)  
     dispatch(actions.setActiveSong(data));
   }
 

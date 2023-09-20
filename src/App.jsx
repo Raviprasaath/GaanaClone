@@ -114,7 +114,7 @@ function App() {
               <Route path="/exited" element={<ExitedSongs />} />
               <Route path="/sad" element={<SadSongs />} />
               <Route path="/romance" element={<Romance />} />
-              <Route path="/songsfrom90s2000s" element={<SongsFrom90s2000s />} />
+              <Route path="/songsfrom90s2000s" element={<ComingSoonPage />} />
 
               <Route path="/album" element={<Album />} />
               <Route path="/comingsoon" element={<ComingSoonPage />} />

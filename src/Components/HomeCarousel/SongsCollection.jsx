@@ -13,6 +13,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
+import { useNavigate } from 'react-router-dom';
 
 
 import { AiOutlineDown } from 'react-icons/ai'
@@ -21,12 +22,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 
 const SongsCollection = () => {
+  const navigate = useNavigate();
 
   const location = useLocation();
-  console.log("locartion ->",location)
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [activeItem, setActiveItem] = React.useState("");
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
   const activeItem = useSelector((state) => state.usersData.activeItem);
@@ -39,11 +39,16 @@ const SongsCollection = () => {
   };
   
   React.useEffect(()=> {
-    
+    dispatch(action.setActiveItem("Home"));    
+    navigate('/', { replace: true });
   }, [])
 
-  const handleSongSelection = (selectedItem) => {
-    // setActiveItem(selectedItem)
+  const [ category, setCategory ] = React.useState("Moods & Genres");
+
+  console.log("testing catogary -> >",category)
+
+
+  const handleSongSelection = (selectedItem) => {    
     dispatch(action.setActiveItem(selectedItem));
   }
 
@@ -55,28 +60,27 @@ const SongsCollection = () => {
     <>
       <div className="songsCollection">
         <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-          
           <Link className="list-selector" to="/">         
-            <Typography onClick={() => handleSongSelection("All")} className={activeItem === "All" ? "active" : ""} sx={{ minWidth: 150 }}>
+            <Typography onClick={() => {handleSongSelection("Home"); setCategory("Moods & Genres")}} className={activeItem === "Home" ? "active" : ""} sx={{ minWidth: 150 }}>
               Home
             </Typography>
           </Link>
           <Link className="list-selector" to="/album">                 
-            <Typography onClick={() => handleSongSelection("Album")} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
+            <Typography onClick={() => {handleSongSelection("Album"); setCategory("Moods & Genres")}} className={activeItem === "Album" ? "active" : ""} sx={{ minWidth: 150 }}>Album</Typography>
           </Link>
           <Link className="list-selector" to="/allsongs">         
-            <Typography onClick={() => handleSongSelection("Trending Songs")} className={activeItem === "Trending Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>              
+            <Typography onClick={() => {handleSongSelection("All Songs"); setCategory("Moods & Genres")}} className={activeItem === "All Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>              
                 All Songs
             </Typography>    
           </Link>              
           
           <Link className="list-selector" to="/happy">         
-            <Typography onClick={() => handleSongSelection("New Songs")} className={activeItem === "New Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>            
+            <Typography onClick={() => {handleSongSelection("Happy Mood"); setCategory("Moods & Genres")}} className={activeItem === "Happy Mood" ? "active" : ""}  sx={{ minWidth: 150 }}>            
               Happy Mood
             </Typography>
           </Link>
           <Link className="list-selector" to="/exited">                   
-            <Typography onClick={() => handleSongSelection("Old Songs")} className={activeItem === "Old Songs" ? "active" : ""}  sx={{ minWidth: 150 }}>Exciting Harmony</Typography>
+            <Typography onClick={() => {handleSongSelection("Exciting Harmony"); setCategory("Moods & Genres")}} className={activeItem === "Exciting Harmony" ? "active" : ""}  sx={{ minWidth: 150 }}>Exciting Harmony</Typography>
           </Link>
 
           <Tooltip title="Hover for Access to the Drop-Down Menu">
@@ -89,7 +93,7 @@ const SongsCollection = () => {
               onMouseOver={handleClick}
               >
               <Typography
-              className={activeItem === "Moods & Genres" ? "active" : ""}
+                className={activeItem === "Moods & Genres" ? "active" : ""}
               variant="body1"
               component="span"
               sx={{
@@ -97,19 +101,19 @@ const SongsCollection = () => {
                 fontWeight: "bold",
                 textTransform: "uppercase",
               }} >
-                Moods & Genres <AiOutlineDown />
+                {category} <AiOutlineDown />
               </Typography>
             </IconButton>
           </Tooltip>
           
           <Link className="list-selector" to="/comingsoon">          
-            <Typography onClick={() => handleSongSelection("Radio")} className={activeItem === "Radio" ? "active" : ""} sx={{ minWidth: 150 }}>Radio</Typography>
+            <Typography onClick={() => {handleSongSelection("Radio"); setCategory("Moods & Genres")}} className={activeItem === "Radio" ? "active" : ""} sx={{ minWidth: 150 }}>Radio</Typography>
           </Link>
           <Link className="list-selector" to="/comingsoon">          
-            <Typography onClick={() => handleSongSelection("Podcast")} className={activeItem === "Podcast" ? "active" : ""} sx={{ minWidth: 150 }}>Podcast</Typography>
+            <Typography onClick={() => {handleSongSelection("Podcast"); setCategory("Moods & Genres")}} className={activeItem === "Podcast" ? "active" : ""} sx={{ minWidth: 150 }}>Podcast</Typography>
           </Link>
           <Link className="list-selector" to="/mysongs">          
-            <Typography onClick={() => handleSongSelection("My Music")} className={activeItem === "My Music" ? "active" : ""} sx={{ minWidth: 150 }}>My Music</Typography>
+            <Typography onClick={() => {handleSongSelection("My Music"); setCategory("Moods & Genres")}} className={activeItem === "My Music" ? "active" : ""} sx={{ minWidth: 150 }}>My Music</Typography>
           </Link>
         </Box>
         <Menu
@@ -117,7 +121,10 @@ const SongsCollection = () => {
           id="account-menu"
           open={open}
           onClose={handleClose}
-          onClick={handleClose}
+          // onClick={handleClose}
+          // onClick={handleClose}
+          onClick={() => {handleSongSelection("Moods & Genres");}}
+
           PaperProps={{
             elevation: 0,
             sx: {
@@ -125,13 +132,8 @@ const SongsCollection = () => {
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1.5,
               "&:before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
+                content: '""', display: "block", position: "absolute", top: 0, right: 14, 
+                width: 10, height: 10,
                 bgcolor: "background.paper",
                 transform: "translateY(-50%) rotate(45deg)",
                 zIndex: 0,
@@ -142,22 +144,22 @@ const SongsCollection = () => {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
-              <Link className="list-selector" to="/sad">                 
-                <MenuItem  onClick={handleClose}>
-                    <Typography  variant="body1" component="span">
+              <Link className="list-selector" to="/sad">          
+                <MenuItem  onClick={()=>{handleClose(); setCategory("Sad Songs");}}>
+                    <Typography variant="body1" component="span">
                       Sad Songs 
                     </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/romance">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Romance");}}>
                   <Typography variant="body1" component="span">
                     Romance
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/songsfrom90s2000s">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("90s and 2000s");}}>
                   <Typography variant="body1" component="span">
                     90s and 2000s
                   </Typography>
@@ -165,77 +167,77 @@ const SongsCollection = () => {
               </Link>
               
               <Link className="list-selector" to="/comingsoon">
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={()=>{handleClose(); setCategory("Bhakti");}}>
                 <Typography variant="body1" component="span">
                   Bhakti
                 </Typography>
               </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Indie");}}>
                   <Typography variant="body1" component="span">
                     Indie
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("EDM");}}>
                   <Typography variant="body1" component="span">
                     EDM
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Ghazals");}}>
                   <Typography variant="body1" component="span">
                     Ghazals
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Workout");}}>
                   <Typography variant="body1" component="span">
                     Workout
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Stars");}}>
                   <Typography variant="body1" component="span">
                     Stars
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Retro");}}>
                   <Typography variant="body1" component="span">
                     Retro
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Wedding");}}>
                   <Typography variant="body1" component="span">
                     Wedding
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Kids");}}>
                   <Typography variant="body1" component="span">
                     Kids
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Dance");}}>
                   <Typography variant="body1" component="span">
                     Dance
                   </Typography>
                 </MenuItem>
               </Link>
               <Link className="list-selector" to="/comingsoon">
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{handleClose(); setCategory("Friendship");}}>
                   <Typography variant="body1" component="span">
                     Friendship
                   </Typography>

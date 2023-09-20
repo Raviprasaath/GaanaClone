@@ -1,11 +1,23 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { BiUserCircle } from "react-icons/bi";
 
 import ToggleSwitch from "../ToggleSwitch";
+import { useDispatch } from "react-redux";
+import action from "../../action";
+
 
 function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  React.useEffect(()=> {
+    dispatch(action.setActiveItem("Home"));    
+    navigate('/', { replace: true });
+  }, [])
+
   return (
     <>
       <div className="navbar">
@@ -21,30 +33,23 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
             <Link className="list-selector" to="/">
             <li>
               Home
-              {/* <a href="#home">Home</a> */}
             </li>
             </Link>
             <li>
               Radio
-              {/* <a href="#radio">Radio</a> */}
             </li>
             <li>
               Podcast
-              {/* <a href="#">Podcast</a> */}
             </li>
             <li>
               My Music
-              {/* <a href="#">My Music</a> */}
             </li>
             <li>
               India's Music
-              {/* <a href="#">India's Music</a> */}
             </li>
             <li>
                 Language
                 <p>(Set Music language)</p>
-              {/* <a href="#">
-              </a> */}
             </li>
             <li>
               <div className="toggler-control" href="#">
