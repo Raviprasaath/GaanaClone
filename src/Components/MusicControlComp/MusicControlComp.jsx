@@ -17,6 +17,7 @@ import { BiSolidVolumeMute, BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
 
 import actions from "../../action";
+import MusicPlayer from "../MusicPlayer/MusicPlayer";
 
 function MusicControlComp(props) {
   const location = useLocation();
@@ -26,9 +27,7 @@ function MusicControlComp(props) {
 
   let songList = [];
   const activeSong = useSelector((state) => state.usersData.activeSong);
-  const topTrendingSongList = useSelector(
-    (state) => state.usersData.trendingSong
-  );
+  const topTrendingSongList = useSelector((state) => state.usersData.trendingSong);
   const happySongList = useSelector((state) => state.usersData.happySong);
   const romanticSongList = useSelector((state) => state.usersData.romanticSong);
   const sadSongList = useSelector((state) => state.usersData.sadSong);
@@ -51,29 +50,45 @@ function MusicControlComp(props) {
     songList = allSongsList;
   }
 
-  // if ((activeSong.featured !== "Trending songs") &&
-  // (activeSong.mood !== "happy") && (activeSong.mood !== "romantic") &&
-  // (activeSong.mood !== "sad") && (activeSong.mood !== "excited")
-  // ) {
-  //   songList = allSongsList;
-  // }
 
   const handleSongClicker = (data) => {
-    console.log("from inside music player data -> ", data);
+    if (audioRef.current) {
+      audioRef.current.src = data.audio_url;
+      audioRef.current.play();
+    }
+    // console.log("from inside music player data -> ", data);
     dispatch(actions.setActiveSong(data));
   };
 
   let songListIndex = [];
 
   const songTrackList = [];
-  songList?.map((item) => {
-    songTrackList.push(item.audio_url);
-    songListIndex.push(item._id);
-  });
-  console.log("songList -> ", songList);
 
-  // let tracks = [ song1, song2, song3, song4, song5,  ];
-  let tracks = songTrackList.length !== 0 ? songTrackList : { song1 };
+  // working code
+
+  // songList?.map((item) => {
+  //   songTrackList.push(item.audio_url);
+  //   songListIndex.push(item._id);
+  // });
+  // console.log("songList -> ", songList);
+
+  // // let tracks = [ song1, song2, song3, song4, song5,  ];
+  // let tracks = songTrackList.length !== 0 ? songTrackList : { song1 };
+
+  if (Array.isArray(songList)) {
+    songList.forEach((item) => {
+      if (item.audio_url && item._id) {
+        songTrackList.push(item.audio_url);
+        songListIndex.push(item._id);
+      }
+    });
+  }
+  
+
+  const tracks = songTrackList.length !== 0 ? songTrackList : ["song1"];
+  // console.log("tracks -> ", tracks);
+
+
 
   // #region ------------ screen size control ---------
 
@@ -141,7 +156,7 @@ function MusicControlComp(props) {
   };
 
   useEffect(() => {
-    const currentId = activeSong.songId;
+    const currentId = activeSong.songId ? activeSong.songId : activeSong._id;
     if (songListIndex.length > 0 && currentId !== "") {
       const index = songList.findIndex((d) => d._id === currentId);
       setCurrentTrack(index);
@@ -249,6 +264,7 @@ function MusicControlComp(props) {
 
   // #endregion ------------ song control ---------
 
+
   // #region -----------music expander -------------
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
@@ -278,7 +294,7 @@ function MusicControlComp(props) {
       <>
         <audio
           ref={audioRef}
-          // onTimeUpdate={handleTimeUpdate}
+          onTimeUpdate={handleTimeUpdate}
           onEnded={handleNextTrack}
           src={tracks[currentTrack]}
           controls
@@ -297,24 +313,34 @@ function MusicControlComp(props) {
                   <div className="poster-container">
                     <img
                       className="mobile-view-song-preview"
-                      src={
+                      src=
+                      // {
+                      //   activeSong.thumbnail?activeSong.thumbnail : songList &&
+                      //   songList[currentTrack] &&
+                      //   songList[currentTrack].thumbnail
+                      //     ? songList[currentTrack].thumbnail
+                      //     : image1                        
+                      // }
+                      {
                         songList &&
                         songList[currentTrack] &&
                         songList[currentTrack].thumbnail
-                          ? songList[currentTrack].thumbnail
-                          : image1
+                        ? songList[currentTrack].thumbnail
+                        : image1
                       }
+
+
                       alt="img"
                     />
                     <div className="song-details-splitter">
                       <div className="poster-song-splitter">
                         <div className="song-name">
                           <p>
-                            {songList &&
+                            {
+                            // activeSong.title?activeSong.title : 
+                            songList &&
                             songList[currentTrack] &&
-                            songList[currentTrack].title
-                              ? songList[currentTrack].title
-                              : ""}
+                            songList[currentTrack].title}
                           </p>
                           <p>
                             <AiOutlineHeart className="heart-in" />
@@ -329,7 +355,7 @@ function MusicControlComp(props) {
                             max={duration}
                             step={0.01}
                             value={currentTime}
-                            // onChange={handleSeek}
+                            onChange={handleSeek}
                           />
                         </div>
                         <div className="song-duration">
@@ -399,7 +425,8 @@ function MusicControlComp(props) {
                       <div className="table-td-2-img">
                         {songList.map((item, index) => (
                           <div
-                            onClick={() => handleSongClicker(songList[index])}
+                            onClick={() => handleSongClicker(songList[index]) }
+                            
                             key={item._id || index}
                             className="songs-collection"
                           >
@@ -439,22 +466,23 @@ function MusicControlComp(props) {
                     <img
                       className="mobile-view-song-preview"
                       src={
+                        // activeSong.thumbnail?activeSong.thumbnail : 
                         songList &&
                         songList[currentTrack] &&
                         songList[currentTrack].thumbnail
                           ? songList[currentTrack].thumbnail
-                          : image1
+                          : image1 
                       }
                       alt="img"
                     />
                     <div className="poster-song-splitter">
                       <div className="song-name">
                         <p>
-                          {songList &&
+                          {
+                          // activeSong.title?activeSong.title : 
+                          songList &&
                           songList[currentTrack] &&
-                          songList[currentTrack].title
-                            ? songList[currentTrack].title
-                            : ""}
+                          songList[currentTrack].title}
                         </p>
                         <p>
                           <AiOutlineHeart className="heart-in" />
@@ -469,7 +497,7 @@ function MusicControlComp(props) {
                           max={duration}
                           step={0.01}
                           value={currentTime}
-                          // onChange={handleSeek}
+                          onChange={handleSeek}
                         />
                       </div>
                       <div className="song-duration">
@@ -583,7 +611,7 @@ function MusicControlComp(props) {
     <>
       <audio
         ref={audioRef}
-        // onTimeUpdate={handleTimeUpdate}
+        onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}
         src={tracks[currentTrack]}
         controls

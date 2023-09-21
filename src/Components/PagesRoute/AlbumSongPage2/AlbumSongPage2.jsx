@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import actions from "../../../action";
 
 import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsPlayCircle, BsFillPlayFill,BsThreeDotsVertical } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import actions from "../../../action";
 
 
 
@@ -21,11 +21,7 @@ function AlbumSongPage2(  ) {
   const [currentTrack, setCurrentTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
 
-
   let { albumName, albumId } = useParams();
-
-
-
 
   const dispatch = useDispatch();
 
@@ -78,7 +74,6 @@ function AlbumSongPage2(  ) {
       const fromLocalStorage = JSON.parse(localStorage.getItem("localAlbum"));
       const index = fromLocalStorage.data.findIndex((item) => item._id === albumId);
       console.log("index", index);
-
       const selectedSong = fromLocalStorage.data[index];
       
       const updatedSongs = ({
@@ -159,8 +154,8 @@ function AlbumSongPage2(  ) {
     //                 <div className="song-line1">
     //                   <div className="song-name1">{currentSong.name}</div>
     //                   <div className="song-movie-name">
-    //                     (From "{currentSong.name}") Song |{" "}
-    //                     <span>{currentSong.artist}</span>
+    //                     (From {currentSong.name}) Song |{" "}
+    //                     <span>{currentSong.artist }</span>
     //                   </div>
     //                 </div>
     //                 <p className="song-line2">{currentSong.description}</p>
@@ -209,31 +204,27 @@ function AlbumSongPage2(  ) {
     //                 </thead>
     //                 <tbody className="table-body-container">
     //                   {currentSongArray.map((tracks, index) => (
-    //                     <tr
-    //                       key={tracks._id || index}
-                          
-    //                       onClick={() => handleSongClicker(currentSong[index])}
-    //                     >
+    //                     <tr key={tracks.id || index} onClick={() => handleSongClicker(currentSong[index])} >
     //                       <td className="table-col-1">{index + 1}</td>
     //                       <td className="table-col-2">
     //                         <div className="track-img-play">
     //                           <BsPlayCircle className="play-track-icon" />
     //                           <img
-    //                             src={tracks.thumbnail}
+    //                             src={tracks.url}
     //                             alt="tracker-img"
     //                             className="tracker-image"
     //                           />
     //                         </div>
     //                         <div className="track-name-premium">
     //                           <button className="premium-btn">Premium</button>
-    //                           <p className="song-name"> {tracks.title} </p>
+    //                           <p className="song-name"> {tracks.name} </p>
     //                         </div>
     //                       </td>
     //                       <td className="table-col-3">
-    //                         <p className="singer-name"> {tracks.artists} </p>
+    //                         <p className="singer-name"> {tracks.artist} </p>
     //                       </td>
     //                       <td className="table-col-4">
-    //                         <p className="track-movie-name">{tracks.title}</p>
+    //                         <p className="track-movie-name">{tracks.name}</p>
     //                       </td>
     //                       <td className="table-col-5">
     //                         <p className="track-duration">
@@ -252,7 +243,7 @@ function AlbumSongPage2(  ) {
     //                 <tbody>
     //                   {currentSong.audio.map((item, index) => (
     //                     <tr
-    //                       key={item._id || index}
+    //                       key={item.id || index}
     //                       className="table-tr-mob"
     //                       onClick={() => handleSongClicker(currentSong[index])}
     //                     >
@@ -260,7 +251,7 @@ function AlbumSongPage2(  ) {
     //                       <td className="table-td-2">
     //                         <div className="table-td-2-img">
     //                           <img
-    //                             src={item.thumbnail}
+    //                             src={item.url}
     //                             alt="img"
     //                             className="table-mob-view-poster"
     //                           />
@@ -270,10 +261,10 @@ function AlbumSongPage2(  ) {
     //                             </button>
     //                             <p className="table-mob-artist">
     //                               {" "}
-    //                               {item.artists}{" "}
+    //                               {item.artist}{" "}
     //                             </p>
     //                           </div>
-    //                           <p className="table-song-name">{item.title}</p>
+    //                           <p className="table-song-name">{item.name}</p>
     //                         </div>
     //                       </td>
     //                       <td className="table-td-3">
@@ -299,7 +290,7 @@ function AlbumSongPage2(  ) {
     // </>
     <>
     </>
-
+    
   );
 }
 

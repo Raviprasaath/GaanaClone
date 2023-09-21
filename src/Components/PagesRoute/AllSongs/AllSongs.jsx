@@ -4,11 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-import {
-  BsPlayCircle,
-  BsFillPlayFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
+import { BsPlayCircle, BsFillPlayFill, BsThreeDotsVertical, } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
 
@@ -35,10 +31,7 @@ function AllSongs() {
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-      2,
-      "0"
-    )}`;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart( 2, "0" )}`;
   };
 
   const formatTime2 = (timeInSeconds) => {
