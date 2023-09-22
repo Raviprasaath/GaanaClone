@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import image1 from "../../assets/1.jpg";
 
@@ -36,18 +37,32 @@ function MusicControlComp(props) {
 
   // console.log("current song ", activeSong);
 
-  if (activeSong.featured === "Trending songs") {
-    songList = topTrendingSongList;
-  } else if (activeSong.mood === "happy") {
-    songList = happySongList;
-  } else if (activeSong.mood === "romantic") {
-    songList = romanticSongList;
-  } else if (activeSong.mood === "sad") {
-    songList = sadSongList;
-  } else if (activeSong.mood === "excited") {
-    songList = excitedSongList;
-  } else {
+  let urlCheck = location.pathname;
+
+  let flag = false;
+  if (urlCheck.includes('album')) {
+    flag = true;
+  }
+  
+  if (location.pathname === `/allsongs`) {
     songList = allSongsList;
+    console.log("true cond")
+  } else if (flag) {
+    console.log("active songs", activeSong);
+  } else {
+    if (activeSong.featured === "Trending songs") {
+      songList = topTrendingSongList;
+    } else if (activeSong.mood === "happy") {
+      songList = happySongList;
+    } else if (activeSong.mood === "romantic") {
+      songList = romanticSongList;
+    } else if (activeSong.mood === "sad") {
+      songList = sadSongList;
+    } else if (activeSong.mood === "excited") {
+      songList = excitedSongList;
+    } else {
+      songList = allSongsList;
+    }
   }
 
 
@@ -56,7 +71,7 @@ function MusicControlComp(props) {
       audioRef.current.src = data.audio_url;
       audioRef.current.play();
     }
-    // console.log("from inside music player data -> ", data);
+    console.log("from inside music player data -> ", data);
     dispatch(actions.setActiveSong(data));
   };
 
@@ -83,12 +98,42 @@ function MusicControlComp(props) {
       }
     });
   }
-  
+
+
+
+  console.log("songList", songList)
 
   const tracks = songTrackList.length !== 0 ? songTrackList : ["song1"];
-  // console.log("tracks -> ", tracks);
+  // console.log("songList -> ", tracks);
+  
+  const [songTrackFinalArray, setSongTrackFinalArray] = useState([]);
 
+  
+  function arraySetting() {
+    setSongTrackFinalArray(songList.map((item) => ({
+      id: item._id,
+      thumbnail: item.thumbnail,
+      title: item.title,
+      artist: item.artist[0]?.name,
+      audio_url: item.audio_url,
+    })));
+  }
+  
 
+  const [uiWait, setUiWait] = useState(false);
+
+  console.log("Component re-rendered, uiWait:", uiWait);
+
+  
+  useEffect(() => {
+    setTimeout(() => {
+      arraySetting();
+      console.log("songTrackFinalArray -> ", songTrackFinalArray);
+      setUiWait(true);
+      console.log("uiWait:", uiWait);
+    }, 1000);
+  }, [songList]);
+  
 
   // #region ------------ screen size control ---------
 
@@ -264,7 +309,6 @@ function MusicControlComp(props) {
 
   // #endregion ------------ song control ---------
 
-
   // #region -----------music expander -------------
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
@@ -294,7 +338,7 @@ function MusicControlComp(props) {
       <>
         <audio
           ref={audioRef}
-          onTimeUpdate={handleTimeUpdate}
+          // onTimeUpdate={handleTimeUpdate}
           onEnded={handleNextTrack}
           src={tracks[currentTrack]}
           controls
@@ -321,15 +365,11 @@ function MusicControlComp(props) {
                       //     ? songList[currentTrack].thumbnail
                       //     : image1                        
                       // }
+
                       {
-                        songList &&
-                        songList[currentTrack] &&
-                        songList[currentTrack].thumbnail
-                        ? songList[currentTrack].thumbnail
-                        : image1
+                        songList && songList[currentTrack] && songList[currentTrack].thumbnail
+                        ? songList[currentTrack].thumbnail : image1
                       }
-
-
                       alt="img"
                     />
                     <div className="song-details-splitter">
@@ -423,10 +463,9 @@ function MusicControlComp(props) {
                       <div style={{ padding: "5px 0px" }}></div>
 
                       <div className="table-td-2-img">
-                        {songList.map((item, index) => (
+                        {songTrackFinalArray.map((item, index) => (
                           <div
-                            onClick={() => handleSongClicker(songList[index]) }
-                            
+                            onClick={() => handleSongClicker(songTrackFinalArray[index]) }                            
                             key={item._id || index}
                             className="songs-collection"
                           >
@@ -442,7 +481,7 @@ function MusicControlComp(props) {
                                   Premium
                                 </button>
                                 <p className="table-mob-artist">
-                                  {item?.artist[0]?.name}
+                                  {item.artist}
                                 </p>
                               </div>
                               <p className="table-song-name">{item.title}</p>
@@ -466,7 +505,7 @@ function MusicControlComp(props) {
                     <img
                       className="mobile-view-song-preview"
                       src={
-                        // activeSong.thumbnail?activeSong.thumbnail : 
+                        activeSong.thumbnail?activeSong.thumbnail :
                         songList &&
                         songList[currentTrack] &&
                         songList[currentTrack].thumbnail
@@ -478,11 +517,8 @@ function MusicControlComp(props) {
                     <div className="poster-song-splitter">
                       <div className="song-name">
                         <p>
-                          {
-                          // activeSong.title?activeSong.title : 
-                          songList &&
-                          songList[currentTrack] &&
-                          songList[currentTrack].title}
+                          {activeSong.title ? activeSong.title : songList && songList[currentTrack] && songList[currentTrack].title}
+                          
                         </p>
                         <p>
                           <AiOutlineHeart className="heart-in" />
@@ -568,9 +604,11 @@ function MusicControlComp(props) {
                       className="drop-arrow"
                     />
                     <div className="table-td-2-img">
-                      {songList.map((item, index) => (
+                      
+                      { uiWait ? (
+                      songTrackFinalArray.map((item, index) => (
                         <div
-                          onClick={() => handleSongClicker(songList[index])}
+                          onClick={() => handleSongClicker(songTrackFinalArray[index])}
                           key={item._id || index}
                           className="songs-collection"
                         >
@@ -586,7 +624,7 @@ function MusicControlComp(props) {
                                 Premium
                               </button>
                               <p className="table-mob-artist">
-                                {item?.artist[0]?.name}
+                                {item.artist}
                               </p>
                             </div>
                             <p className="table-song-name">{item.title}</p>
@@ -595,7 +633,11 @@ function MusicControlComp(props) {
                             <AiOutlineHeart className="fav-remover" />
                           </p>
                         </div>
-                      ))}
+                      )) ): (
+                        <p>Loading...</p>
+
+                      )
+                      }
                     </div>
                   </div>
                 </div>
@@ -611,7 +653,7 @@ function MusicControlComp(props) {
     <>
       <audio
         ref={audioRef}
-        onTimeUpdate={handleTimeUpdate}
+        // onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}
         src={tracks[currentTrack]}
         controls
@@ -636,11 +678,8 @@ function MusicControlComp(props) {
                 <img
                   className="current-playing-song"
                   src={
-                    songList &&
-                    songList[currentTrack] &&
-                    songList[currentTrack].thumbnail
-                      ? songList[currentTrack].thumbnail
-                      : image1
+                    activeSong.thumbnail ? activeSong.thumbnail : songList && songList[currentTrack] && songList[currentTrack].thumbnail
+                    ? songList[currentTrack].thumbnail: image1
                   }
                   alt=""
                 />

@@ -38,7 +38,7 @@ function App() {
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
   const [musicExpander, setMusicExpander] = useState(false);
-  const [urlLinkGenerate, setUrlLinkGenerate] = useState("");
+  // const [urlLinkGenerate, setUrlLinkGenerate] = useState("");
 
   const toggleSidePanel = () => {
     setIsOpen(!isOpen);
@@ -82,9 +82,9 @@ function App() {
     setMusicExpander(value);
   };
 
-  const urlLinks = (urlLinks) => {
-    setUrlLinkGenerate(urlLinks);
-  }
+  // const urlLinks = (urlLinks) => {
+  //   setUrlLinkGenerate(urlLinks);
+  // }
   // console.log("from app.js ", urlLinkGenerate)
 
   return (
@@ -123,7 +123,8 @@ function App() {
 
               {/* <Route path="/albumsongpage2" element={<AlbumSongPage2 />} /> */}
 
-              <Route path='album/:albumName/:albumId' element={<AlbumSongPage2 urlLinks={urlLinks} />} />
+              {/* <Route path='album/:albumName/:albumId' element={<AlbumSongPage2 urlLinks={urlLinks} />} /> */}
+              <Route path='album/:albumName/:albumId' element={<AlbumSongPage2  />} />
               
             </Routes>
           </div>
