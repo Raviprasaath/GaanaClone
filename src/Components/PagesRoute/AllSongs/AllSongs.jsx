@@ -85,7 +85,6 @@ function AllSongs() {
   }
 
   const handleSongClicker = (data) => {
-    console.log("all data -> ", data);
     dispatch(actions.setActiveSong(data));
   };
 
@@ -107,15 +106,15 @@ function AllSongs() {
     <>
       {showContent ? (
         <div>
-          <audio
+          {/* <audio
             ref={audioRef}
             src={currentSongArray.length > 0 ? currentSongArray[0].audio : ""}
             onTimeUpdate={handleTimeUpdate}
-            controls
-            autoPlay
-            muted
+            // controls
+            // autoPlay
+            // muted
             className="audio-hide"
-          />
+          /> */}
           <div>
             <div className="musicCollections">
               <div className="traction-splitter">

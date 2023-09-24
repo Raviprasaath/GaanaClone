@@ -65,7 +65,7 @@
   color: var(--PrimaryColor);
 }
 .lite-mode .navbar-top .navbar-view-changer .search-section .search-bar {
-  border: 2px solid var(--PrimaryColor);
+  border: 1px solid var(--PrimaryColor);
 }
 .lite-mode .navbar-top .navbar-view-changer .search-section .search-bar .search-icon {
   color: var(--PrimaryColor);
@@ -289,7 +289,7 @@
 }
 .navbar-top .navbar-view-changer .search-section .search-bar {
   border-radius: 3rem;
-  border: 2px solid var(--SecondaryColor);
+  border: 1px solid var(--SecondaryColor);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -299,6 +299,7 @@
 }
 .navbar-top .navbar-view-changer .search-section .search-bar .search-icon {
   font-size: 1.2rem;
+  padding-top: 5px;
   color: var(--SecondaryColor);
   cursor: pointer;
 }
@@ -313,6 +314,17 @@
   width: 100%;
   outline: none;
   padding-left: 10px;
+}
+
+.search-section-box {
+  width: 200px;
+  height: 400px;
+  background-color: pink;
+  position: sticky;
+  top: 60px;
+  left: 275px;
+  z-index: 3;
+  color: black;
 }
 
 .list-selector {
@@ -556,7 +568,6 @@
   overflow: unset;
   overflow-x: hidden;
   overflow-y: visible;
-  height: 230px;
 }
 
 .productArtist.card {
@@ -2975,7 +2986,7 @@
   }
   .navbar-top .navbar-view-changer .search-section .search-bar {
     border-radius: 3rem;
-    border: 2px solid var(--SecondaryColor);
+    border: 1px solid var(--SecondaryColor);
     display: flex;
     flex-direction: row;
     justify-content: space-between;

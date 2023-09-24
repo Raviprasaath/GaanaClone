@@ -101,9 +101,7 @@ function App() {
             {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
             <NavbarTop />
 
-            <div className="bg-fill-patch-work"
-              
-            >
+            <div className="bg-fill-patch-work" >
               <SongsCollection />
             </div>
 

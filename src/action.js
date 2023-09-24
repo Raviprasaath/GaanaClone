@@ -63,8 +63,17 @@ const setAllSongsData = (item) => {
     }
 }
 
+const setAlbumData = (item) => {
+    return {
+        type: "SET_ALBUM_SONGS",
+        payload: item
+    }
+}
+
 
 
 export default {
-    toggledarkmode, setActiveItem, setActiveSong, setHappyData, setRomanticData, setTrendingData, setSadSongData, setExcitedData, setAllSongsData
+    toggledarkmode, setActiveItem, setActiveSong, setHappyData, 
+    setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
+    setAllSongsData, setAlbumData
 }

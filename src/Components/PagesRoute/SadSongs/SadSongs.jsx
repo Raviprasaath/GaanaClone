@@ -37,7 +37,6 @@ function PartySongs() {
   }, []);
 
   const handleSongClicker = (data) => {    
-    console.log("sad song -> ", data)
     dispatch(actions.setActiveSong(data));
   } 
 

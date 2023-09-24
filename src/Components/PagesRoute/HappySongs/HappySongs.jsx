@@ -37,7 +37,6 @@ function HappySongs() {
   }, [])
   
   const handleSongClicker = (data) => {  
-    console.log("happy data -> ", data)  
     dispatch(actions.setActiveSong(data));
   }
 

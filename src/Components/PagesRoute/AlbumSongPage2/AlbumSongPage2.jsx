@@ -92,11 +92,11 @@ function AlbumSongPage2() {
   
       console.log("songsOfMovie: ", songsOfMovie);
       setCurrentTrack(songsOfMovie);
+      dispatch(actions.setAlbumData(songsOfMovie));
     }
   }
 
   // console.log("currentSong -> ", currentSong);
-
 
   const handleSongClicker = (data) => {
     console.log("all data -> ", data);
@@ -107,8 +107,9 @@ function AlbumSongPage2() {
     localStorageDataGetting();
   }, []);
 
-
   console.log("currentTrack ", currentTrack);
+
+  
 
   useEffect(() => {
     setTimeout(() => {
@@ -146,12 +147,9 @@ function AlbumSongPage2() {
                 <div className="button-details-splitter">
                   <div className="song-button">
                     <button
-                      onClick={() => handleSongClicker(currentSong)}
-                      className="song-play-btn"
-                    >
+                      onClick={() => handleSongClicker(currentSong)} className="song-play-btn" >
                       Play Song
                     </button>
-
                     <BiHeart className="fav-song-adding" />
                   </div>
                   <div className="songs-side-details">

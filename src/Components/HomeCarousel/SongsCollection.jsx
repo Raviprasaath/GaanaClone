@@ -45,7 +45,7 @@ const SongsCollection = () => {
 
   const [ category, setCategory ] = React.useState("Moods & Genres");
 
-  console.log("testing catogary -> >",category)
+
 
 
   const handleSongSelection = (selectedItem) => {    

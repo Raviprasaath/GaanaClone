@@ -76,7 +76,7 @@
     color: var(--PrimaryColor);
   }
   .navbar-top .navbar-view-changer .search-section .search-bar {
-    border: 2px solid var(--PrimaryColor);
+    border: 1px solid var(--PrimaryColor);
   }
   .navbar-top .navbar-view-changer .search-section .search-bar .search-icon {
     color: var(--PrimaryColor);
@@ -323,7 +323,7 @@
     .search-section {     
       .search-bar {
         border-radius: 3rem;
-        border: 2px solid var(--SecondaryColor);
+        border: 1px solid var(--SecondaryColor);
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -333,11 +333,11 @@
         
         .search-icon {
           font-size: 1.2rem;
+          padding-top: 5px;
           color: var(--SecondaryColor);
           cursor: pointer;
           &:hover {
             opacity: 0.5;
-
           }
         }
         
@@ -353,6 +353,18 @@
       }
     }
   }
+}
+
+
+.search-section-box {
+  width: 200px;
+  height: 400px;
+  background-color: pink;
+  position: sticky;
+  top: 60px;
+  left: 275px;
+  z-index: 3;
+  color: black;
 }
 
 .list-selector {
@@ -642,7 +654,6 @@
   overflow: unset;
   overflow-x: hidden;
   overflow-y: visible;
-  height: 230px;
 }
 
 // artist round carousel
@@ -2430,6 +2441,7 @@
 
 
 
+
 @media screen and (min-width: 360px) {
 
   .largerCarousel {
@@ -3685,7 +3697,7 @@
         width: 50%;   
         .search-bar {
           border-radius: 3rem;
-          border: 2px solid var(--SecondaryColor);
+          border: 1px solid var(--SecondaryColor);
           display: flex;
           flex-direction: row;
           justify-content: space-between;

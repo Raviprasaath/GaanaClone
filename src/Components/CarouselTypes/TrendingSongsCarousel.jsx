@@ -8,7 +8,6 @@ const TrendingSongsCarousel = (props) => {
   const dispatch = useDispatch();
   
   const handleSongClicker = (data) => {
-    console.log(data)
     dispatch(actions.setActiveSong(data));
   }
 

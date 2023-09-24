@@ -36,8 +36,7 @@ function Romance() {
     }, 0);
   }, []);
 
-  const handleSongClicker = (data) => {  
-    console.log("happy data -> ", data)  
+  const handleSongClicker = (data) => {   
     dispatch(actions.setActiveSong(data));
   }
 

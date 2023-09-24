@@ -86,7 +86,6 @@ function ExitedSongs() {
   }
 
   const handleSongClicker = (data) => {
-    console.log("excited data -> ",data);
     dispatch(actions.setActiveSong(data));
   };
 

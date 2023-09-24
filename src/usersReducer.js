@@ -34,6 +34,9 @@ function usersReducer(state = initialState, action) {
         case 'SET_ALL_SONGS': {
             return { ...state, allSongs: action.payload }
         }
+        case 'SET_ALBUM_SONGS': {
+            return { ...state, albumSongs: action.payload }
+        }
         default:
             return state;
     }

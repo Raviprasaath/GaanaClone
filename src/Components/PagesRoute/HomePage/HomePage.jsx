@@ -32,7 +32,6 @@ function HomePage() {
     const trendingData = parsedLocalStorageData.data;
     dispatch(action.setAllSongsData(trendingData));
     setAllSongs(trendingData);
-    console.log("checking all songs -> ", allsongs)
 
     const ts = trendingData?.filter((item) => {
       return item.featured === "Trending songs";

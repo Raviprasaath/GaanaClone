@@ -1,4 +1,4 @@
-import { AiOutlineSearch, AiOutlineDown } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineDown, AiOutlineClose } from "react-icons/ai";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
 import { MdBrightness2 } from "react-icons/md";
 import MainLogo from "../../assets/main-logo.png";
@@ -11,6 +11,7 @@ import action from '../../action.js'
 import { Link } from 'react-router-dom'
 
 import LoginPage from '../../Components/LoginPage/LoginPage.jsx'
+import SearchSection from "../SearchSection/SearchSection";
 
 function NavbarTop() {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
@@ -20,7 +21,14 @@ function NavbarTop() {
 
   const dispatch = useDispatch();
 
- 
+  const [searchSection, setSearchSection] = useState(false);
+
+  const handlerSearch = () => {
+    setSearchSection(true);
+  }
+  const handleCloseSearch = () => {
+    setSearchSection(false);
+  }
 
   const handleLogo = () => {
     dispatch(action.setActiveItem())
@@ -68,7 +76,11 @@ function NavbarTop() {
                   type="text"
                   className="input-search-option"
                   placeholder="Search Artists, Songs, Albums"
+                  onClick={handlerSearch}
                 />
+                {searchSection && 
+                  <AiOutlineClose onClick={handleCloseSearch} className="search-icon"/>
+                } 
               </span>
             </span>
             <div className="buttons-area">
@@ -101,12 +113,17 @@ function NavbarTop() {
                   type="text"
                   className="input-search-option"
                   placeholder="Search Artists, Songs, Albums"
+                  onClick={handlerSearch}
                 />
+                {searchSection &&
+                  <AiOutlineClose onClick={handleCloseSearch} className="search-icon"/>
+                }
               </span>
             </span>
           </div>
         )}
       </div>
+      {searchSection && <SearchSection />}
     </>
   );
 }
