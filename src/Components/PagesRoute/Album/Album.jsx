@@ -1,31 +1,42 @@
 import { useState, useEffect } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 function Album() {
   const [dataFromStore, setDataFromStore] = useState([]);
   const [renderCard, setRenderCard] = useState(false);
-
-  function localStorageDataGetting() {
-    const localStorageFiltered = JSON.parse(localStorage.getItem("localAlbum"));
-    const storedData = localStorageFiltered.data;
-    const result = storedData.map((item) => ({
-      id: item._id || "",
-      imageUrl: item.image || "",
-      title: item.title || "",
-      description: item.description || "",
-      artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
-      audioUrl: (item.artist && item.artist[0] && item.artist[0].songs) || "",
-    }));
-    setDataFromStore(result);
-  }
+ 
 
   useEffect(() => {
-    localStorageDataGetting();
-    setTimeout(() => {
-      setRenderCard(true);
-    }, 0);
+    async function dataGetting() {
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          'projectId': '8jf3b15onzua'
+        };
+        const response = await axios.get("https://academics.newtonschool.co/api/v1/music/album?limit=100", { headers: headers });
+        const result = response.data;
+        const storedData = result.data;
+        const result2 = storedData.map((item) => ({
+          id: item._id || "",
+          imageUrl: item.image || "",
+          title: item.title || "",
+          description: item.description || "",
+          artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+          audioUrl: (item.artist && item.artist[0] && item.artist[0].songs) || "",
+        }));
+        setDataFromStore(result2);
+        setRenderCard(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    dataGetting();
   }, []);
+
+  // console.log("dataFromStore", dataFromStore)
 
   return (
     <>

@@ -6,14 +6,13 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import actions from "../../action.js";
 import { useDispatch } from "react-redux";
-import action from '../../action.js'
+import action from "../../action.js";
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import LoginPage from '../../Components/LoginPage/LoginPage.jsx'
-import SearchSection from "../SearchSection/SearchSection";
+import LoginPage from "../../Components/LoginPage/LoginPage.jsx";
 
-function NavbarTop() {
+function NavbarTop( {handlerSearchBar} ) {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
   const [loginState, setLoginState] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -23,16 +22,20 @@ function NavbarTop() {
 
   const [searchSection, setSearchSection] = useState(false);
 
+
   const handlerSearch = () => {
     setSearchSection(true);
-  }
+    handlerSearchBar(true);
+  };
   const handleCloseSearch = () => {
     setSearchSection(false);
-  }
+    handlerSearchBar(false);
+  };
 
+  
   const handleLogo = () => {
-    dispatch(action.setActiveItem())
-  }
+    dispatch(action.setActiveItem());
+  };
 
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
@@ -40,8 +43,8 @@ function NavbarTop() {
   };
 
   useEffect(() => {
-    const handleResize = () => {      
-      setScreenSize(window.innerWidth > 960)
+    const handleResize = () => {
+      setScreenSize(window.innerWidth > 960);
     };
 
     window.addEventListener("resize", handleResize);
@@ -53,19 +56,18 @@ function NavbarTop() {
 
   const openLoginForm = () => {
     setLoginState(!loginState);
-  }
+  };
 
   return (
     <>
-
       <LoginPage loginState={loginState} />
       <div className="navbar-top">
         {screenSize ? (
           <div className="navbar-view-changer">
-            <div  className="main-logo">
-                <Link to ="/">
-                  <img onClick={handleLogo} src={MainLogo} alt="main-logo" />
-                </Link>
+            <div className="main-logo">
+              <Link to="/">
+                <img onClick={handleLogo} src={MainLogo} alt="main-logo" />
+              </Link>
             </div>
             <span className="search-section">
               <span className="search-bar">
@@ -78,24 +80,27 @@ function NavbarTop() {
                   placeholder="Search Artists, Songs, Albums"
                   onClick={handlerSearch}
                 />
-                {searchSection && 
-                  <AiOutlineClose onClick={handleCloseSearch} className="search-icon"/>
-                } 
+                {searchSection && (
+                  <AiOutlineClose
+                    onClick={handleCloseSearch}
+                    className="search-icon"
+                  />
+                )}
               </span>
             </span>
             <div className="buttons-area">
               <Link to="/subscription">
                 <button className="get-gaana-plus">Get Gaana Plus</button>
               </Link>
-              <button className="dark-light-toggler" onClick={handleDarkModeToggle}>
-                {darkMode ? (
-                  <BsFillBrightnessHighFill  />
-                ) : (
-                  <MdBrightness2  />                
-                )
-              }
+              <button
+                className="dark-light-toggler"
+                onClick={handleDarkModeToggle}
+              >
+                {darkMode ? <BsFillBrightnessHighFill /> : <MdBrightness2 />}
               </button>
-              <button className="user-login" onClick={openLoginForm} >Log In / Sign Up</button>
+              <button className="user-login" onClick={openLoginForm}>
+                Log In / Sign Up
+              </button>
             </div>
           </div>
         ) : (
@@ -115,15 +120,17 @@ function NavbarTop() {
                   placeholder="Search Artists, Songs, Albums"
                   onClick={handlerSearch}
                 />
-                {searchSection &&
-                  <AiOutlineClose onClick={handleCloseSearch} className="search-icon"/>
-                }
+                {searchSection && (
+                  <AiOutlineClose
+                    onClick={handleCloseSearch}
+                    className="search-icon"
+                  />
+                )}
               </span>
             </span>
           </div>
         )}
       </div>
-      {searchSection && <SearchSection />}
     </>
   );
 }

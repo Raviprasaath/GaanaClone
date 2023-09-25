@@ -27,18 +27,15 @@ import DataFetch from "./Components/DataFetch/DataFetch.jsx";
 import MySongs from "./Components/PagesRoute/MySongs/MySongs.jsx";
 import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage2.jsx";
 
-
+import SearchSection from "./Components/SearchSection/SearchSection.jsx";
 
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
-
-  // console.log("print dark mode val", darkMode);
 
   // music player maximize and minimize
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
   const [musicExpander, setMusicExpander] = useState(false);
-  // const [urlLinkGenerate, setUrlLinkGenerate] = useState("");
 
   const toggleSidePanel = () => {
     setIsOpen(!isOpen);
@@ -74,23 +71,21 @@ function App() {
     };
   }, []);
 
-  // toggleCallback={toggling}
-
-  // DARKMODEVAL::{darkMode}
-
   const onHandlerExpander = (value) => {
     setMusicExpander(value);
   };
 
-  // const urlLinks = (urlLinks) => {
-  //   setUrlLinkGenerate(urlLinks);
-  // }
-  // console.log("from app.js ", urlLinkGenerate)
+  const [searchBar, setSearchBar] = useState(false);
+
+  const handlerSearchBar = (value) => {
+    setSearchBar(value);
+  };
 
   return (
     <>
-      <div className={`app-component ${ darkMode ? `dark-mode` : 'lite-mode'}`}   >
+      <div className="search-bar-section">{searchBar && <SearchSection />}</div>
 
+      <div className={`app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
         {musicExpander && (
           <div>
             <button className="navbar-btn" onClick={toggleSidePanel}>
@@ -99,14 +94,16 @@ function App() {
             {isOpen && <div className="opacity-style-middle"></div>}
             <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
             {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
-            <NavbarTop />
 
-            <div className="bg-fill-patch-work" >
+            <NavbarTop handlerSearchBar={handlerSearchBar} />
+
+            <div className="bg-fill-patch-work">
               <SongsCollection />
             </div>
 
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/album" element={<Album />} />
               <Route path="/allsongs" element={<AllSongs />} />
               <Route path="/happy" element={<HappySongs />} />
               <Route path="/exited" element={<ExitedSongs />} />
@@ -114,7 +111,6 @@ function App() {
               <Route path="/romance" element={<Romance />} />
               <Route path="/songsfrom90s2000s" element={<ComingSoonPage />} />
 
-              <Route path="/album" element={<Album />} />
               <Route path="/comingsoon" element={<ComingSoonPage />} />
               <Route path="/subscription" element={<SubscriptionPage />} />
               <Route path="/mysongs" element={<MySongs />} />
@@ -122,8 +118,10 @@ function App() {
               {/* <Route path="/albumsongpage2" element={<AlbumSongPage2 />} /> */}
 
               {/* <Route path='album/:albumName/:albumId' element={<AlbumSongPage2 urlLinks={urlLinks} />} /> */}
-              <Route path='album/:albumName/:albumId' element={<AlbumSongPage2  />} />
-              
+              <Route
+                path="album/:albumName/:albumId"
+                element={<AlbumSongPage2 />}
+              />
             </Routes>
           </div>
         )}
@@ -132,8 +130,6 @@ function App() {
 
         <DataFetch />
         <MusicControlComp expander={onHandlerExpander} />
-
-        
 
         <LoginPage />
       </div>

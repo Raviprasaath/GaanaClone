@@ -355,17 +355,114 @@
   }
 }
 
+.search-bar-section {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
 
 .search-section-box {
-  width: 200px;
-  height: 400px;
-  background-color: pink;
-  position: sticky;
-  top: 60px;
-  left: 275px;
-  z-index: 3;
-  color: black;
+  width: 85%;
+  height: 100px;
+  position: absolute;
+  top: 110px;
+  left: 30px;
+  z-index: 0;
+  
+  .search-results {
+    background-color: var(--PrimaryColor3);
+    max-height: 220px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    
+    .results-rows {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: var(--SecondaryColor);
+      img {
+        width: 50px;
+      }
+      .movie-name {
+        max-width: 30%;
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+        white-space: nowrap;
+        font-size: 1rem;
+      }
+      .artist-name {
+        max-width: 30%;
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+        white-space: nowrap;
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .search-results-lap {
+    width: 50%;
+    background-color: var(--PrimaryColor3);
+    max-height: 400px;
+    overflow: scroll;
+    position: relative;
+
+    .title {
+      color: white;
+    }
+
+    .search-cards {
+      .swiper {
+        padding: 0 50px;
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+
+        
+        .swiper-slide {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .movie-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+
+            .poster {
+              .movie-poster {
+                display: block;
+                width: 120px;
+                height: auto;
+                object-fit: cover;
+              }
+            } 
+            .movie-name {
+              font-size: 0.9rem;
+              color: white;
+            }
+            .artist-name {
+              color: white;
+              font-size: 0.7rem;
+            }
+            
+            
+          }
+          
+        }
+      }
+    }
+  }
 }
+
+
+
 
 .list-selector {
   color: var(--SecondaryColor);
@@ -2733,9 +2830,9 @@
       }
     }
   }
-
   
-  }
+  
+}
 
 @media screen and (min-width: 480px) {
   
@@ -3070,6 +3167,8 @@
     }
     
   } 
+
+
 }
 
 @media screen and (min-width: 600px) {
@@ -4120,7 +4219,10 @@
     }
   
   }
-
+  .search-section-box {
+    left: 10rem;
+    top: 60px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -4254,6 +4356,9 @@
     }
   
   }
+  .search-section-box {
+    left: 12rem;
+  }
 }
 
 @media screen and (min-width: 1106px) {
@@ -4265,7 +4370,22 @@
       }
     }
   }
-
+  .search-section-box {
+    left: 14rem;
+  }
+}
+@media screen and (min-width: 1206px) {
+  .music-control-comp {    
+    .large-screen-controls {
+      .song-playing-area2 {
+        width: 700px;
+        gap: 2rem;  
+      }
+    }
+  }
+  .search-section-box {
+    left: 17rem;
+  }
 }
 
 @media screen and (min-width: 1332px) {
@@ -4330,5 +4450,8 @@
       }      
     }
   
+  }
+  .search-section-box {
+    left: 18rem;
   }
 }

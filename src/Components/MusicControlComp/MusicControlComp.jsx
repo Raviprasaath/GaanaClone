@@ -43,13 +43,16 @@ function MusicControlComp(props) {
   const allSongsList = useSelector((state) => state.usersData.allSongs);
   const albumSongsList = useSelector((state)=>state.usersData.albumSongs);
 
-  // console.log("current song ", activeSong);
+  console.log("current song ", activeSong);
   let urlCheck = location.pathname;
+  
 
   let flag = false;
-  if (urlCheck.includes("album")) {
+  // if (urlCheck.includes("album") && 
+  if (activeSong.id) {
     flag = true;
   }
+
 
   if (location.pathname === `/allsongs` && !playing) {
     songList = allSongsList;
@@ -58,7 +61,7 @@ function MusicControlComp(props) {
     songList = albumSongsList;
     console.log("active songs", activeSong);
     console.log("albumSongsList from Music", albumSongsList);
-  } else {
+  } else if (!flag) {
     if (activeSong.featured === "Trending songs") {
       songList = topTrendingSongList;
     } else if (activeSong.mood === "happy") {
@@ -74,7 +77,7 @@ function MusicControlComp(props) {
     }
   }
 
-  console.log("songList", songList)
+  // console.log("songList", songList)
 
   const handleSongClicker = (data) => {
     if (audioRef.current) {
@@ -136,7 +139,7 @@ function MusicControlComp(props) {
         });    
     }
   }
-  console.log("songAllDetails", songAllDetails);
+  // console.log("songAllDetails", songAllDetails);
 
   // #region ------------ screen size control ---------
 

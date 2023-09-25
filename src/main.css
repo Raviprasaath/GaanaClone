@@ -316,15 +316,95 @@
   padding-left: 10px;
 }
 
-.search-section-box {
-  width: 200px;
-  height: 400px;
-  background-color: pink;
+.search-bar-section {
   position: sticky;
-  top: 60px;
-  left: 275px;
+  top: 0;
   z-index: 3;
-  color: black;
+}
+
+.search-section-box {
+  width: 85%;
+  height: 100px;
+  position: absolute;
+  top: 110px;
+  left: 30px;
+  z-index: 0;
+}
+.search-section-box .search-results {
+  background-color: var(--PrimaryColor3);
+  max-height: 220px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.search-section-box .search-results .results-rows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--SecondaryColor);
+}
+.search-section-box .search-results .results-rows img {
+  width: 50px;
+}
+.search-section-box .search-results .results-rows .movie-name {
+  max-width: 30%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1rem;
+}
+.search-section-box .search-results .results-rows .artist-name {
+  max-width: 30%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+.search-section-box .search-results-lap {
+  width: 50%;
+  background-color: var(--PrimaryColor3);
+  max-height: 400px;
+  overflow: scroll;
+  position: relative;
+}
+.search-section-box .search-results-lap .title {
+  color: white;
+}
+.search-section-box .search-results-lap .search-cards .swiper {
+  padding: 0 50px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.search-section-box .search-results-lap .search-cards .swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+.search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container .poster .movie-poster {
+  display: block;
+  width: 120px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container .movie-name {
+  font-size: 0.9rem;
+  color: white;
+}
+.search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container .artist-name {
+  color: white;
+  font-size: 0.7rem;
 }
 
 .list-selector {
@@ -3338,6 +3418,10 @@
   .comming-soon-page .coming-soon-image .content {
     font-size: 2rem;
   }
+  .search-section-box {
+    left: 10rem;
+    top: 60px;
+  }
 }
 @media screen and (min-width: 1024px) {
   .largerCarousel {
@@ -3450,11 +3534,26 @@
   .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
     font-size: 1.1rem;
   }
+  .search-section-box {
+    left: 12rem;
+  }
 }
 @media screen and (min-width: 1106px) {
   .music-control-comp .large-screen-controls .song-playing-area2 {
     width: 700px;
     gap: 2rem;
+  }
+  .search-section-box {
+    left: 14rem;
+  }
+}
+@media screen and (min-width: 1206px) {
+  .music-control-comp .large-screen-controls .song-playing-area2 {
+    width: 700px;
+    gap: 2rem;
+  }
+  .search-section-box {
+    left: 17rem;
   }
 }
 @media screen and (min-width: 1332px) {
@@ -3517,5 +3616,8 @@
   }
   .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
     font-size: 1.1rem;
+  }
+  .search-section-box {
+    left: 18rem;
   }
 }/*# sourceMappingURL=main.css.map */

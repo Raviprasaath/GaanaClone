@@ -2,39 +2,66 @@ import { useState, useEffect } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
+import axios from 'axios';
 
 function PartySongs() {
   const [dataFromStore, setDataFromStore] = useState([]);
   const [renderCard, setRenderCard] = useState(false);
   const dispatch = useDispatch();
 
-  function localStorageDataGetting() {
-    const localStorageFiltered = JSON.parse(localStorage.getItem("localSongs"));
-    const storedData = localStorageFiltered.data;
+  // function localStorageDataGetting() {
+  //   const localStorageFiltered = JSON.parse(localStorage.getItem("localSongs"));
+  //   const storedData = localStorageFiltered.data;
     
-    const result = storedData
-      .filter((item) => item.mood === "sad")
-      .map((item) => ({
-        key: item._id || "",
-        url: item.thumbnail || "",
-        name: item.title || "",
-        audio: item.audio_url || "",
-        description:
-        (item.artist && item.artist[0] && item.artist[0].description) || "",
-        artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
-        mood: item.mood || "",
-        songId: item._id || "",
-      }));
+  //   const result = storedData
+  //     .filter((item) => item.mood === "sad")
+  //     .map((item) => ({
+  //       key: item._id || "",
+  //       url: item.thumbnail || "",
+  //       name: item.title || "",
+  //       audio: item.audio_url || "",
+  //       description:
+  //       (item.artist && item.artist[0] && item.artist[0].description) || "",
+  //       artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+  //       mood: item.mood || "",
+  //       songId: item._id || "",
+  //     }));
 
-    setDataFromStore(result);
-  }
+  //   setDataFromStore(result);
+  // }
 
   useEffect(() => {
-    localStorageDataGetting();
-    setTimeout(() => {
-      setRenderCard(true);
-    }, 0);
+    async function dataGetting() {
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          'projectId': '8jf3b15onzua'
+        };
+        const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song?limit=100", { headers: headers });
+        const result = response.data;
+        const result2 = result.data.filter((item)=>item.mood==='sad')
+          .map((item) => ({
+          key: item._id,
+          url: item.thumbnail || "",
+          name: item.title || "",
+          audio: item.audio_url || "",
+          description:
+            (item.artist && item.artist[0] && item.artist[0].description) || "",
+          artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+          mood: item.mood || "",
+          songId: item._id || "",
+        }));
+        setDataFromStore(result2);
+        setRenderCard(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    dataGetting();
   }, []);
+
+
 
   const handleSongClicker = (data) => {    
     dispatch(actions.setActiveSong(data));

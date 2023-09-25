@@ -7,6 +7,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsPlayCircle, BsFillPlayFill,BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
+import axios from 'axios';
 
 function ExitedSongs() {
   const [showContent, setShowContent] = useState(false);
@@ -64,45 +65,48 @@ function ExitedSongs() {
   }, [scrolling]);
 
 
-  function localStorageDataGetting() {
-    try {
-      const localStorageFiltered = JSON.parse(localStorage.getItem('localSongs'));    
-      const storedData = localStorageFiltered.data;
-      const result = storedData.filter((item)=> item.mood==='excited')
-        .map((item) => ({      
-          key: item._id,   
+
+  useEffect(() => {
+    async function dataGetting() {
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          'projectId': '8jf3b15onzua'
+        };
+        const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song?limit=100", { headers: headers });
+        const result = response.data;
+        const result2 = result.data.filter((item)=>item.mood==='excited')
+          .map((item) => ({
+          key: item._id,
           url: item.thumbnail || "",
           name: item.title || "",
           audio: item.audio_url || "",
-          description: (item.artist && item.artist[0] && item.artist[0].description) || "",
+          description:
+            (item.artist && item.artist[0] && item.artist[0].description) || "",
           artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
-          mood: (item.mood) || "",
+          mood: item.mood || "",
           songId: item._id || "",
-        }))          
-        setCurrentSong(result)
-    } catch (error) {
-      console.log(error)
-    } 
-  }
+        }));
+        setCurrentSong(result2);
+        setShowContent(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
 
+    dataGetting();
+  }, []);
+
+
+
+  
   const handleSongClicker = (data) => {
     dispatch(actions.setActiveSong(data));
   };
 
-  useEffect(() => {
-    localStorageDataGetting();
-  }, []);
-
   const currentSongArray = Object.keys(currentSong).map(
     (key) => currentSong[key]
   );
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowContent(true);
-    }, 0);
-  });
-  
   
   return (
     <>
@@ -288,3 +292,40 @@ function ExitedSongs() {
 }
 
 export default ExitedSongs;
+
+
+
+  // function localStorageDataGetting() {
+  //   try {
+  //     const localStorageFiltered = JSON.parse(localStorage.getItem('localSongs'));    
+  //     const storedData = localStorageFiltered.data;
+  //     const result = storedData.filter((item)=> item.mood==='excited')
+  //       .map((item) => ({      
+  //         key: item._id,   
+  //         url: item.thumbnail || "",
+  //         name: item.title || "",
+  //         audio: item.audio_url || "",
+  //         description: (item.artist && item.artist[0] && item.artist[0].description) || "",
+  //         artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+  //         mood: (item.mood) || "",
+  //         songId: item._id || "",
+  //       }))          
+  //       setCurrentSong(result)
+  //   } catch (error) {
+  //     console.log(error)
+  //   } 
+  // }
+
+
+
+  // useEffect(() => {
+  //   localStorageDataGetting();
+  // }, []);
+
+
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowContent(true);
+  //   }, 0);
+  // });

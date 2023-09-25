@@ -7,6 +7,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsPlayCircle, BsFillPlayFill, BsThreeDotsVertical, } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
+import axios from 'axios';
 
 function AllSongs() {
   const [showContent, setShowContent] = useState(false);
@@ -60,11 +61,20 @@ function AllSongs() {
     };
   }, [scrolling]);
 
-  function localStorageDataGetting() {
-    try {
-      const fromLocalStorage = JSON.parse(localStorage.getItem("localSongs"));
-      if (fromLocalStorage && fromLocalStorage.data) {
-        const updatedSongs = fromLocalStorage.data.map((item) => ({
+  
+
+
+  useEffect(() => {
+    async function dataGetting() {
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          'projectId': '8jf3b15onzua'
+        };
+        const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song?limit=100", { headers: headers });
+        const result = response.data;
+        const storedData = result.data;
+        const result2 = storedData.map((item) => ({
           key: item._id,
           url: item.thumbnail || "",
           name: item.title || "",
@@ -75,32 +85,35 @@ function AllSongs() {
           mood: item.mood || "",
           songId: item._id || "",
         }));
-        setCurrentSong(updatedSongs);
-      } else {
-        console.error("Data not found in local storage.");
+        setCurrentSong(result2);
+        setShowContent(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    } catch (error) {
-      console.error("Error parsing data from local storage:", error);
     }
-  }
+
+    dataGetting();
+  }, []);
 
   const handleSongClicker = (data) => {
     dispatch(actions.setActiveSong(data));
   };
 
-  useEffect(() => {
-    localStorageDataGetting();
-  }, []);
 
+
+
+
+
+
+
+
+
+
+  
   const currentSongArray = Object.keys(currentSong).map(
     (key) => currentSong[key]
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowContent(true);
-    }, 0);
-  });
 
   return (
     <>
@@ -285,3 +298,45 @@ function AllSongs() {
 }
 
 export default AllSongs;
+
+
+
+
+
+
+
+// function localStorageDataGetting() {
+  //   try {
+  //     const fromLocalStorage = JSON.parse(localStorage.getItem("localSongs"));
+  //     if (fromLocalStorage && fromLocalStorage.data) {
+  //       const updatedSongs = fromLocalStorage.data.map((item) => ({
+  //         key: item._id,
+  //         url: item.thumbnail || "",
+  //         name: item.title || "",
+  //         audio: item.audio_url || "",
+  //         description:
+  //           (item.artist && item.artist[0] && item.artist[0].description) || "",
+  //         artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+  //         mood: item.mood || "",
+  //         songId: item._id || "",
+  //       }));
+  //       setCurrentSong(updatedSongs);
+  //     } else {
+  //       console.error("Data not found in local storage.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error parsing data from local storage:", error);
+  //   }
+  // }
+
+
+
+  // useEffect(() => {
+  //   localStorageDataGetting();
+  // }, []);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowContent(true);
+  //   }, 0);
+  // });

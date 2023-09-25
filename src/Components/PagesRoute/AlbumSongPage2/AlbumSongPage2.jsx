@@ -8,7 +8,12 @@ import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsPlayCircle, BsFillPlayFill, BsThreeDotsVertical, } from "react-icons/bs";
+import {
+  BsPlayCircle,
+  BsFillPlayFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
+import axios from "axios";
 
 function AlbumSongPage2() {
   const [showContent, setShowContent] = useState(false);
@@ -33,7 +38,11 @@ function AlbumSongPage2() {
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart( 2, "0" )}`; };
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+      2,
+      "0"
+    )}`;
+  };
 
   const formatTime2 = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -63,59 +72,61 @@ function AlbumSongPage2() {
 
   // console.log(albumId, albumName, " id checking");
 
-  function localStorageDataGetting() {
-    const fromLocalStorage = JSON.parse(localStorage.getItem("localAlbum"));
-    const index = fromLocalStorage.data.findIndex(
-      (item) => item._id === albumId
-    );
-    const selectedSong = fromLocalStorage.data[index];
+ 
 
-    const updatedSongs = {
-      key: selectedSong._id,
-      url: selectedSong.image,
-      name: selectedSong.title || "",
-      audio: selectedSong.songs || "",
-      description: selectedSong.description || "",
-      artist: selectedSong.artists,
-      id: selectedSong._id,
+  useEffect(() => {
+    async function dataGetting() {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          projectId: "8jf3b15onzua",
+        };
+        const response = await axios.get(
+          "https://academics.newtonschool.co/api/v1/music/album?limit=100",
+          { headers: headers }
+        );
+        const result = response.data;
+        const index = result.data.findIndex((item) => item._id === albumId);
+        const selectedSong = result.data[index];
+        const updatedSongs = {
+          key: selectedSong._id,
+          url: selectedSong.image,
+          name: selectedSong.title || "",
+          audio: selectedSong.songs || "",
+          description: selectedSong.description || "",
+          artist: selectedSong.artists,
+          id: selectedSong._id,
+        };
+        setCurrentSong(updatedSongs);
 
-    };
-    setCurrentSong(updatedSongs);
-  
-    if (updatedSongs && updatedSongs.audio) {
-      const songsOfMovie = updatedSongs.audio.map((item) => ({
-        audio: item.audio_url || '', 
-        songName: item.title || '',
-        image: updatedSongs.url || '',
-        id: item._id,
-      }));
-  
-      console.log("songsOfMovie: ", songsOfMovie);
-      setCurrentTrack(songsOfMovie);
-      dispatch(actions.setAlbumData(songsOfMovie));
+        if (updatedSongs && updatedSongs.audio) {
+          const songsOfMovie = updatedSongs.audio.map((item) => ({
+            audio: item.audio_url || "",
+            songName: item.title || "",
+            image: updatedSongs.url || "",
+            id: item._id,
+          }));
+
+          console.log("songsOfMovie: ", songsOfMovie);
+          setCurrentTrack(songsOfMovie);
+          setShowContent(true);
+          // dispatch(actions.setAlbumData(songsOfMovie));
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
-  }
 
-  // console.log("currentSong -> ", currentSong);
+    dataGetting();
+  }, []);
 
+  console.log("currentSong -> ", currentSong);
+  
   const handleSongClicker = (data) => {
     console.log("all data -> ", data);
+    dispatch(actions.setAlbumData(currentTrack));
     dispatch(actions.setActiveSong(data));
   };
-
-  useEffect(() => {
-    localStorageDataGetting();
-  }, []);
-
-  console.log("currentTrack ", currentTrack);
-
-  
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowContent(true);
-    }, 0);
-  }, []);
 
   return (
     <>
@@ -135,7 +146,7 @@ function AlbumSongPage2() {
               <div className="traction-splitter">
                 <div className="track-section">
                   <AiOutlinePlayCircle
-                    onClick={() => handleSongClicker(currentSong)}
+                    onClick={() => handleSongClicker(currentTrack[0])}
                     className="prime-poster-play poster-play-option"
                   />
                   <img
@@ -147,7 +158,9 @@ function AlbumSongPage2() {
                 <div className="button-details-splitter">
                   <div className="song-button">
                     <button
-                      onClick={() => handleSongClicker(currentSong)} className="song-play-btn" >
+                      onClick={() => handleSongClicker(currentTrack[0])}
+                      className="song-play-btn"
+                    >
                       Play Song
                     </button>
                     <BiHeart className="fav-song-adding" />
@@ -158,11 +171,11 @@ function AlbumSongPage2() {
                       <div className="song-movie-name">
                         (From {currentSong.name}) Song |{" "}
                         <span>
-                        {
-                          currentSong.artist &&
+                          {currentSong.artist &&
                           currentSong.artist[0] &&
-                          currentSong.artist[0].name ? currentSong.artist[0].name : ""
-                        }
+                          currentSong.artist[0].name
+                            ? currentSong.artist[0].name
+                            : ""}
                         </span>
                       </div>
                     </div>
@@ -187,7 +200,7 @@ function AlbumSongPage2() {
                   <p className="song-name">{currentSong.name} </p>
                 </div>
                 <button
-                  onClick={() => handleSongClicker(currentSong)}
+                  onClick={() => handleSongClicker(currentTrack[0])}
                   className="track-list-playing-option"
                 >
                   Play All
@@ -212,7 +225,10 @@ function AlbumSongPage2() {
                     </thead>
                     <tbody className="table-body-container">
                       {currentTrack.map((tracks, index) => (
-                        <tr key={tracks.id || index} onClick={() => handleSongClicker(currentTrack[index])} >
+                        <tr
+                          key={tracks.id || index}
+                          onClick={() => handleSongClicker(currentTrack[index])}
+                        >
                           <td className="table-col-1">{index + 1}</td>
                           <td className="table-col-2">
                             <div className="track-img-play">
@@ -232,7 +248,9 @@ function AlbumSongPage2() {
                             <p className="singer-name"> {} </p>
                           </td>
                           <td className="table-col-4">
-                            <p className="track-movie-name">{tracks.songName}</p>
+                            <p className="track-movie-name">
+                              {tracks.songName}
+                            </p>
                           </td>
                           <td className="table-col-5">
                             <p className="track-duration">
@@ -249,7 +267,7 @@ function AlbumSongPage2() {
                 <div className="table-mobile-container">
                   <table>
                     <tbody>
-                      {currentTrack.map((item, index) => (                        
+                      {currentTrack.map((item, index) => (
                         <tr
                           key={item.id || index}
                           className="table-tr-mob"
@@ -334,8 +352,49 @@ function AlbumSongPage2() {
         <div></div>
       )}
     </>
-
   );
 }
 
 export default AlbumSongPage2;
+
+
+ // function localStorageDataGetting() {
+  //   const fromLocalStorage = JSON.parse(localStorage.getItem("localAlbum"));
+  //   const index = fromLocalStorage.data.findIndex(
+  //     (item) => item._id === albumId
+  //   );
+  //   const selectedSong = fromLocalStorage.data[index];
+
+  //   const updatedSongs = {
+  //     key: selectedSong._id,
+  //     url: selectedSong.image,
+  //     name: selectedSong.title || "",
+  //     audio: selectedSong.songs || "",
+  //     description: selectedSong.description || "",
+  //     artist: selectedSong.artists,
+  //     id: selectedSong._id,
+
+  //   };
+  //   setCurrentSong(updatedSongs);
+
+  //   if (updatedSongs && updatedSongs.audio) {
+  //     const songsOfMovie = updatedSongs.audio.map((item) => ({
+  //       audio: item.audio_url || '',
+  //       songName: item.title || '',
+  //       image: updatedSongs.url || '',
+  //       id: item._id,
+  //     }));
+
+  //     console.log("songsOfMovie: ", songsOfMovie);
+  //     setCurrentTrack(songsOfMovie);
+  //     dispatch(actions.setAlbumData(songsOfMovie));
+  //   }
+  // }
+  // useEffect(() => {
+  //   localStorageDataGetting();
+  // }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowContent(true);
+  //   }, 0);
+  // }, []);

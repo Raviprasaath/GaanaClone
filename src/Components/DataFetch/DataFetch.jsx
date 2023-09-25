@@ -99,8 +99,8 @@ function DataFetch () {
 
 
     useEffect (() => {
-        handleSongs();
-        handleAlbums();
+        // handleSongs();
+        // handleAlbums();
     }, [])
 
     return (

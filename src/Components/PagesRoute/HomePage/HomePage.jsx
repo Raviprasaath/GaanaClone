@@ -10,10 +10,11 @@ import { productData } from "../../../Components/HomeCarousel/Data.jsx";
 import TrendingSongsCarousel from "../../CarouselTypes/TrendingSongsCarousel.jsx";
 
 import { responsive } from "../../CarouselTypes/CarouselResponsive.jsx";
-
 import { useDispatch } from "react-redux";
-
 import action from '../../../action.js'
+
+import axios from 'axios';
+
 
 function HomePage() {
   const [trendingSongs, setTrendingSongs] = useState();
@@ -25,54 +26,66 @@ function HomePage() {
 
   const dispatch = useDispatch();
   
-  function fetching() {
-    const localStorageData = localStorage.getItem("localSongs");
-    const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
-    
-    const trendingData = parsedLocalStorageData.data;
-    dispatch(action.setAllSongsData(trendingData));
-    setAllSongs(trendingData);
-
-    const ts = trendingData?.filter((item) => {
-      return item.featured === "Trending songs";
-    });
-    setTrendingSongs(ts);
-
-    dispatch(action.setTrendingData(ts));
-    
-    
-    const happySongs = parsedLocalStorageData.data;
-    const hsd = happySongs?.filter((item) => {
-      return item.mood === "happy";
-    });
-    setHappySongsData(hsd);
-    
-    dispatch(action.setHappyData(hsd));
-
-    const romanticSongs = parsedLocalStorageData.data;
-    const rsd = romanticSongs?.filter((item) => {
-      return item.mood === "romantic";
-    });
-    setRomanticSongsData(rsd);
-    
-    dispatch(action.setRomanticData(rsd));
-
-    const sadSongs = parsedLocalStorageData.data;
-    const ssd = sadSongs?.filter((item) => {
-      return item.mood === "sad";
-    });
-    
-    dispatch(action.setSadSongData(ssd));
-    setSadSongsData(ssd);
-
-
-
-    const excitedSongs = parsedLocalStorageData.data;
-    const esd = excitedSongs?.filter((item) => {
-      return item.mood === "excited";
-    });
-    dispatch(action.setExcitedData(esd));
-    setExcitedSongsData(esd);
+  async function fetching() {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        'projectId': '8jf3b15onzua'
+      };
+      const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song?limit=100", { headers: headers });
+      const result = response.data;
+            
+      
+      // const localStorageData = localStorage.getItem("localSongs");
+      // const parsedLocalStorageData = localStorageData ? JSON.parse(localStorageData) : [];
+      
+      const trendingData = result.data;
+      dispatch(action.setAllSongsData(trendingData));
+      setAllSongs(trendingData);
+  
+      const ts = trendingData?.filter((item) => {
+        return item.featured === "Trending songs";
+      });
+      setTrendingSongs(ts);
+  
+      dispatch(action.setTrendingData(ts));
+      
+      
+      const happySongs = result.data;
+      const hsd = happySongs?.filter((item) => {
+        return item.mood === "happy";
+      });
+      setHappySongsData(hsd);
+      
+      dispatch(action.setHappyData(hsd));
+  
+      const romanticSongs = result.data;
+      const rsd = romanticSongs?.filter((item) => {
+        return item.mood === "romantic";
+      });
+      setRomanticSongsData(rsd);
+      
+      dispatch(action.setRomanticData(rsd));
+  
+      const sadSongs = result.data;
+      const ssd = sadSongs?.filter((item) => {
+        return item.mood === "sad";
+      });
+      
+      dispatch(action.setSadSongData(ssd));
+      setSadSongsData(ssd);
+  
+  
+  
+      const excitedSongs = result.data;
+      const esd = excitedSongs?.filter((item) => {
+        return item.mood === "excited";
+      });
+      dispatch(action.setExcitedData(esd));
+      setExcitedSongsData(esd);
+    } catch (error) {
+      console.log("Error fetching data", error)
+    }
 
 
 }
@@ -85,6 +98,10 @@ function HomePage() {
     }, 500)
 
   }, [])
+
+  
+
+
 
   // Trending Carousel
   const productTrending = trendingSongs?.map((item) => (    
@@ -139,10 +156,6 @@ function HomePage() {
     />
   ));
 
-  // data MultiCarouselCard carousel
-  // const product = productData?.map((item) => (
-  //   <MultiCarouselCard key={item.id} name={item.name} url={item.imageurl} />
-  // ));
 
   // round carousel
   const productArtist = productData?.map((item) => (
