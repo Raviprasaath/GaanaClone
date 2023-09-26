@@ -36,6 +36,7 @@ function App() {
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
   const [isOpen, setIsOpen] = useState(false);
   const [musicExpander, setMusicExpander] = useState(false);
+  const [searchingType, setSearchingType] = useState("");
 
   const toggleSidePanel = () => {
     setIsOpen(!isOpen);
@@ -81,9 +82,13 @@ function App() {
     setSearchBar(value);
   };
 
+  const handlerTypingValue = (value) => {
+    setSearchingType(value);
+  }
+
   return (
     <>
-      <div className="search-bar-section">{searchBar && <SearchSection />}</div>
+      <div className="search-bar-section">{searchBar && <SearchSection message={searchingType} />}</div>
 
       <div className={`app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
         {musicExpander && (
@@ -95,7 +100,7 @@ function App() {
             <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
             {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
 
-            <NavbarTop handlerSearchBar={handlerSearchBar} />
+            <NavbarTop handlerSearchBar={handlerSearchBar} handlerTypingValue={handlerTypingValue} />
 
             <div className="bg-fill-patch-work">
               <SongsCollection />

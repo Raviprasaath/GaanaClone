@@ -323,7 +323,7 @@
 }
 
 .search-section-box {
-  width: 85%;
+  width: 80%;
   height: 100px;
   position: absolute;
   top: 110px;
@@ -336,6 +336,12 @@
   overflow: scroll;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+.search-section-box .search-results .title {
+  color: white;
+  padding-left: 10px;
+  font-size: 1.1rem;
 }
 .search-section-box .search-results .results-rows {
   display: flex;
@@ -370,6 +376,7 @@
 }
 .search-section-box .search-results-lap .title {
   color: white;
+  padding-left: 10px;
 }
 .search-section-box .search-results-lap .search-cards .swiper {
   padding: 0 50px;
@@ -389,7 +396,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  width: 120px;
 }
 .search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container .poster .movie-poster {
   display: block;
@@ -401,10 +408,24 @@
 .search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container .movie-name {
   font-size: 0.9rem;
   color: white;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .search-section-box .search-results-lap .search-cards .swiper .swiper-slide .movie-container .artist-name {
   color: white;
   font-size: 0.7rem;
+  max-width: 80%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.search-section-box .search-results-lap .search-cards .swiper-button-next, .search-section-box .search-results-lap .search-cards .swiper-button-prev {
+  color: white;
+}
+.search-section-box .search-results-lap .search-cards .swiper-button-prev:after, .search-section-box .search-results-lap .search-cards .swiper-button-next:after {
+  font-size: 20px;
 }
 
 .list-selector {

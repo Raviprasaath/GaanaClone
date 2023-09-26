@@ -9,6 +9,8 @@ import image4 from "../../assets/home-pic4.webp";
 import image5 from "../../assets/home-pic5.webp";
 import image6 from "../../assets/home-pic6.webp";
 import image7 from "../../assets/home-pic7.webp";
+import image8 from "../../assets/home-pic8.webp";
+import image9 from "../../assets/home-pic9.webp";
 
 const responsive = {
   superLargeDesktop: {
@@ -44,10 +46,16 @@ function LargerCarousel() {
     <div className="largerCarousel">
       <Carousel {...carouselOptions}>
         <div>
+          <img className="large-slider-img" src={image8} alt="" />
+        </div>
+        <div>
           <img className="large-slider-img" src={image1} alt="" />
         </div>
         <div>
           <img className="large-slider-img" src={image2} alt="" />
+        </div>
+        <div>
+          <img className="large-slider-img" src={image9} alt="" />
         </div>
         <div>
           <img className="large-slider-img" src={image3} alt="" />

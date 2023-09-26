@@ -42,6 +42,27 @@ const setTrendingData = (item) => {
     }
 }
 
+const setSoulSongsData = (item) => {
+    return {
+        type: "SET_SOUL_SONG",
+        payload: item
+    }
+}
+
+const setEvergreenData = (item) => {
+    return {
+        type: "SET_EVERGREEN_SONG",
+        payload: item
+    }
+}
+
+const setTop20Data = (item) => {
+    return {
+        type: "SET_TOP20_SONG",
+        payload: item
+    }
+}
+
 const setSadSongData = (item) => {
     return {
         type: "SET_SAD_SONG",
@@ -75,5 +96,7 @@ const setAlbumData = (item) => {
 export default {
     toggledarkmode, setActiveItem, setActiveSong, setHappyData, 
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
-    setAllSongsData, setAlbumData
+    setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
+    setTop20Data
+
 }

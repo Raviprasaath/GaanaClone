@@ -35,6 +35,10 @@ function MusicControlComp(props) {
 
   const activeSong = useSelector((state) => state.usersData.activeSong);
   const topTrendingSongList = useSelector((state) => state.usersData.trendingSong);
+  const soulSongList = useSelector((state) => state.usersData.soulSongs);
+  const evergreenList = useSelector((state) => state.usersData.evergreen);
+  const top20songs = useSelector((state) => state.usersData.top20);
+
 
   const happySongList = useSelector((state) => state.usersData.happySong);
   const romanticSongList = useSelector((state) => state.usersData.romanticSong);
@@ -42,29 +46,40 @@ function MusicControlComp(props) {
   const excitedSongList = useSelector((state) => state.usersData.excitedSong);
   const allSongsList = useSelector((state) => state.usersData.allSongs);
   const albumSongsList = useSelector((state)=>state.usersData.albumSongs);
+  
+  
+  let songAllDetails = [];
+  // console.log("current song ", activeSong.album);
 
-  console.log("current song ", activeSong);
   let urlCheck = location.pathname;
   
 
   let flag = false;
-  // if (urlCheck.includes("album") && 
-  if (activeSong.id) {
-    flag = true;
-  }
 
+  if (activeSong.album==="yes") {
+    flag = true;
+  } else if (activeSong.album === 'no') {
+    flag = false;
+  }
 
   if (location.pathname === `/allsongs` && !playing) {
     songList = allSongsList;
-  } else if (flag && albumSongsList) {
-    console.log("playing inside", playing);
+  } else if (flag) {
+    // console.log("playing inside", playing);
     songList = albumSongsList;
-    console.log("active songs", activeSong);
-    console.log("albumSongsList from Music", albumSongsList);
+    // console.log("albumSongsList from Music", albumSongsList);
   } else if (!flag) {
     if (activeSong.featured === "Trending songs") {
       songList = topTrendingSongList;
-    } else if (activeSong.mood === "happy") {
+    } else if  (activeSong.featured === "Soul soother") {
+      songList = soulSongList;
+    } else if (activeSong.featured === 'Evergreen melodies') {
+      songList = evergreenList;
+    }
+    else if (activeSong.featured === 'Top 20 of this week') {
+      songList = top20songs;
+    }
+    else if (activeSong.mood === "happy") {
       songList = happySongList;
     } else if (activeSong.mood === "romantic") {
       songList = romanticSongList;
@@ -110,7 +125,7 @@ function MusicControlComp(props) {
 
   const tracks = songTrackList.length !== 0 ? songTrackList : song1;
 
-  let songAllDetails = [];
+
 
   if (Array.isArray(songList) && (flag) && albumSongsList) {
     songList.forEach((item) => {        
@@ -121,6 +136,7 @@ function MusicControlComp(props) {
         title: item.songName,
         artist: "",
         audio_url: item.audio,
+        album:"yes",
       });
     });
   } else {
@@ -135,6 +151,7 @@ function MusicControlComp(props) {
             title: item.title,
             artist: item.artist[0]?.name || "",
             audio_url: item.audio_url,
+            album:"no",
           });
         });    
     }
@@ -552,6 +569,7 @@ function MusicControlComp(props) {
                         // songList[currentTrack].thumbnail
                         //   ? songList[currentTrack].thumbnail
                         // :
+                        
                         songAllDetails &&
                         songAllDetails[currentTrack] &&
                         songAllDetails[currentTrack].thumbnail

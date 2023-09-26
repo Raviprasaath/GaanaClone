@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
+import Loader from "react-js-loader";
 
 import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
@@ -96,6 +97,7 @@ function AlbumSongPage2() {
           description: selectedSong.description || "",
           artist: selectedSong.artists,
           id: selectedSong._id,
+          album:"yes",
         };
         setCurrentSong(updatedSongs);
 
@@ -105,6 +107,7 @@ function AlbumSongPage2() {
             songName: item.title || "",
             image: updatedSongs.url || "",
             id: item._id,
+            album:"yes",
           }));
 
           console.log("songsOfMovie: ", songsOfMovie);
@@ -349,7 +352,9 @@ function AlbumSongPage2() {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div>
+              <Loader size="lg"/>
+        </div>
       )}
     </>
   );

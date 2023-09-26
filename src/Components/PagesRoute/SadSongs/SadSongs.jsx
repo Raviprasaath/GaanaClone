@@ -3,6 +3,7 @@ import { BsPlayCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
 import axios from 'axios';
+import Loader from "react-js-loader";
 
 function PartySongs() {
   const [dataFromStore, setDataFromStore] = useState([]);
@@ -50,6 +51,7 @@ function PartySongs() {
           artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
           mood: item.mood || "",
           songId: item._id || "",
+          album:"no",
         }));
         setDataFromStore(result2);
         setRenderCard(true);
@@ -89,7 +91,7 @@ function PartySongs() {
           </div>
         </div>
       ) : (
-        ""
+        <Loader size="lg"/>
       )}
     </>
   );

@@ -8,6 +8,8 @@ import { BsPlayCircle, BsFillPlayFill,BsThreeDotsVertical } from "react-icons/bs
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
 import axios from 'axios';
+import Loader from "react-js-loader";
+
 
 function ExitedSongs() {
   const [showContent, setShowContent] = useState(false);
@@ -86,6 +88,7 @@ function ExitedSongs() {
           artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
           mood: item.mood || "",
           songId: item._id || "",
+          album:"no",
         }));
         setCurrentSong(result2);
         setShowContent(true);
@@ -285,7 +288,9 @@ function ExitedSongs() {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div>
+          <Loader size="lg"/>
+        </div>
       )}
     </>
   );

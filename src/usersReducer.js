@@ -3,6 +3,9 @@ const initialState = {
     activeItem: "Home",
     activeSong: {},
     happySong: [],
+    romanticSong: [],
+    trendingSong: [],
+    soulSongs: [],
 };
 
 function usersReducer(state = initialState, action) {
@@ -24,6 +27,15 @@ function usersReducer(state = initialState, action) {
         }
         case 'SET_TRENDING_SONG': {
             return { ...state, trendingSong: action.payload }
+        }
+        case 'SET_SOUL_SONG': {
+            return { ...state, soulSongs: action.payload }
+        }
+        case 'SET_EVERGREEN_SONG': {
+            return { ...state, evergreen: action.payload }
+        }
+        case 'SET_TOP20_SONG': {
+            return { ...state, top20: action.payload }
         }
         case 'SET_SAD_SONG': {
             return { ...state, sadSong: action.payload }

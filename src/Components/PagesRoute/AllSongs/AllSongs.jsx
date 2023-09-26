@@ -8,6 +8,7 @@ import { BsPlayCircle, BsFillPlayFill, BsThreeDotsVertical, } from "react-icons/
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
 import axios from 'axios';
+import Loader from "react-js-loader";
 
 function AllSongs() {
   const [showContent, setShowContent] = useState(false);
@@ -84,6 +85,7 @@ function AllSongs() {
           artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
           mood: item.mood || "",
           songId: item._id || "",
+          album:"no",
         }));
         setCurrentSong(result2);
         setShowContent(true);
@@ -291,7 +293,9 @@ function AllSongs() {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div>
+              <Loader size="lg"/>
+        </div>
       )}
     </>
   );

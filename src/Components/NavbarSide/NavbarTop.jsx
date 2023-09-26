@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { AiOutlineSearch, AiOutlineDown, AiOutlineClose } from "react-icons/ai";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
 import { MdBrightness2 } from "react-icons/md";
@@ -12,11 +13,13 @@ import { Link } from "react-router-dom";
 
 import LoginPage from "../../Components/LoginPage/LoginPage.jsx";
 
-function NavbarTop( {handlerSearchBar} ) {
+function NavbarTop( {handlerSearchBar, handlerTypingValue} ) {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
   const [loginState, setLoginState] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const darkMode = useSelector((state) => state.usersData.darkMode);
+  const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef("");
 
   const dispatch = useDispatch();
 
@@ -30,8 +33,18 @@ function NavbarTop( {handlerSearchBar} ) {
   const handleCloseSearch = () => {
     setSearchSection(false);
     handlerSearchBar(false);
+    handlerTypingValue("");
+    setInputValue('');
   };
 
+  let timeout;
+  const handlerTyping = (e) => {
+    clearTimeout(timeout);
+    timeout=setTimeout(()=> {
+      handlerTypingValue(e.target.value);
+    }, 3000)
+    setInputValue(e.target.value);
+  }
   
   const handleLogo = () => {
     dispatch(action.setActiveItem());
@@ -76,8 +89,10 @@ function NavbarTop( {handlerSearchBar} ) {
                 </span>
                 <input
                   type="text"
+                  value={inputValue}
                   className="input-search-option"
                   placeholder="Search Artists, Songs, Albums"
+                  onChange={handlerTyping}
                   onClick={handlerSearch}
                 />
                 {searchSection && (
@@ -118,7 +133,9 @@ function NavbarTop( {handlerSearchBar} ) {
                   type="text"
                   className="input-search-option"
                   placeholder="Search Artists, Songs, Albums"
+                  value={inputValue}
                   onClick={handlerSearch}
+                  onChange={handlerTyping}
                 />
                 {searchSection && (
                   <AiOutlineClose

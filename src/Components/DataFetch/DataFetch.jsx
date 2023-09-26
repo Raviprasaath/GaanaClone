@@ -97,10 +97,91 @@ function DataFetch () {
         }
     }
 
+    async function fetching() {
+        // try {
+        //   const headers = {
+        //     'Content-Type': 'application/json',
+        //     'projectId': 'ghmumg9x1zid'
+        //   };
+        //   const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song?filter={'mood':'romantic'}", { headers: headers });
+    
+        //   const result = response;
+                
+        //   console.log("result", result);
+
+        // } catch (error) {
+        //   console.log("Error fetching data", error)
+        // }
+
+        // success done
+
+        // fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Trending songs"}&limit=100', {
+        //     headers: {
+        //         'projectId': 'ghmumg9x1zid'
+        //     }
+        // }).then(data=>data.json()).then(response => {
+        //     console.log("result", response)
+        // })
+
+
+
+        // success 
+
+        // fetch('https://academics.newtonschool.co/api/v1/music/artist', {
+        //     headers: {
+        //         'projectId': 'ghmumg9x1zid'
+        //     }
+        // }).then(data=>data.json()).then(response => {
+        //     console.log("result", response)
+        // })
+
+
+        // success done
+        // fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Soul soother"}&limit=100', {
+        //     headers: {
+        //         'projectId': 'ghmumg9x1zid'
+        //     }
+        // }).then(data=>data.json()).then(response => {
+        //     console.log("result", response)
+        // })
+
+
+        // success done
+        // fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Evergreen melodies"}&limit=100', {
+        //     headers: {
+        //         'projectId': 'ghmumg9x1zid'
+        //     }
+        // }).then(data=>data.json()).then(response => {
+        //     console.log("result", response)
+        // })
+
+
+        // success 
+        // fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 20 of this week"}&limit=100', {
+        //     headers: {
+        //         'projectId': 'ghmumg9x1zid'
+        //     }
+        // }).then(data=>data.json()).then(response => {
+        //     console.log("result", response)
+        // })
+
+        
+        // success 
+        // fetch('https://academics.newtonschool.co/api/v1/music/song?limit=100', {
+        //     headers: {
+        //         'projectId': 'ghmumg9x1zid'
+        //     }
+        // }).then(data=>data.json()).then(response => {
+        //     console.log("result", response)
+        // })
+
+    }
+
 
     useEffect (() => {
         // handleSongs();
         // handleAlbums();
+        fetching();
     }, [])
 
     return (

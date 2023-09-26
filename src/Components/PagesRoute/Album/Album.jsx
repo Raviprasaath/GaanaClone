@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Loader from "react-js-loader";
+
 
 function Album() {
   const [dataFromStore, setDataFromStore] = useState([]);
@@ -65,7 +67,7 @@ function Album() {
           </div>
         </div>
       ) : (
-        ""
+        <Loader size="lg"/>
       )}
     </>
   );

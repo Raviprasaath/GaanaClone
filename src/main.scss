@@ -363,7 +363,7 @@
 
 
 .search-section-box {
-  width: 85%;
+  width: 80%;
   height: 100px;
   position: absolute;
   top: 110px;
@@ -371,11 +371,17 @@
   z-index: 0;
   
   .search-results {
+    .title {
+      color: white;
+      padding-left: 10px;
+      font-size: 1.1rem;
+    }
     background-color: var(--PrimaryColor3);
     max-height: 220px;
     overflow: scroll;
     display: flex;
     flex-direction: column;
+    gap: 10px;
     
     .results-rows {
       display: flex;
@@ -411,6 +417,7 @@
 
     .title {
       color: white;
+      padding-left: 10px;
     }
 
     .search-cards {
@@ -433,7 +440,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: red;
+            width: 120px;
 
             .poster {
               .movie-poster {
@@ -446,16 +453,30 @@
             .movie-name {
               font-size: 0.9rem;
               color: white;
+              max-width: 80%;
+              text-overflow: ellipsis; 
+              overflow: hidden; 
+              white-space: nowrap;
             }
             .artist-name {
               color: white;
               font-size: 0.7rem;
+              max-width: 80%;
+              text-overflow: ellipsis; 
+              overflow: hidden; 
+              white-space: nowrap;
             }
             
             
           }
           
         }
+      }
+      .swiper-button-next, .swiper-button-prev {
+        color: white;
+      }
+      .swiper-button-prev:after, .swiper-button-next:after {
+        font-size: 20px;
       }
     }
   }
