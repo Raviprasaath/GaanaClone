@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 const SearchSection = (props) => {
     
   const dispatch = useDispatch();
+  
     
   const [loader, setLoader]= useState(false);  
 

@@ -100,6 +100,25 @@ function SearchResultPage() {
         setCurrentSong(updatedSongs);
         console.log("updatedSongs", updatedSongs)
         setShowContent(true);
+      } else if ((selectedSong && selectedSong.fromSearch === 'yes' && selectedSong.category === 'search-artistSong')) {
+        const updated = selectedSongAll && selectedSongAll[0].songs && selectedSongAll[0].songs 
+        .map((item, index)=> ({
+          key: `${item}&${index}`,
+          url: selectedSongAll[0].image,
+          name: selectedSongAll[0].name || "",
+          title: selectedSongAll[0].name,
+          audio_url: `https://newton-project-resume-backend.s3.amazonaws.com/audio/${item}.mp3` || "",
+          description: selectedSongAll[0].description,
+          artist: selectedSongAll[0].name,            
+          id: item,
+          fromSearch: selectedSong.fromSearch,
+          category: selectedSong.category,
+        }))
+        setCurrentSong(updated);
+        console.log("updatedSongs", updated)
+        setShowContent(true);      
+
+
       } else {
         {
           const updated = selectedSongAll && selectedSongAll[0].songs && selectedSongAll[0].songs 
