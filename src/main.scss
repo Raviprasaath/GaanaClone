@@ -1102,7 +1102,7 @@
 }
 
 .expanded-view-music-section {
-  position: absolute;
+  position: fixed;
   background-color: var(--PrimaryColor);
   z-index: 8;
   top: 0;
@@ -1110,7 +1110,7 @@
   bottom: 0;
   right: 0;
   transform: translate(-50% -50%);
-  
+  overflow: hidden;  
 }
 
 

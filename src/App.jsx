@@ -102,7 +102,7 @@ function App() {
       <div className="search-bar-section">{searchBar && <SearchSection message={searchingType} handlerClosingBox={handlerClosingBox} />}</div>
 
       <div className={`app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
-        {musicExpander && (
+        {/* {musicExpander && ( */}
           <div>
             <button className="navbar-btn" onClick={toggleSidePanel}>
               <FaBars />
@@ -137,9 +137,10 @@ function App() {
 
             </Routes>
           </div>
-        )}
+        {/* )} */}
 
-        {musicExpander && <Footer />}
+        {/* {musicExpander &&  */}
+        <Footer />        
 
         <DataFetch />
         <MusicControlComp expander={onHandlerExpander} />

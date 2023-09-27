@@ -21,6 +21,8 @@ function MusicControlComp(props) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
 
+  console.log("lifting", lifting)
+
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -108,7 +110,7 @@ function MusicControlComp(props) {
     }
   } 
 
-  console.log("songList", songList)
+  // console.log("songList", songList)
 
   const handleSongClicker = (data) => {
     if (audioRef.current) {
@@ -193,8 +195,8 @@ function MusicControlComp(props) {
       });    
     }
   }
-  console.log("songAllDetails index", songAllDetails[indexVal]);
-  console.log("songAllDetails", songAllDetails);
+  // console.log("songAllDetails index", songAllDetails[indexVal]);
+  // console.log("songAllDetails", songAllDetails);
 
   // #region ------------ screen size control ---------
 
