@@ -28,6 +28,7 @@ import MySongs from "./Components/PagesRoute/MySongs/MySongs.jsx";
 import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage2.jsx";
 
 import SearchSection from "./Components/SearchSection/SearchSection.jsx";
+import SearchResultPage from "./Components/PagesRoute/SearchResultPage/SearchResultPage.jsx";
 
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
@@ -86,9 +87,19 @@ function App() {
     setSearchingType(value);
   }
 
+  const [boxClose, setBoxClose] = useState(true);
+
+  const handlerClosingBox =(value) => {
+    setBoxClose(value);
+    setSearchBar(value);
+    if (value === false) {
+      setSearchingType("");
+    }
+  }
+
   return (
     <>
-      <div className="search-bar-section">{searchBar && <SearchSection message={searchingType} />}</div>
+      <div className="search-bar-section">{searchBar && <SearchSection message={searchingType} handlerClosingBox={handlerClosingBox} />}</div>
 
       <div className={`app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
         {musicExpander && (
@@ -100,7 +111,7 @@ function App() {
             <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
             {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
 
-            <NavbarTop handlerSearchBar={handlerSearchBar} handlerTypingValue={handlerTypingValue} />
+            <NavbarTop closingStatus={boxClose} handlerSearchBar={handlerSearchBar} handlerTypingValue={handlerTypingValue} />
 
             <div className="bg-fill-patch-work">
               <SongsCollection />
@@ -120,13 +131,10 @@ function App() {
               <Route path="/subscription" element={<SubscriptionPage />} />
               <Route path="/mysongs" element={<MySongs />} />
 
-              {/* <Route path="/albumsongpage2" element={<AlbumSongPage2 />} /> */}
+              <Route path="album/:albumName/:albumId" element={<AlbumSongPage2 />} />
 
-              {/* <Route path='album/:albumName/:albumId' element={<AlbumSongPage2 urlLinks={urlLinks} />} /> */}
-              <Route
-                path="album/:albumName/:albumId"
-                element={<AlbumSongPage2 />}
-              />
+              <Route path="searchresult/:title/:id" element={<SearchResultPage />} />
+
             </Routes>
           </div>
         )}

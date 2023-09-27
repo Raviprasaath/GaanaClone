@@ -91,12 +91,25 @@ const setAlbumData = (item) => {
     }
 }
 
+const setSearchResultData = (item) => {
+    return {
+        type: "SET_SEARCH_RESULT_SONGS",
+        payload: item
+    }
+}
+const setAllSearchResultData = (item) => {
+    return {
+        type: "SET_ALL_SEARCH_RESULT_SONGS",
+        payload: item
+    }
+}
+
 
 
 export default {
     toggledarkmode, setActiveItem, setActiveSong, setHappyData, 
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
     setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
-    setTop20Data
+    setTop20Data, setSearchResultData, setAllSearchResultData
 
 }

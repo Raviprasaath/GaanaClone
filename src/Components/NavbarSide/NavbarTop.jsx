@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+
 import { AiOutlineSearch, AiOutlineDown, AiOutlineClose } from "react-icons/ai";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
 import { MdBrightness2 } from "react-icons/md";
@@ -13,27 +13,28 @@ import { Link } from "react-router-dom";
 
 import LoginPage from "../../Components/LoginPage/LoginPage.jsx";
 
-function NavbarTop( {handlerSearchBar, handlerTypingValue} ) {
+function NavbarTop( props ) {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
   const [loginState, setLoginState] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const darkMode = useSelector((state) => state.usersData.darkMode);
   const [inputValue, setInputValue] = useState('');
-  const inputRef = useRef("");
+
 
   const dispatch = useDispatch();
 
   const [searchSection, setSearchSection] = useState(false);
 
-
   const handlerSearch = () => {
     setSearchSection(true);
-    handlerSearchBar(true);
+    props.handlerSearchBar(true);
+    setInputValue('');
   };
   const handleCloseSearch = () => {
     setSearchSection(false);
-    handlerSearchBar(false);
-    handlerTypingValue("");
+    props.handlerSearchBar(false);
+    props.boxClose;
+    props.handlerTypingValue("");
     setInputValue('');
   };
 
@@ -41,8 +42,8 @@ function NavbarTop( {handlerSearchBar, handlerTypingValue} ) {
   const handlerTyping = (e) => {
     clearTimeout(timeout);
     timeout=setTimeout(()=> {
-      handlerTypingValue(e.target.value);
-    }, 3000)
+      props.handlerTypingValue(e.target.value);
+    }, 2000)
     setInputValue(e.target.value);
   }
   

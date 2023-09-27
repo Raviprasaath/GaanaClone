@@ -90,7 +90,8 @@ const SongsCollection = () => {
               aria-controls={open ? "account-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onMouseOver={handleClick}
+              // onMouseOver={handleClick}
+              onClick={handleClick}
               >
               <Typography
                 className={activeItem === "Moods & Genres" ? "active" : ""}

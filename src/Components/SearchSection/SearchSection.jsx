@@ -1,100 +1,268 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 import Loader from "react-js-loader";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import { Link } from 'react-router-dom'
 import { Pagination, Navigation } from "swiper/modules";
-
-import image from "../../assets/1.jpg";
+import action from "../../action";
+import { useDispatch } from "react-redux";
 
 const SearchSection = (props) => {
+    
+  const dispatch = useDispatch();
+    
   const [loader, setLoader]= useState(false);  
+
   const [top20, setTop20] = useState([]);
   const [songData, setSongData] = useState([]);
   const [albumData, setAlbumData] = useState([]);
   const [artistData, setArtistData] = useState([]);
+  
+  const [updatedSongData, setUpdatedSongData] = useState();
+  const [updatedalbumData, setUpdatedAlbumData] = useState();
+  const [updatedartistData, setUpdatedArtistData] = useState();
+  const [updatedTopData, setUpdatedTopData] = useState();
 
-  const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
-  useEffect(() => {
-    const handleScreenSize = () => {
-      setScreenSize(window.innerWidth > 960);
-    };
-    window.addEventListener("resize", handleScreenSize);
-
-    return () => {
-      window.removeEventListener("resize", handleScreenSize);
-    };
-  }, []);
+//   console.log("updatedSongData", updatedSongData)
+//   console.log("updatedartistData", updatedartistData)
+//   console.log("updatedTopData", updatedTopData)
+//   console.log("updatedalbumData", updatedalbumData)
 
 
-  function fetching() {
+//   function fetching() {
+//     setLoader(true);
+//     try {
+//         // default
+//         fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 20 of this week"}&limit=100', {
+//             headers: {
+//                 'projectId': 'ghmumg9x1zid'
+//             }
+//         }).then(data=>data.json()).then(response => {
+//         const tsa = response.data
+//         // console.log(tsa)
+//         setTop20(tsa);
+//         setLoader(false);
+//         })
+//     } catch (error) {
+//         error;
+//     }
+
+//     try {
+//         // songs
+//         fetch(`https://academics.newtonschool.co/api/v1/music/song?filter={"title":%22${props.message}%22}`, {
+//         // fetch(`https://academics.newtonschool.co/api/v1/music/song?filter={"title":"Kohinoor"}`, {
+//             headers: {
+//                 'projectId': 'ghmumg9x1zid'
+//             }
+//         }).then(data=>data.json()).then(response => {
+//             setSongData(response.data);
+//         })
+//     } catch (error) {
+//         error;
+//     }
+
+//     try {
+//         // album
+//         fetch(`https://academics.newtonschool.co/api/v1/music/album?filter={"title":%22${props.message}%22}`, {
+//         // fetch(`https://academics.newtonschool.co/api/v1/music/album?filter={"title":"Shershaah"}`, {
+//         headers: {
+//             'projectId': 'ghmumg9x1zid'
+//         }
+//         }).then(data=>data.json()).then(response => {
+//             setAlbumData(response.data);
+//         })
+//     } catch (error) {
+//         error;
+//     }
+//     try {
+//         // artist
+//         fetch(`https://academics.newtonschool.co/api/v1/music/artist/?filter={"name":%22${props.message}%22}`, {
+//         // fetch(`https://academics.newtonschool.co/api/v1/music/artist/?filter={"name":"Babul Supriyo"}`, {
+//         headers: {
+//             'projectId': 'ghmumg9x1zid'
+//         }
+//         }).then(data=>data.json()).then(response => {
+//             setArtistData(response.data);
+//         })
+//         props.handlerClosingBox(true);
+//     } catch (error) {
+//         error;
+//     }
+// }
+async function fetching() {
     setLoader(true);
     
-    // default
-    fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 20 of this week"}&limit=100', {
+    try {
+      const top20Response = await fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 20 of this week"}&limit=100', {
         headers: {
-            'projectId': 'ghmumg9x1zid'
+          'projectId': 'ghmumg9x1zid'
         }
-    }).then(data=>data.json()).then(response => {
-    const tsa = response.data
-    console.log(tsa)
-    setTop20(tsa);
-    setLoader(false);
-    })
-
-    // songs
-    fetch(`https://academics.newtonschool.co/api/v1/music/song?filter={"title":%22${props.message}%22}`, {
-    // fetch(`https://academics.newtonschool.co/api/v1/music/song?filter={"title":"Kohinoor"}`, {
+      });
+  
+      const top20Data = await top20Response.json();
+      setTop20(top20Data.data);
+      setLoader(false);
+    } catch (error) {
+      console.error("Error fetching top 20 data:", error);
+      setLoader(false);
+    }
+  
+    try {
+      // songs
+      const songsResponse = await fetch(`https://academics.newtonschool.co/api/v1/music/song?filter={"title":%22${props.message}%22}`, {
         headers: {
-            'projectId': 'ghmumg9x1zid'
+          'projectId': 'ghmumg9x1zid'
         }
-    }).then(data=>data.json()).then(response => {
-        setSongData(response.data);
-    })
-
-    // album
-    fetch(`https://academics.newtonschool.co/api/v1/music/album?filter={"title":%22${props.message}%22}`, {
-    // fetch(`https://academics.newtonschool.co/api/v1/music/album?filter={"title":"Kohinoor"}`, {
-    headers: {
-        'projectId': 'ghmumg9x1zid'
+      });
+  
+      const songsData = await songsResponse.json();
+      setSongData(songsData.data);
+    } catch (error) {
+      console.error("Error fetching songs data:", error);
     }
-    }).then(data=>data.json()).then(response => {
-        setAlbumData(response.data);
-    })
-
-    // artist
-    fetch(`https://academics.newtonschool.co/api/v1/music/artist/?filter={"name":%22${props.message}%22}`, {
-    // fetch(`https://academics.newtonschool.co/api/v1/music/artist/?filter={"name":"Babul Supriyo"}`, {
-    headers: {
-        'projectId': 'ghmumg9x1zid'
+  
+    try {
+      // album
+      const albumResponse = await fetch(`https://academics.newtonschool.co/api/v1/music/album?filter={"title":%22${props.message}%22}`, {
+        headers: {
+          'projectId': 'ghmumg9x1zid'
+        }
+      });
+  
+      const albumData = await albumResponse.json();
+      setAlbumData(albumData.data);
+    } catch (error) {
+      console.error("Error fetching album data:", error);
     }
-    }).then(data=>data.json()).then(response => {
-        setArtistData(response.data);
-    })
+  
+    try {
+      // artist
+      const artistResponse = await fetch(`https://academics.newtonschool.co/api/v1/music/artist/?filter={"name":%22${props.message}%22}`, {
+        headers: {
+          'projectId': 'ghmumg9x1zid'
+        }
+      });
+  
+      const artistData = await artistResponse.json();
+      setArtistData(artistData.data);
+      props.handlerClosingBox(true);
+    } catch (error) {
+      console.error("Error fetching artist data:", error);
+    }
   }
+  
 
   useEffect(()=> {
     fetching();
-  }, [props])
+  }, [props, updatedSongData, updatedTopData, updatedalbumData, updatedartistData])
+
+
+
+  const handlerSongSelection = (e) => {
+    const updatedList = {
+        key: e._id,
+        id: e._id,
+        thumbnail: e.thumbnail,
+        title: e.title,
+        artist: 
+            e.artist && e.artist[0] &&
+            e.artist[0].name? 
+            e.artist[0].name : "",
+        description: 
+            e.artist && e.artist[0] &&
+            e.artist[0].description ?
+            e.artist[0].description : "",
+        audio_url: e.audio_url,
+        fromSearch : "yes",
+        category: "search-allSongs",
+    }
+    setUpdatedSongData(updatedList);
+    setTimeout(()=> {
+        props.handlerClosingBox(false);
+    }, 1000)
+    dispatch(action.setSearchResultData(updatedList));
+    dispatch(action.setAllSearchResultData(songData));
+  }
+  const handlerAlbumSelection = (e) => {
+    const updatedList = {
+        key: e._id,
+        id: e._id,
+        thumbnail: e.image,
+        title: e.title,
+        artist: 
+            e.artist && e.artist[0] &&
+            e.artist[0].name? 
+            e.artist[0].name : "",
+        description: 
+            e.artist && e.artist[0] &&
+            e.artist[0].description ?
+            e.artist[0].description : "",
+        audio_url: e.songs,
+        fromSearch : "yes",
+        category: "search-albumSong",
+    }
+    
+    setUpdatedAlbumData(updatedList);
+    setTimeout(()=> {
+        props.handlerClosingBox(false);
+    }, 1000)
+    dispatch(action.setSearchResultData(updatedList));
+    dispatch(action.setAllSearchResultData(albumData));
+  }
+  
+  const handlerArtistSelection = (e) => {
+    console.log(e);
+    const updatedList = {
+        key: e._id,
+        id: e._id,
+        thumbnail: e.image,
+        title: e.name,
+        artist: e.name,  
+        description: e.description,
+        audio_url: e.songs,
+        fromSearch : "yes",
+        category: "search-artistSong",
+    }
+    setUpdatedArtistData(updatedList);
+    setTimeout(()=> {
+        props.handlerClosingBox(false);
+    }, 1000)
+    dispatch(action.setSearchResultData(updatedList));
+    dispatch(action.setAllSearchResultData(artistData));
+}
+  const handlerTopSelection = (e) => {    
+    const updatedList = {
+        key: e._id,
+        id: e._id,
+        thumbnail: e.thumbnail,
+        title: e.title,
+        artist: 
+            e.artist && e.artist[0] &&
+            e.artist[0].name? 
+            e.artist[0].name : "",
+        description: 
+            e.artist && e.artist[0] &&
+            e.artist[0].description ?
+            e.artist[0].description : "",
+        audio_url: e.audio_url,
+        fromSearch : "yes",
+        category: "search-top20",
+    }
+    setUpdatedTopData(updatedList);
+    setTimeout(()=> {
+        props.handlerClosingBox(false);
+    }, 1000)
+    dispatch(action.setSearchResultData(updatedList));
+    dispatch(action.setAllSearchResultData(top20));
+  }
+
 
 
   return (
     <>
       <div className="search-section-box">
-        {!screenSize && (
-          <div className="search-results">
-            <h2 className="title">Top Results</h2>
-            <div className="results-rows">
-              <img src={image} alt="" />
-              <div className="movie-name">Nameasdasdasdsd</div>
-              <div className="artist-name">Artistasdasdasdsasd</div>
-            </div>            
-          </div>
-        )}
-        {screenSize && (
           <div className="search-results-lap">
             {
             !songData && 
@@ -115,12 +283,16 @@ const SearchSection = (props) => {
                                     navigation={true}
                                     className="mySwiper"
                                     breakpoints={{
+                                        450: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 10,
+                                            },
                                         640: {
-                                        slidesPerView: 2,
+                                        slidesPerView: 3,
                                         spaceBetween: 10,
                                         },
                                         1024: {
-                                        slidesPerView: 2,
+                                        slidesPerView: 3,
                                         spaceBetween: 10,
                                         },
                                         1080: {
@@ -133,21 +305,23 @@ const SearchSection = (props) => {
                                         },
                                     }}
                                 >
-                                    {top20.map((item)=> (
-                                        <SwiperSlide key={item._id}>
-                                            <div className="movie-container">
-                                                <div className="poster">
-                                                    <img src={item.thumbnail} className="movie-poster" alt="" />
+                                    {top20.map((item, index)=> (
+                                        <SwiperSlide key={`searchresult-${item.title}-${item._id}`} >
+                                                <Link key={`searchresult-${item.title}-${item._id}-${index}`} to={`searchresult/${item.title}/${item._id}`}>                                        
+                                                <div onClick={()=>handlerTopSelection(item)} className="movie-container">
+                                                    <div className="poster">
+                                                        <img src={item.thumbnail} className="movie-poster" alt="" />
+                                                    </div>
+                                                    <div className="movie-name">
+                                                        {item.title}
+                                                    </div>
+                                                    <div className="artist-name">
+                                                    {item.artist && item.artist[0] && item.artist[0].name ?
+                                                    item.artist[0].name : ""}
+                                                    </div>
                                                 </div>
-                                                <div className="movie-name">
-                                                    {item.title}
-                                                </div>
-                                                <div className="artist-name">
-                                                {item.artist && item.artist[0] && item.artist[0].name ?
-                                                item.artist[0].name : ""}
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>                                                    
+                                                </Link>
+                                            </SwiperSlide>                                                    
                                     ))}
                                 </Swiper>
                             </div>
@@ -169,12 +343,16 @@ const SearchSection = (props) => {
                             navigation={true}
                             className="mySwiper"
                             breakpoints={{
+                                450: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                    },
                                 640: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                                 spaceBetween: 10,
                                 },
                                 1024: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                                 spaceBetween: 10,
                                 },
                                 1080: {
@@ -187,9 +365,10 @@ const SearchSection = (props) => {
                                 },
                             }}
                         >
-                            {songData.map((item)=> (
+                            {songData.map((item, index)=> (
                                 <SwiperSlide key={item._id}>
-                                    <div  className="movie-container">
+                                    <Link key={`searchresult-${item.title}-${item._id}-${index}`} to={`searchresult/${item.title}/${item._id}`}>  
+                                    <div onClick={()=>handlerSongSelection(item)} className="movie-container">
                                         <div className="poster">
                                             <img src={item.thumbnail} className="movie-poster" alt="" />
                                         </div>
@@ -201,6 +380,7 @@ const SearchSection = (props) => {
                                             item.artist[0].name : ""}
                                         </div>
                                     </div>
+                                    </Link>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -219,12 +399,16 @@ const SearchSection = (props) => {
                             navigation={true}
                             className="mySwiper"
                             breakpoints={{
+                                450: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                    },
                                 640: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                                 spaceBetween: 10,
                                 },
                                 1024: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                                 spaceBetween: 10,
                                 },
                                 1080: {
@@ -237,9 +421,10 @@ const SearchSection = (props) => {
                                 },
                             }}
                         >   
-                        {albumData.map((item)=> (
+                        {albumData.map((item, index)=> (
                             <SwiperSlide key={item._id}>
-                                <div className="movie-container">
+                                <Link key={`searchresult-${item.title}-${item._id}-${index}`} to={`searchresult/${item.title}/${item._id}`}>  
+                                <div onClick={()=>handlerAlbumSelection(item)} className="movie-container">
                                     <div className="poster">
                                         <img src={item.image} className="movie-poster" alt="" />
                                     </div>
@@ -251,6 +436,7 @@ const SearchSection = (props) => {
                                         item.artists[0].name : ""}
                                     </div>
                                 </div>
+                                </Link>
                             </SwiperSlide>                
                         ))}
                         </Swiper>
@@ -270,12 +456,16 @@ const SearchSection = (props) => {
                             navigation={true}
                             className="mySwiper"
                             breakpoints={{
+                                450: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                    },
                                 640: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                                 spaceBetween: 10,
                                 },
                                 1024: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                                 spaceBetween: 10,
                                 },
                                 1080: {
@@ -288,9 +478,10 @@ const SearchSection = (props) => {
                                 },
                             }}
                         >
-                            {artistData.map((item)=>(
+                            {artistData.map((item, index)=>(
                                 <SwiperSlide key={item._id}>
-                                    <div className="movie-container">
+                                    <Link key={`searchresult-${item.title}-${item._id}-${index}`} to={`searchresult/${item.title}/${item._id}`}>  
+                                    <div onClick={()=>handlerArtistSelection(item)} className="movie-container">
                                         <div className="poster">
                                             <img src={item.image} className="movie-poster" alt="" />
                                         </div>
@@ -298,6 +489,7 @@ const SearchSection = (props) => {
                                             {item.name}
                                         </div>
                                     </div>
+                                    </Link>
                                 </SwiperSlide>                
 
                             ))}
@@ -306,7 +498,6 @@ const SearchSection = (props) => {
                 </>
             }
           </div>
-        )}
       </div>
     </>
   );

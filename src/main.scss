@@ -370,46 +370,8 @@
   left: 30px;
   z-index: 0;
   
-  .search-results {
-    .title {
-      color: white;
-      padding-left: 10px;
-      font-size: 1.1rem;
-    }
-    background-color: var(--PrimaryColor3);
-    max-height: 220px;
-    overflow: scroll;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    
-    .results-rows {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      color: var(--SecondaryColor);
-      img {
-        width: 50px;
-      }
-      .movie-name {
-        max-width: 30%;
-        text-overflow: ellipsis; 
-        overflow: hidden; 
-        white-space: nowrap;
-        font-size: 1rem;
-      }
-      .artist-name {
-        max-width: 30%;
-        text-overflow: ellipsis; 
-        overflow: hidden; 
-        white-space: nowrap;
-        font-size: 0.8rem;
-      }
-    }
-  }
   .search-results-lap {
-    width: 50%;
+    width: 100%;
     background-color: var(--PrimaryColor3);
     max-height: 400px;
     overflow: scroll;
@@ -4241,8 +4203,9 @@
   
   }
   .search-section-box {
-    left: 10rem;
+    left: 9rem;
     top: 60px;
+    width: 43%;
   }
 }
 
@@ -4378,7 +4341,7 @@
   
   }
   .search-section-box {
-    left: 12rem;
+    left: 16%;
   }
 }
 
@@ -4391,9 +4354,6 @@
       }
     }
   }
-  .search-section-box {
-    left: 14rem;
-  }
 }
 @media screen and (min-width: 1206px) {
   .music-control-comp {    
@@ -4403,9 +4363,6 @@
         gap: 2rem;  
       }
     }
-  }
-  .search-section-box {
-    left: 17rem;
   }
 }
 
@@ -4473,6 +4430,6 @@
   
   }
   .search-section-box {
-    left: 18rem;
+    left: 19%;
   }
 }
