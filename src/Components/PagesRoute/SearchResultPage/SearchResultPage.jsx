@@ -76,7 +76,7 @@ function SearchResultPage() {
   useEffect(() => {
     function dataGetting() {
       if (
-        (selectedSong.fromSearch === 'yes' && selectedSong.category === 'search-top20') ||
+        (selectedSong && selectedSong.fromSearch === 'yes' && selectedSong.category === 'search-top20') ||
         selectedSong.category === 'search-allSongs'
       ) {
       const updatedSongs = selectedSongAll && selectedSongAll.map((item, index)=>({
@@ -102,21 +102,21 @@ function SearchResultPage() {
         setShowContent(true);
       } else {
         {
-          const updated = selectedSongAll && selectedSongAll.songs && selectedSongAll.songs 
+          const updated = selectedSongAll && selectedSongAll[0].songs && selectedSongAll[0].songs 
           .map((item, index)=> ({
             key: `${item._id}&${index}`,
             url: item.thumbnail,
             name: item.title || "",
-            title: item.title,
+            title: selectedSong.title,
             audio_url: item.audio_url || "",
             description: 
               item.artist && item.artist[0] &&
               item.artist[0].description ?
               item.artist[0].description : "",
-            artist: 
-              item.artist && item.artist[0] &&
-              item.artist[0].name? 
-              item.artist[0].name : "",
+            artist: "",
+              // item.artist && item.artist[0] &&
+              // item.artist[0].name? 
+              // item.artist[0].name : "",
             id: item._id,
             fromSearch: selectedSong.fromSearch,
             category: selectedSong.category,
@@ -139,8 +139,12 @@ function SearchResultPage() {
   
   const handleSongClicker = (data) => {
     console.log("all data -> ", data);
-    // dispatch(actions.setAlbumData(currentTrack));
-    // dispatch(actions.setActiveSong(data));
+    // dispatch(actions.setAllSearchResultData(currentSong));
+    // dispatch(actions.setSearchResultData(selectedSong));
+    console.log("data", data)
+    dispatch(actions.setActiveSong(data));
+    dispatch(actions.setAlbumData(currentSong));
+
   };
 
   return (
@@ -166,7 +170,7 @@ function SearchResultPage() {
                   />
                   <img
                     className="posterPrime"
-                    src={currentSong[songIndex].url}
+                    src={currentSong && currentSong[songIndex] && currentSong[songIndex].url ? currentSong[songIndex].url : ""}
                     alt="img"
                   />
                 </div>
@@ -182,15 +186,15 @@ function SearchResultPage() {
                   </div>
                   <div className="songs-side-details">
                     <div className="song-line1">
-                      <div className="song-name1">{currentSong[songIndex].name}</div>
+                      <div className="song-name1">{currentSong && currentSong[songIndex] && currentSong[songIndex].title ?  currentSong[songIndex].title : ""}</div>
                       <div className="song-movie-name">
-                        (From {currentSong[songIndex].name}) Song |{" "}
+                        (From {currentSong && currentSong[songIndex] && currentSong[songIndex].title ?  currentSong[songIndex].title : ""}) Song |{" "}
                         <span>
-                          {currentSong[songIndex].name}
+                        {currentSong && currentSong[songIndex] && currentSong[songIndex].name ?  currentSong[songIndex].name : ""}
                         </span>
                       </div>
                     </div>
-                    <p className="song-line2">{currentSong[songIndex].description}</p>
+                    <p className="song-line2">{currentSong && currentSong[songIndex] && currentSong[songIndex].description ?  currentSong[songIndex].description : ""}</p>
                     <div className="track-details-warp">
                       <button className="track-duration">
                         {formatTime2(duration)}
@@ -204,11 +208,11 @@ function SearchResultPage() {
               <div className="track-list-header">
                 <img
                   className="track-list-header-img"
-                  src={currentSong[songIndex].url}
+                  src={currentSong && currentSong[songIndex] && currentSong[songIndex].url ?  currentSong[songIndex].url : ""}
                   alt="img"
                 />
                 <div className="song-genere">
-                  <p className="song-name">{currentSong[songIndex].name} </p>
+                  <p className="song-name">{currentSong && currentSong[songIndex] && currentSong[songIndex].title ?  currentSong[songIndex].title : ""} </p>
                 </div>
                 <button
                   onClick={() => handleSongClicker(currentTrack[songIndex])}
