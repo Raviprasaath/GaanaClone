@@ -224,6 +224,7 @@
   align-items: center;
   padding-top: 10px;
   color: var(--SecondaryColor);
+  cursor: pointer;
 }
 .navbar .sideNav .logo-login .logo {
   font-size: 2rem;
@@ -1874,7 +1875,7 @@
   transition: 0.5s ease-in-out;
 }
 .ReactModalPortal .login-container {
-  height: 500px;
+  height: 600px;
   width: 100%;
   background-color: var(--PrimaryColor3);
   display: flex;
@@ -1919,7 +1920,7 @@
   border-bottom: 1px solid var(--SecondaryColor);
 }
 .ReactModalPortal .login-container .login-section1 .login-btn {
-  margin-top: 30px;
+  margin-top: 20px;
   border: none;
   border-radius: 30px;
   padding: 10px 50px;
@@ -1929,7 +1930,7 @@
   cursor: pointer;
 }
 .ReactModalPortal .login-container .login-section1 .line-break {
-  padding-top: 30px;
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1960,6 +1961,14 @@
 }
 .ReactModalPortal .login-container .login-section1 .google-btn .google-icon {
   font-size: 1.1rem;
+}
+.ReactModalPortal .login-container .login-section1 .error-messages {
+  font-size: 0.7rem;
+  color: red;
+}
+.ReactModalPortal .login-container .login-section1 .success-message {
+  font-size: 0.9rem;
+  color: greenyellow;
 }
 .ReactModalPortal .login-container .login-section2 img {
   height: 500px;

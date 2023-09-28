@@ -243,6 +243,7 @@
       align-items: center;
       padding-top: 10px;
       color: var(--SecondaryColor);
+      cursor: pointer;
       .logo {
         font-size: 2rem;
         display: grid;
@@ -2194,7 +2195,7 @@
 
   }
   .login-container {
-    height: 500px;
+    height: 600px;
     width: 100%;
     background-color: var(--PrimaryColor3);
     display: flex;
@@ -2239,7 +2240,7 @@
         border-bottom: 1px solid var(--SecondaryColor);
       }
       .login-btn {
-        margin-top: 30px;
+        margin-top: 20px;
         border: none;
         border-radius: 30px;
         padding: 10px 50px;
@@ -2249,7 +2250,7 @@
         cursor: pointer;
       }
       .line-break {
-        padding-top: 30px;
+        padding-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -2280,6 +2281,15 @@
         .google-icon {
           font-size: 1.1rem;
         }
+      }
+      
+      .error-messages {
+        font-size: 0.7rem;
+        color: red;
+      }
+      .success-message {
+        font-size: 0.9rem;
+        color: greenyellow;
       }
     }
     .login-section2 {
@@ -4361,6 +4371,7 @@
     }
   }
 }
+
 @media screen and (min-width: 1206px) {
   .music-control-comp {    
     .large-screen-controls {

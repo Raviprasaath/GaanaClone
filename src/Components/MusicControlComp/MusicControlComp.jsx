@@ -21,7 +21,6 @@ function MusicControlComp(props) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
 
-  console.log("lifting", lifting)
 
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -57,7 +56,7 @@ function MusicControlComp(props) {
 
 
   // console.log("currentTrack", currentTrack)
-  console.log("activeSong", activeSong)
+  // console.log("activeSong", activeSong)
   
   let songAllDetails = [];
   

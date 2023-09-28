@@ -29,7 +29,6 @@ import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage
 
 import SearchSection from "./Components/SearchSection/SearchSection.jsx";
 import SearchResultPage from "./Components/PagesRoute/SearchResultPage/SearchResultPage.jsx";
-import FetchingMethods from "./Components/LoginPage/fetchingMethods.jsx";
 
 
 
@@ -100,7 +99,7 @@ function App() {
     }
   }
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
 
   const handleModal = (openState) => {
     setOpenModal(openState)
@@ -157,7 +156,6 @@ function App() {
         <MusicControlComp expander={onHandlerExpander} />
 
         {/* <LoginPage /> */}
-        <FetchingMethods />
       </div>
     </>
   );
