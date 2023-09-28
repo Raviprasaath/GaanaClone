@@ -29,6 +29,9 @@ import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage
 
 import SearchSection from "./Components/SearchSection/SearchSection.jsx";
 import SearchResultPage from "./Components/PagesRoute/SearchResultPage/SearchResultPage.jsx";
+import FetchingMethods from "./Components/LoginPage/fetchingMethods.jsx";
+
+
 
 function App() {
   const darkMode = useSelector((state) => state.usersData.darkMode);
@@ -97,21 +100,29 @@ function App() {
     }
   }
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleModal = (openState) => {
+    setOpenModal(openState)
+  }
+
   return (
     <>
+      <LoginPage loginState={openModal} />
+
       <div className="search-bar-section">{searchBar && <SearchSection message={searchingType} handlerClosingBox={handlerClosingBox} />}</div>
 
-      <div className={`app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
+      <div className={`{${musicExpander}?"background-content":" "} app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
         {/* {musicExpander && ( */}
           <div>
             <button className="navbar-btn" onClick={toggleSidePanel}>
               <FaBars />
             </button>
             {isOpen && <div className="opacity-style-middle"></div>}
-            <Navbar isOpen={isOpen} closeSidePanel={closeSidePanel} />
+            <Navbar handleModal={handleModal} isOpen={isOpen} closeSidePanel={closeSidePanel} />
             {isOpen && <div className="overlay" onClick={closeSidePanel}></div>}
 
-            <NavbarTop closingStatus={boxClose} handlerSearchBar={handlerSearchBar} handlerTypingValue={handlerTypingValue} />
+            <NavbarTop handleModal={handleModal}  closingStatus={boxClose} handlerSearchBar={handlerSearchBar} handlerTypingValue={handlerTypingValue} />
 
             <div className="bg-fill-patch-work">
               <SongsCollection />
@@ -145,7 +156,8 @@ function App() {
         <DataFetch />
         <MusicControlComp expander={onHandlerExpander} />
 
-        <LoginPage />
+        {/* <LoginPage /> */}
+        <FetchingMethods />
       </div>
     </>
   );

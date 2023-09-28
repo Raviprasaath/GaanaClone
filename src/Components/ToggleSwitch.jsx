@@ -13,7 +13,8 @@ function ToggleSwitch() {
   // dark theme toggler
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
-    dispatch(actions.toggledarkmode(!isDarkMode));
+    // dispatch(actions.toggledarkmode(isDarkMode));
+    dispatch(actions.toggledarkmode(!darkMode));
     
   };
 

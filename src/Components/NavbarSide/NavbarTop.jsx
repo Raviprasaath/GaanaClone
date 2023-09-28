@@ -53,7 +53,7 @@ function NavbarTop( props ) {
 
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
-    dispatch(actions.toggledarkmode(!isDarkMode));
+    dispatch(actions.toggledarkmode(!darkMode));
   };
 
   useEffect(() => {
@@ -68,13 +68,17 @@ function NavbarTop( props ) {
     };
   }, []);
 
+  const [modalToggle, setModalToggle] = useState(false);
+
   const openLoginForm = () => {
-    setLoginState(!loginState);
+    // setLoginState(!loginState);
+    setModalToggle(!modalToggle);
+    props.handleModal(modalToggle);
   };
 
   return (
     <>
-      <LoginPage loginState={loginState} />
+      {/* <LoginPage loginState={loginState} /> */}
       <div className="navbar-top">
         {screenSize ? (
           <div className="navbar-view-changer">

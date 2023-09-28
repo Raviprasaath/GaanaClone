@@ -135,6 +135,7 @@
   color: var(--PrimaryColor);
 }
 .lite-mode .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img,
+.lite-mode .music-player-container .music-player .view-splitter .poster-container,
 .lite-mode .music-player-container .music-player {
   background-color: var(--SecondaryColor);
 }
@@ -945,7 +946,14 @@
   left: 0;
   bottom: 0;
   right: 0;
+  height: 100%;
   transform: translate(-50% -50%);
+  overflow: auto;
+}
+
+.background-content {
+  position: relative;
+  height: 100vh;
   overflow: hidden;
 }
 

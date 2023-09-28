@@ -104,12 +104,19 @@ const setAllSearchResultData = (item) => {
     }
 }
 
+const setLoginPageDisplay = (item) => {
+    return {
+        type: "SET_LOGIN_PAGE",
+        payload: item
+    }
+}
+
 
 
 export default {
     toggledarkmode, setActiveItem, setActiveSong, setHappyData, 
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
     setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
-    setTop20Data, setSearchResultData, setAllSearchResultData
+    setTop20Data, setSearchResultData, setAllSearchResultData, setLoginPageDisplay
 
 }

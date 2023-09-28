@@ -57,7 +57,7 @@ function MusicControlComp(props) {
 
 
   // console.log("currentTrack", currentTrack)
-  // console.log("activeSong", activeSong)
+  console.log("activeSong", activeSong)
   
   let songAllDetails = [];
   

@@ -147,6 +147,7 @@
     color: var(--PrimaryColor);
   }
   .music-player-container .music-player .view-splitter .poster-container .song-details-splitter .table-td-2-img,
+  .music-player-container .music-player .view-splitter .poster-container,
   .music-player-container .music-player{
     background-color: var(--SecondaryColor);
   }
@@ -1109,10 +1110,15 @@
   left: 0;
   bottom: 0;
   right: 0;
+  height: 100%;
   transform: translate(-50% -50%);
-  overflow: hidden;  
+  overflow: auto; 
 }
-
+.background-content {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
 
 
 // second page track list header

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { BiUserCircle } from "react-icons/bi";
@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import action from "../../action";
 
 
-function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
+function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +17,14 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
     dispatch(action.setActiveItem("Home"));    
     navigate('/', { replace: true });
   }, [])
+
+  const [modalToggle, setModalToggle] = useState(false);
+
+  const openLoginForm = () => {
+    // setLoginState(!loginState);
+    setModalToggle(!modalToggle);
+    handleModal(modalToggle);
+  };
 
   return (
     <>
@@ -27,30 +35,40 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
             <div className="logo">
               <BiUserCircle />
             </div>
-            <div className="login">Login / Sign Up</div>
+            <div className="login" onClick={openLoginForm} >Login / Sign Up</div>
           </div>
           <ul>
             <Link className="list-selector" to="/">
-            <li>
-              Home
-            </li>
+              <li>
+                Home
+              </li>
             </Link>
-            <li>
-              Radio
-            </li>
-            <li>
-              Podcast
-            </li>
-            <li>
-              My Music
-            </li>
-            <li>
-              India's Music
-            </li>
-            <li>
-                Language
-                <p>(Set Music language)</p>
-            </li>
+            <Link to='/comingsoon'>
+              <li >
+                Radio
+              </li>            
+            </Link>
+            <Link to='/comingsoon'>            
+              <li>
+                Podcast
+              </li>
+            </Link>
+            <Link to='mysongs'>            
+              <li>
+                My Music
+              </li>
+            </Link>
+            <Link to='comingsoon'>            
+              <li>
+                India's Music
+              </li>
+            </Link>
+            <Link to='comingsoon'>            
+              <li>
+                  Language
+                  <p>(Set Music language)</p>
+              </li>
+            </Link>
             <li>
               <div className="toggler-control" href="#">
                 Night Mode
@@ -64,10 +82,12 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel }) {
                 Go Premium{" "}
               </div>
             </li>
-            <li>
-              Get Gaana Plus
-              {/* <a href="#">Get Gaana Plus </a> */}
-            </li>
+            <Link to='subscription'>            
+              <li>
+                Get Gaana Plus
+                {/* <a href="#">Get Gaana Plus </a> */}
+              </li>
+            </Link>
           </ul>
         </nav>
       </div>
