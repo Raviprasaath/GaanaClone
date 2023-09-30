@@ -5,8 +5,18 @@ import image1 from "../../assets/1.jpg";
 
 import song1 from "../../assets/audio/song-1.mp3";
 
-import { BsPlayCircle, BsFillPlayCircleFill, BsFillVolumeUpFill, BsFillPauseCircleFill, } from "react-icons/bs";
-import { IoIosArrowDown, IoIosArrowUp, IoMdRepeat, IoMdShuffle, } from "react-icons/io";
+import {
+  BsPlayCircle,
+  BsFillPlayCircleFill,
+  BsFillVolumeUpFill,
+  BsFillPauseCircleFill,
+} from "react-icons/bs";
+import {
+  IoIosArrowDown,
+  IoIosArrowUp,
+  IoMdRepeat,
+  IoMdShuffle,
+} from "react-icons/io";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSolidVolumeMute, BiSkipPrevious, BiSkipNext } from "react-icons/bi";
@@ -14,13 +24,11 @@ import { useLocation } from "react-router-dom";
 
 import actions from "../../action";
 
-
 function MusicControlComp(props) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
-
 
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -36,36 +44,58 @@ function MusicControlComp(props) {
   let songList = [];
 
   const activeSong = useSelector((state) => state.usersData.activeSong);
-  const topTrendingSongList = useSelector((state) => state.usersData.trendingSong);
+  const topTrendingSongList = useSelector(
+    (state) => state.usersData.trendingSong
+  );
   const soulSongList = useSelector((state) => state.usersData.soulSongs);
   const evergreenList = useSelector((state) => state.usersData.evergreen);
   const top20songs = useSelector((state) => state.usersData.top20);
-
 
   const happySongList = useSelector((state) => state.usersData.happySong);
   const romanticSongList = useSelector((state) => state.usersData.romanticSong);
   const sadSongList = useSelector((state) => state.usersData.sadSong);
   const excitedSongList = useSelector((state) => state.usersData.excitedSong);
   const allSongsList = useSelector((state) => state.usersData.allSongs);
-  const albumSongsList = useSelector((state)=>state.usersData.albumSongs);
-  const resultSongsList = useSelector((state)=>state.usersData.resultSongs);
-  const resultSongsDataList = useSelector((state)=>state.usersData.albumSongs);
+  const albumSongsList = useSelector((state) => state.usersData.albumSongs);
+  const resultSongsList = useSelector((state) => state.usersData.resultSongs);
+  const resultSongsDataList = useSelector(
+    (state) => state.usersData.albumSongs
+  );
 
   const [indexVal, setIndexVal] = useState(0);
-  
 
+  const [favSongAdding, setFavSongAdding] = useState([]);
+  const [existingSongFavCheck, setExistingSongFavCheck] = useState(false);
+  const currentPlayingSongId = activeSong.id || activeSong.songId;
+
+  const handlerFavSongAdding = () => {
+    const index = favSongAdding?.findIndex(
+      (songId) => songId === currentPlayingSongId
+    );
+    console.log("index", index);
+    if (index === -1) {
+      setExistingSongFavCheck(true);
+    } else {
+      setExistingSongFavCheck(false);
+    }
+    const favSong = [...favSongAdding, activeSong.id];
+
+    setFavSongAdding(favSong);
+  };
+  console.log("existingSongFavCheck", existingSongFavCheck);
+  console.log("activeSong", activeSong);
+  console.log("favSongAdding", favSongAdding);
 
   // console.log("currentTrack", currentTrack)
   // console.log("activeSong", activeSong)
-  
+
   let songAllDetails = [];
-  
 
   let flag = false;
 
-  if (activeSong.album==="yes") {
+  if (activeSong.album === "yes") {
     flag = true;
-  } else if (activeSong.album === 'no') {
+  } else if (activeSong.album === "no") {
     flag = false;
   }
 
@@ -83,20 +113,16 @@ function MusicControlComp(props) {
     songList = albumSongsList;
   } else if (activeSong.fromSearch === "yes") {
     songList = resultSongsDataList;
-  }
-
-  else if (!flag) {
+  } else if (!flag) {
     if (activeSong.featured === "Trending songs") {
       songList = topTrendingSongList;
-    } else if  (activeSong.featured === "Soul soother") {
+    } else if (activeSong.featured === "Soul soother") {
       songList = soulSongList;
-    } else if (activeSong.featured === 'Evergreen melodies') {
+    } else if (activeSong.featured === "Evergreen melodies") {
       songList = evergreenList;
-    }
-    else if (activeSong.featured === 'Top 20 of this week') {
+    } else if (activeSong.featured === "Top 20 of this week") {
       songList = top20songs;
-    }
-    else if (activeSong.mood === "happy") {
+    } else if (activeSong.mood === "happy") {
       songList = happySongList;
     } else if (activeSong.mood === "romantic") {
       songList = romanticSongList;
@@ -107,7 +133,7 @@ function MusicControlComp(props) {
     } else {
       songList = allSongsList;
     }
-  } 
+  }
 
   // console.log("songList", songList)
 
@@ -150,9 +176,8 @@ function MusicControlComp(props) {
 
   const tracks = songTrackList.length !== 0 ? songTrackList : song1;
 
-
-  if (Array.isArray(songList) && (flag) && albumSongsList) {
-    songList.forEach((item) => {        
+  if (Array.isArray(songList) && flag && albumSongsList) {
+    songList.forEach((item) => {
       songAllDetails.push({
         key: item.id,
         id: item.id,
@@ -160,11 +185,11 @@ function MusicControlComp(props) {
         title: item.songName,
         artist: "",
         audio_url: item.audio,
-        album:"yes",
+        album: "yes",
       });
     });
   } else if (Array.isArray(songList) && searchResultFlag) {
-    songList.forEach((item)=> {
+    songList.forEach((item) => {
       songAllDetails.push({
         id: item.id,
         key: item.id,
@@ -172,15 +197,15 @@ function MusicControlComp(props) {
         title: item.title,
         artist: item.artist,
         audio_url: item.audio_url,
-        name : item.name,
-        album:"no",
+        name: item.name,
+        album: "no",
         fromSearch: "yes",
-      })
-    }) 
+      });
+    });
   } else {
     if (Array.isArray(songList)) {
       songList.forEach((item) => {
-        songAllDetails.push({        
+        songAllDetails.push({
           key: item._id,
           id: item._id,
           mood: item.mood,
@@ -189,9 +214,9 @@ function MusicControlComp(props) {
           title: item.title,
           artist: item.artist[0]?.name || "",
           audio_url: item.audio_url,
-          album:"no",
+          album: "no",
         });
-      });    
+      });
     }
   }
   // console.log("songAllDetails index", songAllDetails[indexVal]);
@@ -234,7 +259,7 @@ function MusicControlComp(props) {
   };
 
   useEffect(() => {
-    if (location.pathname === "/" && playing ) {
+    if (location.pathname === "/" && playing) {
       handlePlay();
     }
   }, []);
@@ -253,8 +278,6 @@ function MusicControlComp(props) {
       handlePlay();
     }
   }, [currentTrack]);
-
-
 
   const handlePause = () => {
     audioRef.current.pause();
@@ -278,7 +301,6 @@ function MusicControlComp(props) {
     }
   }, [activeSong]);
 
-
   const handleNextTrack = () => {
     if (isShuffleOn) {
       const nextShuffledIndex = Math.floor(
@@ -299,8 +321,6 @@ function MusicControlComp(props) {
     }
     setPlaying(true);
   };
-
-
 
   useEffect(() => {
     audioRef.current.addEventListener("ended", handleNextTrack);
@@ -443,19 +463,30 @@ function MusicControlComp(props) {
                                 songList[currentTrack].title
                             } */}
 
-                            {
-                            songAllDetails &&
+                            {songAllDetails &&
                             songAllDetails[currentTrack] &&
-                            songAllDetails[currentTrack].name ?
-                            songAllDetails[currentTrack].name :
-                            songAllDetails &&
-                            songAllDetails[currentTrack] &&
-                            songAllDetails[currentTrack].title
+                            songAllDetails[currentTrack].name
+                              ? songAllDetails[currentTrack].name
+                              : songAllDetails &&
+                                songAllDetails[currentTrack] &&
+                                songAllDetails[currentTrack].title
                               ? songAllDetails[currentTrack].title
                               : "Once upon a Time"}
                           </p>
                           <p>
-                            <AiOutlineHeart className="heart-in" />
+                            {existingSongFavCheck ? (
+                              <AiFillHeart
+                                id="test-1"
+                                onClick={handlerFavSongAdding}
+                                className="heart-in"
+                              />
+                            ) : (
+                              <AiOutlineHeart
+                                id="test-2"
+                                onClick={handlerFavSongAdding}
+                                className="heart-in"
+                              />
+                            )}
                           </p>
                         </div>
                         <div className="song-seeking-line">
@@ -535,37 +566,40 @@ function MusicControlComp(props) {
                       <div style={{ padding: "5px 0px" }}></div>
 
                       <div className="table-td-2-img">
-                        {songAllDetails.length > 0 && songAllDetails?.map((item, index) => (
-                          <div
-                            onClick={() =>
-                              {handleSongClicker(songAllDetails[index]), setIndexVal(index)}
-                            }
-                            key={item.id || index}
-                            className="songs-collection"
-                          >
-                            <BsPlayCircle className="play-track-icon" />
-                            <img
-                              src={item.thumbnail}
-                              alt="img"
-                              className="table-mob-view-poster"
-                            />
-                            <div className="flex">
-                              <div className="table-button-artist">
-                                <button className="premium-button">
-                                  Premium
-                                </button>
-                                <p className="table-mob-artist">
-                                  {item.artist}
+                        {songAllDetails.length > 0 &&
+                          songAllDetails?.map((item, index) => (
+                            <div
+                              onClick={() => {
+                                handleSongClicker(songAllDetails[index]),
+                                  setIndexVal(index);
+                              }}
+                              key={item.id || index}
+                              className="songs-collection"
+                            >
+                              <BsPlayCircle className="play-track-icon" />
+                              <img
+                                src={item.thumbnail}
+                                alt="img"
+                                className="table-mob-view-poster"
+                              />
+                              <div className="flex">
+                                <div className="table-button-artist">
+                                  <button className="premium-button">
+                                    Premium
+                                  </button>
+                                  <p className="table-mob-artist">
+                                    {item.artist}
+                                  </p>
+                                </div>
+                                <p className="table-song-name">
+                                  {item.name ? item.name : item.title}
                                 </p>
                               </div>
-                              <p className="table-song-name">{
-                              item.name ? item.name : item.title}</p>
-                            </div>
-                            <p>
+                              {/* <p>
                               <AiOutlineHeart className="fav-remover" />
-                            </p>
-                          </div>
-                        ))}
+                            </p> */}
+                            </div>
+                          ))}
                         {/* {songList.map((item, index) => (
                           <div
                             onClick={() => handleSongClicker(songList[index])}
@@ -614,7 +648,7 @@ function MusicControlComp(props) {
                         // songList[currentTrack].thumbnail
                         //   ? songList[currentTrack].thumbnail
                         // :
-                        
+
                         songAllDetails &&
                         songAllDetails[currentTrack] &&
                         songAllDetails[currentTrack].thumbnail
@@ -626,20 +660,34 @@ function MusicControlComp(props) {
                     <div className="poster-song-splitter">
                       <div className="song-name">
                         <p>
-                          {
-                          songAllDetails &&
+                          {songAllDetails &&
                           songAllDetails[currentTrack] &&
-                          songAllDetails[currentTrack].name ?
-                          songAllDetails[currentTrack].name :
-                          songAllDetails &&
-                          songAllDetails[currentTrack] &&
-                          songAllDetails[currentTrack].title
+                          songAllDetails[currentTrack].name
+                            ? songAllDetails[currentTrack].name
+                            : songAllDetails &&
+                              songAllDetails[currentTrack] &&
+                              songAllDetails[currentTrack].title
                             ? songAllDetails[currentTrack].title
                             : "Once upon a Time"}
                         </p>
-                        <p>
-                          <AiOutlineHeart className="heart-in" />
-                        </p>
+                        <div>
+                          <div>
+                            {existingSongFavCheck && (
+                              <AiFillHeart
+                                onClick={handlerFavSongAdding}
+                                id="test-3"
+                                className="heart-in"
+                              />
+                            )}
+                            {!existingSongFavCheck && (
+                              <AiOutlineHeart
+                                onClick={handlerFavSongAdding}
+                                id="test-4"
+                                className="heart-in"
+                              />
+                            )}
+                          </div>
+                        </div>
                       </div>
                       <div className="song-seeking-line">
                         <input
@@ -723,7 +771,10 @@ function MusicControlComp(props) {
                     <div className="table-td-2-img">
                       {songAllDetails.map((item, index) => (
                         <div
-                          onClick={() => {handleSongClicker(songAllDetails[index]), setIndexVal(index)}}
+                          onClick={() => {
+                            handleSongClicker(songAllDetails[index]),
+                              setIndexVal(index);
+                          }}
                           key={item.id || index}
                           className="songs-collection"
                         >
@@ -740,11 +791,13 @@ function MusicControlComp(props) {
                               </button>
                               <p className="table-mob-artist">{item.artist}</p>
                             </div>
-                            <p className="table-song-name">{item.name ? item.name : item.title}</p>
+                            <p className="table-song-name">
+                              {item.name ? item.name : item.title}
+                            </p>
                           </div>
-                          <p>
+                          {/* <p>
                             <AiOutlineHeart className="fav-remover" />
-                          </p>
+                          </p> */}
                         </div>
                       ))}
                     </div>
@@ -805,27 +858,25 @@ function MusicControlComp(props) {
               <div className="song-name-lines">
                 <p className="song-name-1">
                   {/* {activeSong.name ? activeSong.name : "Once upon a Time"} */}
-                  {
-                  songAllDetails &&
+                  {songAllDetails &&
                   songAllDetails[currentTrack] &&
-                  songAllDetails[currentTrack].name ?
-                  songAllDetails[currentTrack].name :
-                  songAllDetails &&
-                  songAllDetails[currentTrack] &&
-                  songAllDetails[currentTrack].title
+                  songAllDetails[currentTrack].name
+                    ? songAllDetails[currentTrack].name
+                    : songAllDetails &&
+                      songAllDetails[currentTrack] &&
+                      songAllDetails[currentTrack].title
                     ? songAllDetails[currentTrack].title
                     : "Once upon a Time"}
                 </p>
                 <p className="song-name-2">
                   {/* {activeSong.name ? activeSong.name : "Once upon a Time"}  */}
-                  {
-                  songAllDetails &&
+                  {songAllDetails &&
                   songAllDetails[currentTrack] &&
-                  songAllDetails[currentTrack].name ?
-                  songAllDetails[currentTrack].name :
-                  songAllDetails &&
-                  songAllDetails[currentTrack] &&
-                  songAllDetails[currentTrack].title
+                  songAllDetails[currentTrack].name
+                    ? songAllDetails[currentTrack].name
+                    : songAllDetails &&
+                      songAllDetails[currentTrack] &&
+                      songAllDetails[currentTrack].title
                     ? songAllDetails[currentTrack].title
                     : "Once upon a Time"}
                   (From Movie)
@@ -894,14 +945,13 @@ function MusicControlComp(props) {
                       ? songList[currentTrack].title
                       : ""} */}
 
-                    {
-                    songAllDetails &&
+                    {songAllDetails &&
                     songAllDetails[currentTrack] &&
-                    songAllDetails[currentTrack].name ?
-                    songAllDetails[currentTrack].name :
-                    songAllDetails &&
-                    songAllDetails[currentTrack] &&
-                    songAllDetails[currentTrack].title
+                    songAllDetails[currentTrack].name
+                      ? songAllDetails[currentTrack].name
+                      : songAllDetails &&
+                        songAllDetails[currentTrack] &&
+                        songAllDetails[currentTrack].title
                       ? songAllDetails[currentTrack].title
                       : "Once upon a Time"}
                   </p>
@@ -912,21 +962,32 @@ function MusicControlComp(props) {
                       ? songList[currentTrack].title
                       : ""} */}
 
-                    {
-                    songAllDetails &&
+                    {songAllDetails &&
                     songAllDetails[currentTrack] &&
-                    songAllDetails[currentTrack].name ?
-                    songAllDetails[currentTrack].name :
-                    songAllDetails &&
-                    songAllDetails[currentTrack] &&
-                    songAllDetails[currentTrack].title
+                    songAllDetails[currentTrack].name
+                      ? songAllDetails[currentTrack].name
+                      : songAllDetails &&
+                        songAllDetails[currentTrack] &&
+                        songAllDetails[currentTrack].title
                       ? songAllDetails[currentTrack].title
                       : "Once upon a Time"}
                   </p>
                 </div>
                 <div>
-                  <AiOutlineHeart className="heart-empty" />
-                  {/* <AiFillHeart className="heart-filled" /> */}
+                  {existingSongFavCheck && (
+                    <AiFillHeart
+                      onClick={handlerFavSongAdding}
+                      id="test-5"
+                      className="heart-in"
+                    />
+                  )}
+                  {!existingSongFavCheck && (
+                    <AiOutlineHeart
+                      onClick={handlerFavSongAdding}
+                      id="test-6"
+                      className="heart-in"
+                    />
+                  )}
                 </div>
                 <div>
                   <SlOptionsVertical className="options" />

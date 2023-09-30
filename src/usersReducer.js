@@ -6,8 +6,7 @@ const initialState = {
     romanticSong: [],
     trendingSong: [],
     soulSongs: [],
-    loginDetailsData: "",
-    // loginPage: false,
+
 };
 
 function usersReducer(state = initialState, action) {
@@ -57,15 +56,10 @@ function usersReducer(state = initialState, action) {
         case 'SET_ALL_SEARCH_RESULT_SONGS': {
             return { ...state, resultData: action.payload }
         }
-
-        case 'SET_LOGIN_DETAILS': {
-            return { ...state, loginDetailsData: action.payload }
+        case 'SET_FAV_SONGS': {
+            return { ...state, favSongData: action.payload }
         }
 
-
-        // case 'SET_LOGIN_PAGE': {
-        //     return { ...state, loginPage: action.payload }
-        // }
 
 
         default:

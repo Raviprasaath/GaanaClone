@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import logo from "../../assets/main-logo.png";
 import login_bg from "../../assets/login_bg.jpg";
-
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { AiOutlineClose } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -63,7 +62,17 @@ function LoginPage(props) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  console.log("logStatus", logStatus);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorageCheck !== 0) {
+      setEmail(userData.emailFromFetch);
+      setPassword(userData.passwordFromFetch);
+      setUserName(userData.userNameFromFetch);
+      setCurrentPassword(userData.passwordFromFetch);
+      fetchingFromServer();
+    }
+  }, []);
 
   const [btnDisable, setBtnDisable] = useState(true);
 
@@ -110,6 +119,7 @@ function LoginPage(props) {
   };
 
   const handlerLogOut = () => {
+    localStorage.setItem("userData", []);
     window.location.reload();
   };
 
@@ -132,8 +142,6 @@ function LoginPage(props) {
     setNewPassword(e.target.value);
   };
 
-
-
   // #endregion
 
   // #region ------------- Fetching ---------------
@@ -145,26 +153,51 @@ function LoginPage(props) {
   const [userNameFromFetch, setUserNameFromFetch] = useState("");
   const [passwordFromFetch, setPasswordFromFetch] = useState("");
   const [messageFromFetch, setMessageFromFetch] = useState("");
+  const [emailFromFetch, setEmailFromFetch] = useState("");
   const [passwordStatus, setPasswordStatus] = useState("fail");
+  const [passwordChangeErrorState, setPasswordChangeErrorState] =
+    useState(false);
 
-  const handlerStartFetch = () => {
+  const handlerStartFetch = async () => {
+    const responseFetch = await fetchingFromServer();
+    setTimeout(() => {
+      if (responseFetch === "success") {
+        window.location.reload();
+      }
+    }, [1000]);
+
     setFetching((prev) => prev + 1);
   };
+  // getting out from local store
+  const userDataString = localStorage.getItem("userData");
+  const userData = JSON.parse(userDataString || "{}");
+
+  const localStorageCheck = Object.keys(userData).length;
+
   const handlerUpdatePassword = () => {
-    setTimeout(()=> {
-      clearInput()
-    }, 3000)
+    setEmail(userData.emailFromFetch);
+    setPassword(userData.passwordFromFetch);
+    setUserName(userData.userNameFromFetch);
+    setCurrentPassword(userData.passwordFromFetch);
+    setToken(userData.token);
+    updatePassword();
+    setTimeout(() => {
+      setPasswordChangeErrorState(true);
+    }, [1000]);
+    setTimeout(() => {
+      clearInput();
+      setPasswordChangeErrorState(false);
+    }, 3000);
     setFetching((prev) => prev + 1);
   };
-  // useEffect(() => {
-  //   if (successStatus === "success") {
-  //     setTimeout(() => {
-  //       setIsOpen(false);
-  //     }, [10000]);
-  //   }
-  // }, [successStatus]);
 
-  useEffect(() => {
+  // function gettingFromLocalStorage() {
+  //   const dataFromStore = JSON.parse(localStorage.getItem("userData")) || [];
+  //   return dataFromStore;
+  // }
+
+
+  async function fetchingFromServer() {
     if (successStatus === "fail" && logStatus === "Sign Up") {
       let myHeaders = new Headers();
       myHeaders.append("projectID", "ghmumg9x1zid");
@@ -184,28 +217,35 @@ function LoginPage(props) {
         redirect: "follow",
       };
 
-      fetch(
+      const fetchingSigning = await fetch(
         "https://academics.newtonschool.co/api/v1/user/signup",
         requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          setSuccessStatus(result.status);
-          setMessageFromFetch(result.message);
-          setUserNameFromFetch(result.data.user.name);
-          setPasswordFromFetch(result.data.password);
-          console.log("signup ", result);
-          if (result.status == "success") {
-            setToken(result.token);
-          }
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
-    }
+      );
+      const response = await fetchingSigning.json();
+      const result = await response;
 
+      setSuccessStatus(result.status);
+      setMessageFromFetch(result.message);
+      setUserNameFromFetch(result.data.user.name);
+      setEmailFromFetch(result.data.user.email);
+      if (result.status == "success") {
+        setToken(result.token);
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({
+            logStatus: result.status || "",
+            token: result.token || "",
+            userNameFromFetch: result.data.user.name || "",
+            messageFromFetch: result.message || "",
+            emailFromFetch: result.data.user.email || "",
+            passwordFromFetch: password || "",
+          })
+        );
+        return result.status;
+      }
+    }
     // -------------LOG IN--------------------
-    else if (successStatus === "fail" && logStatus === "Log In") {
+    else if (!userData.logStatus && logStatus === "Log In") {
       let myHeaders = new Headers();
       myHeaders.append("projectID", "ghmumg9x1zid");
       myHeaders.append("Content-Type", "application/json");
@@ -223,67 +263,81 @@ function LoginPage(props) {
         redirect: "follow",
       };
 
-      fetch(
+      const fetchingSigning = await fetch(
         "https://academics.newtonschool.co/api/v1/user/login",
         requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          setSuccessStatus(result.status);
-          setMessageFromFetch(result.message);
-          setUserNameFromFetch(result.data.name);
-          setPasswordFromFetch(result.data.password);
-          console.log("login ", result);
-          if (result.status == "success") {
-            setToken(result.token);
-          }
-        })
-        .catch((error) => console.log("error", error));
-    } else if (successStatus === "success") {
-      let myHeaders = new Headers();
-      myHeaders.append("projectID", "ghmumg9x1zid");
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("Authorization", `Bearer ${token}`);
+      );
+      const response = await fetchingSigning.json();
+      const result = await response;
 
-      let raw = JSON.stringify({
-        name: `${userName}`,
-        email: `${email}`,
-        passwordCurrent: `${currentPassword}`,
-        password: `${newPassword}`,
-        appType: "music",
-      });
+      setSuccessStatus(result.status);
+      setMessageFromFetch(result.message);
+      setUserNameFromFetch(result.data.name);
+      setPasswordFromFetch(result.data.password);
+      setEmailFromFetch(result.data.email);
+      if (result.status == "success") {
+        setToken(result.token);
 
-      let requestOptions = {
-        method: "PATCH",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
-
-      fetch(
-        "https://academics.newtonschool.co/api/v1/user/updateMyPassword",
-        requestOptions
-      )
-        .then((response) => response.json())
-        .then((result) => {
-          setPasswordStatus(result.status);
-          setMessageFromFetch(result.message);
-          setUserNameFromFetch(result.data.name);
-          setPasswordFromFetch(result.data.password);
-          console.log("login ", result, 
-          "result status", result.status,
-          );
-          if (result.status == "success") {
-            setToken(result.token);
-          }
-        })
-        .catch((error) => console.log("error", error));
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({
+            logStatus: result.status || "",
+            token: result.token || "",
+            userNameFromFetch: result.data.name || "",
+            messageFromFetch: result.message || "",
+            emailFromFetch: result.data.email || "",
+            passwordFromFetch: password || "",
+          })
+        );
+      }
+      return result.status;
     }
-  }, [fetching]);
+    // else if ((userData.logStatus === "success"))
+  }
+  function updatePassword() {
+    let myHeaders = new Headers();
+    myHeaders.append("projectID", "ghmumg9x1zid");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    let raw = JSON.stringify({
+      name: `${userName}`,
+      email: `${email}`,
+      passwordCurrent: `${currentPassword}`,
+      password: `${newPassword}`,
+      appType: "music",
+    });
+
+    let requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://academics.newtonschool.co/api/v1/user/updateMyPassword",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setPasswordStatus(result.status);
+        if (result.status == "success") {
+          setToken(result.token);
+          userData.passwordFromFetch = newPassword;
+          localStorage.setItem("userData", JSON.stringify(userData));
+        }
+      })
+      .catch((error) => console.log("error", error));
+  }
+
+  // useEffect(() => {
+  //   // gettingFromLocalStorage();
+  //   // fetchingFromServer();
+  // }, [fetching]);
 
   //  #endregion ---------------------------------
 
-  console.log("successStatus", successStatus);
 
   return (
     <>
@@ -299,18 +353,18 @@ function LoginPage(props) {
             <div className="login-section1">
               <img src={logo} alt="" />
               <h2 className="login-title">
-                {successStatus === "fail" && <div>Login/Signup</div>}
-                {successStatus === "success" && (
-                  <div>
-                    Hi {userNameFromFetch}
-                    <div style={{ textAlign: "center" }}>Welcome</div>
+                {!userData.logStatus && <div>Login/Signup</div>}
+                {userData.logStatus === "success" && (
+                  <div style={{ textAlign: "center" }}>
+                    Hi {userData.userNameFromFetch}
+                    <div>Welcome</div>
                   </div>
                 )}
               </h2>
               <p className="login-info">
                 Get a personalized experience, and access all your music
               </p>
-              {successStatus === "fail" && logStatus === "Sign Up" && (
+              {!userData.logStatus && logStatus === "Sign Up" && (
                 <>
                   <input
                     type="text"
@@ -326,7 +380,7 @@ function LoginPage(props) {
                   )}
                 </>
               )}
-              {successStatus === "success" && (
+              {userData.logStatus === "success" && (
                 <>
                   <input
                     type="password"
@@ -358,17 +412,24 @@ function LoginPage(props) {
                   >
                     Update Password
                   </button>
-                  {newPassword.length > 0 && passwordStatus === "success" && (
-                    <p className="success-message">Password Updated</p>
+                  {passwordChangeErrorState && (
+                    <>
+                      {userData.logStatus === "success" &&
+                        passwordStatus === "success" && (
+                          <p className="success-message">Password Updated</p>
+                        )}
+                      {userData.logStatus === "success" &&
+                        passwordStatus === "fail" && (
+                          <p className="error-messages">
+                            Password Not Matching
+                          </p>
+                        )}
+                    </>
                   )}
-                  {successStatus === "fail" && (
-                    <p className="success-message">Password Not Matching</p>
-                  )}
-
                 </>
               )}
 
-              {successStatus === "fail" && (
+              {!userData.logStatus && (
                 <>
                   <input
                     type="email"
@@ -403,7 +464,7 @@ function LoginPage(props) {
                   </button>
 
                   {password.length > 0 &&
-                    successStatus === "fail" &&
+                    !userData.logStatus &&
                     logStatus === "Log In" && (
                       <p className="error-messages">
                         {messageFromFetch === "Incorrect EmailId or Password"
@@ -412,7 +473,7 @@ function LoginPage(props) {
                       </p>
                     )}
                   {password.length > 0 &&
-                    successStatus === "fail" &&
+                    !userData.logStatus &&
                     logStatus === "Sign Up" && (
                       <p className="error-messages">
                         {messageFromFetch === "Incorrect EmailId or Password"
@@ -423,7 +484,7 @@ function LoginPage(props) {
                       </p>
                     )}
 
-                  {successStatus === "success" && (
+                  {userData.logStatus === "success" && (
                     <p className="success-message">Success</p>
                   )}
                 </>
@@ -440,7 +501,7 @@ function LoginPage(props) {
                 <p className="empty-line"></p>
               </div>
 
-              {successStatus === "fail" && (
+              {!userData.logStatus && (
                 <button
                   onClick={handlerToggleLogging}
                   className="login-btn google-btn"
@@ -448,7 +509,7 @@ function LoginPage(props) {
                   {logStatus === "Sign Up" ? "Log In" : "Sign Up"}
                 </button>
               )}
-              {successStatus === "success" && (
+              {userData.logStatus === "success" && (
                 <button
                   onClick={handlerLogOut}
                   className="login-btn google-btn"

@@ -1,6 +1,7 @@
 
 import { AiOutlineSearch, AiOutlineDown, AiOutlineClose } from "react-icons/ai";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
+import { BiUserCircle } from "react-icons/bi";
 import { MdBrightness2 } from "react-icons/md";
 import MainLogo from "../../assets/main-logo.png";
 import { useEffect, useState } from "react";
@@ -19,7 +20,6 @@ function NavbarTop( props ) {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const darkMode = useSelector((state) => state.usersData.darkMode);
   const [inputValue, setInputValue] = useState('');
-
 
   const dispatch = useDispatch();
 
@@ -55,6 +55,26 @@ function NavbarTop( props ) {
     setIsDarkMode(!isDarkMode);
     dispatch(actions.toggledarkmode(!darkMode));
   };
+
+
+
+  // getting out from local store
+  const userDataString = localStorage.getItem("userData");
+  const userData = JSON.parse(userDataString || "{}");
+
+  const [userName, setUserName] = useState("Log In / Sign Up");
+
+  const localStorageCheck = Object.keys(userData).length;
+
+  useEffect(()=> {
+    if (localStorageCheck !== 0) {
+      setUserName(userData.userNameFromFetch);
+    }
+  }, [])
+  
+
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -119,7 +139,17 @@ function NavbarTop( props ) {
                 {darkMode ? <BsFillBrightnessHighFill /> : <MdBrightness2 />}
               </button>
               <button className="user-login" onClick={openLoginForm}>
-                Log In / Sign Up
+                {userName === 'Log In / Sign Up' && 
+                  <>               
+                    Log In / Sign Up
+                  </>
+                }
+                {userName !== 'Log In / Sign Up' && 
+                  <>               
+                    <BiUserCircle /> { userName}
+                  </>
+                }
+
               </button>
             </div>
           </div>

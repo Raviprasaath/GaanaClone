@@ -103,19 +103,14 @@ const setAllSearchResultData = (item) => {
         payload: item
     }
 }
-const setLoginDetailsData = (item) => {
+const setFavSongs = (item) => {
     return {
-        type: "SET_LOGIN_DETAILS",
+        type: "SET_FAV_SONGS",
         payload: item
     }
 }
 
-// const setLoginPageDisplay = (item) => {
-//     return {
-//         type: "SET_LOGIN_PAGE",
-//         payload: item
-//     }
-// }
+
 
 
 
@@ -123,7 +118,6 @@ export default {
     toggledarkmode, setActiveItem, setActiveSong, setHappyData, 
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
     setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
-    setTop20Data, setSearchResultData, setAllSearchResultData, 
-    setLoginDetailsData, 
+    setTop20Data, setSearchResultData, setAllSearchResultData, setFavSongs
 
 }

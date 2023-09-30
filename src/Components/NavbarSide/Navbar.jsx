@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { BiUserCircle } from "react-icons/bi";
@@ -26,6 +26,20 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
     handleModal(modalToggle);
   };
 
+    // getting out from local store
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString || "{}");
+  
+    const [userName, setUserName] = useState("Log In / Sign Up");
+  
+    const localStorageCheck = Object.keys(userData).length;
+  
+    useEffect(()=> {
+      if (localStorageCheck !== 0) {
+        setUserName(userData.userNameFromFetch);
+      }
+    }, [])
+
   return (
     <>
       <div className="navbar">
@@ -35,7 +49,18 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
             <div className="logo">
               <BiUserCircle />
             </div>
-            <div className="login" onClick={openLoginForm} >Login / Sign Up</div>
+            <div className="login" onClick={openLoginForm} >
+                {userName !== 'Log In / Sign Up' && 
+                  <>               
+                    {userName}
+                  </>
+                }
+                {userName === 'Log In / Sign Up' && 
+                  <>               
+                    Log In / Sign Up
+                  </>
+                }
+            </div>
           </div>
           <ul>
             <Link className="list-selector" to="/">

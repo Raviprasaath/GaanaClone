@@ -99,7 +99,7 @@ function App() {
     }
   }
 
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleModal = (openState) => {
     setOpenModal(openState)
