@@ -5,18 +5,8 @@ import image1 from "../../assets/1.jpg";
 
 import song1 from "../../assets/audio/song-1.mp3";
 
-import {
-  BsPlayCircle,
-  BsFillPlayCircleFill,
-  BsFillVolumeUpFill,
-  BsFillPauseCircleFill,
-} from "react-icons/bs";
-import {
-  IoIosArrowDown,
-  IoIosArrowUp,
-  IoMdRepeat,
-  IoMdShuffle,
-} from "react-icons/io";
+import { BsPlayCircle, BsFillPlayCircleFill, BsFillVolumeUpFill, BsFillPauseCircleFill,} from "react-icons/bs";
+import { IoIosArrowDown, IoIosArrowUp, IoMdRepeat, IoMdShuffle, } from "react-icons/io";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BiSolidVolumeMute, BiSkipPrevious, BiSkipNext } from "react-icons/bi";
@@ -25,12 +15,14 @@ import { useLocation } from "react-router-dom";
 import actions from "../../action";
 
 function MusicControlComp(props) {
+
   const location = useLocation();
   const dispatch = useDispatch();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [lifting, setLifting] = useState(true);
 
   const [playing, setPlaying] = useState(false);
+  const [songChanging, setSongChanging] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
@@ -44,9 +36,7 @@ function MusicControlComp(props) {
   let songList = [];
 
   const activeSong = useSelector((state) => state.usersData.activeSong);
-  const topTrendingSongList = useSelector(
-    (state) => state.usersData.trendingSong
-  );
+  const topTrendingSongList = useSelector((state) => state.usersData.trendingSong);
   const soulSongList = useSelector((state) => state.usersData.soulSongs);
   const evergreenList = useSelector((state) => state.usersData.evergreen);
   const top20songs = useSelector((state) => state.usersData.top20);
@@ -58,38 +48,54 @@ function MusicControlComp(props) {
   const allSongsList = useSelector((state) => state.usersData.allSongs);
   const albumSongsList = useSelector((state) => state.usersData.albumSongs);
   const resultSongsList = useSelector((state) => state.usersData.resultSongs);
-  const resultSongsDataList = useSelector(
-    (state) => state.usersData.albumSongs
-  );
+  const resultSongsDataList = useSelector((state) => state.usersData.albumSongs);
 
-  const [indexVal, setIndexVal] = useState(0);
 
-  const [favSongAdding, setFavSongAdding] = useState([]);
-  const [existingSongFavCheck, setExistingSongFavCheck] = useState(false);
-  const currentPlayingSongId = activeSong.id || activeSong.songId;
+  let songAllDetails = [];
 
-  const handlerFavSongAdding = () => {
-    const index = favSongAdding?.findIndex(
-      (songId) => songId === currentPlayingSongId
-    );
-    console.log("index", index);
-    if (index === -1) {
-      setExistingSongFavCheck(true);
-    } else {
-      setExistingSongFavCheck(false);
-    }
-    const favSong = [...favSongAdding, activeSong.id];
 
-    setFavSongAdding(favSong);
-  };
-  console.log("existingSongFavCheck", existingSongFavCheck);
-  console.log("activeSong", activeSong);
-  console.log("favSongAdding", favSongAdding);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // console.log("currentTrack", currentTrack)
   // console.log("activeSong", activeSong)
 
-  let songAllDetails = [];
+
 
   let flag = false;
 
@@ -284,15 +290,6 @@ function MusicControlComp(props) {
     setPlaying(false);
   };
 
-  // useEffect(() => {
-  //   const currentId = activeSong.songId ? activeSong.songId : activeSong._id;
-  //   if (songListIndex.length > 0 && currentId !== "") {
-  //     const index = songList.findIndex((d) => d._id === currentId);
-  //     setCurrentTrack(index);
-  //   }
-  // }, [activeSong]);
-
-  // trailed for album
   useEffect(() => {
     const currentId = activeSong.songId ? activeSong.songId : activeSong.id;
     if (songListIndex.length > 0 && currentId !== "") {
@@ -313,6 +310,7 @@ function MusicControlComp(props) {
       setCurrentTrack(0);
     }
     setPlaying(true);
+    setSongChanging(prev => prev + 1);
   };
 
   const handlePrevTrack = () => {
@@ -320,6 +318,7 @@ function MusicControlComp(props) {
       setCurrentTrack((prevTrack) => prevTrack - 1);
     }
     setPlaying(true);
+    setSongChanging(prev => prev + 1);
   };
 
   useEffect(() => {
@@ -419,6 +418,135 @@ function MusicControlComp(props) {
 
   // #endregion
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+//#region ----------------- Fav Fetching -------------
+
+
+  const dataGettingFromLocal =  localStorage.getItem("userData") || "";
+  const fromLocalStorage = dataGettingFromLocal?JSON.parse(dataGettingFromLocal) : "";
+  const [favFetchingActivator, setFavFetchingActivator] = useState(0); // fetch initiator only
+  const [existingSongFavCheck, setExistingSongFavCheck] = useState(false); // heart controller
+
+  const handlerFavSongAdding = () => {
+    setFavFetchingActivator(prev => prev + 1);    
+  };
+
+  const [fetchingSongStoringArray, setFetchingSongStoringArray] = useState([]);
+  
+  const currentPlayingSongId = 
+    songAllDetails && 
+    songAllDetails[currentTrack] && 
+    songAllDetails[currentTrack].id &&
+    songAllDetails[currentTrack].id;
+
+  
+
+    async function favSongFetching() {
+      try {
+        let myHeaders = new Headers();
+        myHeaders.append("projectID", "ghmumg9x1zid");
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Bearer ${fromLocalStorage.token}`);
+      
+        // let raw = JSON.stringify({
+        //   "songId": currentPlayingSongId ? currentPlayingSongId : "6517f1282539a734f85e1b86"
+        // });
+
+        let raw = 
+        currentPlayingSongId ? 
+        JSON.stringify({        
+            "songId": currentPlayingSongId          
+        }) : ("")
+      
+        let requestOptions = {
+          method: 'PATCH',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+      
+        const response = await fetch("https://academics.newtonschool.co/api/v1/music/favorites/like", requestOptions)
+        if (!response.ok) {
+          const errorText = await response.text(); // Get the error response body if available
+          throw new Error(`Request failed with status: ${response.status}. Error message: ${errorText}`);
+        }
+        const result = await response.json();
+        console.log("result", result)
+        if (result.data) {
+          setFetchingSongStoringArray(result.data.songs);
+
+          const array = (result.data.songs || []).map((item) => {
+            return item && item._id ? item._id : item;
+          });
+          
+          let flag = array.findIndex((d) => d === currentPlayingSongId);
+          setExistingSongFavCheck(flag !== -1);
+        } else {
+          console.log("Data not found in the API response.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+
+    function songFavNextPrev() {
+      const array = (fetchingSongStoringArray || []).map((item) => {
+        return item && item._id ? item._id : item;
+      });
+      let flag = array.findIndex((d) => d === currentPlayingSongId);
+      setExistingSongFavCheck(flag !== -1);
+    }
+
+  
+    // heart symbol clicked will change
+    // done
+    useEffect(()=> {
+      favSongFetching();
+    }, [favFetchingActivator])
+
+
+
+    useEffect(()=> {
+      setTimeout(()=> {
+        songFavNextPrev();
+      }, 100)
+    }, [currentTrack])
+
+
+
+
+  //#endregion ------------
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   if (!lifting) {
     return (
       <>
@@ -456,13 +584,6 @@ function MusicControlComp(props) {
                       <div className="poster-song-splitter">
                         <div className="song-name">
                           <p>
-                            {/* {
-                              // activeSong.title?activeSong.title :
-                              songList &&
-                                songList[currentTrack] &&
-                                songList[currentTrack].title
-                            } */}
-
                             {songAllDetails &&
                             songAllDetails[currentTrack] &&
                             songAllDetails[currentTrack].name
@@ -571,7 +692,8 @@ function MusicControlComp(props) {
                             <div
                               onClick={() => {
                                 handleSongClicker(songAllDetails[index]),
-                                  setIndexVal(index);
+                                  // setIndexVal(index);
+                                  setCurrentTrack(index);
                               }}
                               key={item.id || index}
                               className="songs-collection"
@@ -600,34 +722,7 @@ function MusicControlComp(props) {
                             </p> */}
                             </div>
                           ))}
-                        {/* {songList.map((item, index) => (
-                          <div
-                            onClick={() => handleSongClicker(songList[index])}
-                            key={item._id || index}
-                            className="songs-collection"
-                          >
-                            <BsPlayCircle className="play-track-icon" />
-                            <img
-                              src={item.thumbnail}
-                              alt="img"
-                              className="table-mob-view-poster"
-                            />
-                            <div className="flex">
-                              <div className="table-button-artist">
-                                <button className="premium-button">
-                                  Premium
-                                </button>
-                                <p className="table-mob-artist">
-                                  {item?.artist[0]?.name}
-                                </p>
-                              </div>
-                              <p className="table-song-name">{item.title}</p>
-                            </div>
-                            <p>
-                              <AiOutlineHeart className="fav-remover" />
-                            </p>
-                          </div>
-                        ))} */}
+                        
                       </div>
                     </div>
                   </div>
@@ -642,13 +737,6 @@ function MusicControlComp(props) {
                     <img
                       className="mobile-view-song-preview"
                       src={
-                        // activeSong.thumbnail?activeSong.thumbnail :
-                        // songList &&
-                        // songList[currentTrack] &&
-                        // songList[currentTrack].thumbnail
-                        //   ? songList[currentTrack].thumbnail
-                        // :
-
                         songAllDetails &&
                         songAllDetails[currentTrack] &&
                         songAllDetails[currentTrack].thumbnail
@@ -773,7 +861,8 @@ function MusicControlComp(props) {
                         <div
                           onClick={() => {
                             handleSongClicker(songAllDetails[index]),
-                              setIndexVal(index);
+                              // setIndexVal(index);
+                              setCurrentTrack(index);
                           }}
                           key={item.id || index}
                           className="songs-collection"
@@ -795,9 +884,6 @@ function MusicControlComp(props) {
                               {item.name ? item.name : item.title}
                             </p>
                           </div>
-                          {/* <p>
-                            <AiOutlineHeart className="fav-remover" />
-                          </p> */}
                         </div>
                       ))}
                     </div>
@@ -840,12 +926,6 @@ function MusicControlComp(props) {
                 <img
                   className="current-playing-song"
                   src={
-                    // songList &&
-                    // songList[currentTrack] &&
-                    // songList[currentTrack].thumbnail
-                    //   ? songList[currentTrack].thumbnail
-                    //   : image1
-
                     songAllDetails &&
                     songAllDetails[currentTrack] &&
                     songAllDetails[currentTrack].thumbnail
@@ -857,7 +937,6 @@ function MusicControlComp(props) {
               </div>
               <div className="song-name-lines">
                 <p className="song-name-1">
-                  {/* {activeSong.name ? activeSong.name : "Once upon a Time"} */}
                   {songAllDetails &&
                   songAllDetails[currentTrack] &&
                   songAllDetails[currentTrack].name
@@ -869,7 +948,6 @@ function MusicControlComp(props) {
                     : "Once upon a Time"}
                 </p>
                 <p className="song-name-2">
-                  {/* {activeSong.name ? activeSong.name : "Once upon a Time"}  */}
                   {songAllDetails &&
                   songAllDetails[currentTrack] &&
                   songAllDetails[currentTrack].name
@@ -922,12 +1000,6 @@ function MusicControlComp(props) {
                   <img
                     className="current-playing-song"
                     src={
-                      // songList &&
-                      // songList[currentTrack] &&
-                      // songList[currentTrack].thumbnail
-                      //   ? songList[currentTrack].thumbnail
-                      //   : image1
-
                       songAllDetails &&
                       songAllDetails[currentTrack] &&
                       songAllDetails[currentTrack].thumbnail
@@ -939,12 +1011,6 @@ function MusicControlComp(props) {
                 </div>
                 <div>
                   <p className="song-name">
-                    {/* {songList &&
-                    songList[currentTrack] &&
-                    songList[currentTrack].title
-                      ? songList[currentTrack].title
-                      : ""} */}
-
                     {songAllDetails &&
                     songAllDetails[currentTrack] &&
                     songAllDetails[currentTrack].name
@@ -956,12 +1022,6 @@ function MusicControlComp(props) {
                       : "Once upon a Time"}
                   </p>
                   <p className="song-details">
-                    {/* {songList &&
-                    songList[currentTrack] &&
-                    songList[currentTrack].title
-                      ? songList[currentTrack].title
-                      : ""} */}
-
                     {songAllDetails &&
                     songAllDetails[currentTrack] &&
                     songAllDetails[currentTrack].name

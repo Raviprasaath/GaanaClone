@@ -223,11 +223,10 @@ function LoginPage(props) {
       );
       const response = await fetchingSigning.json();
       const result = await response;
-
       setSuccessStatus(result.status);
       setMessageFromFetch(result.message);
-      setUserNameFromFetch(result.data.user.name);
-      setEmailFromFetch(result.data.user.email);
+      setUserNameFromFetch( result && result.data && result.data.user ? result.data.user.name : "");
+      setEmailFromFetch(result && result.data && result.data.user.email ? result.data.user.email : "");
       if (result.status == "success") {
         setToken(result.token);
         localStorage.setItem(

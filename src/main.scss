@@ -1647,6 +1647,8 @@
             font-size: 1.1rem;
 
             .heart-in {
+              font-size: 1.2rem;
+              color: red;
               cursor: pointer;
               &:hover {
                 opacity: 0.5;
@@ -2534,7 +2536,14 @@
   visibility: hidden;
 }
 
-
+.heart-in {
+  font-size: 1.4rem;
+  color: red;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }            
+}
 
 
 

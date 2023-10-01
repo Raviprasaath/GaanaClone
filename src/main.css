@@ -1409,6 +1409,8 @@
   font-size: 1.1rem;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-name .heart-in {
+  font-size: 1.2rem;
+  color: red;
   cursor: pointer;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-name .heart-in:hover {
@@ -2169,6 +2171,15 @@
 
 .audio-hide {
   visibility: hidden;
+}
+
+.heart-in {
+  font-size: 1.4rem;
+  color: red;
+  cursor: pointer;
+}
+.heart-in:hover {
+  opacity: 0.5;
 }
 
 @media screen and (min-width: 360px) {
