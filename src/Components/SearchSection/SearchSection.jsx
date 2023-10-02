@@ -214,7 +214,6 @@ async function fetching() {
   }
   
   const handlerArtistSelection = (e) => {
-    console.log(e);
     const updatedList = {
         key: e._id,
         id: e._id,

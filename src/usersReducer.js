@@ -56,10 +56,12 @@ function usersReducer(state = initialState, action) {
         case 'SET_ALL_SEARCH_RESULT_SONGS': {
             return { ...state, resultData: action.payload }
         }
-        case 'SET_FAV_SONGS': {
-            return { ...state, favSongData: action.payload }
+        case 'SET_ALL_FAV_SONGS': {
+            return { ...state, allfavSongData: action.payload }
         }
-
+        case 'SET_FAV_SONG_UI_UPDATE': {
+            return { ...state, favSongUiUpdate: action.payload }
+        }
 
 
         default:

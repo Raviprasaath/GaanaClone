@@ -103,9 +103,17 @@ const setAllSearchResultData = (item) => {
         payload: item
     }
 }
-const setFavSongs = (item) => {
+
+const setAllFavSongs = (item) => {
     return {
-        type: "SET_FAV_SONGS",
+        type: "SET_ALL_FAV_SONGS",
+        payload: item
+    }
+}
+
+const setFavSongUiUpdate = (item) => {
+    return {
+        type: "SET_FAV_SONG_UI_UPDATE",
         payload: item
     }
 }
@@ -118,6 +126,7 @@ export default {
     toggledarkmode, setActiveItem, setActiveSong, setHappyData, 
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
     setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
-    setTop20Data, setSearchResultData, setAllSearchResultData, setFavSongs
+    setTop20Data, setSearchResultData, setAllSearchResultData,
+    setAllFavSongs, setFavSongUiUpdate
 
 }

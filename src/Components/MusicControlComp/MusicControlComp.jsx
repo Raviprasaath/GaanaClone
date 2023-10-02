@@ -49,7 +49,7 @@ function MusicControlComp(props) {
   const albumSongsList = useSelector((state) => state.usersData.albumSongs);
   const resultSongsList = useSelector((state) => state.usersData.resultSongs);
   const resultSongsDataList = useSelector((state) => state.usersData.albumSongs);
-
+  const favSongAllList = useSelector((state) => state.usersData.allfavSongData);
 
   let songAllDetails = [];
 
@@ -93,7 +93,7 @@ function MusicControlComp(props) {
 
 
   // console.log("currentTrack", currentTrack)
-  // console.log("activeSong", activeSong)
+  // console.log("activeSong", activeSong);
 
 
 
@@ -111,6 +111,14 @@ function MusicControlComp(props) {
   } else {
     searchResultFlag = false;
   }
+
+  let favSongCheck = false;
+  if (activeSong.myFav === "yes") {
+    favSongCheck = true;
+  } else {
+    favSongCheck = false;
+  }
+
   // console.log("searchResultFlag", searchResultFlag)
 
   if (location.pathname === `/allsongs` && !playing) {
@@ -119,6 +127,8 @@ function MusicControlComp(props) {
     songList = albumSongsList;
   } else if (activeSong.fromSearch === "yes") {
     songList = resultSongsDataList;
+  } else if (activeSong.myFav === "yes") {
+    songList = favSongAllList;
   } else if (!flag) {
     if (activeSong.featured === "Trending songs") {
       songList = topTrendingSongList;
@@ -148,7 +158,7 @@ function MusicControlComp(props) {
       audioRef.current.src = data.audio_url;
       audioRef.current.play();
     }
-    // console.log("from inside music player data -> ", data);
+    console.log("from inside music player data -> ", data);
     dispatch(actions.setActiveSong(data));
   };
 
@@ -179,6 +189,14 @@ function MusicControlComp(props) {
       }
     });
   }
+  if (!flag && !searchResultFlag && favSongCheck && Array.isArray(songList)) {
+    songList.forEach((item)=> {
+      if(item.audio_url && item.id) {
+        songTrackList.push(item.audio_url);
+        songListIndex.push(item.id);
+      }
+    })
+  }
 
   const tracks = songTrackList.length !== 0 ? songTrackList : song1;
 
@@ -208,6 +226,19 @@ function MusicControlComp(props) {
         fromSearch: "yes",
       });
     });
+  } else if (Array.isArray(songList) && favSongCheck) {
+    songList.forEach((item)=> {
+      songAllDetails.push({
+        id: item.id,
+        key: item.id,
+        thumbnail: item.thumbnail,
+        title: item.title,
+        artist: item.artist,
+        audio_url: item.audio_url,
+        name: item.title,
+        myFav: "yes"
+      })
+    })
   } else {
     if (Array.isArray(songList)) {
       songList.forEach((item) => {
@@ -225,6 +256,7 @@ function MusicControlComp(props) {
       });
     }
   }
+
   // console.log("songAllDetails index", songAllDetails[indexVal]);
   // console.log("songAllDetails", songAllDetails);
 
@@ -426,11 +458,6 @@ function MusicControlComp(props) {
 
 
 
-
-
-
-
-
   
 //#region ----------------- Fav Fetching -------------
 
@@ -441,7 +468,8 @@ function MusicControlComp(props) {
   const [existingSongFavCheck, setExistingSongFavCheck] = useState(false); // heart controller
 
   const handlerFavSongAdding = () => {
-    setFavFetchingActivator(prev => prev + 1);    
+    setFavFetchingActivator(prev => prev + 1);
+    dispatch(actions.setFavSongUiUpdate(activeSong));  
   };
 
   const [fetchingSongStoringArray, setFetchingSongStoringArray] = useState([]);
@@ -461,9 +489,6 @@ function MusicControlComp(props) {
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", `Bearer ${fromLocalStorage.token}`);
       
-        // let raw = JSON.stringify({
-        //   "songId": currentPlayingSongId ? currentPlayingSongId : "6517f1282539a734f85e1b86"
-        // });
 
         let raw = 
         currentPlayingSongId ? 
@@ -484,7 +509,6 @@ function MusicControlComp(props) {
           throw new Error(`Request failed with status: ${response.status}. Error message: ${errorText}`);
         }
         const result = await response.json();
-        console.log("result", result)
         if (result.data) {
           setFetchingSongStoringArray(result.data.songs);
 
@@ -534,10 +558,6 @@ function MusicControlComp(props) {
 
 
 
-
-
-
-  
   
   
   

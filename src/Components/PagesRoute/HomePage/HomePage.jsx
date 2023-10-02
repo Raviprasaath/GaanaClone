@@ -38,6 +38,15 @@ function HomePage() {
   const [loader7, setLoader7] = useState(false);
   const [loader8, setLoader8] = useState(false);
 
+  function setInLocalStorage(data) {
+    const allSongsList = JSON.parse(localStorage.getItem("allData")) || [];
+    if (!allSongsList) {
+      localStorage.setItem("allData", JSON.stringify(...data));
+    } else {
+      localStorage.setItem("allData", JSON.stringify([...allSongsList, ...data]));
+    }
+  }
+
   const dispatch = useDispatch();
   
   async function fetching() {
@@ -66,10 +75,11 @@ function HomePage() {
               'projectId': 'ghmumg9x1zid'
           }
       }).then(data=>data.json()).then(response => {          
-          const ts = response.data          
+          const ts = response.data;
           setTrendingSongs(ts);      
           dispatch(action.setTrendingData(ts));
-          setLoader1(false);
+          setLoader1(false);          
+          setInLocalStorage(ts);
       })
 
       fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Soul soother"}&limit=100', {
@@ -77,10 +87,11 @@ function HomePage() {
             'projectId': 'ghmumg9x1zid'
         }
       }).then(data=>data.json()).then(response => {
-        const tsa = response.data
+        const tsa = response.data;
         setSoulSongs(tsa);
         dispatch(action.setSoulSongsData(tsa));
         setLoader2(false);
+        setInLocalStorage(tsa);
       })
 
       fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Evergreen melodies"}&limit=100', {
@@ -88,10 +99,11 @@ function HomePage() {
             'projectId': 'ghmumg9x1zid'
         }
         }).then(data=>data.json()).then(response => {
-          const tsa = response.data
+          const tsa = response.data;
           setEvergreenSongs(tsa);
           dispatch(action.setEvergreenData(tsa));
           setLoader3(false);
+          setInLocalStorage(tsa);
       })
 
       fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 20 of this week"}&limit=100', {
@@ -99,10 +111,11 @@ function HomePage() {
               'projectId': 'ghmumg9x1zid'
           }
       }).then(data=>data.json()).then(response => {
-        const tsa = response.data
+        const tsa = response.data;
         setTop20Songs(tsa);
         dispatch(action.setTop20Data(tsa));
         setLoader4(false);
+        setInLocalStorage(tsa);
       })
 
 
@@ -111,10 +124,11 @@ function HomePage() {
               'projectId': 'ghmumg9x1zid'
           }
       }).then(data=>data.json()).then(response => {
-        const hsd = response.data
+        const hsd = response.data;
         setHappySongsData(hsd);
         dispatch(action.setHappyData(hsd));
         setLoader5(false);
+        setInLocalStorage(hsd);
       })
 
       fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"romantic"}&limit=100', {
@@ -122,10 +136,11 @@ function HomePage() {
             'projectId': 'ghmumg9x1zid'
         }
         }).then(data=>data.json()).then(response => {
-          const rsd = response.data
+          const rsd = response.data;
           setRomanticSongsData(rsd);
           dispatch(action.setRomanticData(rsd));
           setLoader6(false);
+          setInLocalStorage(rsd);
       })
 
       fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"sad"}&limit=100', {
@@ -133,10 +148,11 @@ function HomePage() {
             'projectId': 'ghmumg9x1zid'
         }
         }).then(data=>data.json()).then(response => {
-          const ssd = response.data
+          const ssd = response.data;
           dispatch(action.setSadSongData(ssd));
           setSadSongsData(ssd);
           setLoader7(false);
+          setInLocalStorage(ssd);
       })
       
       fetch('https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"excited"}&limit=100', {
@@ -144,10 +160,11 @@ function HomePage() {
           'projectId': 'ghmumg9x1zid'
       }
       }).then(data=>data.json()).then(response => {
-        const esd = response.data
+        const esd = response.data;
         dispatch(action.setExcitedData(esd));
         setExcitedSongsData(esd);
         setLoader8(false);
+        setInLocalStorage(esd);
       })
     
 

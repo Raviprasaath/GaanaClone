@@ -19,6 +19,7 @@ const customStyles = {
   },
 };
 
+
 function LoginPage(props) {
   // #region ------------ screen size control ---------
   const { loginState } = props;
@@ -35,7 +36,15 @@ function LoginPage(props) {
     return () => {
       window.removeEventListener("resize", handlerScreenSize);
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    if (loginState) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }, [loginState]);
 
   function closeModal() {
     setIsOpen(false);

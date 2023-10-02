@@ -153,7 +153,7 @@ function AllSongs() {
                       Play Song
                     </button>
 
-                    <BiHeart className="fav-song-adding" />
+                    {/* <BiHeart className="fav-song-adding" /> */}
                   </div>
                   <div className="songs-side-details">
                     <div className="song-line1">
@@ -189,7 +189,7 @@ function AllSongs() {
                 >
                   Play All
                 </button>
-                <AiOutlineHeart className="playlist-heart" />
+                {/* <AiOutlineHeart className="playlist-heart" /> */}
               </div>
             ) : (
               <div></div>

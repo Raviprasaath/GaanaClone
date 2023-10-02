@@ -2410,14 +2410,40 @@
       color: white;
       font-size: 0.9rem;
       font-weight: 600;
-      .payment-option {
-        display: none;
-      }
+
       .subs-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
+        }
+        .subs-btn-inside {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          align-items: center;
+
+
+          .btn-subs {
+            background-color: transparent;
+            border: none;
+            color: white;
+          }
+        }
+        .btn-subs {
+          background-color: transparent;
+          border: none;
+          color: white;
+        }
         .arrow-option {
           padding-bottom: -4px;
           font-size: 1.1rem;
           font-weight: 800;
+          color: white;
         }
       }
     }
@@ -2469,63 +2495,80 @@
 
 .mySongs {
   padding-left: 20px;
-  h2 {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  h2 {    
     padding-left: 20px;
   }
   .music-player-section-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .table-td-2-img { 
       height: 580px;        
-      width: 100%;
       overflow: scroll;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .songs-collection {
         display: flex;
-        justify-content: center;
-        padding: 10px 10px;
-        
-        
-        .table-mob-view-poster {
-          width: 45px;
-        }
-        
-        .flex {
+        justify-content: space-between;
+        padding: 10px 0px;
+        width: 100%;
+        .inside-song-collection {
           display: flex;
-          
-
-            .table-button-artist {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              padding-left: 10px;
-    
-              .premium-button {
-                padding: 0 10px;
-                border: none;
-                border-radius: 15px;
-                background-color: var(--SecondaryColor3);
-                color: var(--SecondaryColor4);
-                font-size: 0.7rem;
-              }
-              .table-mob-artist {
-                font-size: 0.8rem;
-                color: var(--SecondaryColor);
-              }
-            }
-            .table-song-name {
-              font-size: 0.8rem;  //media query
-              padding-left: 10px;
-              width: 150px;   //media control requires
-              white-space: nowrap;   
-              overflow: hidden;  
-              text-overflow: ellipsis;
-            }
-        }
-        .fav-remover {
-          cursor: pointer;
           &:hover {
-            opacity: 0.5;
+            opacity: 0.7;
+            cursor: pointer;
+          }     
+          .table-mob-view-poster {
+            width: 45px;
+          }
+          
+          .flex {
+            display: flex;
+            
+  
+              .table-button-artist {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-left: 10px;
+      
+                .premium-button {
+                  padding: 0 10px;
+                  border: none;
+                  border-radius: 15px;
+                  background-color: var(--SecondaryColor3);
+                  color: var(--SecondaryColor4);
+                  font-size: 0.7rem;
+                }
+                .table-mob-artist {
+                  font-size: 0.8rem;
+                  color: var(--SecondaryColor);
+                }
+              }
+              .table-song-name {
+                font-size: 0.8rem;  //media query
+                padding-left: 10px;
+                width: 150px;   //media control requires
+                white-space: nowrap;   
+                overflow: hidden;  
+                text-overflow: ellipsis;
+              }
+          }
+          .fav-remover {
+            cursor: pointer;
+            &:hover {
+              opacity: 0.5;
+            }
           }
         }
+        
+        
       }
 
     }
@@ -2544,6 +2587,33 @@
     opacity: 0.5;
   }            
 }
+
+
+.check-out-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .checkout-card {
+    background-color: white;
+    width: 70%;
+    
+  }
+  .payment-area {
+    background-color: transparent;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3437,15 +3507,17 @@
     }
   
   }
+
   .mySongs {
     .music-player-section-2 {
       .table-td-2-img { 
-        .songs-collection {                  
-          .table-mob-view-poster {
-            width: 45px;
-          }
-          
-          .flex {
+        .songs-collection {
+          .inside-song-collection {
+            .table-mob-view-poster {
+              width: 45px;
+            }
+            
+            .flex {
               .table-button-artist {      
                 .premium-button {
                   font-size: 0.7rem;
@@ -3461,19 +3533,20 @@
                 overflow: hidden;  
                 text-overflow: ellipsis;
               }
-          }
-          .fav-remover {
-            cursor: pointer;
-            &:hover {
-              opacity: 0.5;
             }
-          }
-        }
-  
+
+            .fav-remover {
+              cursor: pointer;
+              &:hover {
+                opacity: 0.5;
+              }
+            }
+
+          }                  
+        }  
       }
     }
   }
-
 }
 
 @media screen and (min-width: 680px) {

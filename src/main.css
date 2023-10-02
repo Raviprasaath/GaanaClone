@@ -2068,13 +2068,38 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
-.subscription-page .subscribe-card .subscribe-btn .payment-option {
-  display: none;
+.subscription-page .subscribe-card .subscribe-btn .subs-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+.subscription-page .subscribe-card .subscribe-btn .subs-btn:hover {
+  opacity: 0.8;
+}
+.subscription-page .subscribe-card .subscribe-btn .subs-btn .subs-btn-inside {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+.subscription-page .subscribe-card .subscribe-btn .subs-btn .subs-btn-inside .btn-subs {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+.subscription-page .subscribe-card .subscribe-btn .subs-btn .btn-subs {
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 .subscription-page .subscribe-card .subscribe-btn .subs-btn .arrow-option {
   padding-bottom: -4px;
   font-size: 1.1rem;
   font-weight: 800;
+  color: white;
 }
 .subscription-page .subscribe-card .faq-query {
   margin-top: 20px;
@@ -2119,30 +2144,45 @@
 .mySongs h2 {
   padding-left: 20px;
 }
+.mySongs .music-player-section-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .mySongs .music-player-section-2 .table-td-2-img {
   height: 580px;
-  width: 100%;
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .mySongs .music-player-section-2 .table-td-2-img .songs-collection {
   display: flex;
-  justify-content: center;
-  padding: 10px 10px;
+  justify-content: space-between;
+  padding: 10px 0px;
+  width: 100%;
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .table-mob-view-poster {
-  width: 45px;
-}
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection {
   display: flex;
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-button-artist {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .table-mob-view-poster {
+  width: 45px;
+}
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex {
+  display: flex;
+}
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-button-artist {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-left: 10px;
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-button-artist .premium-button {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-button-artist .premium-button {
   padding: 0 10px;
   border: none;
   border-radius: 15px;
@@ -2150,11 +2190,11 @@
   color: var(--SecondaryColor4);
   font-size: 0.7rem;
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-button-artist .table-mob-artist {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-button-artist .table-mob-artist {
   font-size: 0.8rem;
   color: var(--SecondaryColor);
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-song-name {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-song-name {
   font-size: 0.8rem;
   padding-left: 10px;
   width: 150px;
@@ -2162,10 +2202,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .fav-remover {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .fav-remover {
   cursor: pointer;
 }
-.mySongs .music-player-section-2 .table-td-2-img .songs-collection .fav-remover:hover {
+.mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .fav-remover:hover {
   opacity: 0.5;
 }
 
@@ -2180,6 +2220,19 @@
 }
 .heart-in:hover {
   opacity: 0.5;
+}
+
+.check-out-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check-out-page .checkout-card {
+  background-color: white;
+  width: 70%;
+}
+.check-out-page .payment-area {
+  background-color: transparent;
 }
 
 @media screen and (min-width: 360px) {
@@ -2805,26 +2858,26 @@
   .comming-soon-page .coming-soon-image .content {
     font-size: 1.5rem;
   }
-  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .table-mob-view-poster {
+  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .table-mob-view-poster {
     width: 45px;
   }
-  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-button-artist .premium-button {
+  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-button-artist .premium-button {
     font-size: 0.7rem;
   }
-  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-button-artist .table-mob-artist {
+  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-button-artist .table-mob-artist {
     font-size: 0.8rem;
   }
-  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .flex .table-song-name {
+  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .flex .table-song-name {
     font-size: 0.8rem;
     width: 350px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .fav-remover {
+  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .fav-remover {
     cursor: pointer;
   }
-  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .fav-remover:hover {
+  .mySongs .music-player-section-2 .table-td-2-img .songs-collection .inside-song-collection .fav-remover:hover {
     opacity: 0.5;
   }
 }

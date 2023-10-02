@@ -7,16 +7,32 @@ import svg2 from '../../../assets/subscribe-page-2.svg'
 import svg3 from '../../../assets/subscribe-page-3.svg'
 import svg4 from '../../../assets/subscribe-page-4.svg'
 import svg5 from '../../../assets/subscribe-page-5.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Footer from '../../Footer/Footer'
 import SubscrptionPageFooter from './SubscrptionPageFooter'
+import { Link } from 'react-router-dom'
 
-function SubscriptionPage () {
-    const [paySelector, setPaySelector] = useState(false);
+function SubscriptionPage ( props ) {
+    const [paySelector, setPaySelector] = useState(4);
     
+    const [loginStateChanger, setLoginStateChanger] = useState(false);
+
     const handleClick = (packageId) => {
-        setPaySelector(packageId);        
+        setPaySelector(packageId);
     }
+
+
+    // localStore
+    useEffect(()=> {
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString || "{}");
+ 
+        if ("userData", userData.logStatus==="success") {
+            setLoginStateChanger(true);
+        }
+
+    }, [])
+    
 
     return (
         <>
@@ -77,12 +93,25 @@ function SubscriptionPage () {
                         </div>
                     </div>
                     <button className='subscribe-btn'>
-                        <p className='subs-btn login-option'>
-                            Login to Subscribe <AiOutlineArrowRight className='arrow-option'/>
-                        </p> 
-                        <p className='subs-btn payment-option'>
-                            Continue Payment <AiOutlineArrowRight className='arrow-option'/>
-                        </p>
+                        {!loginStateChanger && 
+                            <div className='subs-btn login-option'>
+                                <button onClick={()=>props.fromSubscribePage(true)} className='btn-subs'>
+                                    Login to Subscribe 
+                                </button>
+                                {/* <AiOutlineArrowRight className='arrow-option'/> */}
+                            </div> 
+                        }
+                        {loginStateChanger &&                         
+                            <div className='subs-btn payment-option'>
+                                <Link className='subs-btn-inside' to='/paymentpage'>
+                                    <div  className='btn-subs'>
+                                        Continue Payment 
+                                    </div>
+                                    <AiOutlineArrowRight className='arrow-option'/>                            
+                                    
+                                </Link>
+                            </div>
+                        }
                     </button>
                     <div className='faq-query'>
                         cancel anytime! Check FAQ'S for more info.

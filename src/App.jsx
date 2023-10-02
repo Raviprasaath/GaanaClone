@@ -29,6 +29,7 @@ import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage
 
 import SearchSection from "./Components/SearchSection/SearchSection.jsx";
 import SearchResultPage from "./Components/PagesRoute/SearchResultPage/SearchResultPage.jsx";
+import PaymentPage from "./Components/PagesRoute/SubscriptionPage/PaymentPage.jsx";
 
 
 
@@ -105,6 +106,11 @@ function App() {
     setOpenModal(openState)
   }
 
+  const fromSubscribePage = (value) => {
+    setOpenModal(value => !value);
+    console.log("is it checking", value)
+  }
+
   return (
     <>
       <LoginPage loginState={openModal} />
@@ -138,12 +144,14 @@ function App() {
               <Route path="/songsfrom90s2000s" element={<ComingSoonPage />} />
 
               <Route path="/comingsoon" element={<ComingSoonPage />} />
-              <Route path="/subscription" element={<SubscriptionPage />} />
+              <Route path="/subscription" element={<SubscriptionPage fromSubscribePage={fromSubscribePage}/>} />
               <Route path="/mysongs" element={<MySongs />} />
 
               <Route path="album/:albumName/:albumId" element={<AlbumSongPage2 />} />
 
               <Route path="searchresult/:title/:id" element={<SearchResultPage />} />
+
+              <Route path="/paymentpage" element={<PaymentPage />} />
 
             </Routes>
           </div>
@@ -155,7 +163,7 @@ function App() {
         <DataFetch />
         <MusicControlComp expander={onHandlerExpander} />
 
-        {/* <LoginPage /> */}
+        
       </div>
     </>
   );

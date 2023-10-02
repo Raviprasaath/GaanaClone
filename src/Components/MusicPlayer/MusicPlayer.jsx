@@ -206,7 +206,7 @@ function MusicPlayer(props) {
     
 
     const handleSongClicker = (data) => {
-      console.log("from inside music player data -> ", data);
+      // console.log("from inside music player data -> ", data);
       dispatch(actions.setActiveSong(data));
     };
 

@@ -110,7 +110,7 @@ function AlbumSongPage2() {
             album: "yes",
           }));
 
-          console.log("songsOfMovie: ", songsOfMovie);
+          
           setCurrentTrack(songsOfMovie);
           setShowContent(true);
           // dispatch(actions.setAlbumData(songsOfMovie));
@@ -166,7 +166,7 @@ function AlbumSongPage2() {
                     >
                       Play Song
                     </button>
-                    <BiHeart className="fav-song-adding" />
+                    {/* <BiHeart className="fav-song-adding" /> */}
                   </div>
                   <div className="songs-side-details">
                     <div className="song-line1">
@@ -208,7 +208,7 @@ function AlbumSongPage2() {
                 >
                   Play All
                 </button>
-                <AiOutlineHeart className="playlist-heart" />
+                {/* <AiOutlineHeart className="playlist-heart" /> */}
               </div>
             ) : (
               <div></div>

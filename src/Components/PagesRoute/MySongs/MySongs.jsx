@@ -1,103 +1,116 @@
 import { useEffect, useState } from "react";
 import image from "../../../assets/trending-movies6.jpg";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import action from "../../../action";
 
 
 function MySongs() {
-  
+  const dispatch = useDispatch();
 
 //#region ----------------- Fav Fetching -------------
 
 
 const dataGettingFromLocal =  localStorage.getItem("userData") || "";
 const fromLocalStorage = dataGettingFromLocal?JSON.parse(dataGettingFromLocal) : "";
-const [favFetchingActivator, setFavFetchingActivator] = useState(0); // fetch initiator only
 const [existingSongFavCheck, setExistingSongFavCheck] = useState(false); // heart controller
 
+const [songRemoval, setRemoval] = useState("");
 
-const handlerFavSongAdding = () => {
-  setFavFetchingActivator(prev => prev + 1);    
-};
+const [individualSongGetting, setIndividualSongGetting] = useState([]);
+
+const [uiReRender, setUiReRender] = useState(0);
 
 const [fetchingSongStoringArray, setFetchingSongStoringArray] = useState([]);
 
-const currentPlayingSongId = "";
-//   songAllDetails && 
-//   songAllDetails[currentTrack] && 
-//   songAllDetails[currentTrack].id &&
-//   songAllDetails[currentTrack].id;
+
+
+const uiReRenderData = useSelector((state) => state.usersData.favSongUiUpdate);
 
 
 
-  async function favSongFetching() {
-    try {
-      let myHeaders = new Headers();
-      myHeaders.append("projectID", "ghmumg9x1zid");
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("Authorization", `Bearer ${fromLocalStorage.token}`);
+
+
+
+
+
+
+
+
+async function favSongFetching() {
+  try {
+    const myHeaders = new Headers();
+    myHeaders.append("projectID", "ghmumg9x1zid");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${fromLocalStorage.token}`);
     
-      let raw = 
-      currentPlayingSongId ? 
-      JSON.stringify({        
-          "songId": currentPlayingSongId          
-      }) : ("")
-    
-      let requestOptions = {
-        method: 'PATCH',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
-    
-      const response = await fetch("https://academics.newtonschool.co/api/v1/music/favorites/like", requestOptions)
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Request failed with status: ${response.status}. Error message: ${errorText}`);
-      }
-      const result = await response.json();
-      console.log("result from my music ", result)
-      if (result.data) {
-        setFetchingSongStoringArray(result.data.songs);
+    const raw = songRemoval ? JSON.stringify({ "songId": songRemoval }) : "";
 
-        const array = (result.data.songs || []).map((item) => {
-          return item && item._id ? item._id : item;
-        });
-        
-        let flag = array.findIndex((d) => d === currentPlayingSongId);
-        setExistingSongFavCheck(flag !== -1);
-      } else {
-        console.log("Data not found in the API response.");
-      }
-    } catch (error) {
-      console.log(error);
+    const requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    const delayBetweenRequests = 1000; // 1 second (adjust as needed)
+
+    const response = await fetch("https://academics.newtonschool.co/api/v1/music/favorites/like", requestOptions);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Request failed with status: ${response.status}. Error message: ${errorText}`);
     }
+
+    const result = await response.json();
+
+    if (result.data) {
+      setFetchingSongStoringArray(result.data.songs);
+
+      const array = (result.data.songs || []).map((item) => {
+        return item && item._id ? item._id : item;
+      });
+      
+    } else {
+      console.log("Data not found in the API response.");
+    }
+
+    // Delay before making the next request
+    await new Promise(resolve => setTimeout(resolve, delayBetweenRequests));
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+  
+
+  const handlerRemoveFav = (data) => {
+    setRemoval(data._id);
+    favSongFetching();
+  }
+  
+  
+
+
+
+  const handlerSongPlay = (item) => {
+    const songObject = {
+      key: item._id,
+      id: item._id,
+      thumbnail: item.thumbnail,
+      title: item.title,
+      artist: artsitName(item.artist[0]),
+      audio_url: item.audio_url,
+      myFav: "yes",
+    }
+    dispatch(action.setActiveSong(songObject));
   }
   
 
-  function songFavNextPrev() {
-    const array = (fetchingSongStoringArray || []).map((item) => {
-      return item && item._id ? item._id : item;
-    });
-    let flag = array.findIndex((d) => d === currentPlayingSongId);
-    setExistingSongFavCheck(flag !== -1);
-  }
-
-
-  // heart symbol clicked will change
-  useEffect(()=> {
-    favSongFetching();    
-  }, [favFetchingActivator])
 
 
 
-  useEffect(()=> {
-    setTimeout(()=> {
-      songFavNextPrev();
-    }, 100)
-  }, [])
-
-
-  console.log("fetchingSongStoringArray", fetchingSongStoringArray);
 
 //#endregion ------------
 
@@ -109,60 +122,84 @@ const currentPlayingSongId = "";
     try {
       let myHeaders = new Headers();
       myHeaders.append("projectID", "ghmumg9x1zid");
-    
+      myHeaders.append("Authorization", `Bearer ${fromLocalStorage.token}`);
+      
       let requestOptions = {
-        method: 'PATCH',
+        method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
       };
-    
-      const response = await fetch("https://academics.newtonschool.co/api/v1/music/song/64cf913147ae38c3e33a2713", requestOptions);
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Request failed with status: ${response.status}. Error message: ${errorText}`);
-      }
-      const result = await response.json();
-      console.log("result from my music ", result);
 
+      const fetching = await fetch("https://academics.newtonschool.co/api/v1/music/favorites/like", requestOptions);
+      const response = await fetching.json();
+      setIndividualSongGetting(response.data.songs);
     } catch (error) {
       console.log(error);
-    } 
-
+    }
   }
+  
 
-  useEffect(()=> {
-    songIdFetching();
-  })
-
+  function artsitName(id) {
+    let artistName = ""
+    const allSongsList = JSON.parse(localStorage.getItem("allData")) || [];
+    allSongsList.map((item)=> {
+      if (item.artist[0]?._id === id) {
+        artistName = item.artist[0].name;
+      }
+    })
+    return artistName;
+  }
+  
   //#endregion
 
 
 
+  const sendingToStore = individualSongGetting.map((item)=>({
+    key: item._id,
+    id: item._id,
+    thumbnail: item.thumbnail,
+    title: item.title,
+    artist: artsitName(item.artist[0]),
+    audio_url: item.audio_url,
+    myFav: "yes",
+
+  }))
 
 
+  useEffect(()=> {
+    songIdFetching();
+    setTimeout(()=> {
+      songIdFetching();
+    }, 500)
+  }, [uiReRenderData])
 
+
+  dispatch(action.setAllFavSongs(sendingToStore));
 
 
   return (
     <>
       <div className="mySongs">
-        <h2>Favorite Songs</h2>
+      <h2>Favorite Songs</h2>
         <div className="music-player-section-2">
           <div className="table-td-2-img">
-            <div className="songs-collection">
-              <img src={image} alt="img" className="table-mob-view-poster" />
-
-              <div className="flex">
-                <div className="table-button-artist">
-                  <button className="premium-button">Premium</button>
-                  <p className="table-mob-artist">Karthik</p>
-                </div>
-                <p className="table-song-name">Yethi Yethi Yethi En Nenjil</p>
-              </div>
-              <p>
-                <AiOutlineHeart className="heart-in" />
-              </p>
-            </div>            
+            {individualSongGetting.map((item)=> (                  
+                <div onClick={()=>handlerSongPlay(item)} key={item._id} className="songs-collection">
+                  <div className="inside-song-collection">
+                    <img src={item.thumbnail} alt="img" className="table-mob-view-poster" />
+                    <div className="flex">                
+                      <div className="table-button-artist">
+                        <button className="premium-button">Premium</button>
+                        <p className="table-mob-artist">{artsitName(item.artist[0])}</p>
+                      </div>
+                      <p className="table-song-name">{item.title}</p>
+                    </div>
+                  </div>
+                  <div>
+                    {/* <AiOutlineClose onClick={()=>handlerRemoveFav(item._id)} className="heart-in" /> */}
+                  </div>
+                </div>            
+            ))}
           </div>
         </div>
       </div>

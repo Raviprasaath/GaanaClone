@@ -23,8 +23,8 @@ function SearchResultPage() {
   const selectedSong = useSelector((state) => state.usersData.resultSongs);
   const selectedSongAll = useSelector((state) => state.usersData.resultData);
   
-  console.log("selectedSong", selectedSong);
-  console.log("selectedSongAll", selectedSongAll);
+  // console.log("selectedSong", selectedSong);
+  // console.log("selectedSongAll", selectedSongAll);
 
   const dispatch = useDispatch();
 
@@ -98,7 +98,6 @@ function SearchResultPage() {
         category: selectedSong.category,
       }))
         setCurrentSong(updatedSongs);
-        console.log("updatedSongs", updatedSongs)
         setShowContent(true);
       } else if ((selectedSong && selectedSong.fromSearch === 'yes' && selectedSong.category === 'search-artistSong')) {
         const updated = selectedSongAll && selectedSongAll[0].songs && selectedSongAll[0].songs 
@@ -115,7 +114,7 @@ function SearchResultPage() {
           category: selectedSong.category,
         }))
         setCurrentSong(updated);
-        console.log("updatedSongs", updated)
+        // console.log("updatedSongs", updated)
         setShowContent(true);      
 
 
@@ -141,7 +140,7 @@ function SearchResultPage() {
             category: selectedSong.category,
           }))
           setCurrentSong(updated);
-          console.log("updatedSongs", updated)
+          // console.log("updatedSongs", updated)
           setShowContent(true);
         }
       }
@@ -153,14 +152,14 @@ function SearchResultPage() {
     dataGetting();
   }, [selectedSongAll]);
 
-  console.log("currentSong -> ", currentSong);
-  console.log("currentTrack -> ", currentTrack);
+  // console.log("currentSong -> ", currentSong);
+  // console.log("currentTrack -> ", currentTrack);
   
   const handleSongClicker = (data) => {
-    console.log("all data -> ", data);
+    // console.log("all data -> ", data);
     // dispatch(actions.setAllSearchResultData(currentSong));
     // dispatch(actions.setSearchResultData(selectedSong));
-    console.log("data", data)
+    // console.log("data", data)
     dispatch(actions.setActiveSong(data));
     dispatch(actions.setAlbumData(currentSong));
 
