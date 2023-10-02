@@ -85,10 +85,10 @@ async function favSongFetching() {
 
   
 
-  const handlerRemoveFav = (data) => {
-    setRemoval(data._id);
-    favSongFetching();
-  }
+  // const handlerRemoveFav = (data) => {
+  //   setRemoval(data._id);
+  //   favSongFetching();
+  // }
   
   
 
@@ -105,6 +105,7 @@ async function favSongFetching() {
       myFav: "yes",
     }
     dispatch(action.setActiveSong(songObject));
+    dispatch(action.setAllFavSongs(sendingToStore));
   }
   
 
@@ -173,8 +174,6 @@ async function favSongFetching() {
     }, 500)
   }, [uiReRenderData])
 
-
-  dispatch(action.setAllFavSongs(sendingToStore));
 
 
   return (

@@ -108,8 +108,30 @@ function App() {
 
   const fromSubscribePage = (value) => {
     setOpenModal(value => !value);
-    console.log("is it checking", value)
   }
+
+
+  useEffect(() => {
+    const userDataString = localStorage.getItem("userData");
+    const userData = JSON.parse(userDataString || "{}");
+    const allSubToken = localStorage.getItem("allSubsDetails");
+    const allToken = JSON.parse(allSubToken || "[]");
+    if (userData.token) {
+      const partialTokenToCheck = userData.token.slice(0, 64);
+    
+      const hasPartialMatch = allToken.some(token => token.startsWith(partialTokenToCheck));
+
+    
+      if (hasPartialMatch) {
+        localStorage.setItem("subs", "success");
+      }
+
+    }
+  }, []);
+
+
+
+
 
   return (
     <>

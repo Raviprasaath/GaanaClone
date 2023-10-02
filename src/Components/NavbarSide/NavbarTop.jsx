@@ -96,6 +96,37 @@ function NavbarTop( props ) {
     props.handleModal(!modalToggle);
   };
 
+  // subs pack
+  const [subsStatus, setSubStatus] = useState("Get Gaana Plus")
+  
+  
+  useEffect(()=> {
+    const allSubToken = localStorage.getItem("allSubsDetails");
+    const allToken = JSON.parse(allSubToken || "[]");
+    
+    if (userData.token) {
+
+      const partialTokenToCheck = userData.token.slice(0, 64);
+    
+      const hasPartialMatch = allToken.some(token => token.startsWith(partialTokenToCheck));
+    
+    
+      if (hasPartialMatch) {
+        localStorage.setItem("subs", "success");
+  
+      }
+  
+      const packStatus = localStorage.getItem("subs");
+      if (packStatus === "success" && userData.logStatus==="success" && hasPartialMatch) {
+        setSubStatus("Subscribed")
+      }
+    }
+  }, [])
+
+
+
+
+
   return (
     <>
       {/* <LoginPage loginState={loginState} /> */}
@@ -130,7 +161,7 @@ function NavbarTop( props ) {
             </span>
             <div className="buttons-area">
               <Link to="/subscription">
-                <button className="get-gaana-plus">Get Gaana Plus</button>
+                <button className="get-gaana-plus">{subsStatus}</button>
               </Link>
               <button
                 className="dark-light-toggler"

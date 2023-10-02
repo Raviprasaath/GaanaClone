@@ -127,7 +127,7 @@ function MusicControlComp(props) {
     songList = albumSongsList;
   } else if (activeSong.fromSearch === "yes") {
     songList = resultSongsDataList;
-  } else if (activeSong.myFav === "yes") {
+  } else if (favSongCheck) {
     songList = favSongAllList;
   } else if (!flag) {
     if (activeSong.featured === "Trending songs") {
@@ -158,14 +158,15 @@ function MusicControlComp(props) {
       audioRef.current.src = data.audio_url;
       audioRef.current.play();
     }
-    console.log("from inside music player data -> ", data);
+    // console.log("from inside music player data -> ", data);
     dispatch(actions.setActiveSong(data));
   };
 
   let songListIndex = [];
   const songTrackList = [];
 
-  if (!flag && !searchResultFlag && Array.isArray(songList)) {
+
+  if (!flag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
     songList.forEach((item) => {
       if (item.audio_url && item._id) {
         songTrackList.push(item.audio_url);
@@ -173,7 +174,7 @@ function MusicControlComp(props) {
       }
     });
   }
-  if (flag && !searchResultFlag && Array.isArray(songList)) {
+  if (flag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
     songList.forEach((item) => {
       if (item.audio && item.id) {
         songTrackList.push(item.audio);
@@ -181,7 +182,7 @@ function MusicControlComp(props) {
       }
     });
   }
-  if (searchResultFlag && !flag && Array.isArray(songList)) {
+  if (searchResultFlag && !flag && !favSongCheck && Array.isArray(songList)) {
     songList.forEach((item) => {
       if (item.audio_url && item.id) {
         songTrackList.push(item.audio_url);
@@ -519,7 +520,7 @@ function MusicControlComp(props) {
           let flag = array.findIndex((d) => d === currentPlayingSongId);
           setExistingSongFavCheck(flag !== -1);
         } else {
-          console.log("Data not found in the API response.");
+          // console.log("Data not found in the API response.");
         }
       } catch (error) {
         console.log(error);
@@ -572,7 +573,7 @@ function MusicControlComp(props) {
       <>
         <audio
           ref={audioRef}
-          // onTimeUpdate={handleTimeUpdate}
+          onTimeUpdate={handleTimeUpdate}
           onEnded={handleNextTrack}
           src={tracks[currentTrack]}
           controls
@@ -921,7 +922,7 @@ function MusicControlComp(props) {
     <>
       <audio
         ref={audioRef}
-        // onTimeUpdate={handleTimeUpdate}
+        onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}
         src={tracks[currentTrack]}
         controls

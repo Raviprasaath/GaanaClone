@@ -19,8 +19,8 @@ function SubscriptionPage ( props ) {
 
     const handleClick = (packageId) => {
         setPaySelector(packageId);
+        localStorage.setItem("package", packageId);
     }
-
 
     // localStore
     useEffect(()=> {

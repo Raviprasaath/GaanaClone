@@ -40,6 +40,32 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
       }
     }, [])
 
+    const [subsStatus, setSubStatus] = useState("Get Gaana Plus")
+  
+  
+    useEffect(()=> {
+      const allSubToken = localStorage.getItem("allSubsDetails");
+      const allToken = JSON.parse(allSubToken || "[]");
+      
+      if (userData.token) {
+  
+        const partialTokenToCheck = userData.token.slice(0, 64);
+      
+        const hasPartialMatch = allToken.some(token => token.startsWith(partialTokenToCheck));
+      
+      
+        if (hasPartialMatch) {
+          localStorage.setItem("subs", "success");
+    
+        }
+    
+        const packStatus = localStorage.getItem("subs");
+        if (packStatus === "success" && userData.logStatus==="success" && hasPartialMatch) {
+          setSubStatus("Subscribed")
+        }
+      }
+    }, [])
+
   return (
     <>
       <div className="navbar">
@@ -109,7 +135,7 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
             </li>
             <Link to='subscription'>            
               <li>
-                Get Gaana Plus
+                {subsStatus}
                 {/* <a href="#">Get Gaana Plus </a> */}
               </li>
             </Link>

@@ -2234,6 +2234,19 @@
 .check-out-page .payment-area {
   background-color: transparent;
 }
+.check-out-page .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  font-size: 0.8rem;
+}
+.check-out-page .error-message {
+  font-size: 0.7rem;
+  color: red;
+}
+
+.css-bdhsul-MuiTypography-root-MuiDialogTitle-root,
+.css-hlj6pa-MuiDialogActions-root {
+  background-color: #B5CB99;
+  color: black;
+}
 
 @media screen and (min-width: 360px) {
   .largerCarousel {

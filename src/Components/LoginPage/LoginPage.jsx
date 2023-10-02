@@ -130,6 +130,7 @@ function LoginPage(props) {
   const handlerLogOut = () => {
     localStorage.setItem("userData", []);
     window.location.reload();
+    localStorage.setItem("subs", "fail");
   };
 
   const clearInput = () => {
