@@ -434,6 +434,18 @@
   font-size: 0.8rem;
 }
 
+.css-5nwj3y {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 10px !important;
+}
+.css-5nwj3y .css-h1hc9n {
+  min-width: unset !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+
 .songsCollection .MuiBox-root .css-1563k86-MuiTypography-root {
   min-width: -moz-fit-content !important;
   min-width: fit-content !important;

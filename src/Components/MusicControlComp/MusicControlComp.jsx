@@ -468,7 +468,14 @@ function MusicControlComp(props) {
   const [favFetchingActivator, setFavFetchingActivator] = useState(0); // fetch initiator only
   const [existingSongFavCheck, setExistingSongFavCheck] = useState(false); // heart controller
 
+  const userDataString = localStorage.getItem("userData");
+  const userData = JSON.parse(userDataString || "{}");
+
   const handlerFavSongAdding = () => {
+    if (userData.logStatus !== "success") {
+      props.fromMusicPage(true);
+    }
+
     setFavFetchingActivator(prev => prev + 1);
     dispatch(actions.setFavSongUiUpdate(activeSong));  
   };

@@ -50,7 +50,7 @@ async function favSongFetching() {
       method: 'PATCH',
       headers: myHeaders,
       body: raw,
-      redirect: 'follow'
+      // redirect: 'follow'
     };
 
     const delayBetweenRequests = 1000; // 1 second (adjust as needed)
@@ -128,7 +128,7 @@ async function favSongFetching() {
       let requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow'
+        // redirect: 'follow'
       };
 
       const fetching = await fetch("https://academics.newtonschool.co/api/v1/music/favorites/like", requestOptions);

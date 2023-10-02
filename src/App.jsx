@@ -110,6 +110,10 @@ function App() {
     setOpenModal(value => !value);
   }
 
+  const fromMusicPage = (value) => {
+    setOpenModal(value => !value);
+  }
+
 
   useEffect(() => {
     const userDataString = localStorage.getItem("userData");
@@ -183,7 +187,7 @@ function App() {
         <Footer />        
 
         <DataFetch />
-        <MusicControlComp expander={onHandlerExpander} />
+        <MusicControlComp expander={onHandlerExpander} fromMusicPage={fromMusicPage} />
 
         
       </div>
