@@ -91,9 +91,8 @@ function NavbarTop( props ) {
   const [modalToggle, setModalToggle] = useState(false);
 
   const openLoginForm = () => {
-    // setLoginState(!loginState);
     setModalToggle(!modalToggle);
-    props.handleModal(!modalToggle);
+    props.handleModal(true);
   };
 
   // subs pack

@@ -95,7 +95,7 @@ function SubscriptionPage ( props ) {
                     <button className='subscribe-btn'>
                         {!loginStateChanger && 
                             <div className='subs-btn login-option'>
-                                <button onClick={()=>props.fromSubscribePage(true)} className='btn-subs'>
+                                <button onClick={()=>props.handleModal(true)} className='btn-subs'>
                                     Login to Subscribe 
                                 </button>
                                 {/* <AiOutlineArrowRight className='arrow-option'/> */}

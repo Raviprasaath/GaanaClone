@@ -22,8 +22,9 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
 
   const openLoginForm = () => {
     // setLoginState(!loginState);
-    setModalToggle(!modalToggle);
-    handleModal(modalToggle);
+    // setModalToggle(!modalToggle);
+    // handleModal(modalToggle);
+    handleModal(true);
   };
 
     // getting out from local store

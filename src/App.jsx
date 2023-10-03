@@ -100,19 +100,9 @@ function App() {
     }
   }
 
-  const [openModal, setOpenModal] = useState(false);
 
-  const handleModal = (openState) => {
-    setOpenModal(openState)
-  }
 
-  const fromSubscribePage = (value) => {
-    setOpenModal(value => !value);
-  }
 
-  const fromMusicPage = (value) => {
-    setOpenModal(value => !value);
-  }
 
 
   useEffect(() => {
@@ -134,17 +124,21 @@ function App() {
   }, []);
 
 
+  const [openModal, setOpenModal] = useState(false);
 
+  const handleModal = (openState) => {
+    setOpenModal(openState);
+  };
 
 
   return (
     <>
-      <LoginPage loginState={openModal} />
+      <LoginPage isOpen={openModal} handleModal={handleModal} />
 
       <div className="search-bar-section">{searchBar && <SearchSection message={searchingType} handlerClosingBox={handlerClosingBox} />}</div>
 
       <div className={`{${musicExpander}?"background-content":" "} app-component ${darkMode ? `dark-mode` : "lite-mode"}`}>
-        {/* {musicExpander && ( */}
+    
           <div>
             <button className="navbar-btn" onClick={toggleSidePanel}>
               <FaBars />
@@ -170,7 +164,7 @@ function App() {
               <Route path="/songsfrom90s2000s" element={<ComingSoonPage />} />
 
               <Route path="/comingsoon" element={<ComingSoonPage />} />
-              <Route path="/subscription" element={<SubscriptionPage fromSubscribePage={fromSubscribePage}/>} />
+              <Route path="/subscription" element={<SubscriptionPage handleModal={handleModal} />} />
               <Route path="/mysongs" element={<MySongs />} />
 
               <Route path="album/:albumName/:albumId" element={<AlbumSongPage2 />} />
@@ -181,13 +175,13 @@ function App() {
 
             </Routes>
           </div>
-        {/* )} */}
 
-        {/* {musicExpander &&  */}
+
+
         <Footer />        
 
         <DataFetch />
-        <MusicControlComp expander={onHandlerExpander} fromMusicPage={fromMusicPage} />
+        <MusicControlComp expander={onHandlerExpander} handleModal={handleModal} />
 
         
       </div>

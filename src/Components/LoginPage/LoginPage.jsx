@@ -20,11 +20,9 @@ const customStyles = {
 };
 
 
-function LoginPage(props) {
-  // #region ------------ screen size control ---------
-  const { loginState } = props;
+function LoginPage( { isOpen, handleModal  } ) {
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  // #region ------------ screen size control ---------
   const [screenSize, setScreensize] = useState(window.innerWidth > 960);
 
   useEffect(() => {
@@ -38,21 +36,8 @@ function LoginPage(props) {
     };
   }, []);
 
-  useEffect(() => {
-    if (loginState) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [loginState]);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
 
-  useEffect(() => {
-    loginState ? setIsOpen(true) : setIsOpen(false);
-  }, [loginState, screenSize]);
 
   // #endregion ------------ screen size control ---------
 
@@ -352,12 +337,12 @@ function LoginPage(props) {
     <>
       <div className="login-page">
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          isOpen={isOpen}
+          onRequestClose={() => handleModal(false)}
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <AiOutlineClose onClick={closeModal} className="close-btn-icon" />
+          <AiOutlineClose onClick={() => handleModal(false)} className="close-btn-icon" />
           <div className="login-container">
             <div className="login-section1">
               <img src={logo} alt="" />

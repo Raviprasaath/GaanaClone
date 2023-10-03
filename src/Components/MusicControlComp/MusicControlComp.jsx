@@ -473,8 +473,9 @@ function MusicControlComp(props) {
 
   const handlerFavSongAdding = () => {
     if (userData.logStatus !== "success") {
-      props.fromMusicPage(true);
+      props.handleModal(true);
     }
+    
 
     setFavFetchingActivator(prev => prev + 1);
     dispatch(actions.setFavSongUiUpdate(activeSong));  
