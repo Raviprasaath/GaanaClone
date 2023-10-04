@@ -92,8 +92,8 @@
 }
 .lite-mode .footer .footer-section .footer-intro .intro-tag,
 .lite-mode .footer .footer-section .footer-intro .footer-terms-condition,
-.lite-mode .footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p,
-.lite-mode .footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p,
+.lite-mode .footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p .title,
+.lite-mode .footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p .title,
 .lite-mode .footer .footer-section .footer-intro .copy-right {
   color: var(--PrimaryColor);
 }
@@ -120,7 +120,8 @@
 .lite-mode .navbar .sideNav .logo-login {
   color: var(--PrimaryColor);
 }
-.lite-mode .footer .footer-mob-view .accordion {
+.lite-mode .footer .footer-mob-view .accordion,
+.lite-mode .footer .footer-mob-view .accordion p .title {
   background-color: var(--SecondaryColor);
   color: var(--PrimaryColor);
 }
@@ -647,6 +648,10 @@
   border-radius: 0.6rem;
 }
 
+.carousel.card.round .product-image {
+  border-radius: 50%;
+}
+
 .react-multi-carousel-list {
   overflow: unset;
   overflow-x: hidden;
@@ -775,6 +780,7 @@
 .music-control-comp .large-screen-controls .song-playing-area1 {
   width: 30%;
   overflow: hidden;
+  z-index: 1;
 }
 .music-control-comp .large-screen-controls .song-playing-area1 .song-cover {
   display: flex;
@@ -1422,7 +1428,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0px 10px;
-  width: 100%;
+  width: 400px;
   font-size: 1.1rem;
 }
 .music-player-container .music-player-lap-view .music-player-section .music-player-section-1 .poster-song-splitter .song-name .heart-in {
@@ -1676,7 +1682,6 @@
 .footer .footer-section .footer-intro .footer-content .row-1 {
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
 }
 .footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content h3 {
   opacity: 0.9;
@@ -1685,17 +1690,19 @@
   padding: 10px 10px;
 }
 .footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p {
+  cursor: pointer;
+}
+.footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p .title {
   font-size: 0.8rem;
   color: var(--SecondaryColor);
 }
-.footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p:hover {
+.footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p .title:hover {
   opacity: 0.5;
 }
 .footer .footer-section .footer-intro .footer-content .row-2 {
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
 }
 .footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content h3 {
   opacity: 0.9;
@@ -1704,10 +1711,13 @@
   padding: 10px 10px;
 }
 .footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p {
+  cursor: pointer;
+}
+.footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p .title {
   font-size: 0.8rem;
   color: var(--SecondaryColor);
 }
-.footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p:hover {
+.footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p .title:hover {
   opacity: 0.5;
 }
 .footer .footer-section .footer-intro .copy-right {
@@ -1743,11 +1753,12 @@
   background-color: var(--PrimaryColor2);
   color: var(--SecondaryColor);
 }
-.footer .footer-mob-view .accordion p {
+.footer .footer-mob-view .accordion p .title {
   font-size: 0.9rem;
+  color: var(--SecondaryColor);
   cursor: pointer;
 }
-.footer .footer-mob-view .accordion p:hover {
+.footer .footer-mob-view .accordion p .title:hover {
   opacity: 0.8;
 }
 .footer .footer-mob-view .MuiSvgIcon-root {
@@ -1761,6 +1772,35 @@
 }
 .footer .dummy-spacing {
   height: 70px;
+}
+
+.DialogOverlay {
+  background-color: var(--black-a9);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.Button.violet {
+  cursor: pointer;
+}
+
+.DialogContent {
+  background-color: var(--PrimaryColor3);
+  border-radius: 6px;
+  box-shadow: hsla(206, 22%, 7%, 0.35) 0px 10px 38px -10px, hsla(206, 22%, 7%, 0.2) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 65vh;
+  padding: 25px;
+  z-index: 5;
+  font-size: 0.7rem;
+  overflow: scroll;
+  color: var(--SecondaryColor);
 }
 
 .toggler {

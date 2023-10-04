@@ -110,6 +110,21 @@ function ExitedSongs() {
   const currentSongArray = Object.keys(currentSong).map(
     (key) => currentSong[key]
   );
+
+
+
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
   
   return (
     <>

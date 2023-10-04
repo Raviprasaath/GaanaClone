@@ -65,6 +65,15 @@ function usersReducer(state = initialState, action) {
         case 'SET_ARTIST_PAGE_1': {
             return { ...state, artistPage1: action.payload }
         }
+        
+        case 'SET_ARTIST_PAGE_2': {
+            return { ...state, artistPage2: action.payload }
+        }
+        
+        case 'SET_ARTIST_CARD_RENDER': {
+            return { ...state, artistPageCardRender: action.payload }
+        }
+        
 
 
         default:

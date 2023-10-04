@@ -31,6 +31,7 @@ import SearchSection from "./Components/SearchSection/SearchSection.jsx";
 import SearchResultPage from "./Components/PagesRoute/SearchResultPage/SearchResultPage.jsx";
 import PaymentPage from "./Components/PagesRoute/SubscriptionPage/PaymentPage.jsx";
 import ArtistPage2 from "./Components/PagesRoute/ArtistPage2/ArtistPage2.jsx";
+import ArtistPage from "./Components/PagesRoute/ArtistPage/ArtistPage.jsx";
 
 
 
@@ -157,12 +158,14 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/album" element={<Album />} />
+              <Route path="/artist" element={<ArtistPage />} />
+
               <Route path="/allsongs" element={<AllSongs />} />
               <Route path="/happy" element={<HappySongs />} />
               <Route path="/exited" element={<ExitedSongs />} />
               <Route path="/sad" element={<SadSongs />} />
               <Route path="/romance" element={<Romance />} />
-              <Route path="/songsfrom90s2000s" element={<ComingSoonPage />} />
+              <Route path="/comingsoon" element={<ComingSoonPage />} />
 
               <Route path="/comingsoon" element={<ComingSoonPage />} />
               <Route path="/subscription" element={<SubscriptionPage handleModal={handleModal} />} />
@@ -171,8 +174,9 @@ function App() {
               <Route path="album/:albumName/:albumId" element={<AlbumSongPage2 />} />
 
               <Route path="searchresult/:title/:id" element={<SearchResultPage />} />
-              <Route path="artist/:id" element = { <ArtistPage2/> } />
+              <Route path="artist/:name/" element = { <ArtistPage2/> } />
               <Route path="/paymentpage" element={<PaymentPage />} />
+              
 
             </Routes>
           </div>
@@ -184,6 +188,7 @@ function App() {
         <DataFetch />
         <MusicControlComp expander={onHandlerExpander} handleModal={handleModal} />
 
+        
         
       </div>
     </>

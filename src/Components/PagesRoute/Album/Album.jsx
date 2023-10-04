@@ -38,7 +38,21 @@ function Album() {
     dataGetting();
   }, []);
 
-  // console.log("dataFromStore", dataFromStore)
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling animation
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
+
+
+
 
   return (
     <>

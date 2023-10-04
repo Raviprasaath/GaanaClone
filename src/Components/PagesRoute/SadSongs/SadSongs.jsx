@@ -10,26 +10,7 @@ function PartySongs() {
   const [renderCard, setRenderCard] = useState(false);
   const dispatch = useDispatch();
 
-  // function localStorageDataGetting() {
-  //   const localStorageFiltered = JSON.parse(localStorage.getItem("localSongs"));
-  //   const storedData = localStorageFiltered.data;
-    
-  //   const result = storedData
-  //     .filter((item) => item.mood === "sad")
-  //     .map((item) => ({
-  //       key: item._id || "",
-  //       url: item.thumbnail || "",
-  //       name: item.title || "",
-  //       audio: item.audio_url || "",
-  //       description:
-  //       (item.artist && item.artist[0] && item.artist[0].description) || "",
-  //       artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
-  //       mood: item.mood || "",
-  //       songId: item._id || "",
-  //     }));
 
-  //   setDataFromStore(result);
-  // }
 
   useEffect(() => {
     async function dataGetting() {
@@ -68,6 +49,19 @@ function PartySongs() {
   const handleSongClicker = (data) => {    
     dispatch(actions.setActiveSong(data));
   } 
+
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
 
   return (
     <>

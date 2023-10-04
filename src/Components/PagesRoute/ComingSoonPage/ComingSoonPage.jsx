@@ -1,7 +1,18 @@
 
+import { useEffect } from "react";
 import image from "../../../assets/coming-soon-page.png"
 
 function ComingSoonPage () {
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', 
+        });
+      };
+    
+      useEffect(()=> {
+        scrollToTop();
+      }, [])
     return (
         <>
             <div className="comming-soon-page">

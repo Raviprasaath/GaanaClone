@@ -14,7 +14,6 @@ import {
   BsFillPlayFill,
   BsThreeDotsVertical,
 } from "react-icons/bs";
-import axios from "axios";
 
 function ArtistPage2() {
   const [showContent, setShowContent] = useState(false);
@@ -22,14 +21,10 @@ function ArtistPage2() {
   const [scrolling, setScrolling] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  
   const [currentTrack, setCurrentTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
-
-  const artistData = useSelector((state) => state.usersData.artistPage1);
-
-  console.log("artistData", artistData)
-
-  let { albumName, albumId } = useParams();
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -77,63 +72,82 @@ function ArtistPage2() {
 
   // console.log(albumId, albumName, " id checking");
 
- 
+  const artistDataFromStore = useSelector((state) => state.usersData.artistPage1);
+  // console.log("artistDataFromStore", artistDataFromStore)
 
-  useEffect(() => {
-    async function dataGetting() {
-      try {
-        const headers = {
-          "Content-Type": "application/json",
-          projectId: "8jf3b15onzua",
-        };
-        const response = await axios.get(
-          "https://academics.newtonschool.co/api/v1/music/album?limit=100",
-          { headers: headers }
-        );
-        const result = response.data;
-        const index = result.data.findIndex((item) => item._id === albumId);
-        const selectedSong = result.data[index];
-        const updatedSongs = {
-          key: selectedSong._id,
-          url: selectedSong.image,
-          name: selectedSong.title || "",
-          audio: selectedSong.songs || "",
-          description: selectedSong.description || "",
-          artist: selectedSong.artists,
-          id: selectedSong._id,
-          album: "yes",
-        };
-        setCurrentSong(updatedSongs);
+  function settingArtistSongs (artistDataFromStore) {
 
-        if (updatedSongs && updatedSongs.audio) {
-          const songsOfMovie = updatedSongs.audio.map((item) => ({
-            audio: item.audio_url || "",
-            songName: item.title || "",
-            image: updatedSongs.url || "",
-            id: item._id,
-            album: "yes",
-          }));
-
+    if (artistDataFromStore.audio) {
+      const updatedSongs = artistDataFromStore && artistDataFromStore.audio.map((item)=> ({
           
-          setCurrentTrack(songsOfMovie);
-          setShowContent(true);
-          // dispatch(actions.setAlbumData(songsOfMovie));
+          key: item._id,
+          url: item.thumbnail || "",
+          name: item.title || "",
+          audio: item.audio_url || "",
+          description:
+            (item.artist && item.artist[0] && item.artist[0].description) || "",
+          artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+          mood: "",
+          songId: item._id || "",
+          artistFiltered :"yes",
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      ))
+      setCurrentSong(updatedSongs);
+      setShowContent(true);
+    } else if (artistDataFromStore.newSongs) {
+      const updatedSongs = artistDataFromStore && artistDataFromStore.newSongs.map((item)=> ({          
+        key: item._id,
+        url: item.thumbnail || "",
+        name: item.title || "",
+        audio: item.audio_url || "",
+        description:
+          (item.artist && item.artist[0] && item.artist[0].description) || "",
+        artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+        mood: "",
+        songId: item._id || "",
+        artistFiltered :"yes",
       }
+    ))
+    setCurrentSong(updatedSongs);
+    setShowContent(true);
     }
+  }
 
-    dataGetting();
-  }, []);
 
-  // console.log("currentSong -> ", currentSong);
-  
+  useEffect(()=> {
+    setTimeout(()=> {
+      if (artistDataFromStore) {
+        settingArtistSongs(artistDataFromStore);
+      }
+    }, 2000)
+  }, [])
+
+
+
   const handleSongClicker = (data) => {
     // console.log("all data -> ", data);
-    dispatch(actions.setAlbumData(currentTrack));
+    // console.log("currentSong", currentSong)
+    dispatch(actions.setArtistPage2(currentSong));
     dispatch(actions.setActiveSong(data));
   };
+
+  const currentSongArray = Object.keys(currentSong).map(
+    (key) => currentSong[key]
+  );
+
+
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
 
   return (
     <>
@@ -153,40 +167,35 @@ function ArtistPage2() {
               <div className="traction-splitter">
                 <div className="track-section">
                   <AiOutlinePlayCircle
-                    onClick={() => handleSongClicker(currentTrack[0])}
+                    onClick={() => handleSongClicker(currentSong[currentSongIndex])}
                     className="prime-poster-play poster-play-option"
                   />
                   <img
                     className="posterPrime"
-                    src={currentSong.url}
+                    src={currentSong[currentSongIndex].url}
                     alt="img"
                   />
                 </div>
                 <div className="button-details-splitter">
                   <div className="song-button">
                     <button
-                      onClick={() => handleSongClicker(currentTrack[0])}
+                      onClick={() => handleSongClicker(currentSong[currentSongIndex])}
                       className="song-play-btn"
                     >
                       Play Song
                     </button>
+
                     {/* <BiHeart className="fav-song-adding" /> */}
                   </div>
                   <div className="songs-side-details">
                     <div className="song-line1">
-                      <div className="song-name1">{currentSong.name}</div>
+                      <div className="song-name1">{currentSong[currentSongIndex].name}</div>
                       <div className="song-movie-name">
-                        (From {currentSong.name}) Song |{" "}
-                        <span>
-                          {currentSong.artist &&
-                          currentSong.artist[0] &&
-                          currentSong.artist[0].name
-                            ? currentSong.artist[0].name
-                            : ""}
-                        </span>
+                        (From "{currentSong[currentSongIndex].name}") Song |{" "}
+                        <span>{artistDataFromStore.name}</span>
                       </div>
                     </div>
-                    <p className="song-line2">{currentSong.description}</p>
+                    <p className="song-line2">{currentSong[currentSongIndex].description}</p>
                     <div className="track-details-warp">
                       <button className="track-duration">
                         {formatTime2(duration)}
@@ -200,14 +209,14 @@ function ArtistPage2() {
               <div className="track-list-header">
                 <img
                   className="track-list-header-img"
-                  src={currentSong.url}
+                  src={currentSong[currentSongIndex].url}
                   alt="img"
                 />
                 <div className="song-genere">
-                  <p className="song-name">{currentSong.name} </p>
+                  <p className="song-name">{currentSong[currentSongIndex].name} </p>
                 </div>
                 <button
-                  onClick={() => handleSongClicker(currentTrack[0])}
+                  onClick={() => handleSongClicker(currentSong[currentSongIndex])}
                   className="track-list-playing-option"
                 >
                   Play All
@@ -231,33 +240,31 @@ function ArtistPage2() {
                       </tr>
                     </thead>
                     <tbody className="table-body-container">
-                      {currentTrack.map((tracks, index) => (
+                      {currentSongArray.map((tracks, index) => (
                         <tr
-                          key={tracks.id || index}
-                          onClick={() => handleSongClicker(currentTrack[index])}
+                          key={tracks._id || index}
+                          onClick={() => {handleSongClicker(currentSong[index]); setCurrentSongIndex(index) }}
                         >
                           <td className="table-col-1">{index + 1}</td>
                           <td className="table-col-2">
                             <div className="track-img-play">
                               <BsPlayCircle className="play-track-icon" />
                               <img
-                                src={tracks.image}
+                                src={tracks.url}
                                 alt="tracker-img"
                                 className="tracker-image"
                               />
                             </div>
                             <div className="track-name-premium">
                               <button className="premium-btn">Premium</button>
-                              <p className="song-name"> {tracks.songName} </p>
+                              <p className="song-name"> {tracks.name} </p>
                             </div>
                           </td>
                           <td className="table-col-3">
-                            <p className="singer-name"> {} </p>
+                            <p className="singer-name"> {artistDataFromStore.name} </p>
                           </td>
                           <td className="table-col-4">
-                            <p className="track-movie-name">
-                              {tracks.songName}
-                            </p>
+                            <p className="track-movie-name">{tracks.name}</p>
                           </td>
                           <td className="table-col-5">
                             <p className="track-duration">
@@ -274,17 +281,17 @@ function ArtistPage2() {
                 <div className="table-mobile-container">
                   <table>
                     <tbody>
-                      {currentTrack.map((item, index) => (
+                      {currentSong.map((item, index) => (
                         <tr
-                          key={item.id || index}
+                          key={item._id || index}
                           className="table-tr-mob"
-                          onClick={() => handleSongClicker(currentTrack[index])}
+                          onClick={() => {handleSongClicker(currentSong[index]); setCurrentSongIndex(index) }}
                         >
                           <td className="table-td-1">{index + 1}</td>
                           <td className="table-td-2">
                             <div className="table-td-2-img">
                               <img
-                                src={item.image}
+                                src={item.url}
                                 alt="img"
                                 className="table-mob-view-poster"
                               />
@@ -293,10 +300,11 @@ function ArtistPage2() {
                                   Premium
                                 </button>
                                 <p className="table-mob-artist">
-                                  {/* {item.artist} */}
+                                  {" "}
+                                  {item.artist}{" "}
                                 </p>
                               </div>
-                              <p className="table-song-name">{item.songName}</p>
+                              <p className="table-song-name">{item.name}</p>
                             </div>
                           </td>
                           <td className="table-td-3">
@@ -309,7 +317,6 @@ function ArtistPage2() {
                           </td>
                         </tr>
                       ))}
-                      
                     </tbody>
                   </table>
                 </div>

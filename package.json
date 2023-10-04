@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
     "@nextui-org/react": "^2.1.10",
+    "@radix-ui/react-dialog": "^1.0.5",
     "axios": "^1.5.0",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",

@@ -74,6 +74,11 @@ const SongsCollection = () => {
             </Typography>    
           </Link>              
           
+          <Link className="list-selector" to="/artist">         
+            <Typography onClick={() => {handleSongSelection("Artist"); setCategory("Moods & Genres")}} className={activeItem === "Artist" ? "active" : ""}  sx={{ minWidth: 150 }}>            
+              Artist
+            </Typography>
+          </Link>
           <Link className="list-selector" to="/happy">         
             <Typography onClick={() => {handleSongSelection("Happy Mood"); setCategory("Moods & Genres")}} className={activeItem === "Happy Mood" ? "active" : ""}  sx={{ minWidth: 150 }}>            
               Happy Mood
@@ -145,6 +150,19 @@ const SongsCollection = () => {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
+
+
+              <Link className="list-selector" to="/exited">          
+                <MenuItem  onClick={()=>{handleClose(); setCategory("Exciting Harmony");}}>
+                    <Typography variant="body1" component="span">
+                    Exciting Harmony 
+                    </Typography>
+                </MenuItem>
+              </Link>
+              
+              
+              
+              
               <Link className="list-selector" to="/sad">          
                 <MenuItem  onClick={()=>{handleClose(); setCategory("Sad Songs");}}>
                     <Typography variant="body1" component="span">

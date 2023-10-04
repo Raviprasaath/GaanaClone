@@ -50,6 +50,7 @@ function MusicControlComp(props) {
   const resultSongsList = useSelector((state) => state.usersData.resultSongs);
   const resultSongsDataList = useSelector((state) => state.usersData.albumSongs);
   const favSongAllList = useSelector((state) => state.usersData.allfavSongData);
+  const artistSong = useSelector((state) => state.usersData.artistPage2);
 
   let songAllDetails = [];
 
@@ -94,15 +95,15 @@ function MusicControlComp(props) {
 
   // console.log("currentTrack", currentTrack)
   // console.log("activeSong", activeSong);
+  // console.log("artistSong", artistSong);
 
 
 
-  let flag = false;
-
+  let albumFlag = false;
   if (activeSong.album === "yes") {
-    flag = true;
+    albumFlag = true;
   } else if (activeSong.album === "no") {
-    flag = false;
+    albumFlag = false;
   }
 
   let searchResultFlag = false;
@@ -119,17 +120,26 @@ function MusicControlComp(props) {
     favSongCheck = false;
   }
 
+  let artistFlag = false;
+  if (activeSong.artistFiltered === "yes") {
+    artistFlag = true;
+  } else {
+    artistFlag = false;
+  }
+
   // console.log("searchResultFlag", searchResultFlag)
 
   if (location.pathname === `/allsongs` && !playing) {
     songList = allSongsList;
-  } else if (flag) {
+  } else if (albumFlag) {
     songList = albumSongsList;
   } else if (activeSong.fromSearch === "yes") {
     songList = resultSongsDataList;
   } else if (favSongCheck) {
     songList = favSongAllList;
-  } else if (!flag) {
+  } else if (artistFlag) {
+    songList = artistSong;
+  } else if (!albumFlag) {
     if (activeSong.featured === "Trending songs") {
       songList = topTrendingSongList;
     } else if (activeSong.featured === "Soul soother") {
@@ -166,7 +176,7 @@ function MusicControlComp(props) {
   const songTrackList = [];
 
 
-  if (!flag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
+  if (!albumFlag && !artistFlag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
     songList.forEach((item) => {
       if (item.audio_url && item._id) {
         songTrackList.push(item.audio_url);
@@ -174,7 +184,7 @@ function MusicControlComp(props) {
       }
     });
   }
-  if (flag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
+  if (albumFlag && !artistFlag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
     songList.forEach((item) => {
       if (item.audio && item.id) {
         songTrackList.push(item.audio);
@@ -182,7 +192,15 @@ function MusicControlComp(props) {
       }
     });
   }
-  if (searchResultFlag && !flag && !favSongCheck && Array.isArray(songList)) {
+  if (!albumFlag && artistFlag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
+    songList.forEach((item) => {
+      if (item.audio && item.songId) {
+        songTrackList.push(item.audio);
+        songListIndex.push(item.songId);
+      }
+    });
+  }
+  if (searchResultFlag && !artistFlag && !albumFlag && !favSongCheck && Array.isArray(songList)) {
     songList.forEach((item) => {
       if (item.audio_url && item.id) {
         songTrackList.push(item.audio_url);
@@ -190,7 +208,7 @@ function MusicControlComp(props) {
       }
     });
   }
-  if (!flag && !searchResultFlag && favSongCheck && Array.isArray(songList)) {
+  if (!albumFlag && !artistFlag && !searchResultFlag && favSongCheck && Array.isArray(songList)) {
     songList.forEach((item)=> {
       if(item.audio_url && item.id) {
         songTrackList.push(item.audio_url);
@@ -201,7 +219,7 @@ function MusicControlComp(props) {
 
   const tracks = songTrackList.length !== 0 ? songTrackList : song1;
 
-  if (Array.isArray(songList) && flag && albumSongsList) {
+  if (Array.isArray(songList) && albumFlag && albumSongsList) {
     songList.forEach((item) => {
       songAllDetails.push({
         key: item.id,
@@ -238,6 +256,19 @@ function MusicControlComp(props) {
         audio_url: item.audio_url,
         name: item.title,
         myFav: "yes"
+      })
+    })
+  } else if (Array.isArray(songList) && artistFlag) {
+    songList.forEach((item)=> {
+      songAllDetails.push({
+        id: item.songId,
+        key: item.songId,
+        thumbnail: item.url,
+        title: item.name,
+        artist: item.artist,
+        audio_url: item.audio,
+        name: item.name,
+        artistFiltered: "yes"
       })
     })
   } else {
@@ -525,8 +556,8 @@ function MusicControlComp(props) {
             return item && item._id ? item._id : item;
           });
           
-          let flag = array.findIndex((d) => d === currentPlayingSongId);
-          setExistingSongFavCheck(flag !== -1);
+          let albumFlag = array.findIndex((d) => d === currentPlayingSongId);
+          setExistingSongFavCheck(albumFlag !== -1);
         } else {
           // console.log("Data not found in the API response.");
         }
@@ -540,8 +571,8 @@ function MusicControlComp(props) {
       const array = (fetchingSongStoringArray || []).map((item) => {
         return item && item._id ? item._id : item;
       });
-      let flag = array.findIndex((d) => d === currentPlayingSongId);
-      setExistingSongFavCheck(flag !== -1);
+      let albumFlag = array.findIndex((d) => d === currentPlayingSongId);
+      setExistingSongFavCheck(albumFlag !== -1);
     }
 
   

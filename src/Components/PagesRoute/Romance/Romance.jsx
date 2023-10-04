@@ -49,6 +49,18 @@ function Romance() {
     dispatch(actions.setActiveSong(data));
   }
 
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
   return (
     <>
       {renderCard ? (

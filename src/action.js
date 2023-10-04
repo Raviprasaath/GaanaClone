@@ -125,6 +125,20 @@ const setArtistPage1 = (item) => {
     }
 }
 
+const setArtistPage2 = (item) => {
+    return {
+        type: "SET_ARTIST_PAGE_2",
+        payload: item
+    }
+}
+
+const setArtistCardsRender = (item) => {
+    return {
+        type: "SET_ARTIST_CARD_RENDER",
+        payload: item
+    }
+}
+
 
 
 
@@ -134,6 +148,7 @@ export default {
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
     setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
     setTop20Data, setSearchResultData, setAllSearchResultData,
-    setAllFavSongs, setFavSongUiUpdate, setArtistPage1
+    setAllFavSongs, setFavSongUiUpdate, setArtistPage1, setArtistPage2,
+    setArtistCardsRender
 
 }

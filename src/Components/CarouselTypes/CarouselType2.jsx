@@ -10,12 +10,13 @@ const CarouselType2 = (props) => {
 
   const handleSongClicker = (data) => {       
     dispatch(actions.setArtistPage1(data));
-    navigate(`/artist/${data.songId}`, {replace: true})  
+    // console.log("data", data)
+    navigate(`/artist/${data.name}/${data.songId}`, {replace: true})  
   }
 
   return (
     <>
-      <div onClick={()=>handleSongClicker(props)} className="carousel card">          
+      <div onClick={()=>handleSongClicker(props)} className="carousel card round">          
           <img className="product-image" src={props.url} alt="product image" />
           <h4> {props.name} </h4>
         </div>

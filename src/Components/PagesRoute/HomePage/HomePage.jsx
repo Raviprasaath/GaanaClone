@@ -15,6 +15,8 @@ import action from "../../../action.js";
 import axios from "axios";
 import Loader from "react-js-loader";
 
+import {getSongsByArtist} from '../../../Utility.jsx'
+
 function HomePage() {
   const [trendingSongs, setTrendingSongs] = useState();
   const [soulSongs, setSoulSongs] = useState();
@@ -38,11 +40,14 @@ function HomePage() {
   const [loader8, setLoader8] = useState(false);
   const [loader9, setLoader9] = useState(false);
 
+  const dispatch = useDispatch();
+
+
   function setInLocalStorage(data) {
     const allSongsList = JSON.parse(localStorage.getItem("allData")) || [];
     if (!allSongsList) {
       localStorage.setItem("allData", JSON.stringify(...data));
-    } else {
+    } else if (allSongsList.length < 410) {
       localStorage.setItem(
         "allData",
         JSON.stringify([...allSongsList, ...data])
@@ -50,9 +55,9 @@ function HomePage() {
     }
   }
 
-  const dispatch = useDispatch();
-
   async function fetching() {
+    const allFetchedData = [];
+
     setLoader1(true);
     setLoader2(true);
     setLoader3(true);
@@ -86,10 +91,13 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const ts = response.data;
+          allFetchedData.push(...response.data);
+          // console.log(allFetchedData)
           setTrendingSongs(ts);
           dispatch(action.setTrendingData(ts));
           setLoader1(false);
           setInLocalStorage(ts);
+          
         });
 
       fetch(
@@ -103,6 +111,9 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const tsa = response.data;
+          allFetchedData.push(...response.data);
+          // console.log(allFetchedData)
+
           setSoulSongs(tsa);
           dispatch(action.setSoulSongsData(tsa));
           setLoader2(false);
@@ -120,6 +131,9 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const tsa = response.data;
+          allFetchedData.push(...response.data);
+          // console.log(allFetchedData)
+
           setEvergreenSongs(tsa);
           dispatch(action.setEvergreenData(tsa));
           setLoader3(false);
@@ -137,6 +151,9 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const tsa = response.data;
+          allFetchedData.push(...response.data);
+          // console.log(allFetchedData)
+
           setTop20Songs(tsa);
           dispatch(action.setTop20Data(tsa));
           setLoader4(false);
@@ -154,6 +171,9 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const hsd = response.data;
+          allFetchedData.push(...response.data);
+          // console.log(allFetchedData)
+
           setHappySongsData(hsd);
           dispatch(action.setHappyData(hsd));
           setLoader5(false);
@@ -171,6 +191,9 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const rsd = response.data;
+          allFetchedData.push(...response.data);
+          // console.log(allFetchedData)
+
           setRomanticSongsData(rsd);
           dispatch(action.setRomanticData(rsd));
           setLoader6(false);
@@ -188,34 +211,15 @@ function HomePage() {
         .then((data) => data.json())
         .then((response) => {
           const ssd = response.data;
+          allFetchedData.push(...response.data);
           dispatch(action.setSadSongData(ssd));
           setSadSongsData(ssd);
           setLoader7(false);
           setInLocalStorage(ssd);
         });
 
-      fetch(
-        'https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"excited"}&limit=100',
-        {
-          headers: {
-            projectId: "ghmumg9x1zid",
-          },
-        }
-      )
-        .then((data) => data.json())
-        .then((response) => {
-          const esd = response.data;
-          dispatch(action.setExcitedData(esd));
-          setExcitedSongsData(esd);
-          setLoader8(false);
-          setInLocalStorage(esd);
-        });
-
-
-
-
         fetch(
-          'https://academics.newtonschool.co/api/v1/music/artist?limit=100',
+          'https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"excited"}&limit=100',
           {
             headers: {
               projectId: "ghmumg9x1zid",
@@ -224,13 +228,37 @@ function HomePage() {
         )
           .then((data) => data.json())
           .then((response) => {
-            const tsa = response.data;
-            setArtistPage1(tsa);
-            dispatch(action.setArtistPage1(tsa));
-            setLoader9(false);
+            setLoader8(false);
+            const esd = response.data;          
+            allFetchedData.push(...esd);
+            setExcitedSongsData(esd);
+            dispatch(action.setExcitedData(esd));
+            
+            
+            setInLocalStorage(esd);        
+            // console.log("allFetchedData", allFetchedData);
+            // dispatch(action.setFullSongData(allFetchedData));
           });
 
-      
+      fetch("https://academics.newtonschool.co/api/v1/music/artist?limit=500", {
+        headers: {
+          projectId: "ghmumg9x1zid",
+        },
+      })
+        .then((data) => data.json())
+        .then((response) => {
+          const tsa = response.data;
+         
+          const newSongData = getSongsByArtist(tsa)
+          const newFilteredArray = [...new Set(newSongData.map((item)=>item))]        
+
+          setArtistPage1(newFilteredArray);
+          dispatch(action.setArtistPage1(newFilteredArray));
+          dispatch(action.setArtistCardsRender(newFilteredArray));
+
+          setLoader9(false);
+        });
+
     } catch (error) {
       console.log("Error fetching data", error);
     }
@@ -240,7 +268,10 @@ function HomePage() {
     fetching();
   }, []);
 
+  
+
   // Trending Carousel
+
   const productTrending = trendingSongs?.map((item) => (
     <TrendingSongsCarousel
       key={item._id}
@@ -341,15 +372,33 @@ function HomePage() {
       songId={item._id}
       name={item.name}
       url={item.image}
-      audio={item.songs}
+      audio={item.newSongs}
       mood=""
-      artist="yes"
+      artistFilter="yes"
     />
   ));
 
-  // toggleCallback={toggling}
 
-  // DARKMODEVAL::{darkMode}
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling animation
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -368,7 +417,7 @@ function HomePage() {
       )}
 
       <h2 className="homepage-heading">Peaceful Melodic</h2>
-      {!loader1 ? (
+      {!loader2 ? (
         <>
           {productSoul?.length > 0 && (
             <Carousel showDots={false} responsive={responsive}>
@@ -459,7 +508,7 @@ function HomePage() {
       ) : (
         <Loader size="lg" />
       )}
-      
+
       <h2 className="homepage-heading">Artist</h2>
       {!loader9 ? (
         <>

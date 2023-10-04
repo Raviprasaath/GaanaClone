@@ -117,6 +117,24 @@ function AllSongs() {
   );
 
 
+
+
+
+
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling animation
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
+
+
   return (
     <>
       {showContent ? (

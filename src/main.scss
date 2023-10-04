@@ -103,8 +103,8 @@
   }
   .footer .footer-section .footer-intro .intro-tag,
   .footer .footer-section .footer-intro .footer-terms-condition,
-  .footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p,
-  .footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p,
+  .footer .footer-section .footer-intro .footer-content .row-1 .footer-row-content p .title,
+  .footer .footer-section .footer-intro .footer-content .row-2 .footer-row-content p .title,
   .footer .footer-section .footer-intro .copy-right {
   
     color: var(--PrimaryColor);
@@ -132,7 +132,8 @@
   .navbar .sideNav .logo-login {
     color: var(--PrimaryColor);
   }
-  .footer .footer-mob-view .accordion {
+  .footer .footer-mob-view .accordion,
+  .footer .footer-mob-view .accordion p .title  {
     background-color: var(--SecondaryColor);
     color: var(--PrimaryColor);
   }
@@ -747,6 +748,13 @@
     border-radius: 0.6rem;
   }
 }
+.carousel.card.round {
+  .product-image {
+    border-radius: 50%;
+  }
+}
+
+
 
 .react-multi-carousel-list {
   overflow: unset;
@@ -902,6 +910,7 @@
     .song-playing-area1 {
       width: 30%;
       overflow: hidden;
+      z-index: 1;
       .song-cover {
         
         .current-playing-song {        
@@ -1659,7 +1668,8 @@
             display: flex;
             justify-content: space-between;
             padding: 0px 10px;
-            width: 100%;
+            // width: 100%;
+            width: 400px;
             font-size: 1.1rem;
 
             .heart-in {
@@ -1946,8 +1956,7 @@
         .row-1 {
           display: flex;
           justify-content: space-between;
-          cursor: pointer;
-
+          
           .footer-row-content { 
             h3 {
               opacity: 0.9;
@@ -1956,11 +1965,14 @@
               padding: 10px 10px;
             }           
             p {
-              font-size: 0.8rem;
-              color: var(--SecondaryColor);
-
-              &:hover {
-                opacity: 0.5;
+              cursor: pointer;
+              .title {
+                font-size: 0.8rem;
+                color: var(--SecondaryColor);
+  
+                &:hover {
+                  opacity: 0.5;
+                }
               }
             }
           }
@@ -1969,21 +1981,23 @@
           padding-top: 20px;
           display: flex;
           justify-content: space-between;
-          cursor: pointer;
-
+          
           .footer-row-content { 
             h3 {
               opacity: 0.9;
               font-size: 1rem;
               font-weight: unset;
               padding: 10px 10px;
-            }           
+            }
             p {
-              font-size: 0.8rem;
-              color: var(--SecondaryColor);
-
-              &:hover {
-                opacity: 0.5;
+              cursor: pointer;
+              .title {
+                font-size: 0.8rem;
+                color: var(--SecondaryColor);
+  
+                &:hover {
+                  opacity: 0.5;
+                }
               }
             }
           }
@@ -2026,10 +2040,15 @@
       color: var(--SecondaryColor);
 
       p {
-        font-size: 0.9rem;
-        cursor: pointer;
-        &:hover {
-          opacity: 0.8;
+        .title {
+          font-size: 0.9rem;
+          color: var(--SecondaryColor);
+
+          cursor: pointer;
+          &:hover {
+            opacity: 0.8;
+          }
+
         }
       }
     }
@@ -2044,12 +2063,40 @@
     }
   }
 
-
-
   .dummy-spacing {
     height: 70px;
   }
 }
+
+.DialogOverlay {
+  background-color: var(--black-a9);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.Button.violet {
+  cursor: pointer;
+}
+
+.DialogContent {
+  background-color: var(--PrimaryColor3);
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 65vh;
+  padding: 25px;
+  z-index: 5;
+  font-size: 0.7rem;
+  overflow: scroll;
+  color: var(--SecondaryColor);
+}
+
 
 
 // Dark theme Toggler

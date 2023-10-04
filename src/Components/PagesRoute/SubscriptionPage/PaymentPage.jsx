@@ -125,6 +125,20 @@ const PaymentPage = () => {
 
 
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
+
+
+
+
   return (
     <div className="check-out-page">
       <Container maxWidth="sm">

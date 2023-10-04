@@ -36,7 +36,6 @@ const uiReRenderData = useSelector((state) => state.usersData.favSongUiUpdate);
 
 
 
-
 async function favSongFetching() {
   try {
     const myHeaders = new Headers();
@@ -140,6 +139,14 @@ async function favSongFetching() {
   }
   
 
+
+  // const fullSongDataStore = useSelector((state) => state.usersData.fullSongData);
+  // console.log("fullSongData", fullSongDataStore);
+  
+  // const excitedSongList = useSelector((state) => state.usersData.excitedSong);
+  // console.log("excitedSongList", excitedSongList);
+
+
   function artsitName(id) {
     let artistName = ""
     const allSongsList = JSON.parse(localStorage.getItem("allData")) || [];
@@ -173,6 +180,19 @@ async function favSongFetching() {
       songIdFetching();
     }, 500)
   }, [uiReRenderData])
+
+
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', 
+    });
+  };
+
+  useEffect(()=> {
+    scrollToTop();
+  }, [])
 
 
 

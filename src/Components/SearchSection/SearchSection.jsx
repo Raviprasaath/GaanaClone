@@ -213,6 +213,7 @@ async function fetching() {
     dispatch(action.setAllSearchResultData(albumData));
   }
   
+  
   const handlerArtistSelection = (e) => {
     const updatedList = {
         key: e._id,
