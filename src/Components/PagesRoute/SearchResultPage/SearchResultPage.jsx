@@ -182,15 +182,15 @@ function SearchResultPage() {
     <>
       {showContent ? (
         <div>
-          {/* <audio
+          <audio
             ref={audioRef}
-            // src={currentSongArray.length > 0 ? currentSongArray[0].audio : ""}
+            src={currentSong.length > 0 ? currentSong[0].audio : ""}
             onTimeUpdate={handleTimeUpdate}
             controls
-            // autoPlay
-            // muted
+            autoPlay
+            muted
             className="audio-hide"
-          /> */}
+          />
           <div>
             <div className="musicCollections">
               <div className="traction-splitter">

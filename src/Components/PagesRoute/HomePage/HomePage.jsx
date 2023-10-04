@@ -509,7 +509,7 @@ function HomePage() {
         <Loader size="lg" />
       )}
 
-      <h2 className="homepage-heading">Artist</h2>
+      {/* <h2 className="homepage-heading">Artist</h2>
       {!loader9 ? (
         <>
           {productArtist?.length > 0 && (
@@ -520,7 +520,7 @@ function HomePage() {
         </>
       ) : (
         <Loader size="lg" />
-      )}
+      )} */}
 
       {/* <h2 className="homepage-heading">Artist</h2>
       <Carousel showDots={false} responsive={responsive}>

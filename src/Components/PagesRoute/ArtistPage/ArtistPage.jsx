@@ -50,7 +50,7 @@ function ArtistPage() {
       {renderCard ? (
         <div className="new-songs-section">
           <div className="new-songs-container">
-            <h2>Album Songs</h2>
+            <h2>Artist Songs</h2>
             <div className="song-container-level-1">
               {artistDataFromStore.length === 133 && artistDataFromStore.map((item) => (
                 <Link onClick={()=>handlerSongSelector(item)} key={item._id} to={`/artist/${item.name}`}>
