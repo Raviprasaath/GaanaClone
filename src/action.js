@@ -118,6 +118,13 @@ const setFavSongUiUpdate = (item) => {
     }
 }
 
+const setArtistPage1 = (item) => {
+    return {
+        type: "SET_ARTIST_PAGE_1",
+        payload: item
+    }
+}
+
 
 
 
@@ -127,6 +134,6 @@ export default {
     setRomanticData, setTrendingData, setSadSongData, setExcitedData, 
     setAllSongsData, setAlbumData, setSoulSongsData, setEvergreenData,
     setTop20Data, setSearchResultData, setAllSearchResultData,
-    setAllFavSongs, setFavSongUiUpdate
+    setAllFavSongs, setFavSongUiUpdate, setArtistPage1
 
 }

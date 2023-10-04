@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
@@ -8,9 +9,14 @@ import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsPlayCircle, BsFillPlayFill, BsThreeDotsVertical, } from "react-icons/bs";
+import {
+  BsPlayCircle,
+  BsFillPlayFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
+import axios from "axios";
 
-function SearchResultPage() {
+function ArtistPage2() {
   const [showContent, setShowContent] = useState(false);
   const [screenSize, setScreenSize] = useState(window.innerWidth < 960);
   const [scrolling, setScrolling] = useState(false);
@@ -18,14 +24,12 @@ function SearchResultPage() {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTrack, setCurrentTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
-  const [songIndex, setIndex] = useState(0);
 
-  const selectedSong = useSelector((state) => state.usersData.resultSongs);
-  const selectedSongAll = useSelector((state) => state.usersData.resultData);
-  
-  // console.log("selectedSong", selectedSong);
-  // console.log("selectedSongAll", selectedSongAll);
-  
+  const artistData = useSelector((state) => state.usersData.artistPage1);
+
+  console.log("artistData", artistData)
+
+  let { albumName, albumId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -71,99 +75,64 @@ function SearchResultPage() {
     };
   }, [scrolling]);
 
+  // console.log(albumId, albumName, " id checking");
 
  
 
   useEffect(() => {
-    function dataGetting() {
-      if (
-        (selectedSong && selectedSong.fromSearch === 'yes' && selectedSong.category === 'search-top20') ||
-        selectedSong.category === 'search-allSongs'
-      ) {
-      const updatedSongs = selectedSongAll && selectedSongAll.map((item, index)=>({
-        key: `${item._id}&${index}`,
-        url: item.thumbnail,
-        name: item.title || "",
-        title: item.title,
-        audio_url: item.audio_url || "",
-        description: 
-          item.artist && item.artist[0] &&
-          item.artist[0].description ?
-          item.artist[0].description : "",
-        artist: 
-          item.artist && item.artist[0] &&
-          item.artist[0].name? 
-          item.artist[0].name : "",
-        id: item._id,
-        fromSearch: selectedSong.fromSearch,
-        category: selectedSong.category,
-      }))
+    async function dataGetting() {
+      try {
+        const headers = {
+          "Content-Type": "application/json",
+          projectId: "8jf3b15onzua",
+        };
+        const response = await axios.get(
+          "https://academics.newtonschool.co/api/v1/music/album?limit=100",
+          { headers: headers }
+        );
+        const result = response.data;
+        const index = result.data.findIndex((item) => item._id === albumId);
+        const selectedSong = result.data[index];
+        const updatedSongs = {
+          key: selectedSong._id,
+          url: selectedSong.image,
+          name: selectedSong.title || "",
+          audio: selectedSong.songs || "",
+          description: selectedSong.description || "",
+          artist: selectedSong.artists,
+          id: selectedSong._id,
+          album: "yes",
+        };
         setCurrentSong(updatedSongs);
-        setShowContent(true);
-      } else if ((selectedSong && selectedSong.fromSearch === 'yes' && selectedSong.category === 'search-artistSong')) {
-        const updated = selectedSongAll && selectedSongAll[0].songs && selectedSongAll[0].songs 
-        .map((item, index)=> ({
-          key: `${item}&${index}`,
-          url: selectedSongAll[0].image,
-          name: selectedSongAll[0].name || "",
-          title: selectedSongAll[0].name,
-          audio_url: `https://newton-project-resume-backend.s3.amazonaws.com/audio/${item}.mp3` || "",
-          description: selectedSongAll[0].description,
-          artist: selectedSongAll[0].name,            
-          id: item,
-          fromSearch: selectedSong.fromSearch,
-          category: selectedSong.category,
-        }))
-        setCurrentSong(updated);
-        // console.log("updatedSongs", updated)
-        setShowContent(true);      
 
-
-      } else {
-        {
-          const updated = selectedSongAll && selectedSongAll[0].songs && selectedSongAll[0].songs 
-          .map((item, index)=> ({
-            key: `${item._id}&${index}`,
-            url: item.thumbnail,
-            name: item.title || "",
-            title: selectedSong.title,
-            audio_url: item.audio_url || "",
-            description: 
-              item.artist && item.artist[0] &&
-              item.artist[0].description ?
-              item.artist[0].description : "",
-            artist: "",
-              // item.artist && item.artist[0] &&
-              // item.artist[0].name? 
-              // item.artist[0].name : "",
+        if (updatedSongs && updatedSongs.audio) {
+          const songsOfMovie = updatedSongs.audio.map((item) => ({
+            audio: item.audio_url || "",
+            songName: item.title || "",
+            image: updatedSongs.url || "",
             id: item._id,
-            fromSearch: selectedSong.fromSearch,
-            category: selectedSong.category,
-          }))
-          setCurrentSong(updated);
-          // console.log("updatedSongs", updated)
+            album: "yes",
+          }));
+
+          
+          setCurrentTrack(songsOfMovie);
           setShowContent(true);
+          // dispatch(actions.setAlbumData(songsOfMovie));
         }
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     }
-    
-
-
 
     dataGetting();
-  }, [selectedSongAll]);
+  }, []);
 
   // console.log("currentSong -> ", currentSong);
-  // console.log("currentTrack -> ", currentTrack);
   
   const handleSongClicker = (data) => {
     // console.log("all data -> ", data);
-    // dispatch(actions.setAllSearchResultData(currentSong));
-    // dispatch(actions.setSearchResultData(selectedSong));
-    // console.log("data", data)
+    dispatch(actions.setAlbumData(currentTrack));
     dispatch(actions.setActiveSong(data));
-    dispatch(actions.setAlbumData(currentSong));
-
   };
 
   return (
@@ -172,9 +141,9 @@ function SearchResultPage() {
         <div>
           {/* <audio
             ref={audioRef}
-            // src={currentSongArray.length > 0 ? currentSongArray[0].audio : ""}
+            src={currentSongArray.length > 0 ? currentSongArray[0].audio : ""}
             onTimeUpdate={handleTimeUpdate}
-            controls
+            // controls
             // autoPlay
             // muted
             className="audio-hide"
@@ -184,19 +153,19 @@ function SearchResultPage() {
               <div className="traction-splitter">
                 <div className="track-section">
                   <AiOutlinePlayCircle
-                    onClick={() => handleSongClicker(currentSong[songIndex])}
+                    onClick={() => handleSongClicker(currentTrack[0])}
                     className="prime-poster-play poster-play-option"
                   />
                   <img
                     className="posterPrime"
-                    src={currentSong && currentSong[songIndex] && currentSong[songIndex].url ? currentSong[songIndex].url : ""}
+                    src={currentSong.url}
                     alt="img"
                   />
                 </div>
                 <div className="button-details-splitter">
                   <div className="song-button">
                     <button
-                      onClick={() => handleSongClicker(currentSong[songIndex])}
+                      onClick={() => handleSongClicker(currentTrack[0])}
                       className="song-play-btn"
                     >
                       Play Song
@@ -205,15 +174,19 @@ function SearchResultPage() {
                   </div>
                   <div className="songs-side-details">
                     <div className="song-line1">
-                      <div className="song-name1">{currentSong && currentSong[songIndex] && currentSong[songIndex].title ?  currentSong[songIndex].title : ""}</div>
+                      <div className="song-name1">{currentSong.name}</div>
                       <div className="song-movie-name">
-                        (From {currentSong && currentSong[songIndex] && currentSong[songIndex].title ?  currentSong[songIndex].title : ""}) Song |{" "}
+                        (From {currentSong.name}) Song |{" "}
                         <span>
-                        {currentSong && currentSong[songIndex] && currentSong[songIndex].name ?  currentSong[songIndex].name : ""}
+                          {currentSong.artist &&
+                          currentSong.artist[0] &&
+                          currentSong.artist[0].name
+                            ? currentSong.artist[0].name
+                            : ""}
                         </span>
                       </div>
                     </div>
-                    <p className="song-line2">{currentSong && currentSong[songIndex] && currentSong[songIndex].description ?  currentSong[songIndex].description : ""}</p>
+                    <p className="song-line2">{currentSong.description}</p>
                     <div className="track-details-warp">
                       <button className="track-duration">
                         {formatTime2(duration)}
@@ -227,14 +200,14 @@ function SearchResultPage() {
               <div className="track-list-header">
                 <img
                   className="track-list-header-img"
-                  src={currentSong && currentSong[songIndex] && currentSong[songIndex].url ?  currentSong[songIndex].url : ""}
+                  src={currentSong.url}
                   alt="img"
                 />
                 <div className="song-genere">
-                  <p className="song-name">{currentSong && currentSong[songIndex] && currentSong[songIndex].title ?  currentSong[songIndex].title : ""} </p>
+                  <p className="song-name">{currentSong.name} </p>
                 </div>
                 <button
-                  onClick={() => handleSongClicker(currentTrack[songIndex])}
+                  onClick={() => handleSongClicker(currentTrack[0])}
                   className="track-list-playing-option"
                 >
                   Play All
@@ -258,32 +231,32 @@ function SearchResultPage() {
                       </tr>
                     </thead>
                     <tbody className="table-body-container">
-                      {currentSong.map((tracks, index) => (
+                      {currentTrack.map((tracks, index) => (
                         <tr
                           key={tracks.id || index}
-                          onClick={() => {handleSongClicker(currentSong[index]), setIndex(index)}}
+                          onClick={() => handleSongClicker(currentTrack[index])}
                         >
                           <td className="table-col-1">{index + 1}</td>
                           <td className="table-col-2">
                             <div className="track-img-play">
                               <BsPlayCircle className="play-track-icon" />
                               <img
-                                src={tracks.url}
+                                src={tracks.image}
                                 alt="tracker-img"
                                 className="tracker-image"
                               />
                             </div>
                             <div className="track-name-premium">
                               <button className="premium-btn">Premium</button>
-                              <p className="song-name"> {tracks.name} </p>
+                              <p className="song-name"> {tracks.songName} </p>
                             </div>
                           </td>
                           <td className="table-col-3">
-                            <p className="singer-name"> {tracks.artist} </p>
+                            <p className="singer-name"> {} </p>
                           </td>
                           <td className="table-col-4">
                             <p className="track-movie-name">
-                              {tracks.name}
+                              {tracks.songName}
                             </p>
                           </td>
                           <td className="table-col-5">
@@ -301,17 +274,17 @@ function SearchResultPage() {
                 <div className="table-mobile-container">
                   <table>
                     <tbody>
-                      {currentSong.map((item, index) => (
+                      {currentTrack.map((item, index) => (
                         <tr
                           key={item.id || index}
                           className="table-tr-mob"
-                          onClick={() => {handleSongClicker(currentSong[index]), setIndex(index)}}
+                          onClick={() => handleSongClicker(currentTrack[index])}
                         >
                           <td className="table-td-1">{index + 1}</td>
                           <td className="table-td-2">
                             <div className="table-td-2-img">
                               <img
-                                src={item.url}
+                                src={item.image}
                                 alt="img"
                                 className="table-mob-view-poster"
                               />
@@ -320,10 +293,10 @@ function SearchResultPage() {
                                   Premium
                                 </button>
                                 <p className="table-mob-artist">
-                                  {item.artist}
+                                  {/* {item.artist} */}
                                 </p>
                               </div>
-                              <p className="table-song-name">{item.name}</p>
+                              <p className="table-song-name">{item.songName}</p>
                             </div>
                           </td>
                           <td className="table-td-3">
@@ -335,7 +308,8 @@ function SearchResultPage() {
                             </button>
                           </td>
                         </tr>
-                      ))}                      
+                      ))}
+                      
                     </tbody>
                   </table>
                 </div>
@@ -352,5 +326,4 @@ function SearchResultPage() {
   );
 }
 
-export default SearchResultPage;
-
+export default ArtistPage2;

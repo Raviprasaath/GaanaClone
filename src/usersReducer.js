@@ -62,6 +62,9 @@ function usersReducer(state = initialState, action) {
         case 'SET_FAV_SONG_UI_UPDATE': {
             return { ...state, favSongUiUpdate: action.payload }
         }
+        case 'SET_ARTIST_PAGE_1': {
+            return { ...state, artistPage1: action.payload }
+        }
 
 
         default:

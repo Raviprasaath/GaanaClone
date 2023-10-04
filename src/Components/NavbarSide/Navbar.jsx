@@ -90,32 +90,32 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
             </div>
           </div>
           <ul>
-            <Link className="list-selector" to="/">
+            <Link className="list-selector" to="/" onClick={() => closeSidePanel(close)} >
               <li>
                 Home
               </li>
             </Link>
-            <Link to='/comingsoon'>
+            <Link onClick={() => closeSidePanel(close)} to='/comingsoon'>
               <li >
                 Radio
               </li>            
             </Link>
-            <Link to='/comingsoon'>            
+            <Link onClick={() => closeSidePanel(close)} to='/comingsoon'>            
               <li>
                 Podcast
               </li>
             </Link>
-            <Link to='mysongs'>            
+            <Link onClick={() => closeSidePanel(close)} to='mysongs'>            
               <li>
                 My Music
               </li>
             </Link>
-            <Link to='comingsoon'>            
+            <Link onClick={() => closeSidePanel(close)} to='comingsoon'>            
               <li>
                 India's Music
               </li>
             </Link>
-            <Link to='comingsoon'>            
+            <Link onClick={() => closeSidePanel(close)} to='comingsoon'>            
               <li>
                   Language
                   <p>(Set Music language)</p>
@@ -134,10 +134,9 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
                 Go Premium{" "}
               </div>
             </li>
-            <Link to='subscription'>            
+            <Link onClick={() => closeSidePanel(close)} to='subscription'>            
               <li>
                 {subsStatus}
-                {/* <a href="#">Get Gaana Plus </a> */}
               </li>
             </Link>
           </ul>

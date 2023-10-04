@@ -580,6 +580,7 @@ function MusicControlComp(props) {
     return (
       <>
         <audio
+          className="audio-hide"
           ref={audioRef}
           onTimeUpdate={handleTimeUpdate}
           onEnded={handleNextTrack}
@@ -929,6 +930,7 @@ function MusicControlComp(props) {
   return (
     <>
       <audio
+        className="audio-hide"
         ref={audioRef}
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleNextTrack}

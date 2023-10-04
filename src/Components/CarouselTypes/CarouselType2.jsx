@@ -1,12 +1,24 @@
 import Carousel from "react-multi-carousel";
+import { useDispatch } from "react-redux";
+import actions from "../../action";
 
-const CarouselType2 = (props) => {
+import { useNavigate } from "react-router-dom";
+
+const CarouselType2 = (props) => {  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSongClicker = (data) => {       
+    dispatch(actions.setArtistPage1(data));
+    navigate(`/artist/${data.songId}`, {replace: true})  
+  }
+
   return (
     <>
-      <div className="productArtist card">
-        <img  className="product-image" src={props.url} alt="product image" />
-        <h4> {props.name} </h4>
-      </div>
+      <div onClick={()=>handleSongClicker(props)} className="carousel card">          
+          <img className="product-image" src={props.url} alt="product image" />
+          <h4> {props.name} </h4>
+        </div>
     </>
   );
 };

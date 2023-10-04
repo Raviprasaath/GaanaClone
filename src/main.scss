@@ -702,6 +702,10 @@
   }
 }
 
+.audio-hide {
+  visibility: hidden;
+}
+
 
 // moods and genre drop down width control
 .css-oyk7i  {
@@ -2183,7 +2187,7 @@
 // Login page
 .ReactModalPortal {
   position: relative;
-  z-index: 6;
+  z-index: 1000;
   .ReactModal__Overlay {
     background-color: #3333339a !important;
   }
@@ -2313,6 +2317,10 @@
     }
   }
 
+}
+
+.ReactModal__Content .ReactModal__Content--after-open {
+  z-index: 100;
 }
 
 

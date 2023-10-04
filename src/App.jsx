@@ -30,6 +30,7 @@ import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage
 import SearchSection from "./Components/SearchSection/SearchSection.jsx";
 import SearchResultPage from "./Components/PagesRoute/SearchResultPage/SearchResultPage.jsx";
 import PaymentPage from "./Components/PagesRoute/SubscriptionPage/PaymentPage.jsx";
+import ArtistPage2 from "./Components/PagesRoute/ArtistPage2/ArtistPage2.jsx";
 
 
 
@@ -170,7 +171,7 @@ function App() {
               <Route path="album/:albumName/:albumId" element={<AlbumSongPage2 />} />
 
               <Route path="searchresult/:title/:id" element={<SearchResultPage />} />
-
+              <Route path="artist/:id" element = { <ArtistPage2/> } />
               <Route path="/paymentpage" element={<PaymentPage />} />
 
             </Routes>

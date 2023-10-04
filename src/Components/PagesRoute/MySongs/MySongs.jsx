@@ -180,6 +180,13 @@ async function favSongFetching() {
     <>
       <div className="mySongs">
       <h2>Favorite Songs</h2>
+      {individualSongGetting.length === 0 && 
+        (<div style={{textAlign:"center"}}>
+          No Songs Found
+          </div>
+        )  
+
+      }
         <div className="music-player-section-2">
           <div className="table-td-2-img">
             {individualSongGetting.map((item)=> (                  
