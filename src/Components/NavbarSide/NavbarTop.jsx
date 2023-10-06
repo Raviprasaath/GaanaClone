@@ -48,7 +48,7 @@ function NavbarTop( props ) {
   }
   
   const handleLogo = () => {
-    dispatch(action.setActiveItem());
+    dispatch(action.setActiveItem("Home"));
   };
 
   const handleDarkModeToggle = () => {
@@ -186,7 +186,9 @@ function NavbarTop( props ) {
         ) : (
           <div className="navbar-view-changer">
             <div className="main-logo">
-              <img src={MainLogo} alt="main-logo" />
+            <Link to="/">
+                <img onClick={handleLogo} src={MainLogo} alt="main-logo" />
+              </Link>
             </div>
 
             <span className="search-section">

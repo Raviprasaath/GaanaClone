@@ -16,9 +16,7 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
     navigate("/", { replace: true });
   }, []);
 
-  const handleSongSelection = (selectedItem) => {
-    dispatch(action.setActiveItem(selectedItem));
-  };
+
 
   const [modalToggle, setModalToggle] = useState(false);
 
@@ -71,6 +69,11 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
     }
   }, []);
 
+  const handleSongSelection = (selectedItem) => {
+    dispatch(action.setActiveItem(selectedItem));
+  };
+
+
 
   return (
     <>
@@ -89,14 +92,16 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
             <Link
               className="list-selector"
               to="/"
-              onClick={() => closeSidePanel(close)}
+              onClick={() => {closeSidePanel(close)
+                handleSongSelection("Home");}
+              }
             >
               <li>Home</li>
             </Link>
             <Link
               onClick={() => {
                 closeSidePanel(close);
-                handleSongSelection("Moods & Genres");
+                handleSongSelection("Radio");
               }}
               to="/comingsoon"
             >
@@ -104,17 +109,26 @@ function Navbar({ isOpen, toggleSidePanel, closeSidePanel, handleModal }) {
             </Link>
             <Link 
             onClick={() => {closeSidePanel(close);
-              handleSongSelection("Moods & Genres");
+              handleSongSelection("Podcast");
             }} to="/comingsoon">
               <li>Podcast</li>
             </Link>
-            <Link onClick={() => closeSidePanel(close)} to="mysongs">
+            <Link onClick={() => {
+              closeSidePanel(close);
+              handleSongSelection("My Music");
+            }} to="mysongs">
               <li>My Music</li>
             </Link>
-            <Link onClick={() => closeSidePanel(close)} to="comingsoon">
+            <Link onClick={() => {
+              closeSidePanel(close);
+              handleSongSelection("");
+          }} to="comingsoon">
               <li>India's Music</li>
             </Link>
-            <Link onClick={() => closeSidePanel(close)} to="comingsoon">
+            <Link onClick={() => {
+              closeSidePanel(close);
+              handleSongSelection("");
+            }} to="comingsoon">
               <li>
                 Language
                 <p>(Set Music language)</p>

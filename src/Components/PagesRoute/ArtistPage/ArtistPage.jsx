@@ -32,7 +32,7 @@ function ArtistPage() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // Smooth scrolling animation
+      behavior: 'smooth',
     });
   };
 
@@ -52,7 +52,7 @@ function ArtistPage() {
           <div className="new-songs-container">
             <h2>Artist Songs</h2>
             <div className="song-container-level-1">
-              {artistDataFromStore.length === 133 && artistDataFromStore.map((item) => (
+              {artistDataFromStore.map((item) => (
                 <Link onClick={()=>handlerSongSelector(item)} key={item._id} to={`/artist/${item.name}`}>
                   <div className="music-card">
                     <BsPlayCircle className="play-icon" />

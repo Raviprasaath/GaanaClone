@@ -240,7 +240,7 @@ function HomePage() {
             // dispatch(action.setFullSongData(allFetchedData));
           });
 
-      fetch("https://academics.newtonschool.co/api/v1/music/artist?limit=500", {
+      fetch("https://academics.newtonschool.co/api/v1/music/artist?limit=100", {
         headers: {
           projectId: "ghmumg9x1zid",
         },
@@ -383,7 +383,7 @@ function HomePage() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // Smooth scrolling animation
+      behavior: 'smooth',
     });
   };
 

@@ -9,9 +9,16 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useDispatch } from "react-redux";
+import action from "../../action";
+
+
 
 function Footer() {
   const [screenSize, setScreenSize] = useState(window.innerWidth > 960);
+
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     const handleScreenSize = () => {
@@ -24,6 +31,12 @@ function Footer() {
     };
   }, []);
 
+  const handleSongSelection = (selectedItem) => {    
+    dispatch(action.setActiveItem(selectedItem));
+  }
+
+
+
   const handleFacebookClick = () => {
     window.open(
       "https://www.facebook.com/SpotifyIndia/?brand_redir=6243987495",
@@ -32,6 +45,10 @@ function Footer() {
   };
   const handleTwitterClick = () => {
     window.open("https://twitter.com/spotifyindia?lang=en", "_blank");
+  };
+
+  const handleSiteMap = () => {
+    window.open("https://gaana.com/sitemap/sitemap.html", "_blank");
   };
 
   return (
@@ -279,44 +296,8 @@ function Footer() {
 
                 <Dialog.Root>
                   <Dialog.Trigger asChild>
-                    <p className="Button violet">Sitemap</p>
+                    <p className="Button violet" onClick={()=>handleSiteMap()} >Sitemap</p>
                   </Dialog.Trigger>
-                  <Dialog.Portal>
-                    <Dialog.Overlay className="DialogOverlay" />
-                    <Dialog.Content className="DialogContent">
-                      <Dialog.Description className="DialogDescription">
-                        We take appropriate security measures to protect against
-                        unauthorized access to or unauthorized alteration,
-                        disclosure or destruction of data. These include
-                        internal reviews of our data collection, storage and
-                        processing practices and security measures, including
-                        appropriate encryption and physical security measures to
-                        guard against unauthorized access to systems where we
-                        store personal data. All information gathered on Gamma
-                        Gaana Ltd is securely stored within the Gamma Gaana Ltd
-                        controlled database. The database is stored on servers
-                        secured behind a firewall; access to the servers is
-                        password-protected and is strictly limited. However, as
-                        effective as our security measures are, no security
-                        system is impenetrable. We cannot guarantee the security
-                        of our database, nor can we guarantee that information
-                        you supply will not be intercepted while being
-                        transmitted to us over the Internet. And, of course, any
-                        information you include in a posting to the discussion
-                        areas is available to anyone with Internet access.
-                        However the internet is an ever evolving medium. We may
-                        change our privacy policy from time to time to
-                        incorporate necessary future changes. We use third-party
-                        advertising companies to serve ads when you visit or use
-                        our website, mobile application or services. These
-                        companies may use information (not including your name,
-                        address, email address or telephone number) about your
-                        visits or use to particular website, mobile application
-                        or services, in order to provide advertisements about
-                        goods and services of interest to you.
-                      </Dialog.Description>
-                    </Dialog.Content>
-                  </Dialog.Portal>
                 </Dialog.Root>
 
                 <Dialog.Root>
@@ -356,32 +337,32 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Soundscapes</h3>
                     <p>
-                      <Link className="title" to={`/happy`}>
-                        Upbeat tunes
-                      </Link>
+                    <Link className="title" to={`/happy`} onClick={() => handleSongSelection("Happy Mood")}>
+                      Upbeat tunes
+                    </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         Thrilling tunes
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Melancholic tunes
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Love ballads
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         Electrifying melodies
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                         Mournful ballads
                       </Link>
                     </p>
@@ -389,28 +370,28 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Genres</h3>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                         Heart-wrenching melodies
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Devotional Songs
                       </Link>
                     </p>
 
                     <p>
-                      <Link className="title" to={`/album`}>
+                      <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                         Musical compositions
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         Enthusiastic beats
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Affectionate songs
                       </Link>
                     </p>
@@ -418,37 +399,37 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Musical traditions</h3>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Joyful melodies
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                         Sorrowful music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Heartfelt serenades
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Cheerful music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/allsongs`}>
+                      <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                         Track series
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         High-energy music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/album`}>
+                      <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                         Album cuts
                       </Link>
                     </p>
@@ -456,17 +437,17 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Sound varieties</h3>
                     <p>
-                      <Link className="title" to={`/allsongs`}>
+                      <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                         Soundtrack pieces
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Passionate music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Uplifting songs
                       </Link>
                     </p>
@@ -476,37 +457,37 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Energetic beats</h3>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Peppy music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                         Lively tempos
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Upbeat cadences
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Vibrant pulses
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/allsongs`}>
+                      <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                         Energetic percussion
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         Dynamic rhythms
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/album`}>
+                      <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                         Pounding rhythms
                       </Link>
                     </p>
@@ -514,42 +495,42 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Rhythmic vitality</h3>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Enamored rhythms
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Heart-pounding tracks
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/allsongs`}>
+                      <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                         Euphoric rhythms
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         High-energy music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Pulsating life force
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/allsongs`}>
+                      <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                         Tender compositions
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         High-energy music
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/album`}>
+                      <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                         Amorous melodies
                       </Link>
                     </p>
@@ -557,37 +538,37 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Lyrics</h3>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                         Sentimental tunes
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/happy`}>
+                      <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                         Jingle Bells Lyrics
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/allsongs`}>
+                      <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                         Vivacious drumming
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Memories Lyrics
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/romance`}>
+                      <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                         Pulsing life
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/sad`}>
+                      <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                         Dynamic heartthrobs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/exited`}>
+                      <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                         Energetic thumping
                       </Link>
                     </p>
@@ -595,67 +576,67 @@ function Footer() {
                   <div className="footer-row-content">
                     <h3>Old Songs</h3>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Hindi Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old English Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Punjabi Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Telugu Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Tamil Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Bengali Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Bhojpuri Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Malayalam Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Kannada Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Marathi Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Gujarati Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Haryanvi Songs
                       </Link>
                     </p>
                     <p>
-                      <Link className="title" to={`/comingsoon`}>
+                      <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                         Old Urdu Songs
                       </Link>
                     </p>
@@ -905,44 +886,8 @@ function Footer() {
 
                 <Dialog.Root>
                   <Dialog.Trigger asChild>
-                    <p className="Button violet">Sitemap</p>
+                    <p className="Button violet" onClick={()=>handleSiteMap()} >Sitemap</p>
                   </Dialog.Trigger>
-                  <Dialog.Portal>
-                    <Dialog.Overlay className="DialogOverlay" />
-                    <Dialog.Content className="DialogContent">
-                      <Dialog.Description className="DialogDescription">
-                        We take appropriate security measures to protect against
-                        unauthorized access to or unauthorized alteration,
-                        disclosure or destruction of data. These include
-                        internal reviews of our data collection, storage and
-                        processing practices and security measures, including
-                        appropriate encryption and physical security measures to
-                        guard against unauthorized access to systems where we
-                        store personal data. All information gathered on Gamma
-                        Gaana Ltd is securely stored within the Gamma Gaana Ltd
-                        controlled database. The database is stored on servers
-                        secured behind a firewall; access to the servers is
-                        password-protected and is strictly limited. However, as
-                        effective as our security measures are, no security
-                        system is impenetrable. We cannot guarantee the security
-                        of our database, nor can we guarantee that information
-                        you supply will not be intercepted while being
-                        transmitted to us over the Internet. And, of course, any
-                        information you include in a posting to the discussion
-                        areas is available to anyone with Internet access.
-                        However the internet is an ever evolving medium. We may
-                        change our privacy policy from time to time to
-                        incorporate necessary future changes. We use third-party
-                        advertising companies to serve ads when you visit or use
-                        our website, mobile application or services. These
-                        companies may use information (not including your name,
-                        address, email address or telephone number) about your
-                        visits or use to particular website, mobile application
-                        or services, in order to provide advertisements about
-                        goods and services of interest to you.
-                      </Dialog.Description>
-                    </Dialog.Content>
-                  </Dialog.Portal>
                 </Dialog.Root>
 
                 <Dialog.Root>
@@ -986,32 +931,32 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Upbeat tunes
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     Thrilling tunes
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Melancholic tunes
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Love ballads
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     Electrifying melodies
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Mournful ballads
                   </Link>
                 </p>
@@ -1027,28 +972,28 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Heart-wrenching melodies
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Devotional Songs
                   </Link>
                 </p>
 
                 <p>
-                  <Link className="title" to={`/album`}>
+                  <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                     Musical compositions
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     Enthusiastic beats
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Affectionate songs
                   </Link>
                 </p>
@@ -1064,37 +1009,37 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Joyful melodies
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Sorrowful music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Heartfelt serenades
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Cheerful music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/allsongs`}>
+                  <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                     Track series
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     High-energy music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/album`}>
+                  <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                     Album cuts
                   </Link>
                 </p>
@@ -1110,17 +1055,17 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/allsongs`}>
+                  <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                     Soundtrack pieces
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Passionate music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Uplifting songs
                   </Link>
                 </p>
@@ -1136,37 +1081,37 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Peppy music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Lively tempos
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Upbeat cadences
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Vibrant pulses
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/allsongs`}>
+                  <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                     Energetic percussion
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     Dynamic rhythms
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/album`}>
+                  <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                     Pounding rhythms
                   </Link>
                 </p>
@@ -1182,42 +1127,42 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Enamored rhythms
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Heart-pounding tracks
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/allsongs`}>
+                  <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                     Euphoric rhythms
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     High-energy music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Pulsating life force
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/allsongs`}>
+                  <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                     Tender compositions
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     High-energy music
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/album`}>
+                  <Link className="title" to={`/album`} onClick={()=>handleSongSelection("Album")}>
                     Amorous melodies
                   </Link>
                 </p>
@@ -1233,37 +1178,37 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Sentimental tunes
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/happy`}>
+                  <Link className="title" to={`/happy`} onClick={()=>handleSongSelection("Happy Mood")}>
                     Jingle Bells Lyrics
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/allsongs`}>
+                  <Link className="title" to={`/allsongs`} onClick={()=>handleSongSelection("All Songs")} >
                     Vivacious drumming
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Memories Lyrics
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/romance`}>
+                  <Link className="title" to={`/romance`}  onClick={()=>handleSongSelection("Moods & Genres")} >
                     Pulsing life
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/sad`}>
+                  <Link className="title" to={`/sad`} onClick={()=>handleSongSelection("Moods & Genres")} > 
                     Dynamic heartthrobs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/exited`}>
+                  <Link className="title" to={`/exited`} onClick={()=>handleSongSelection("Exciting Harmony")} >
                     Energetic thumping
                   </Link>
                 </p>
@@ -1279,67 +1224,67 @@ function Footer() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Hindi Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old English Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Punjabi Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Telugu Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Tamil Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Bengali Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Bhojpuri Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Malayalam Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Kannada Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Marathi Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Gujarati Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Haryanvi Songs
                   </Link>
                 </p>
                 <p>
-                  <Link className="title" to={`/comingsoon`}>
+                  <Link className="title" to={`/comingsoon`} onClick={()=>handleSongSelection("Moods & Genres")} >
                     Old Urdu Songs
                   </Link>
                 </p>

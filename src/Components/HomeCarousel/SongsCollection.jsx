@@ -24,14 +24,15 @@ import { Link, useLocation } from 'react-router-dom';
 const SongsCollection = () => {
   const navigate = useNavigate();
 
-  const location = useLocation();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
   const activeItem = useSelector((state) => state.usersData.activeItem);
 
-  function setActiveItem(){}
+
+  function setActiveItem(){
+
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,11 +41,12 @@ const SongsCollection = () => {
   
   React.useEffect(()=> {
     dispatch(action.setActiveItem("Home"));    
-    navigate('/', { replace: true });
+    navigate('/', { replace: true });    
   }, [])
 
-  const [ category, setCategory ] = React.useState("Moods & Genres");
 
+
+  const [ category, setCategory ] = React.useState("Moods & Genres");
 
 
 
@@ -55,6 +57,22 @@ const SongsCollection = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+  const scroll = () => {
+    if (activeItem === "Home" || activeItem === "Album" || activeItem === "All Songs") {
+      window.scrollTo({
+        left: 0, // Use 'left' for horizontal scrolling to the left
+        behavior: 'smooth',
+      });
+    }
+  };
+  
+  React.useEffect(() => {
+    scroll();
+  }, [activeItem]);
+
+  
 
   return (
     <>
@@ -152,13 +170,13 @@ const SongsCollection = () => {
           <Box sx={{ maxHeight: 240, overflowY: "auto" }}>
 
 
-              <Link className="list-selector" to="/exited">          
+              {/* <Link className="list-selector" to="/exited">          
                 <MenuItem  onClick={()=>{handleClose(); setCategory("Exciting Harmony");}}>
                     <Typography variant="body1" component="span">
                     Exciting Harmony 
                     </Typography>
                 </MenuItem>
-              </Link>
+              </Link> */}
               
               
               
