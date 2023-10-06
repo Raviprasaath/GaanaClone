@@ -13,9 +13,6 @@ export const getSongsByArtist = (artistList) => {
                 }
             })            
         })
-    })
-    // const newFilteredArray = [...new Set(newArtistList.map((item)=>item))]
-    // console.log("newFilteredArray", newFilteredArray);
-    
+    })    
     return newArtistList;
 }

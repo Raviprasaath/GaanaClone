@@ -150,5 +150,4 @@ export default {
     setTop20Data, setSearchResultData, setAllSearchResultData,
     setAllFavSongs, setFavSongUiUpdate, setArtistPage1, setArtistPage2,
     setArtistCardsRender
-
 }

@@ -23,10 +23,6 @@ function SearchResultPage() {
   const selectedSong = useSelector((state) => state.usersData.resultSongs);
   const selectedSongAll = useSelector((state) => state.usersData.resultData);
   
-  // console.log("selectedSong", selectedSong);
-  // console.log("selectedSongAll", selectedSongAll);
-  
-
   const dispatch = useDispatch();
 
   const audioRef = useRef(null);
@@ -153,17 +149,10 @@ function SearchResultPage() {
     dataGetting();
   }, [selectedSongAll]);
 
-  // console.log("currentSong -> ", currentSong);
-  // console.log("currentTrack -> ", currentTrack);
   
   const handleSongClicker = (data) => {
-    // console.log("all data -> ", data);
-    // dispatch(actions.setAllSearchResultData(currentSong));
-    // dispatch(actions.setSearchResultData(selectedSong));
-    // console.log("data", data)
     dispatch(actions.setActiveSong(data));
     dispatch(actions.setAlbumData(currentSong));
-
   };
 
 
@@ -178,13 +167,17 @@ function SearchResultPage() {
     scrollToTop();
   }, [])
 
+  const currentSongArray = Object.keys(currentSong).map(
+    (key) => currentSong[key]
+  );
+
   return (
     <>
       {showContent ? (
         <div>
           <audio
             ref={audioRef}
-            src={currentSong.length > 0 ? currentSong[0].audio : ""}
+            src={currentSongArray.length > 0 ? currentSongArray[0].audio : ""}
             onTimeUpdate={handleTimeUpdate}
             controls
             autoPlay
@@ -228,7 +221,8 @@ function SearchResultPage() {
                     <p className="song-line2">{currentSong && currentSong[songIndex] && currentSong[songIndex].description ?  currentSong[songIndex].description : ""}</p>
                     <div className="track-details-warp">
                       <button className="track-duration">
-                        {formatTime2(duration)}
+                        {/* {formatTime2(duration)} */}
+                        0 min 20 sec
                       </button>
                     </div>
                   </div>
@@ -270,7 +264,7 @@ function SearchResultPage() {
                       </tr>
                     </thead>
                     <tbody className="table-body-container">
-                      {currentSong.map((tracks, index) => (
+                      {currentSongArray.map((tracks, index) => (
                         <tr
                           key={tracks.id || index}
                           onClick={() => {handleSongClicker(currentSong[index]), setIndex(index)}}
@@ -300,7 +294,8 @@ function SearchResultPage() {
                           </td>
                           <td className="table-col-5">
                             <p className="track-duration">
-                              {formatTime(duration)}
+                              {/* {formatTime(duration)} */}
+                              00:20
                             </p>
                           </td>
                         </tr>

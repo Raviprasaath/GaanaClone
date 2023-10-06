@@ -78,8 +78,7 @@ function ArtistPage2() {
   function settingArtistSongs (artistDataFromStore) {
 
     if (artistDataFromStore.audio) {
-      const updatedSongs = artistDataFromStore && artistDataFromStore.audio.map((item)=> ({
-          
+      const updatedSongs = artistDataFromStore && artistDataFromStore.audio.map((item)=> ({          
           key: item._id,
           url: item.thumbnail || "",
           name: item.title || "",

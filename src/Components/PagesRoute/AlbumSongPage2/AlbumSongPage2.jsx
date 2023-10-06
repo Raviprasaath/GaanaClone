@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
 import Loader from "react-js-loader";
@@ -9,12 +8,9 @@ import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-import {
-  BsPlayCircle,
-  BsFillPlayFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
-import axios from "axios";
+import { BsPlayCircle, BsFillPlayFill, BsThreeDotsVertical,} from "react-icons/bs";
+import { fetchAlbum } from "../../Fetching/fetching";
+
 
 function AlbumSongPage2() {
   const [showContent, setShowContent] = useState(false);
@@ -25,7 +21,7 @@ function AlbumSongPage2() {
   const [currentTrack, setCurrentTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
 
-  let { albumName, albumId } = useParams();
+  let { albumId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -76,19 +72,11 @@ function AlbumSongPage2() {
  
 
   useEffect(() => {
-    async function dataGetting() {
+    const fetchData = async () => {
       try {
-        const headers = {
-          "Content-Type": "application/json",
-          projectId: "8jf3b15onzua",
-        };
-        const response = await axios.get(
-          "https://academics.newtonschool.co/api/v1/music/album?limit=100",
-          { headers: headers }
-        );
-        const result = response.data;
-        const index = result.data.findIndex((item) => item._id === albumId);
-        const selectedSong = result.data[index];
+        const albumData = await fetchAlbum();
+        const index = albumData.findIndex((item) => item._id === albumId);
+        const selectedSong = albumData[index];
         const updatedSongs = {
           key: selectedSong._id,
           url: selectedSong.image,
@@ -108,19 +96,17 @@ function AlbumSongPage2() {
             image: updatedSongs.url || "",
             id: item._id,
             album: "yes",
-          }));
-
-          
+          }));          
           setCurrentTrack(songsOfMovie);
           setShowContent(true);
-          // dispatch(actions.setAlbumData(songsOfMovie));
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        error
       }
     }
 
-    dataGetting();
+    fetchData();
+    
   }, []);
 
   // console.log("currentSong -> ", currentSong);
@@ -375,44 +361,3 @@ function AlbumSongPage2() {
 
 export default AlbumSongPage2;
 
-
- // function localStorageDataGetting() {
-  //   const fromLocalStorage = JSON.parse(localStorage.getItem("localAlbum"));
-  //   const index = fromLocalStorage.data.findIndex(
-  //     (item) => item._id === albumId
-  //   );
-  //   const selectedSong = fromLocalStorage.data[index];
-
-  //   const updatedSongs = {
-  //     key: selectedSong._id,
-  //     url: selectedSong.image,
-  //     name: selectedSong.title || "",
-  //     audio: selectedSong.songs || "",
-  //     description: selectedSong.description || "",
-  //     artist: selectedSong.artists,
-  //     id: selectedSong._id,
-
-  //   };
-  //   setCurrentSong(updatedSongs);
-
-  //   if (updatedSongs && updatedSongs.audio) {
-  //     const songsOfMovie = updatedSongs.audio.map((item) => ({
-  //       audio: item.audio_url || '',
-  //       songName: item.title || '',
-  //       image: updatedSongs.url || '',
-  //       id: item._id,
-  //     }));
-
-  //     console.log("songsOfMovie: ", songsOfMovie);
-  //     setCurrentTrack(songsOfMovie);
-  //     dispatch(actions.setAlbumData(songsOfMovie));
-  //   }
-  // }
-  // useEffect(() => {
-  //   localStorageDataGetting();
-  // }, []);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setShowContent(true);
-  //   }, 0);
-  // }, []);

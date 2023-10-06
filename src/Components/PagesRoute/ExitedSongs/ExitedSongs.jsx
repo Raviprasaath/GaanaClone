@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
 import "react-multi-carousel/lib/styles.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
@@ -7,8 +6,8 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsPlayCircle, BsFillPlayFill,BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import actions from "../../../action";
-import axios from 'axios';
 import Loader from "react-js-loader";
+import { fetchDataByType } from "../../Fetching/fetching";
 
 
 function ExitedSongs() {
@@ -17,7 +16,6 @@ function ExitedSongs() {
   const [scrolling, setScrolling] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
@@ -69,35 +67,29 @@ function ExitedSongs() {
 
 
   useEffect(() => {
-    async function dataGetting() {
-      try {
-        const headers = {
-          'Content-Type': 'application/json',
-          'projectId': '8jf3b15onzua'
-        };
-        const response = await axios.get("https://academics.newtonschool.co/api/v1/music/song?limit=100", { headers: headers });
-        const result = response.data;
-        const result2 = result.data.filter((item)=>item.mood==='excited')
-          .map((item) => ({
+    const fetchData = async () => {
+      const happyMood = await fetchDataByType("excited");
+      const result = happyMood
+        .map((item) => ({
           key: item._id,
           url: item.thumbnail || "",
           name: item.title || "",
           audio: item.audio_url || "",
           description:
-            (item.artist && item.artist[0] && item.artist[0].description) || "",
-          artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+            (item.artist && item.artist[0] && item.artist[0].description) ||
+            "",
+          artist:
+            (item.artist && item.artist[0] && item.artist[0].name) || "",
           mood: item.mood || "",
           songId: item._id || "",
-          album:"no",
+          album: "no",
         }));
-        setCurrentSong(result2);
+        setCurrentSong(result);
         setShowContent(true);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
     }
 
-    dataGetting();
+    fetchData();
+
   }, []);
 
 
@@ -313,39 +305,3 @@ function ExitedSongs() {
 
 export default ExitedSongs;
 
-
-
-  // function localStorageDataGetting() {
-  //   try {
-  //     const localStorageFiltered = JSON.parse(localStorage.getItem('localSongs'));    
-  //     const storedData = localStorageFiltered.data;
-  //     const result = storedData.filter((item)=> item.mood==='excited')
-  //       .map((item) => ({      
-  //         key: item._id,   
-  //         url: item.thumbnail || "",
-  //         name: item.title || "",
-  //         audio: item.audio_url || "",
-  //         description: (item.artist && item.artist[0] && item.artist[0].description) || "",
-  //         artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
-  //         mood: (item.mood) || "",
-  //         songId: item._id || "",
-  //       }))          
-  //       setCurrentSong(result)
-  //   } catch (error) {
-  //     console.log(error)
-  //   } 
-  // }
-
-
-
-  // useEffect(() => {
-  //   localStorageDataGetting();
-  // }, []);
-
-
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setShowContent(true);
-  //   }, 0);
-  // });

@@ -20,10 +20,8 @@ import ExitedSongs from "./Components/PagesRoute/ExitedSongs/ExitedSongs.jsx";
 import ComingSoonPage from "./Components/PagesRoute/ComingSoonPage/ComingSoonPage.jsx";
 import SadSongs from "./Components/PagesRoute/SadSongs/SadSongs.jsx";
 import Romance from "./Components/PagesRoute/Romance/Romance.jsx";
-import SongsFrom90s2000s from "./Components/PagesRoute/SongsFrom90s2000s/SongsFrom90s2000s.jsx";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
 import SubscriptionPage from "./Components/PagesRoute/SubscriptionPage/SubscriptionPage.jsx";
-import DataFetch from "./Components/DataFetch/DataFetch.jsx";
 import MySongs from "./Components/PagesRoute/MySongs/MySongs.jsx";
 import AlbumSongPage2 from "./Components/PagesRoute/AlbumSongPage2/AlbumSongPage2.jsx";
 
@@ -185,7 +183,6 @@ function App() {
 
         <Footer />        
 
-        <DataFetch />
         <MusicControlComp expander={onHandlerExpander} handleModal={handleModal} />
 
         

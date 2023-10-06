@@ -47,57 +47,14 @@ function MusicControlComp(props) {
   const excitedSongList = useSelector((state) => state.usersData.excitedSong);
   const allSongsList = useSelector((state) => state.usersData.allSongs);
   const albumSongsList = useSelector((state) => state.usersData.albumSongs);
-  const resultSongsList = useSelector((state) => state.usersData.resultSongs);
   const resultSongsDataList = useSelector((state) => state.usersData.albumSongs);
   const favSongAllList = useSelector((state) => state.usersData.allfavSongData);
   const artistSong = useSelector((state) => state.usersData.artistPage2);
 
+  // console.log("allSongsList", allSongsList);
+
   let songAllDetails = [];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // console.log("currentTrack", currentTrack)
-  // console.log("activeSong", activeSong);
-  // console.log("artistSong", artistSong);
-
-
+  // console.log("activeSong", activeSong)
 
   let albumFlag = false;
   if (activeSong.album === "yes") {
@@ -162,6 +119,7 @@ function MusicControlComp(props) {
   }
 
   // console.log("songList", songList)
+
 
   const handleSongClicker = (data) => {
     if (audioRef.current) {
@@ -544,10 +502,7 @@ function MusicControlComp(props) {
         };
       
         const response = await fetch("https://academics.newtonschool.co/api/v1/music/favorites/like", requestOptions)
-        if (!response.ok) {
-          const errorText = await response.text(); // Get the error response body if available
-          throw new Error(`Request failed with status: ${response.status}. Error message: ${errorText}`);
-        }
+        
         const result = await response.json();
         if (result.data) {
           setFetchingSongStoringArray(result.data.songs);

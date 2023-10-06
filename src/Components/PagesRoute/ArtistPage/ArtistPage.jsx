@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import axios from 'axios';
 import Loader from "react-js-loader";
 import { useDispatch, useSelector } from "react-redux";
 import action from "../../../action";
@@ -13,7 +12,6 @@ function ArtistPage() {
   const dispatch = useDispatch();
   
   const artistDataFromStore = useSelector((state) => state.usersData.artistPageCardRender);
-  // console.log("artistDataFromStore", artistDataFromStore )
   
   useEffect(() => {
     setTimeout(()=> {
@@ -24,10 +22,6 @@ function ArtistPage() {
   const handlerSongSelector = (data) => {
     dispatch(action.setArtistPage1(data));
   }
-
-
-
-
 
   const scrollToTop = () => {
     window.scrollTo({

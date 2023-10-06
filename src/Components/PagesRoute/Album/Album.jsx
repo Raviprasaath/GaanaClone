@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { BsPlayCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import axios from 'axios';
 import Loader from "react-js-loader";
+import { fetchAlbum } from "../../Fetching/fetching";
 
 
 function Album() {
@@ -11,38 +11,31 @@ function Album() {
  
 
   useEffect(() => {
-    async function dataGetting() {
+    const fetchData = async () => {
       try {
-        const headers = {
-          'Content-Type': 'application/json',
-          'projectId': '8jf3b15onzua'
-        };
-        const response = await axios.get("https://academics.newtonschool.co/api/v1/music/album?limit=100", { headers: headers });
-        const result = response.data;
-        const storedData = result.data;
-        const result2 = storedData.map((item) => ({
-          id: item._id || "",
-          imageUrl: item.image || "",
-          title: item.title || "",
-          description: item.description || "",
-          artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
-          audioUrl: (item.artist && item.artist[0] && item.artist[0].songs) || "",
-        }));
-        setDataFromStore(result2);
-        setRenderCard(true);
+        const albumData = await fetchAlbum();
+        const result2 = albumData.map((item) => ({
+        id: item._id || "",
+        imageUrl: item.image || "",
+        title: item.title || "",
+        description: item.description || "",
+        artist: (item.artist && item.artist[0] && item.artist[0].name) || "",
+        audioUrl: (item.artist && item.artist[0] && item.artist[0].songs) || "",
+      }));
+      setDataFromStore(result2);
+      setRenderCard(true);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data", error);
       }
     }
-
-    dataGetting();
+    fetchData();
   }, []);
 
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // Smooth scrolling animation
+      behavior: 'smooth',
     });
   };
 
