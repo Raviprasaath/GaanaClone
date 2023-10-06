@@ -51,10 +51,7 @@ function MusicControlComp(props) {
   const favSongAllList = useSelector((state) => state.usersData.allfavSongData);
   const artistSong = useSelector((state) => state.usersData.artistPage2);
 
-  // console.log("allSongsList", allSongsList);
-
   let songAllDetails = [];
-  // console.log("activeSong", activeSong)
 
   let albumFlag = false;
   if (activeSong.album === "yes") {
@@ -84,7 +81,6 @@ function MusicControlComp(props) {
     artistFlag = false;
   }
 
-  // console.log("searchResultFlag", searchResultFlag)
 
   if (location.pathname === `/allsongs` && !playing) {
     songList = allSongsList;
@@ -118,7 +114,7 @@ function MusicControlComp(props) {
     }
   }
 
-  // console.log("songList", songList)
+
 
 
   const handleSongClicker = (data) => {
@@ -133,47 +129,23 @@ function MusicControlComp(props) {
   let songListIndex = [];
   const songTrackList = [];
 
+  if (Array.isArray(songList)) {
+    songList.forEach((item) => {
+      if (
+        (item.audio_url && item._id && !albumFlag && !artistFlag && !searchResultFlag && !favSongCheck) ||
+        (item.audio && item.id && albumFlag && !artistFlag && !searchResultFlag && !favSongCheck) ||
+        (item.audio && item.songId && !albumFlag && artistFlag && !searchResultFlag && !favSongCheck) ||
+        (item.audio_url && item.id && searchResultFlag && !artistFlag && !albumFlag && !favSongCheck) ||
+        (item.audio_url && item.id && !albumFlag && !artistFlag && !searchResultFlag && favSongCheck)
+      ) {
+        songTrackList.push(item.audio_url || item.audio);
+        songListIndex.push(item._id || item.id);
+      }
+    });
+  }
 
-  if (!albumFlag && !artistFlag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
-    songList.forEach((item) => {
-      if (item.audio_url && item._id) {
-        songTrackList.push(item.audio_url);
-        songListIndex.push(item._id);
-      }
-    });
-  }
-  if (albumFlag && !artistFlag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
-    songList.forEach((item) => {
-      if (item.audio && item.id) {
-        songTrackList.push(item.audio);
-        songListIndex.push(item.id);
-      }
-    });
-  }
-  if (!albumFlag && artistFlag && !searchResultFlag && !favSongCheck && Array.isArray(songList)) {
-    songList.forEach((item) => {
-      if (item.audio && item.songId) {
-        songTrackList.push(item.audio);
-        songListIndex.push(item.songId);
-      }
-    });
-  }
-  if (searchResultFlag && !artistFlag && !albumFlag && !favSongCheck && Array.isArray(songList)) {
-    songList.forEach((item) => {
-      if (item.audio_url && item.id) {
-        songTrackList.push(item.audio_url);
-        songListIndex.push(item.id);
-      }
-    });
-  }
-  if (!albumFlag && !artistFlag && !searchResultFlag && favSongCheck && Array.isArray(songList)) {
-    songList.forEach((item)=> {
-      if(item.audio_url && item.id) {
-        songTrackList.push(item.audio_url);
-        songListIndex.push(item.id);
-      }
-    })
-  }
+
+
 
   const tracks = songTrackList.length !== 0 ? songTrackList : song1;
 
