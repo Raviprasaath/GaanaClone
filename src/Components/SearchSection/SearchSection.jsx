@@ -29,7 +29,7 @@ const SearchSection = (props) => {
 
     try {
       const top20Response = await fetch(
-        'https://academics.newtonschool.co/api/v1/music/song?filter={"featured":"Top 20 of this week"}&limit=100',
+        'https://academics.newtonschool.co/api/v1/music/song?search={"featured":"Top 20 of this week"}&limit=100',
         {
           headers: {
             projectId: "ghmumg9x1zid",
@@ -48,7 +48,7 @@ const SearchSection = (props) => {
     try {
       // songs
       const songsResponse = await fetch(
-        `https://academics.newtonschool.co/api/v1/music/song?filter={"title":%22${props.message}%22}`,
+        `https://academics.newtonschool.co/api/v1/music/song?search={"title":%22${props.message}%22}`,
         {
           headers: {
             projectId: "ghmumg9x1zid",
@@ -65,7 +65,7 @@ const SearchSection = (props) => {
     try {
       // album
       const albumResponse = await fetch(
-        `https://academics.newtonschool.co/api/v1/music/album?filter={"title":%22${props.message}%22}`,
+        `https://academics.newtonschool.co/api/v1/music/album?search={"title":%22${props.message}%22}`,
         {
           headers: {
             projectId: "ghmumg9x1zid",
@@ -82,7 +82,7 @@ const SearchSection = (props) => {
     try {
       // artist
       const artistResponse = await fetch(
-        `https://academics.newtonschool.co/api/v1/music/artist/?filter={"name":%22${props.message}%22}`,
+        `https://academics.newtonschool.co/api/v1/music/artist/?search={"name":%22${props.message}%22}`,
         {
           headers: {
             projectId: "ghmumg9x1zid",
