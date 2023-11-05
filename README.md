@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 
 # Hosted Link 
-https://ravi-gaana-clone-project.netlify.app/
+https://ravi-gaana-clone-project-host.netlify.app/
